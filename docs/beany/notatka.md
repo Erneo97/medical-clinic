@@ -33,4 +33,18 @@ Zadanie D3
 
 Aplikacja uruchamia się ale pomija @Qualifier("smsReminderSender")   gdy jest on nad polem.
 
+Zadanie D4
+1. Czym dla Springa różni się `@Service` od `@Component`, a czym dla czytającego kod?
+   
+Odpowiedź: Dla czytającego staje się jasne jakie jest przeznaczenie danej klasy bez zapoznawaia się z jej funkcjonalnością (na jakim poziomie jest). 
+
+
+2. Czemu `JsonMapper` z biblioteki nie może dostać adnotacji stereotypowej i jak
+   wprowadza się go do kontenera?
+
+Odpowidź: Ponieważ jest to klasa z zewnętrznej biblioteki do której kodu nie mamy dostępu, możemy to obejśc przy pomocy klasy pomocniczej z adnotacją @Component i metody tej klasy z adnotacją @Bean.
+
+3. Klasa ma `@Component`, ale bean nie powstaje i nie ma żadnego błędu. Od czego zaczniesz?
+
+Odpowiedź: Czy hierarchia katalogów pozwala przy automatycznym skanowaniu na wykrycie nowych elementów - danego komponentu.  
 
