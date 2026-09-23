@@ -15,9 +15,9 @@ public class InMemoryPatientRepository {
 
     public List<Patient> findAll() {return List.copyOf(patients);}
 
-    public Optional<Patient> findById(int id) {
+    public Optional<Patient> findById(Long id) {
         return patients.stream()
-                .filter(patient -> patient.getId() == id)
+                .filter(patient -> patient.getId().equals(id))
                 .findFirst();
     }
 

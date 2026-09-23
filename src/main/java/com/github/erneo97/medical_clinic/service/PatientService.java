@@ -18,7 +18,7 @@ public class PatientService {
         return inMemoryPatientRepository.findAll();
     }
 
-    public Optional<Patient> findById(int id) {
+    public Optional<Patient> findById(Long id) {
         return inMemoryPatientRepository.findById(id);
     }
 

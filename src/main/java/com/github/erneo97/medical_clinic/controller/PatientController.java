@@ -4,6 +4,7 @@ import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,13 @@ public class PatientController {
     @GetMapping
     public List<Patient> findAll() {
         return patientService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Patient> findById(@PathVariable Long id) {
+        return patientService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
