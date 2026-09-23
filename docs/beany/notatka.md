@@ -24,5 +24,13 @@ You may need to update both your build tool settings as well as your IDE.
 
 Sewris VisidReminderService oczekuje sendera który implementuję interfejs RemindSender i komponentu w jednym, mamy dwie klasy spełniające te warunki i niedoprecyzowane czy któraś ma prymat nad inną. Komunikat nam to tłumaczy
 
+Zadanie D2
+
 Primary określa która implementacja RemindServis jest domyślą nawet gdy występuje kilka.
+
+
+Zadanie D3
+
+Aplikacja uruchamia się ale pomija @Qualifier("smsReminderSender")   gdy jest on nad polem.
+
 
