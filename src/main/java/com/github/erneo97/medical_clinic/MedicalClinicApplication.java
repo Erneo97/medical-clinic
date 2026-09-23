@@ -10,7 +10,7 @@ public class MedicalClinicApplication {
 
 	public static void main(String[] args) {
 		var context = SpringApplication.run(MedicalClinicApplication.class, args);
-		context.getBean(VisitReminderService.class).remind("anna.kowalska@example.com");
+//		context.getBean(VisitReminderService.class).remind("anna.kowalska@example.com");
 	}
 
 }
