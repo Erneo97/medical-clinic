@@ -27,9 +27,10 @@ public class InMemoryPatientRepository {
                 .findFirst();
     }
 
-    public void save(Patient patient) {
+    public Patient save(Patient patient) {
         patient.setId(counter.getAndIncrement());
         patients.add(patient);
+        return patient;
     }
 
     public boolean deleteById(int id) {

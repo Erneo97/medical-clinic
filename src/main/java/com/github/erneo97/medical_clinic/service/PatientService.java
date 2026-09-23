@@ -14,14 +14,20 @@ import java.util.Optional;
 public class PatientService {
     private final InMemoryPatientRepository inMemoryPatientRepository;
 
-    public List<Patient> findAll() {return inMemoryPatientRepository.findAll();}
+    public List<Patient> findAll() {
+        return inMemoryPatientRepository.findAll();
+    }
 
     public Optional<Patient> findById(int id) {
         return inMemoryPatientRepository.findById(id);
     }
 
-    public void create(Patient patient) {
-        inMemoryPatientRepository.findByEmail(patient.getEmail()).orElseThrow(() -> new PatientAlreadyExistsException("Patient with email " + patient.getEmail() + " already exists"));
-        inMemoryPatientRepository.save(patient);
+    public Patient create(Patient patient) {
+        if (inMemoryPatientRepository.findByEmail(patient.getEmail()).isPresent()) {
+            throw new PatientAlreadyExistsException(
+                    "Patient with email " + patient.getEmail() + " already exists"
+            );
+        }
+        return inMemoryPatientRepository.save(patient);
     }
 }
