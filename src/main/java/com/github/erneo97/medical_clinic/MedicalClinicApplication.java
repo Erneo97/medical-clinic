@@ -1,6 +1,5 @@
 package com.github.erneo97.medical_clinic;
 
-import com.github.erneo97.medical_clinic.service.VisitReminderService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

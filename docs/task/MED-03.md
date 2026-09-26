@@ -59,9 +59,9 @@ Dodaj `PUT /patients/{id}`. Body ma ten sam kształt co przy tworzeniu. Serwis d
 pacjenta nie ma, kontroler odpowiada 404.
 
 Kryteria akceptacji:
-- [ ] `PUT /patients/1` z nowym nazwiskiem zwraca 200 i pacjenta z nowym nazwiskiem.
-- [ ] `GET /patients/1` pokazuje zmienione dane.
-- [ ] `PUT /patients/99` zwraca 404.
+- [x] `PUT /patients/1` z nowym nazwiskiem zwraca 200 i pacjenta z nowym nazwiskiem.
+- [x] `GET /patients/1` pokazuje zmienione dane.
+- [x] `PUT /patients/99` zwraca 404.
 
 ### Zadanie D2. Usuwanie pacjenta
 Dodaj `DELETE /patients/{id}`. Gdy pacjent istniał i został usunięty, odpowiedź to 204
