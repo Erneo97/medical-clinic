@@ -172,9 +172,9 @@ Załóż w kolekcji Bruno folder `pacjenci` i zapisz w nim dwa dzisiejsze żąda
 wyszukiwanie po e-mailu i zmianę hasła. Resztę CRUD-a dołożysz w pracy domowej.
 
 Kryteria akceptacji:
-- [ ] Folder `pacjenci` jest w repozytorium, w katalogu `bruno`.
-- [ ] Każde żądanie używa `{{baseUrl}}`, a nie wpisanego na sztywno adresu.
-- [ ] Oba żądania wysłane z Bruno zwracają 200 dla pacjenta o `id` równym 1.
+- [x] Folder `pacjenci` jest w repozytorium, w katalogu `bruno`.
+- [x] Każde żądanie używa `{{baseUrl}}`, a nie wpisanego na sztywno adresu.
+- [x] Oba żądania wysłane z Bruno zwracają 200 dla pacjenta o `id` równym 1.
 
 ## Jak sprawdzisz, że skończyłeś
 
@@ -205,11 +205,11 @@ grep -rhoE "@(Get|Post|Put|Patch|Delete)Mapping(\([^)]*\))?" src/main/java | sor
 ```
 
 Kryteria akceptacji:
-- [ ] Żaden adres nie zawiera słowa opisującego operację (`/all`, `/create`, `/update`,
+- [x] Żaden adres nie zawiera słowa opisującego operację (`/all`, `/create`, `/update`,
   `/delete`); operację niesie metoda HTTP.
-- [ ] Żaden adres nie zawiera e-maila ani innych danych osobowych.
-- [ ] Wyszukiwanie po e-mailu jest parametrem zapytania, nie ścieżką.
-- [ ] Aplikacja startuje, a wszystkie żądania z lekcji 8 nadal działają.
+- [x] Żaden adres nie zawiera e-maila ani innych danych osobowych.
+- [x] Wyszukiwanie po e-mailu jest parametrem zapytania, nie ścieżką.
+- [x] Aplikacja startuje, a wszystkie żądania z lekcji 8 nadal działają.
 
 ## Zadanie D2. Kolekcja Bruno z kompletem żądań
 
