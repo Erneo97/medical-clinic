@@ -5,12 +5,14 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
 public class InMemoryPatientRepository {
-    private final AtomicLong counter = new AtomicLong(1);
+    private final int OFFSET = 1;
+    private final AtomicLong counter = new AtomicLong(OFFSET);
     private final List<Patient> patients = new ArrayList<>();
 
     public List<Patient> findAll() {return List.copyOf(patients);}
@@ -33,12 +35,12 @@ public class InMemoryPatientRepository {
         return patient;
     }
 
-    public boolean deleteById(int id) {
-        return patients.removeIf(patient -> patient.getId() == id);
+    public boolean deleteById(Long id) {
+        return patients.removeIf(patient -> Objects.equals(patient.getId(), id));
     }
 
     public Patient update(long id, Patient patient) {
-        int innerId = (int)id - 1;
+        int innerId = (int)id - OFFSET;
         patients.get(innerId).setFirstName(patient.getFirstName());
         patients.get(innerId).setLastName(patient.getLastName());
         patients.get(innerId).setBirthday(patient.getBirthday());

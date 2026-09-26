@@ -36,4 +36,8 @@ public class PatientService {
         Optional<Patient> optionalPatient = inMemoryPatientRepository.findById(id);
         return optionalPatient.map(value -> inMemoryPatientRepository.update(value.getId(), patient));
     }
+
+    public boolean removeById(Long id) {
+        return inMemoryPatientRepository.deleteById(id);
+    }
 }

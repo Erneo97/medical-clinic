@@ -69,8 +69,8 @@ bez body. Gdy nie istniał, 404. Repozytorium z lekcji 7 ma już metodę `delete
 która zwraca `boolean` (czy coś usunięto); użyj jej w nowej metodzie serwisu.
 
 Kryteria akceptacji:
-- [ ] `DELETE /patients/1` zwraca 204, a `GET /patients` nie zawiera już Anny.
-- [ ] Drugie `DELETE /patients/1` zwraca 404.
+- [x] `DELETE /patients/1` zwraca 204, a `GET /patients` nie zawiera już Anny.
+- [x] Drugie `DELETE /patients/1` zwraca 404.
 
 ### Zadanie D3. Duplikat e-maila ma dostać 409
 Serwis rzuca `PatientAlreadyExistsException`, gdy e-mail jest zajęty, a klient dostaje 500.
@@ -79,8 +79,8 @@ Od tej chwili Spring sam zamienia ten wyjątek na 409. Docelową obsługę błę
 w lekcji 14, dziś wystarczy ta jedna adnotacja.
 
 Kryteria akceptacji:
-- [ ] Drugi `POST /patients` z tym samym e-mailem zwraca 409.
-- [ ] Pierwszy `POST` nadal zwraca 201.
+- [x] Drugi `POST /patients` z tym samym e-mailem zwraca 409.
+- [x] Pierwszy `POST` nadal zwraca 201.
 
 ### Zadanie D4. Kolekcja Bruno i data
 - [ ] W folderze `patients` kolekcji są wszystkie żądania: lista, jeden po id, dodanie,

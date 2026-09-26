@@ -34,10 +34,18 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-
     public ResponseEntity<Patient> update(@PathVariable Long id, @RequestBody Patient patient) {
         return patientService.update(id, patient)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        boolean deleted = patientService.removeById(id);
+        System.err.println("delete : " + deleted);
+        return deleted ?
+                ResponseEntity.ok().build()
+                : ResponseEntity.notFound().build();
     }
 }
