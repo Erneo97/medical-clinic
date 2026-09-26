@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/patients")
@@ -27,6 +28,13 @@ public class PatientController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping(params = "email")
+    public ResponseEntity<Patient> findByEmail(@RequestParam String email) {
+        return patientService.findByEmail(email)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public Patient create(@RequestBody Patient patient) {
@@ -38,6 +46,13 @@ public class PatientController {
         return patientService.update(id, patient)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PatchMapping("{id}/password")
+    public ResponseEntity<?> updatePassword(@PathVariable Long id, @RequestBody Map<String, String> password) {
+        patientService.chanePassword(id, password);
+
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")

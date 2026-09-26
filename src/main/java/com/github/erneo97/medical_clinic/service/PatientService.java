@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -23,6 +24,10 @@ public class PatientService {
         return inMemoryPatientRepository.findById(id);
     }
 
+    public Optional<Patient> findByEmail(String email) {
+        return inMemoryPatientRepository.findByEmail(email);
+    }
+
     public Patient create(Patient patient) {
         if (inMemoryPatientRepository.findByEmail(patient.getEmail()).isPresent()) {
             throw new PatientAlreadyExistsException(
@@ -35,6 +40,11 @@ public class PatientService {
     public Optional<Patient> update(Long id, Patient patient) {
         Optional<Patient> optionalPatient = inMemoryPatientRepository.findById(id);
         return optionalPatient.map(value -> inMemoryPatientRepository.update(value.getId(), patient));
+    }
+
+    public void chanePassword(Long id, Map<String, String> password) {
+        Patient patient =  inMemoryPatientRepository.findById(id).orElseThrow( () -> new PatientNotExists("Patient with id " + id + " does not exist") );
+        inMemoryPatientRepository.changePassword(id, password.get("password"));
     }
 
     public boolean removeById(Long id) {
