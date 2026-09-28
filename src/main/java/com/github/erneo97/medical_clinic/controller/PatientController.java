@@ -1,10 +1,10 @@
 package com.github.erneo97.medical_clinic.controller;
 
 import com.github.erneo97.medical_clinic.dto.EditPasswordCommand;
+import com.github.erneo97.medical_clinic.dto.EditPersonalDataCommand;
 import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
 import com.github.erneo97.medical_clinic.dto.PatientDto;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
-import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/patients")
@@ -49,8 +48,8 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PatientDto> update(@PathVariable Long id, @RequestBody Patient patient) {
-        return patientService.update(id, patient)
+    public ResponseEntity<PatientDto> update(@PathVariable Long id, @RequestBody EditPersonalDataCommand command) {
+        return patientService.update(id, command)
                 .map(patientMapper::toDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

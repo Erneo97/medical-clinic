@@ -16,5 +16,5 @@ public interface PatientMapper {
      List<PatientDto> toDto(List<Patient> patients);
 
      @Mapping(target = "id", ignore = true)
-     Patient toDtoCreate(PatientCreateCommand command);
+     Patient toPatient(PatientCreateCommand command);
 }

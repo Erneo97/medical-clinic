@@ -1,6 +1,7 @@
 package com.github.erneo97.medical_clinic.service;
 
 import com.github.erneo97.medical_clinic.dto.EditPasswordCommand;
+import com.github.erneo97.medical_clinic.dto.EditPersonalDataCommand;
 import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.model.Patient;
@@ -11,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -38,13 +38,20 @@ public class PatientService {
                     "Patient with email " + command.email() + " already exists"
             );
         }
-        Patient patient = patientMapper.toDtoCreate(command);
+        Patient patient = patientMapper.toPatient(command);
         return inMemoryPatientRepository.save(patient);
     }
 
-    public Optional<Patient> update(Long id, Patient patient) {
+    public Optional<Patient> update(Long id, EditPersonalDataCommand command) {
         Optional<Patient> optionalPatient = inMemoryPatientRepository.findById(id);
-        return optionalPatient.map(value -> inMemoryPatientRepository.update(value.getId(), patient));
+        return optionalPatient.map(patientToUpdate -> {
+            patientToUpdate.setEmail(command.email());
+            patientToUpdate.setFirstName(command.firstName());
+            patientToUpdate.setLastName(command.lastName());
+            patientToUpdate.setPhoneNumber(command.phoneNumber());
+            patientToUpdate.setBirthday(command.birthday());
+            return inMemoryPatientRepository.update(id, patientToUpdate);
+        });
     }
 
     public void chanePassword(Long id, EditPasswordCommand command) {
