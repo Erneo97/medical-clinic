@@ -1,5 +1,7 @@
 package com.github.erneo97.medical_clinic.controller;
 
+import com.github.erneo97.medical_clinic.dto.PatientDto;
+import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.service.PatientService;
 import lombok.RequiredArgsConstructor;
@@ -15,35 +17,39 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class PatientController {
     private final PatientService patientService;
+    private final PatientMapper patientMapper;
 
     @GetMapping
-    public List<Patient> findAll() {
-        return patientService.findAll();
+    public List<PatientDto> findAll() {
+        return patientMapper.toDto(patientService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Patient> findById(@PathVariable Long id) {
+    public ResponseEntity<PatientDto> findById(@PathVariable Long id) {
         return patientService.findById(id)
+                .map(patientMapper::toDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping(params = "email")
-    public ResponseEntity<Patient> findByEmail(@RequestParam String email) {
+    public ResponseEntity<PatientDto> findByEmail(@RequestParam String email) {
         return patientService.findByEmail(email)
+                .map(patientMapper::toDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Patient create(@RequestBody Patient patient) {
-        return patientService.create(patient);
+    public PatientDto create(@RequestBody Patient patient) {
+        return patientMapper.toDto(patientService.create(patient));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Patient> update(@PathVariable Long id, @RequestBody Patient patient) {
+    public ResponseEntity<PatientDto> update(@PathVariable Long id, @RequestBody Patient patient) {
         return patientService.update(id, patient)
+                .map(patientMapper::toDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
