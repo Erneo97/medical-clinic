@@ -1,5 +1,6 @@
 package com.github.erneo97.medical_clinic.controller;
 
+import com.github.erneo97.medical_clinic.dto.EditPasswordCommand;
 import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
 import com.github.erneo97.medical_clinic.dto.PatientDto;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
@@ -56,8 +57,8 @@ public class PatientController {
     }
 
     @PatchMapping("{id}/password")
-    public ResponseEntity<?> updatePassword(@PathVariable Long id, @RequestBody Map<String, String> password) {
-        patientService.chanePassword(id, password);
+    public ResponseEntity<?> updatePassword(@PathVariable Long id, @RequestBody EditPasswordCommand command) {
+        patientService.chanePassword(id, command);
 
         return ResponseEntity.ok().build();
     }

@@ -1,5 +1,6 @@
 package com.github.erneo97.medical_clinic.service;
 
+import com.github.erneo97.medical_clinic.dto.EditPasswordCommand;
 import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.model.Patient;
@@ -46,9 +47,9 @@ public class PatientService {
         return optionalPatient.map(value -> inMemoryPatientRepository.update(value.getId(), patient));
     }
 
-    public void chanePassword(Long id, Map<String, String> password) {
-        Patient patient =  inMemoryPatientRepository.findById(id).orElseThrow( () -> new PatientNotExists("Patient with id " + id + " does not exist") );
-        inMemoryPatientRepository.changePassword(id, password.get("password"));
+    public void chanePassword(Long id, EditPasswordCommand command) {
+        inMemoryPatientRepository.findById(id).orElseThrow( () -> new PatientNotExists("Patient with id " + id + " does not exist") );
+        inMemoryPatientRepository.changePassword(id, command.password());
     }
 
     public boolean removeById(Long id) {
