@@ -1,5 +1,7 @@
 package com.github.erneo97.medical_clinic.service;
 
+import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
+import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.repository.InMemoryPatientRepository;
 import com.github.erneo97.medical_clinic.service.exception.PatientAlreadyExistsException;
@@ -15,6 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PatientService {
     private final InMemoryPatientRepository inMemoryPatientRepository;
+    private final PatientMapper patientMapper;
 
     public List<Patient> findAll() {
         return inMemoryPatientRepository.findAll();
@@ -28,12 +31,13 @@ public class PatientService {
         return inMemoryPatientRepository.findByEmail(email);
     }
 
-    public Patient create(Patient patient) {
-        if (inMemoryPatientRepository.findByEmail(patient.getEmail()).isPresent()) {
+    public Patient create(PatientCreateCommand command) {
+        if (inMemoryPatientRepository.findByEmail(command.email()).isPresent()) {
             throw new PatientAlreadyExistsException(
-                    "Patient with email " + patient.getEmail() + " already exists"
+                    "Patient with email " + command.email() + " already exists"
             );
         }
+        Patient patient = patientMapper.toDtoCreate(command);
         return inMemoryPatientRepository.save(patient);
     }
 

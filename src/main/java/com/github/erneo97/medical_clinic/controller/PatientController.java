@@ -1,5 +1,6 @@
 package com.github.erneo97.medical_clinic.controller;
 
+import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
 import com.github.erneo97.medical_clinic.dto.PatientDto;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.model.Patient;
@@ -42,8 +43,8 @@ public class PatientController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public PatientDto create(@RequestBody Patient patient) {
-        return patientMapper.toDto(patientService.create(patient));
+    public PatientDto create(@RequestBody PatientCreateCommand command) {
+        return patientMapper.toDto(patientService.create(command));
     }
 
     @PutMapping("/{id}")
