@@ -49,7 +49,7 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PatientDto> update(@PathVariable Long id, @RequestBody EditPersonalDataCommand command) {
+    public ResponseEntity<PatientDto> update(@PathVariable Long id, @Valid @RequestBody EditPersonalDataCommand command) {
         return patientService.update(id, command)
                 .map(patientMapper::toDto)
                 .map(ResponseEntity::ok)
@@ -57,7 +57,7 @@ public class PatientController {
     }
 
     @PatchMapping("{id}/password")
-    public ResponseEntity<?> updatePassword(@PathVariable Long id, @RequestBody EditPasswordCommand command) {
+    public ResponseEntity<?> updatePassword(@PathVariable Long id, @Valid @RequestBody EditPasswordCommand command) {
         patientService.chanePassword(id, command);
 
         return ResponseEntity.ok().build();
