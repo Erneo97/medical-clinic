@@ -23,7 +23,6 @@ public class GlobalExceptionHandler {
         return ProblemDetail.forStatusAndDetail(exception.getStatus(), exception.getMessage());
     }
 
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleValidation(MethodArgumentNotValidException exception) {
         List<Map<String, String>> errors = exception.getBindingResult().getFieldErrors().stream()
