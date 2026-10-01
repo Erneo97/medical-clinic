@@ -24,9 +24,9 @@ Przebuduj, zrestartuj i wejdź w przeglądarce na `http://localhost:8080/swagger
 Rozwiń `POST /patients` i zobacz, skąd strona wie, jakie pola przyjmuje to żądanie.
 
 Kryteria akceptacji:
-- [ ] `curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8080/v3/api-docs` zwraca `200`.
-- [ ] Strona pod `/swagger-ui/index.html` otwiera się i wymienia wszystkie trzy ścieżki.
-- [ ] Umiesz powiedzieć, skąd wzięła się lista ścieżek, skoro nikt jej nie pisał.
+- [x] `curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8080/v3/api-docs` zwraca `200`.
+- [x] Strona pod `/swagger-ui/index.html` otwiera się i wymienia wszystkie trzy ścieżki.
+- [x] Umiesz powiedzieć, skąd wzięła się lista ścieżek, skoro nikt jej nie pisał.
 
 ### Zadanie 2 (14 min). Nazwij grupę i każdą operację
 Dopisz `@Tag` nad klasą `PatientController` (nazwa grupy i jednozdaniowy opis) oraz
@@ -36,10 +36,10 @@ Opisy piszesz po angielsku. To nie jest komentarz w kodzie: ten tekst wychodzi d
 API tak samo jak komunikaty błędów z lekcji 14.
 
 Kryteria akceptacji:
-- [ ] `curl -s http://localhost:8080/v3/api-docs | python3 -m json.tool | grep -c summary`
+- [x] `curl -s http://localhost:8080/v3/api-docs | python3 -m json.tool | grep -c summary`
   zwraca liczbę **mniejszą** niż liczba metod kontrolera. Umiesz powiedzieć dlaczego.
-- [ ] Na stronie Swagger UI każda operacja ma nazwę zrozumiałą bez zaglądania w kod.
-- [ ] Grupa endpointów ma nazwę z `@Tag`, nie `patient-controller`.
+- [x] Na stronie Swagger UI każda operacja ma nazwę zrozumiałą bez zaglądania w kod.
+- [x] Grupa endpointów ma nazwę z `@Tag`, nie `patient-controller`.
 
 ### Zadanie 3 (8 min). Odpowiedzi, o których opis jeszcze nie wie
 `POST /patients` potrafi odpowiedzieć 201, 400 i 409, ale opis wymienia tylko jedną z tych
