@@ -43,9 +43,9 @@ Potem uprość kontroler: skoro serwis rzuca, metody nie mają już czego sprawd
 > projekt się nie kompiluje i to jest normalne.
 
 Kryteria akceptacji:
-- [ ] `grep -c "notFound" PatientController.java` zwraca `0`.
-- [ ] Żadna metoda serwisu nie zwraca już `Optional<Patient>`.
-- [ ] Projekt się kompiluje i aplikacja startuje.
+- [x] `grep -c "notFound" PatientController.java` zwraca `0`.
+- [x] Żadna metoda serwisu nie zwraca już `Optional<Patient>`.
+- [x] Projekt się kompiluje i aplikacja startuje.
 
 ### Zadanie 3 (8 min). Advice
 Utwórz w pakiecie `exception` klasę `GlobalExceptionHandler` z adnotacjami
@@ -56,10 +56,10 @@ zaloguj komunikat na poziomie `warn` i zwróć
 Zrestartuj i sprawdź dwa żądania: drugi `POST` z tym samym e-mailem oraz `GET /patients/999`.
 
 Kryteria akceptacji:
-- [ ] Drugi `POST` zwraca 409, `GET /patients/999` zwraca 404.
-- [ ] Oba mają `Content-Type: application/problem+json`.
-- [ ] W logu są dwa wiersze `WARN`, żadnego `ERROR`.
-- [ ] Umiesz powiedzieć, czemu jeden handler wystarczył na dwa różne statusy.
+- [x] Drugi `POST` zwraca 409, `GET /patients/999` zwraca 404.
+- [x] Oba mają `Content-Type: application/problem+json`.
+- [x] W logu są dwa wiersze `WARN`, żadnego `ERROR`.
+- [x] Umiesz powiedzieć, czemu jeden handler wystarczył na dwa różne statusy.
 
 ## Jak sprawdzisz, że skończyłeś
 
