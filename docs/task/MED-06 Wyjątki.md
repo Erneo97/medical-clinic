@@ -99,8 +99,8 @@ npx --yes @usebruno/cli@4.1.0 run pacjenci --env local
 ```
 
 Kryteria akceptacji:
-- [ ] Kolekcja ma jedenaście żądań i wszystkie przechodzą.
-- [ ] Statusy dziewięciu żądań z lekcji 13 nie zmieniają się; zmienia się tylko kształt
+- [x] Kolekcja ma jedenaście żądań i wszystkie przechodzą.
+- [x] Statusy dziewięciu żądań z lekcji 13 nie zmieniają się; zmienia się tylko kształt
       ciała odpowiedzi tam, gdzie żądanie kończy się błędem.
 
 ## Lektury
