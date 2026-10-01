@@ -23,12 +23,12 @@ Dopisz `PatientNotFoundException` z dwoma konstruktorami: jeden przyjmuje `Long 
 status `HttpStatus.NOT_FOUND`.
 
 Kryteria akceptacji:
-- [ ] `MedicalClinicException` jest abstrakcyjna i ma getter statusu.
-- [ ] W katalogu `exception` nie ma już ani jednej adnotacji `@ResponseStatus`:
+- [x] `MedicalClinicException` jest abstrakcyjna i ma getter statusu.
+- [x] W katalogu `exception` nie ma już ani jednej adnotacji `@ResponseStatus`:
       `grep -rE "^[[:space:]]*@ResponseStatus" src/main/java/com/github/kurs/medicalclinic/exception/ | wc -l`
       zwraca `0`. Wzorzec jest zakotwiczony na początku wiersza, więc nie liczy wzmianek
       w komentarzach.
-- [ ] Projekt się kompiluje.
+- [x] Projekt się kompiluje.
 
 ### Zadanie 2 (10 min). Serwis rzuca, kontroler chudnie
 Przestaw `PatientService` tak, żeby zamiast pustego `Optional` rzucał

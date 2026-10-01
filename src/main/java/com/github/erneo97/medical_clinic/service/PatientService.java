@@ -6,9 +6,10 @@ import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.repository.InMemoryPatientRepository;
-import com.github.erneo97.medical_clinic.service.exception.PatientAlreadyExistsException;
-import com.github.erneo97.medical_clinic.service.exception.PatientNotExists;
+import com.github.erneo97.medical_clinic.exeption.PatientAlreadyExistsException;
+import com.github.erneo97.medical_clinic.exeption.PatientNotFound;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,7 +39,8 @@ public class PatientService {
         // Walidację formalną danych wejściowych wykonuje już @Valid.
         if (inMemoryPatientRepository.findByEmail(command.email()).isPresent()) {
             throw new PatientAlreadyExistsException(
-                    "Patient with email " + command.email() + " already exists"
+                    "Patient with email " + command.email() + " already exists",
+                    HttpStatus.CONFLICT
             );
         }
         Patient patient = patientMapper.toPatient(command);
@@ -54,7 +56,7 @@ public class PatientService {
     }
 
     public void chanePassword(Long id, EditPasswordCommand command) {
-        inMemoryPatientRepository.findById(id).orElseThrow( () -> new PatientNotExists("Patient with id " + id + " does not exist") );
+        inMemoryPatientRepository.findById(id).orElseThrow( () -> new PatientNotFound(id) );
         inMemoryPatientRepository.changePassword(id, command.password());
     }
 
