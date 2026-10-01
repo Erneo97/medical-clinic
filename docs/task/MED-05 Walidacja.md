@@ -97,9 +97,9 @@ jakakolwiek reguła walidacyjna, bo czego nie ma w klasie, tego nie da się przy
 Do obu dopisz `@Valid` przy parametrze w kontrolerze.
 
 Kryteria akceptacji:
-- [ ] `PUT /patients/1` z e-mailem bez małpy zwraca 400.
-- [ ] `PATCH /patients/1/password` z hasłem `"abc"` zwraca 400.
-- [ ] `grep -l "jakarta.validation" src/main/java/com/github/kurs/medicalclinic/dto/*.java`
+- [x] `PUT /patients/1` z e-mailem bez małpy zwraca 400.
+- [x] `PATCH /patients/1/password` z hasłem `"abc"` zwraca 400.
+- [x] `grep -l "jakarta.validation" src/main/java/com/github/kurs/medicalclinic/dto/*.java`
   wymienia trzy pliki.
 
 ## Zadanie D2. Nazwij walidację biznesową
@@ -112,8 +112,8 @@ Dopisz nad tym sprawdzeniem komentarz, który nazywa rzecz po imieniu: że to wa
 biznesowa, że dlatego mieszka w serwisie i że reguły formalne odsiał już `@Valid`.
 
 Kryteria akceptacji:
-- [ ] Komentarz odróżnia walidację biznesową od formalnej.
-- [ ] Drugi `POST` z tym samym e-mailem nadal zwraca 409, a nie 400. Umiesz powiedzieć,
+- [x] Komentarz odróżnia walidację biznesową od formalnej.
+- [x] Drugi `POST` z tym samym e-mailem nadal zwraca 409, a nie 400. Umiesz powiedzieć,
   czemu to dwa różne statusy.
 
 ## Zadanie D3. Dwa żądania negatywne w kolekcji Bruno
@@ -132,9 +132,9 @@ npx --yes @usebruno/cli@4.1.0 run pacjenci --env local
 ```
 
 Kryteria akceptacji:
-- [ ] Kolekcja ma dziewięć żądań i wszystkie przechodzą.
-- [ ] Dwa ostatnie kończą się statusem 400.
-- [ ] Siedem pierwszych ma statusy dokładnie takie jak w lekcji 12.
+- [x] Kolekcja ma dziewięć żądań i wszystkie przechodzą.
+- [x] Dwa ostatnie kończą się statusem 400.
+- [x] Siedem pierwszych ma statusy dokładnie takie jak w lekcji 12.
 
 ## Lektury
 

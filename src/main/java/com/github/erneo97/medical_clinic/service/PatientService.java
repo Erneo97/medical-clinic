@@ -33,6 +33,9 @@ public class PatientService {
     }
 
     public Patient create(PatientCreateCommand command) {
+        // Walidacja biznesowa: sprawdzamy, czy email nie jest już zajęty.
+        // Wymaga dostępu do innych pacjentów, dlatego znajduje się w serwisie.
+        // Walidację formalną danych wejściowych wykonuje już @Valid.
         if (inMemoryPatientRepository.findByEmail(command.email()).isPresent()) {
             throw new PatientAlreadyExistsException(
                     "Patient with email " + command.email() + " already exists"
