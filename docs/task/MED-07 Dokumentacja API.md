@@ -74,13 +74,13 @@ zwracanego przez metodę. Importy: `io.swagger.v3.oas.annotations.media.Content`
 `io.swagger.v3.oas.annotations.media.Schema`, `org.springframework.http.ProblemDetail`.
 
 Kryteria akceptacji:
-- [ ] `GET /patients/{id}` i `GET /patients?email=` wymieniają 200 i 404.
-- [ ] `PUT /patients/{id}` wymienia 200, 400 i 404.
-- [ ] `PATCH /patients/{id}/password` wymienia 200, 400 i 404.
-- [ ] `DELETE /patients/{id}` wymienia 204 i 404.
-- [ ] Żaden opis nie wymienia kodu, którego endpoint nie zwraca. Wypisz je z kodu,
+- [x] `GET /patients/{id}` i `GET /patients?email=` wymieniają 200 i 404.
+- [x] `PUT /patients/{id}` wymienia 200, 400 i 404.
+- [x] `PATCH /patients/{id}/password` wymienia 200, 400 i 404.
+- [x] `DELETE /patients/{id}` wymienia 204 i 404.
+- [x] Żaden opis nie wymienia kodu, którego endpoint nie zwraca. Wypisz je z kodu,
   nie z pamięci.
-- [ ] Każda odpowiedź 4xx wskazuje schemat `ProblemDetail`, a odpowiedzi pozytywne nadal
+- [x] Każda odpowiedź 4xx wskazuje schemat `ProblemDetail`, a odpowiedzi pozytywne nadal
   wskazują `PatientDto`. Sprawdzisz to tak:
   `curl -s http://localhost:8080/v3/api-docs | python3 -m json.tool | grep -c ProblemDetail`
   ma zwrócić liczbę większą od zera.
