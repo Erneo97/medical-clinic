@@ -27,11 +27,8 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PatientDto> findById(@PathVariable Long id) {
-        return patientService.findById(id)
-                .map(patientMapper::toDto)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public PatientDto findById(@PathVariable Long id) {
+        return patientMapper.toDto(patientService.findById(id));
     }
 
     @GetMapping(params = "email")

@@ -25,8 +25,8 @@ public class PatientService {
         return inMemoryPatientRepository.findAll();
     }
 
-    public Optional<Patient> findById(Long id) {
-        return inMemoryPatientRepository.findById(id);
+    public Patient findById(Long id) {
+        return inMemoryPatientRepository.findById(id).orElseThrow(() -> new PatientNotFound(id));
     }
 
     public Optional<Patient> findByEmail(String email) {
