@@ -6,6 +6,7 @@ import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
 import com.github.erneo97.medical_clinic.dto.PatientDto;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.service.PatientService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,7 @@ public class PatientController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public PatientDto create(@RequestBody PatientCreateCommand command) {
+    public PatientDto create(@Valid @RequestBody PatientCreateCommand command) {
         return patientMapper.toDto(patientService.create(command));
     }
 

@@ -36,9 +36,9 @@ Najpierw wyślij złe body na `POST /patients` i zobacz, co dostajesz. Potem dop
 Wersji nie podajesz: pilnuje jej BOM Boota, tak samo jak przy starterze web z lekcji 6.
 
 Kryteria akceptacji:
-- [ ] `grep -n "spring-boot-starter-validation" pom.xml` coś znajduje.
-- [ ] Projekt się buduje i aplikacja startuje.
-- [ ] Złe żądanie **nadal** zwraca 201 i umiesz powiedzieć, dlaczego.
+- [x] `grep -n "spring-boot-starter-validation" pom.xml` coś znajduje.
+- [x] Projekt się buduje i aplikacja startuje.
+- [x] Złe żądanie **nadal** zwraca 201 i umiesz powiedzieć, dlaczego.
 
 ### Zadanie 2 (14 min). Reguły przy polach
 Dopisz adnotacje do komponentów rekordu `PatientCreateCommand`. Każda reguła stoi przy polu,
@@ -56,19 +56,19 @@ Komunikat podajesz atrybutem `message`, na przykład
 wychodzą do klienta API; tak samo jak komunikaty wyjątków od lekcji 8.
 
 Kryteria akceptacji:
-- [ ] Każde z siedmiu pól ma co najmniej jedną adnotację.
-- [ ] Na polach tekstowych jest `@NotBlank`, a nie `@NotNull`.
-- [ ] Projekt się buduje, a złe żądanie **wciąż** zwraca 201.
+- [x] Każde z siedmiu pól ma co najmniej jedną adnotację.
+- [x] Na polach tekstowych jest `@NotBlank`, a nie `@NotNull`.
+- [x] Projekt się buduje, a złe żądanie **wciąż** zwraca 201.
 
 ### Zadanie 3 (8 min). Bramka
 Dopisz `@Valid` przy parametrze `@RequestBody` w metodzie `create` kontrolera (import
 `jakarta.validation.Valid`). Zrestartuj i wyślij oba body: złe i poprawne.
 
 Kryteria akceptacji:
-- [ ] Złe żądanie zwraca 400.
-- [ ] Poprawne żądanie nadal zwraca 201 z pacjentem.
-- [ ] W logu aplikacji po złym żądaniu jest `MethodArgumentNotValidException`.
-- [ ] Umiesz powiedzieć, czego w body odpowiedzi 400 **nie ma**.
+- [x] Złe żądanie zwraca 400.
+- [x] Poprawne żądanie nadal zwraca 201 z pacjentem.
+- [x] W logu aplikacji po złym żądaniu jest `MethodArgumentNotValidException`.
+- [x] Umiesz powiedzieć, czego w body odpowiedzi 400 **nie ma**.
 
 ## Jak sprawdzisz, że skończyłeś
 
