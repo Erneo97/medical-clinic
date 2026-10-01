@@ -47,8 +47,8 @@ możliwości. Dopisz `@ApiResponses` z trzema `@ApiResponse`: kod i krótki opis
 
 Kryteria akceptacji:
 - [x] W opisie `POST /patients` są trzy kody: 201, 400 i 409.
-- [ ] Każdy ma opis, z którego wynika, **kiedy** klient go dostanie.
-- [ ] Reszta endpointów nadal ma po jednym kodzie: to jest praca domowa.
+- [x] Każdy ma opis, z którego wynika, **kiedy** klient go dostanie.
+- [x] Reszta endpointów nadal ma po jednym kodzie: to jest praca domowa.
 
 ## Jak sprawdzisz, że skończyłeś
 
