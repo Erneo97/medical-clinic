@@ -32,11 +32,8 @@ public class PatientController {
     }
 
     @GetMapping(params = "email")
-    public ResponseEntity<PatientDto> findByEmail(@RequestParam String email) {
-        return patientService.findByEmail(email)
-                .map(patientMapper::toDto)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public PatientDto findByEmail(@RequestParam String email) {
+        return patientMapper.toDto(patientService.findByEmail(email));
     }
 
     @PostMapping

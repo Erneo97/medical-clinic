@@ -29,8 +29,9 @@ public class PatientService {
         return inMemoryPatientRepository.findById(id).orElseThrow(() -> new PatientNotFound(id));
     }
 
-    public Optional<Patient> findByEmail(String email) {
-        return inMemoryPatientRepository.findByEmail(email);
+    public Patient findByEmail(String email) {
+        return inMemoryPatientRepository.findByEmail(email)
+                .orElseThrow(() -> new PatientNotFound(email));
     }
 
     public Patient create(PatientCreateCommand command) {
