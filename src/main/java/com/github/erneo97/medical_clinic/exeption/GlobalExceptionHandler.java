@@ -8,6 +8,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.*;
@@ -52,6 +53,13 @@ public class GlobalExceptionHandler {
     public ProblemDetail handleNoRoute(NoResourceFoundException exception) {
         log.warn("brak trasy: {}", exception.getResourcePath());
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, "no such endpoint");
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ProblemDetail handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException exception) {
+        log.warn("zły typ w ścieżce: {}", exception.getMessage());
+        return ProblemDetail.forStatusAndDetail(
+                HttpStatus.BAD_REQUEST,  "path variable " + exception.getMessage() + " has a wronge type");
     }
 
     // Siatka bezpieczeństwa

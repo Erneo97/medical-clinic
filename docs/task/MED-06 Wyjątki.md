@@ -72,29 +72,6 @@ Kryteria akceptacji:
 Termin: przed następnymi zajęciami. Pracujesz na swoim projekcie medical-clinic, na stanie
 po dzisiejszych ćwiczeniach.
 
-## Zadanie D1. Pozostałe piętra advice
-
-Na zajęciach obsłużyłeś własne wyjątki. Zostały te, które rzuca sam Spring, a odpowiedzi
-na nie nadal mają inny kształt niż reszta.
-
-**Walidacja.** Handler dla `MethodArgumentNotValidException` ma zwrócić 400, a do odpowiedzi
-dołożyć listę złamanych reguł: dla każdego pola `field` i `message`. Listę dokładasz przez
-`problem.setProperty("errors", errors)`. To domyka lukę z lekcji 13, w której klient dostawał
-400 bez informacji, co poprawić.
-
-**Nieczytelne body i brak trasy.** Handlery dla `HttpMessageNotReadableException` (400)
-i `NoResourceFoundException` (404), oba z krótkim komunikatem po angielsku.
-
-**Siatka bezpieczeństwa.** Handler dla `Exception` zwraca 500 z komunikatem `Unknown error`
-i **nic więcej**. Do logu idzie pełny ślad stosu na poziomie `error`; do klienta nie idzie
-nic poza tym komunikatem.
-
-Kryteria akceptacji:
-- [ ] Odpowiedź 400 z walidacji ma pole `errors` z listą pól i komunikatów.
-- [ ] `GET /pacjenci` (zła ścieżka) zwraca 404 z `Content-Type: application/problem+json`.
-- [ ] Żaden handler nie wysyła klientowi `exception.getMessage()` na piętrze `Exception`.
-- [ ] W logu błędy klienta są na `warn` bez śladu stosu, a wyjątki z piętra czwartego
-      na `error` ze śladem.
 
 ## Zadanie D2. Błąd klienta, który wygląda jak awaria
 
@@ -105,9 +82,9 @@ Dopisz handler dla `MethodArgumentTypeMismatchException`, który zwraca 400 z ko
 mówiącym, które pole ścieżki ma zły typ.
 
 Kryteria akceptacji:
-- [ ] `GET /patients/abc` zwraca 400, nie 500.
-- [ ] W logu ten przypadek jest na poziomie `warn`, nie `error`.
-- [ ] Umiesz wyjaśnić, czemu bez tego handlera żądanie trafiało na piętro czwarte.
+- [x] `GET /patients/abc` zwraca 400, nie 500.
+- [x] W logu ten przypadek jest na poziomie `warn`, nie `error`.
+- [x] Umiesz wyjaśnić, czemu bez tego handlera żądanie trafiało na piętro czwarte.
 
 ## Zadanie D3. Scenariusze błędów w kolekcji Bruno
 
