@@ -14,7 +14,7 @@ public record PatientCreateCommand (
         String password,
 
         @NotBlank(message = "card number is required")
-        @Pattern(regexp = "[A-Z]{3}\\d{6}", message = "card number must look like ABC-123456")
+        @Pattern(regexp = "[A-Z]{3}\\d{6}", message = "card number must look like ABC123456")
         String idCardNo,
 
         @NotBlank(message = "email is required")
