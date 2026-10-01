@@ -94,9 +94,9 @@ Potem zbuduj jar i uruchom go dwa razy: raz normalnie, raz z `--spring.profiles.
 Za każdym razem sprawdź trzy adresy: `/v3/api-docs`, `/swagger-ui/index.html` i `/patients`.
 
 Kryteria akceptacji:
-- [ ] Z profilem `prod` oba adresy dokumentacji zwracają 404, a `/patients` nadal 200.
-- [ ] Bez profilu wszystkie trzy zwracają 200.
-- [ ] To ten sam jar w obu przebiegach. Umiesz powiedzieć, co dokładnie się zmieniło.
+- [x] Z profilem `prod` oba adresy dokumentacji zwracają 404, a `/patients` nadal 200.
+- [x] Bez profilu wszystkie trzy zwracają 200.
+- [x] To ten sam jar w obu przebiegach. Umiesz powiedzieć, co dokładnie się zmieniło.
 
 ## Zadanie D3. Jedno zdanie o granicy
 
@@ -108,8 +108,8 @@ z lekcji 12 sprawdza, co API robi. Jedno nie zastępuje drugiego i za pół roku
 będzie pamiętał, więc niech będzie zapisane.
 
 Kryteria akceptacji:
-- [ ] Sekcja podaje oba adresy i sposób wyłączenia na produkcji.
-- [ ] Jest w niej zdanie, które odróżnia opis od kolekcji Bruno.
+- [x] Sekcja podaje oba adresy i sposób wyłączenia na produkcji.
+- [x] Jest w niej zdanie, które odróżnia opis od kolekcji Bruno.
 
 ## Lektury
 
