@@ -55,11 +55,7 @@ public class PatientController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        boolean deleted = patientService.removeById(id);
-        System.err.println("delete : " + deleted);
-        return deleted ?
-                ResponseEntity.ok().build()
-                : ResponseEntity.notFound().build();
+    public void delete(@PathVariable Long id) {
+        patientService.removeById(id);
     }
 }

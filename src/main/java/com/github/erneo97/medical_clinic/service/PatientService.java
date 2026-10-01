@@ -49,7 +49,7 @@ public class PatientService {
     }
 
     public Patient update(Long id, EditPersonalDataCommand command) {
-        this.findById(id);
+        findUserByIdOrThrowException(id);
         Patient patientNewData = patientMapper.toPatient(command);
         return inMemoryPatientRepository.update(id, patientNewData);
     }
@@ -60,6 +60,11 @@ public class PatientService {
     }
 
     public boolean removeById(Long id) {
+        findUserByIdOrThrowException(id);
         return inMemoryPatientRepository.deleteById(id);
+    }
+
+    private void findUserByIdOrThrowException(Long id) {
+        this.findById(id);
     }
 }
