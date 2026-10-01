@@ -7,6 +7,8 @@ import com.github.erneo97.medical_clinic.dto.PatientDto;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.service.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -45,6 +47,12 @@ public class PatientController {
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     @Operation(summary = "create a patient")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "membership created"),
+            @ApiResponse(responseCode = "400",
+                    description = "request body failed validation"),
+            @ApiResponse(responseCode = "409", description = "this email is already taken")
+    })
     public PatientDto create(@Valid @RequestBody PatientCreateCommand command) {
         return patientMapper.toDto(patientService.create(command));
     }

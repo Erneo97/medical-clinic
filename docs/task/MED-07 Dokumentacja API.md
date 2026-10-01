@@ -46,7 +46,7 @@ Kryteria akceptacji:
 możliwości. Dopisz `@ApiResponses` z trzema `@ApiResponse`: kod i krótki opis po angielsku.
 
 Kryteria akceptacji:
-- [ ] W opisie `POST /patients` są trzy kody: 201, 400 i 409.
+- [x] W opisie `POST /patients` są trzy kody: 201, 400 i 409.
 - [ ] Każdy ma opis, z którego wynika, **kiedy** klient go dostanie.
 - [ ] Reszta endpointów nadal ma po jednym kodzie: to jest praca domowa.
 
