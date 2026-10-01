@@ -45,12 +45,8 @@ public class PatientService {
     public Optional<Patient> update(Long id, EditPersonalDataCommand command) {
         Optional<Patient> optionalPatient = inMemoryPatientRepository.findById(id);
         return optionalPatient.map(patientToUpdate -> {
-            patientToUpdate.setEmail(command.email());
-            patientToUpdate.setFirstName(command.firstName());
-            patientToUpdate.setLastName(command.lastName());
-            patientToUpdate.setPhoneNumber(command.phoneNumber());
-            patientToUpdate.setBirthday(command.birthday());
-            return inMemoryPatientRepository.update(id, patientToUpdate);
+            Patient patientNewData = patientMapper.toPatient(command);
+            return inMemoryPatientRepository.update(id, patientNewData);
         });
     }
 

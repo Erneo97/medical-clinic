@@ -1,5 +1,6 @@
 package com.github.erneo97.medical_clinic.mapper;
 
+import com.github.erneo97.medical_clinic.dto.EditPersonalDataCommand;
 import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
 import com.github.erneo97.medical_clinic.dto.PatientDto;
 import com.github.erneo97.medical_clinic.model.Patient;
@@ -17,4 +18,6 @@ public interface PatientMapper {
 
      @Mapping(target = "id", ignore = true)
      Patient toPatient(PatientCreateCommand command);
+
+     Patient toPatient(EditPersonalDataCommand command);
 }

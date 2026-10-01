@@ -45,13 +45,10 @@ public class InMemoryPatientRepository {
 
     public Patient update(long id, Patient patient) {
         int innerId = (int)id - OFFSET;
-        patients.get(innerId).setId((long)innerId);
         patients.get(innerId).setFirstName(patient.getFirstName());
         patients.get(innerId).setLastName(patient.getLastName());
         patients.get(innerId).setBirthday(patient.getBirthday());
         patients.get(innerId).setEmail(patient.getEmail());
-        patients.get(innerId).setPassword(patient.getPassword());
-        patients.get(innerId).setIdCardNo(patient.getIdCardNo());
         patients.get(innerId).setPhoneNumber(patient.getPhoneNumber());
         return patient;
     }
