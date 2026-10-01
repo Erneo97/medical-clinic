@@ -48,12 +48,10 @@ public class PatientService {
         return inMemoryPatientRepository.save(patient);
     }
 
-    public Optional<Patient> update(Long id, EditPersonalDataCommand command) {
-        Optional<Patient> optionalPatient = inMemoryPatientRepository.findById(id);
-        return optionalPatient.map(patientToUpdate -> {
-            Patient patientNewData = patientMapper.toPatient(command);
-            return inMemoryPatientRepository.update(id, patientNewData);
-        });
+    public Patient update(Long id, EditPersonalDataCommand command) {
+        this.findById(id);
+        Patient patientNewData = patientMapper.toPatient(command);
+        return inMemoryPatientRepository.update(id, patientNewData);
     }
 
     public void chanePassword(Long id, EditPasswordCommand command) {

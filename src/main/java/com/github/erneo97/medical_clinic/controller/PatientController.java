@@ -43,11 +43,8 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PatientDto> update(@PathVariable Long id, @Valid @RequestBody EditPersonalDataCommand command) {
-        return patientService.update(id, command)
-                .map(patientMapper::toDto)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public PatientDto update(@PathVariable Long id, @Valid @RequestBody EditPersonalDataCommand command) {
+        return patientMapper.toDto( patientService.update(id, command));
     }
 
     @PatchMapping("{id}/password")
