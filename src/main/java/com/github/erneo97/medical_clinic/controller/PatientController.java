@@ -1,6 +1,10 @@
 package com.github.erneo97.medical_clinic.controller;
 
-import com.github.erneo97.medical_clinic.model.Patient;
+import com.github.erneo97.medical_clinic.dto.EditPasswordCommand;
+import com.github.erneo97.medical_clinic.dto.EditPersonalDataCommand;
+import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
+import com.github.erneo97.medical_clinic.dto.PatientDto;
+import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -8,49 +12,52 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/patients")
 @RequiredArgsConstructor
 public class PatientController {
     private final PatientService patientService;
+    private final PatientMapper patientMapper;
 
     @GetMapping
-    public List<Patient> findAll() {
-        return patientService.findAll();
+    public List<PatientDto> findAll() {
+        return patientMapper.toDto(patientService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Patient> findById(@PathVariable Long id) {
+    public ResponseEntity<PatientDto> findById(@PathVariable Long id) {
         return patientService.findById(id)
+                .map(patientMapper::toDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping(params = "email")
-    public ResponseEntity<Patient> findByEmail(@RequestParam String email) {
+    public ResponseEntity<PatientDto> findByEmail(@RequestParam String email) {
         return patientService.findByEmail(email)
+                .map(patientMapper::toDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Patient create(@RequestBody Patient patient) {
-        return patientService.create(patient);
+    public PatientDto create(@RequestBody PatientCreateCommand command) {
+        return patientMapper.toDto(patientService.create(command));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Patient> update(@PathVariable Long id, @RequestBody Patient patient) {
-        return patientService.update(id, patient)
+    public ResponseEntity<PatientDto> update(@PathVariable Long id, @RequestBody EditPersonalDataCommand command) {
+        return patientService.update(id, command)
+                .map(patientMapper::toDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PatchMapping("{id}/password")
-    public ResponseEntity<?> updatePassword(@PathVariable Long id, @RequestBody Map<String, String> password) {
-        patientService.chanePassword(id, password);
+    public ResponseEntity<?> updatePassword(@PathVariable Long id, @RequestBody EditPasswordCommand command) {
+        patientService.chanePassword(id, command);
 
         return ResponseEntity.ok().build();
     }

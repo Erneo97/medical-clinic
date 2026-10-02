@@ -1,5 +1,9 @@
 package com.github.erneo97.medical_clinic.service;
 
+import com.github.erneo97.medical_clinic.dto.EditPasswordCommand;
+import com.github.erneo97.medical_clinic.dto.EditPersonalDataCommand;
+import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
+import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.repository.InMemoryPatientRepository;
 import com.github.erneo97.medical_clinic.service.exception.PatientAlreadyExistsException;
@@ -8,13 +12,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class PatientService {
     private final InMemoryPatientRepository inMemoryPatientRepository;
+    private final PatientMapper patientMapper;
 
     public List<Patient> findAll() {
         return inMemoryPatientRepository.findAll();
@@ -28,23 +32,31 @@ public class PatientService {
         return inMemoryPatientRepository.findByEmail(email);
     }
 
-    public Patient create(Patient patient) {
-        if (inMemoryPatientRepository.findByEmail(patient.getEmail()).isPresent()) {
+    public Patient create(PatientCreateCommand command) {
+        if (inMemoryPatientRepository.findByEmail(command.email()).isPresent()) {
             throw new PatientAlreadyExistsException(
-                    "Patient with email " + patient.getEmail() + " already exists"
+                    "Patient with email " + command.email() + " already exists"
             );
         }
+        Patient patient = patientMapper.toPatient(command);
         return inMemoryPatientRepository.save(patient);
     }
 
-    public Optional<Patient> update(Long id, Patient patient) {
+    public Optional<Patient> update(Long id, EditPersonalDataCommand command) {
         Optional<Patient> optionalPatient = inMemoryPatientRepository.findById(id);
-        return optionalPatient.map(value -> inMemoryPatientRepository.update(value.getId(), patient));
+        return optionalPatient.map(patientToUpdate -> {
+            patientToUpdate.setEmail(command.email());
+            patientToUpdate.setFirstName(command.firstName());
+            patientToUpdate.setLastName(command.lastName());
+            patientToUpdate.setPhoneNumber(command.phoneNumber());
+            patientToUpdate.setBirthday(command.birthday());
+            return inMemoryPatientRepository.update(id, patientToUpdate);
+        });
     }
 
-    public void chanePassword(Long id, Map<String, String> password) {
-        Patient patient =  inMemoryPatientRepository.findById(id).orElseThrow( () -> new PatientNotExists("Patient with id " + id + " does not exist") );
-        inMemoryPatientRepository.changePassword(id, password.get("password"));
+    public void chanePassword(Long id, EditPasswordCommand command) {
+        inMemoryPatientRepository.findById(id).orElseThrow( () -> new PatientNotExists("Patient with id " + id + " does not exist") );
+        inMemoryPatientRepository.changePassword(id, command.password());
     }
 
     public boolean removeById(Long id) {
