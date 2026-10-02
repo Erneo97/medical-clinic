@@ -23,12 +23,12 @@ Dopisz `PatientNotFoundException` z dwoma konstruktorami: jeden przyjmuje `Long 
 status `HttpStatus.NOT_FOUND`.
 
 Kryteria akceptacji:
-- [ ] `MedicalClinicException` jest abstrakcyjna i ma getter statusu.
-- [ ] W katalogu `exception` nie ma już ani jednej adnotacji `@ResponseStatus`:
+- [x] `MedicalClinicException` jest abstrakcyjna i ma getter statusu.
+- [x] W katalogu `exception` nie ma już ani jednej adnotacji `@ResponseStatus`:
       `grep -rE "^[[:space:]]*@ResponseStatus" src/main/java/com/github/kurs/medicalclinic/exception/ | wc -l`
       zwraca `0`. Wzorzec jest zakotwiczony na początku wiersza, więc nie liczy wzmianek
       w komentarzach.
-- [ ] Projekt się kompiluje.
+- [x] Projekt się kompiluje.
 
 ### Zadanie 2 (10 min). Serwis rzuca, kontroler chudnie
 Przestaw `PatientService` tak, żeby zamiast pustego `Optional` rzucał
@@ -43,9 +43,9 @@ Potem uprość kontroler: skoro serwis rzuca, metody nie mają już czego sprawd
 > projekt się nie kompiluje i to jest normalne.
 
 Kryteria akceptacji:
-- [ ] `grep -c "notFound" PatientController.java` zwraca `0`.
-- [ ] Żadna metoda serwisu nie zwraca już `Optional<Patient>`.
-- [ ] Projekt się kompiluje i aplikacja startuje.
+- [x] `grep -c "notFound" PatientController.java` zwraca `0`.
+- [x] Żadna metoda serwisu nie zwraca już `Optional<Patient>`.
+- [x] Projekt się kompiluje i aplikacja startuje.
 
 ### Zadanie 3 (8 min). Advice
 Utwórz w pakiecie `exception` klasę `GlobalExceptionHandler` z adnotacjami
@@ -56,10 +56,10 @@ zaloguj komunikat na poziomie `warn` i zwróć
 Zrestartuj i sprawdź dwa żądania: drugi `POST` z tym samym e-mailem oraz `GET /patients/999`.
 
 Kryteria akceptacji:
-- [ ] Drugi `POST` zwraca 409, `GET /patients/999` zwraca 404.
-- [ ] Oba mają `Content-Type: application/problem+json`.
-- [ ] W logu są dwa wiersze `WARN`, żadnego `ERROR`.
-- [ ] Umiesz powiedzieć, czemu jeden handler wystarczył na dwa różne statusy.
+- [x] Drugi `POST` zwraca 409, `GET /patients/999` zwraca 404.
+- [x] Oba mają `Content-Type: application/problem+json`.
+- [x] W logu są dwa wiersze `WARN`, żadnego `ERROR`.
+- [x] Umiesz powiedzieć, czemu jeden handler wystarczył na dwa różne statusy.
 
 ## Jak sprawdzisz, że skończyłeś
 
@@ -72,29 +72,6 @@ Kryteria akceptacji:
 Termin: przed następnymi zajęciami. Pracujesz na swoim projekcie medical-clinic, na stanie
 po dzisiejszych ćwiczeniach.
 
-## Zadanie D1. Pozostałe piętra advice
-
-Na zajęciach obsłużyłeś własne wyjątki. Zostały te, które rzuca sam Spring, a odpowiedzi
-na nie nadal mają inny kształt niż reszta.
-
-**Walidacja.** Handler dla `MethodArgumentNotValidException` ma zwrócić 400, a do odpowiedzi
-dołożyć listę złamanych reguł: dla każdego pola `field` i `message`. Listę dokładasz przez
-`problem.setProperty("errors", errors)`. To domyka lukę z lekcji 13, w której klient dostawał
-400 bez informacji, co poprawić.
-
-**Nieczytelne body i brak trasy.** Handlery dla `HttpMessageNotReadableException` (400)
-i `NoResourceFoundException` (404), oba z krótkim komunikatem po angielsku.
-
-**Siatka bezpieczeństwa.** Handler dla `Exception` zwraca 500 z komunikatem `Unknown error`
-i **nic więcej**. Do logu idzie pełny ślad stosu na poziomie `error`; do klienta nie idzie
-nic poza tym komunikatem.
-
-Kryteria akceptacji:
-- [ ] Odpowiedź 400 z walidacji ma pole `errors` z listą pól i komunikatów.
-- [ ] `GET /pacjenci` (zła ścieżka) zwraca 404 z `Content-Type: application/problem+json`.
-- [ ] Żaden handler nie wysyła klientowi `exception.getMessage()` na piętrze `Exception`.
-- [ ] W logu błędy klienta są na `warn` bez śladu stosu, a wyjątki z piętra czwartego
-      na `error` ze śladem.
 
 ## Zadanie D2. Błąd klienta, który wygląda jak awaria
 
@@ -105,9 +82,9 @@ Dopisz handler dla `MethodArgumentTypeMismatchException`, który zwraca 400 z ko
 mówiącym, które pole ścieżki ma zły typ.
 
 Kryteria akceptacji:
-- [ ] `GET /patients/abc` zwraca 400, nie 500.
-- [ ] W logu ten przypadek jest na poziomie `warn`, nie `error`.
-- [ ] Umiesz wyjaśnić, czemu bez tego handlera żądanie trafiało na piętro czwarte.
+- [x] `GET /patients/abc` zwraca 400, nie 500.
+- [x] W logu ten przypadek jest na poziomie `warn`, nie `error`.
+- [x] Umiesz wyjaśnić, czemu bez tego handlera żądanie trafiało na piętro czwarte.
 
 ## Zadanie D3. Scenariusze błędów w kolekcji Bruno
 
@@ -122,8 +99,8 @@ npx --yes @usebruno/cli@4.1.0 run pacjenci --env local
 ```
 
 Kryteria akceptacji:
-- [ ] Kolekcja ma jedenaście żądań i wszystkie przechodzą.
-- [ ] Statusy dziewięciu żądań z lekcji 13 nie zmieniają się; zmienia się tylko kształt
+- [x] Kolekcja ma jedenaście żądań i wszystkie przechodzą.
+- [x] Statusy dziewięciu żądań z lekcji 13 nie zmieniają się; zmienia się tylko kształt
       ciała odpowiedzi tam, gdzie żądanie kończy się błędem.
 
 ## Lektury

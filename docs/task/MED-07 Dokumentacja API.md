@@ -24,9 +24,9 @@ Przebuduj, zrestartuj i wejdź w przeglądarce na `http://localhost:8080/swagger
 Rozwiń `POST /patients` i zobacz, skąd strona wie, jakie pola przyjmuje to żądanie.
 
 Kryteria akceptacji:
-- [ ] `curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8080/v3/api-docs` zwraca `200`.
-- [ ] Strona pod `/swagger-ui/index.html` otwiera się i wymienia wszystkie trzy ścieżki.
-- [ ] Umiesz powiedzieć, skąd wzięła się lista ścieżek, skoro nikt jej nie pisał.
+- [x] `curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8080/v3/api-docs` zwraca `200`.
+- [x] Strona pod `/swagger-ui/index.html` otwiera się i wymienia wszystkie trzy ścieżki.
+- [x] Umiesz powiedzieć, skąd wzięła się lista ścieżek, skoro nikt jej nie pisał.
 
 ### Zadanie 2 (14 min). Nazwij grupę i każdą operację
 Dopisz `@Tag` nad klasą `PatientController` (nazwa grupy i jednozdaniowy opis) oraz
@@ -36,19 +36,19 @@ Opisy piszesz po angielsku. To nie jest komentarz w kodzie: ten tekst wychodzi d
 API tak samo jak komunikaty błędów z lekcji 14.
 
 Kryteria akceptacji:
-- [ ] `curl -s http://localhost:8080/v3/api-docs | python3 -m json.tool | grep -c summary`
+- [x] `curl -s http://localhost:8080/v3/api-docs | python3 -m json.tool | grep -c summary`
   zwraca liczbę **mniejszą** niż liczba metod kontrolera. Umiesz powiedzieć dlaczego.
-- [ ] Na stronie Swagger UI każda operacja ma nazwę zrozumiałą bez zaglądania w kod.
-- [ ] Grupa endpointów ma nazwę z `@Tag`, nie `patient-controller`.
+- [x] Na stronie Swagger UI każda operacja ma nazwę zrozumiałą bez zaglądania w kod.
+- [x] Grupa endpointów ma nazwę z `@Tag`, nie `patient-controller`.
 
 ### Zadanie 3 (8 min). Odpowiedzi, o których opis jeszcze nie wie
 `POST /patients` potrafi odpowiedzieć 201, 400 i 409, ale opis wymienia tylko jedną z tych
 możliwości. Dopisz `@ApiResponses` z trzema `@ApiResponse`: kod i krótki opis po angielsku.
 
 Kryteria akceptacji:
-- [ ] W opisie `POST /patients` są trzy kody: 201, 400 i 409.
-- [ ] Każdy ma opis, z którego wynika, **kiedy** klient go dostanie.
-- [ ] Reszta endpointów nadal ma po jednym kodzie: to jest praca domowa.
+- [x] W opisie `POST /patients` są trzy kody: 201, 400 i 409.
+- [x] Każdy ma opis, z którego wynika, **kiedy** klient go dostanie.
+- [x] Reszta endpointów nadal ma po jednym kodzie: to jest praca domowa.
 
 ## Jak sprawdzisz, że skończyłeś
 
@@ -74,13 +74,13 @@ zwracanego przez metodę. Importy: `io.swagger.v3.oas.annotations.media.Content`
 `io.swagger.v3.oas.annotations.media.Schema`, `org.springframework.http.ProblemDetail`.
 
 Kryteria akceptacji:
-- [ ] `GET /patients/{id}` i `GET /patients?email=` wymieniają 200 i 404.
-- [ ] `PUT /patients/{id}` wymienia 200, 400 i 404.
-- [ ] `PATCH /patients/{id}/password` wymienia 200, 400 i 404.
-- [ ] `DELETE /patients/{id}` wymienia 204 i 404.
-- [ ] Żaden opis nie wymienia kodu, którego endpoint nie zwraca. Wypisz je z kodu,
+- [x] `GET /patients/{id}` i `GET /patients?email=` wymieniają 200 i 404.
+- [x] `PUT /patients/{id}` wymienia 200, 400 i 404.
+- [x] `PATCH /patients/{id}/password` wymienia 200, 400 i 404.
+- [x] `DELETE /patients/{id}` wymienia 204 i 404.
+- [x] Żaden opis nie wymienia kodu, którego endpoint nie zwraca. Wypisz je z kodu,
   nie z pamięci.
-- [ ] Każda odpowiedź 4xx wskazuje schemat `ProblemDetail`, a odpowiedzi pozytywne nadal
+- [x] Każda odpowiedź 4xx wskazuje schemat `ProblemDetail`, a odpowiedzi pozytywne nadal
   wskazują `PatientDto`. Sprawdzisz to tak:
   `curl -s http://localhost:8080/v3/api-docs | python3 -m json.tool | grep -c ProblemDetail`
   ma zwrócić liczbę większą od zera.
@@ -94,9 +94,9 @@ Potem zbuduj jar i uruchom go dwa razy: raz normalnie, raz z `--spring.profiles.
 Za każdym razem sprawdź trzy adresy: `/v3/api-docs`, `/swagger-ui/index.html` i `/patients`.
 
 Kryteria akceptacji:
-- [ ] Z profilem `prod` oba adresy dokumentacji zwracają 404, a `/patients` nadal 200.
-- [ ] Bez profilu wszystkie trzy zwracają 200.
-- [ ] To ten sam jar w obu przebiegach. Umiesz powiedzieć, co dokładnie się zmieniło.
+- [x] Z profilem `prod` oba adresy dokumentacji zwracają 404, a `/patients` nadal 200.
+- [x] Bez profilu wszystkie trzy zwracają 200.
+- [x] To ten sam jar w obu przebiegach. Umiesz powiedzieć, co dokładnie się zmieniło.
 
 ## Zadanie D3. Jedno zdanie o granicy
 
@@ -108,8 +108,8 @@ z lekcji 12 sprawdza, co API robi. Jedno nie zastępuje drugiego i za pół roku
 będzie pamiętał, więc niech będzie zapisane.
 
 Kryteria akceptacji:
-- [ ] Sekcja podaje oba adresy i sposób wyłączenia na produkcji.
-- [ ] Jest w niej zdanie, które odróżnia opis od kolekcji Bruno.
+- [x] Sekcja podaje oba adresy i sposób wyłączenia na produkcji.
+- [x] Jest w niej zdanie, które odróżnia opis od kolekcji Bruno.
 
 ## Lektury
 
