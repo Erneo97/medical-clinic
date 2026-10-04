@@ -25,24 +25,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleValidation(MethodArgumentNotValidException exception) {
-        List<Map<String, String>> errors = exception.getBindingResult()
-                .getFieldErrors()
-                .stream()
-                .sorted(Comparator.comparing(FieldError::getField))
-                .map(err -> {
-                    Map<String, String> error = new HashMap<>();
-                    error.put("field", err.getField());
-                    error.put("message", err.getDefaultMessage());
-                    return error;
-                })
-                .toList();
+        List<Map<String, String>> errors = getListOfFieldErrorsFromException(exception);
         log.warn("rejected request {} break rules", errors.size());
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
                 HttpStatus.BAD_REQUEST,  "request body failed validation");
         problemDetail.setProperty("errors", errors);
         return problemDetail;
     }
-
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ProblemDetail handleUnreadable(HttpMessageNotReadableException exception) {
@@ -70,5 +59,21 @@ public class GlobalExceptionHandler {
         log.error("unhandled exception", exception);
         return ProblemDetail.forStatusAndDetail(
                 HttpStatus.INTERNAL_SERVER_ERROR, "Unknown error");
+    }
+
+    private List<Map<String, String>> getListOfFieldErrorsFromException(MethodArgumentNotValidException exception) {
+        return exception.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .sorted(Comparator.comparing(FieldError::getField))
+                .map(this::getFieldErrorInReturnFormat)
+                .toList();
+    }
+
+    private Map<String, String> getFieldErrorInReturnFormat(FieldError fieldError) {
+        Map<String, String> error = new HashMap<>();
+        error.put("field", fieldError.getField());
+        error.put("message", fieldError.getDefaultMessage());
+        return error;
     }
 }
