@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MedicalClinicException.class)
     public ProblemDetail handleMedicalClinic(MedicalClinicException exception) {
-        log.warn("Error domein {}",exception.getMessage());
+        log.warn("Error domain {}",exception.getMessage());
         return ProblemDetail.forStatusAndDetail(exception.getStatus(), exception.getMessage());
     }
 
