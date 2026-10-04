@@ -1,28 +1,29 @@
 package com.github.erneo97.medical_clinic.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Pattern;
+import com.github.erneo97.medical_clinic.validate.ValidFieldRulers;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 
 public record EditPersonalDataCommand(
-        @NotBlank(message = "email is required")
-        @Email(message = "this does not look like an email address")
+        @NotBlank(message = ValidFieldRulers.NOT_BLANK_MESSAGE)
+        @Email(message = ValidFieldRulers.FIELD_IS_NOT_EMAIL)
         String email,
 
-        @NotBlank(message = "email is required")
+        @NotBlank(message = ValidFieldRulers.NOT_BLANK_MESSAGE)
+        @Pattern(regexp = ValidFieldRulers.NAME_REGEX, message = ValidFieldRulers.FIRST_NAME_PATTERN_MESSAGE)
         String firstName,
 
-        @NotBlank(message = "email is required")
+        @NotBlank(message = ValidFieldRulers.NOT_BLANK_MESSAGE)
+        @Pattern(regexp = ValidFieldRulers.NAME_REGEX, message = ValidFieldRulers.LAST_NAME_PATTERN_MESSAGE)
         String lastName,
 
-        @NotBlank(message = "email is required")
-        @Pattern(regexp = "\\d{9}", message = "phone number must have 9 digits")
+        @NotBlank(message = ValidFieldRulers.NOT_BLANK_MESSAGE)
+        @Pattern(regexp = ValidFieldRulers.PHONE_NUMBER_REGEX, message = ValidFieldRulers.PHONE_NUMBER_PATTERN_MESSAGE)
         String phoneNumber,
 
-        @Past(message = "birth date must be in the past")
+        @Past(message = ValidFieldRulers.AGE_PAST_MESSAGE)
+        @NotNull(message = ValidFieldRulers.FILED_IS_REQUIRED_MESSAGE)
         LocalDate birthday
 ) {
 }
