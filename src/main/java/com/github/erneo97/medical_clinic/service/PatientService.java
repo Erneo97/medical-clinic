@@ -59,9 +59,9 @@ public class PatientService {
         inMemoryPatientRepository.changePassword(id, command.password());
     }
 
-    public boolean removeById(Long id) {
+    public void removeById(Long id) {
         findUserByIdOrThrowException(id);
-        return inMemoryPatientRepository.deleteById(id);
+        inMemoryPatientRepository.deleteById(id);
     }
 
     private void findUserByIdOrThrowException(Long id) {
