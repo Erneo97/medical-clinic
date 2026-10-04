@@ -1,7 +1,6 @@
 package com.github.erneo97.medical_clinic.exeption;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -20,7 +19,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MedicalClinicException.class)
     public ProblemDetail handleMedicalClinic(MedicalClinicException exception) {
-        log.warn("domain error {}",exception.getMessage());
+        log.warn("Error domein {}",exception.getMessage());
         return ProblemDetail.forStatusAndDetail(exception.getStatus(), exception.getMessage());
     }
 
@@ -51,15 +50,15 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NoResourceFoundException.class)
     public ProblemDetail handleNoRoute(NoResourceFoundException exception) {
-        log.warn("bad path: {}", exception.getResourcePath());
+        log.warn("request route missing: {}", exception.getResourcePath());
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, "no such endpoint");
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ProblemDetail handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException exception) {
-        log.warn("bad type of variable: {}", exception.getMessage());
+        log.warn("error type variable in route: {}", exception.getMessage());
         return ProblemDetail.forStatusAndDetail(
-                HttpStatus.BAD_REQUEST,  "path variable " + exception.getMessage() + " has a wronge type");
+                HttpStatus.BAD_REQUEST,  "path variable " + exception.getMessage() + " has a wronged type");
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
@@ -75,7 +74,7 @@ public class GlobalExceptionHandler {
     // Siatka bezpieczeństwa
     @ExceptionHandler(Exception.class)
     public ProblemDetail handleUnknown(Exception exception) {
-        log.error("unhandled exception {}", exception.getLocalizedMessage());
+        log.error("unhandled exception", exception);
         return ProblemDetail.forStatusAndDetail(
                 HttpStatus.INTERNAL_SERVER_ERROR, "Unknown error");
     }

@@ -1,5 +1,6 @@
 package com.github.erneo97.medical_clinic.model;
 
+import lombok.AllArgsConstructor;
 import com.github.erneo97.medical_clinic.dto.patient.EditPersonalDataCommand;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -39,6 +41,7 @@ public class Patient {
     @Column(nullable = false)
     private LocalDate birthday;
 
+
     public Patient() {}
 
     public Patient(Long id, String email, String password, String idCardNo, String firstName, String lastName, String phoneNumber, LocalDate birthday) {
@@ -49,7 +52,6 @@ public class Patient {
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.birthday = birthday;
-    }
 
     public String getEmail() {
         return this.user.getEmail();
