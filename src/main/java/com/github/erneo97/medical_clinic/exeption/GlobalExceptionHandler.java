@@ -19,13 +19,15 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MedicalClinicException.class)
     public ProblemDetail handleMedicalClinic(MedicalClinicException exception) {
-        log.warn("błąd domeny {}",exception.getMessage());
+        log.warn("Error domein {}",exception.getMessage());
         return ProblemDetail.forStatusAndDetail(exception.getStatus(), exception.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleValidation(MethodArgumentNotValidException exception) {
-        List<Map<String, String>> errors = exception.getBindingResult().getFieldErrors().stream()
+        List<Map<String, String>> errors = exception.getBindingResult()
+                .getFieldErrors()
+                .stream()
                 .sorted(Comparator.comparing(FieldError::getField))
                 .map(err -> {
                     Map<String, String> error = new HashMap<>();
@@ -34,37 +36,38 @@ public class GlobalExceptionHandler {
                     return error;
                 })
                 .toList();
-        log.warn("odrzucone rządanie {} złamanych reguł", errors.size());
+        log.warn("rejected request {} break rules", errors.size());
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
                 HttpStatus.BAD_REQUEST,  "request body failed validation");
         problemDetail.setProperty("errors", errors);
         return problemDetail;
     }
 
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ProblemDetail handleUnreadable(HttpMessageNotReadableException exception) {
-        log.warn("nieczytelne body zadania");
+        log.warn("body is unread");
         return ProblemDetail.forStatusAndDetail(
                 HttpStatus.BAD_REQUEST, "request body is not valid JSON");
     }
 
     @ExceptionHandler(NoResourceFoundException.class)
     public ProblemDetail handleNoRoute(NoResourceFoundException exception) {
-        log.warn("brak trasy: {}", exception.getResourcePath());
+        log.warn("request route missing: {}", exception.getResourcePath());
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, "no such endpoint");
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ProblemDetail handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException exception) {
-        log.warn("zły typ w ścieżce: {}", exception.getMessage());
+        log.warn("error type variable in route: {}", exception.getMessage());
         return ProblemDetail.forStatusAndDetail(
-                HttpStatus.BAD_REQUEST,  "path variable " + exception.getMessage() + " has a wronge type");
+                HttpStatus.BAD_REQUEST,  "path variable " + exception.getMessage() + " has a wronged type");
     }
 
     // Siatka bezpieczeństwa
     @ExceptionHandler(Exception.class)
     public ProblemDetail handleUnknown(Exception exception) {
-        log.error("nieobsluzony wyjatek", exception);
+        log.error("unhandled exception", exception);
         return ProblemDetail.forStatusAndDetail(
                 HttpStatus.INTERNAL_SERVER_ERROR, "Unknown error");
     }

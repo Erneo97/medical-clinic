@@ -54,7 +54,8 @@ public class PatientService {
     }
 
     public void chanePassword(Long id, EditPasswordCommand command) {
-        inMemoryPatientRepository.findById(id).orElseThrow( () -> new PatientNotFound(id) );
+        inMemoryPatientRepository.findById(id)
+                .orElseThrow( () -> new PatientNotFound(id) );
         inMemoryPatientRepository.changePassword(id, command.password());
     }
 
