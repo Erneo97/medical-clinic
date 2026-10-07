@@ -1,0 +1,24 @@
+# Baza dla aplikacji, uruchamiana jedną komendą: docker compose up -d --wait
+# Zatrzymanie: docker compose down. Skasowanie także danych: docker compose down -v
+services:
+  postgres:
+    image: postgres:16
+    container_name: medicalClinic
+    environment:
+      POSTGRES_DB: clinic
+      POSTGRES_USER: clinic
+      POSTGRES_PASSWORD: clinic
+    ports:
+      - "5433:5433"
+
+    volumes:
+      - medicalClinic-data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U clinic -d medicalClinic"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+volumes:
+  medicalClinic-data:
