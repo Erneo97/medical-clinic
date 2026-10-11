@@ -22,7 +22,7 @@ public class Patient {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String idCardNo;
 
     @Column(nullable = false)
