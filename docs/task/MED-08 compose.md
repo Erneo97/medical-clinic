@@ -37,16 +37,16 @@ chodziły na H2 i nie potrzebowały Dockera; do `pom.xml` dodaj zależność H2 
 `test`.
 
 Kryteria akceptacji:
-- [ ] Po starcie aplikacji `\dt` w bazie pokazuje tabelę `patients`.
-- [ ] `\d patients` pokazuje kolumny odpowiadające polom klasy `Patient`.
-- [ ] `mvn test` przechodzi przy **zatrzymanym** kontenerze bazy.
-- [ ] `GET /patients` zwraca 200 i pustą tablicę: aplikacja nadal czyta listę w pamięci
+- [x] Po starcie aplikacji `\dt` w bazie pokazuje tabelę `patients`.
+- [x] `\d patients` pokazuje kolumny odpowiadające polom klasy `Patient`.
+- [x] `mvn test` przechodzi przy **zatrzymanym** kontenerze bazy.
+- [x] `GET /patients` zwraca 200 i pustą tablicę: aplikacja nadal czyta listę w pamięci
   i w tej lekcji tak ma być.
 
 ## Jak sprawdzisz, że skończyłeś
 
 - `docker compose ps` → usługa `postgres` w stanie `Up` i `healthy`
 - start aplikacji → w logu `HikariPool-1 - Start completed` i adres bazy
-- `docker compose exec postgres psql -U clinic -d clinic -c "\dt"` → tabela `patients`
+- `docker compose exec postgres psql -U clinicUsr -d clinic -c "\dt"` → tabela `patients`
 - `mvn test` przy zatrzymanym kontenerze → `BUILD SUCCESS`
 - `GET /patients` → 200 i pusta tablica, bo lista w pamięci startuje pusta
