@@ -21,11 +21,11 @@ zgodne z tym, co wpisałeś w `compose.yaml`. Uruchom aplikację i znajdź w log
 pulę połączeń i adres bazy.
 
 Kryteria akceptacji:
-- [ ] `mvn clean package` kończy się na `BUILD SUCCESS`.
-- [ ] Aplikacja startuje, a w logu jest wiersz `HikariPool-1 - Start completed`.
-- [ ] W logu widać `Database JDBC URL` z adresem bazy i portem, który wybrałeś
+- [x] `mvn clean package` kończy się na `BUILD SUCCESS`.
+- [x] Aplikacja startuje, a w logu jest wiersz `HikariPool-1 - Start completed`.
+- [x] W logu widać `Database JDBC URL` z adresem bazy i portem, który wybrałeś
   (domyślnie 5432).
-- [ ] Po zatrzymaniu kontenera start aplikacji kończy się wyjątkiem z `Connection
+- [x] Po zatrzymaniu kontenera start aplikacji kończy się wyjątkiem z `Connection
       refused`. Tak ma być; podnieś potem bazę z powrotem.
 
 ### Zadanie 3 (10 min). Tabela i testy

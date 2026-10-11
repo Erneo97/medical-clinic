@@ -6,16 +6,16 @@ services:
     container_name: medicalClinic
     environment:
       POSTGRES_DB: clinic
-      POSTGRES_USER: clinic
-      POSTGRES_PASSWORD: clinic
+      POSTGRES_USER: clinicUsr
+      POSTGRES_PASSWORD: clinic123
     ports:
-      - "5433:5433"
+      - "5433:5432"
 
     volumes:
       - medicalClinic-data:/var/lib/postgresql/data
 
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U clinic -d medicalClinic"]
+      test: ["CMD-SHELL", "pg_isready -U clinicUsr -d clinic"]
       interval: 2s
       timeout: 3s
       retries: 15
