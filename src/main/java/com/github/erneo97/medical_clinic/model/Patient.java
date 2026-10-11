@@ -1,5 +1,6 @@
 package com.github.erneo97.medical_clinic.model;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,9 +8,32 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "patients")
 public class Patient {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
-    private String email, password, idCardNo, firstName, lastName, phoneNumber;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    private String idCardNo;
+
+    @Column(nullable = false)
+    private String firstName;
+
+    @Column(nullable = false)
+    private String lastName;
+
+    private String phoneNumber;
+
+    @Column(nullable = false)
     private LocalDate birthday;
 
     public Patient() {}

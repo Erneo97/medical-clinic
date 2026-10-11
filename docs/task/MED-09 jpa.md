@@ -11,11 +11,11 @@ Uwaga: przy tym uruchomieniu aplikacja **nie wstanie** i to jest poprawny stan t
 zadania. Tabela powstanie, a dlaczego start się nie udał, wyjaśnia zadanie 2.
 
 Kryteria akceptacji:
-- [ ] W projekcie nie ma pliku `schema.sql`.
-- [ ] `mvn clean package` kończy się na `BUILD SUCCESS`.
-- [ ] Po `docker compose down -v`, `docker compose up -d --wait` i próbie startu aplikacji
+- [x] W projekcie nie ma pliku `schema.sql`.
+- [x] `mvn clean package` kończy się na `BUILD SUCCESS`.
+- [x] Po `docker compose down -v`, `docker compose up -d --wait` i próbie startu aplikacji
   w logu jest wiersz zaczynający się od `Hibernate: create table patients`.
-- [ ] `docker compose exec postgres psql -U clinic -d clinic -c "\d patients"` pokazuje
+- [x] `docker compose exec postgres psql -U clinic -d clinic -c "\d patients"` pokazuje
   tabelę z kolumnami `id_card_no`, `first_name`, `last_name`, `phone_number`.
 
 ### Zadanie 2 (10 min). Ograniczenia, które zniknęły razem ze skryptem
