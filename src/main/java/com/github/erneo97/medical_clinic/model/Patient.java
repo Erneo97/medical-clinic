@@ -11,8 +11,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity
-@Table(name = "patients")
 public class Patient {
     private final static int MAX_LENGHT_NUMBER_DATA = 20;
     private final static int MAX_LENGHT_NAME_DATA = 100;
