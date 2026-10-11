@@ -11,6 +11,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "patients")
 public class Patient {
+    private final static int MAX_LENGHT_NUMBER_DATA = 20;
+    private final static int MAX_LENGHT_NAME_DATA = 100;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -22,15 +24,16 @@ public class Patient {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = MAX_LENGHT_NUMBER_DATA)
     private String idCardNo;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = MAX_LENGHT_NAME_DATA)
     private String firstName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = MAX_LENGHT_NAME_DATA)
     private String lastName;
 
+    @Column(length = MAX_LENGHT_NUMBER_DATA)
     private String phoneNumber;
 
     @Column(nullable = false)

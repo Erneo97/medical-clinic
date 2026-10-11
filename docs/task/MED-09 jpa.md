@@ -46,12 +46,13 @@ domyślna. W `schema.sql` z lekcji 18 numer dowodu miał 20 znaków, imię i naz
 a numer telefonu 20. Przywróć te szerokości, tym razem adnotacjami przy polach.
 
 Kryteria akceptacji:
-- [ ] `id_card_no` i `phone_number` mają w bazie `character varying(20)`, a `first_name`
+- [x] `id_card_no` i `phone_number` mają w bazie `character varying(20)`, a `first_name`
   i `last_name` `character varying(100)`.
-- [ ] `email` i `password` zostają na `varchar(255)`: tych nie zawężamy.
-- [ ] Aplikacja startuje, a `SELECT COUNT(*) FROM patients;` nadal zwraca 3.
-- [ ] W notatce z zadania D2 jest napisane, czy zawężenie zadziałało na istniejącej
+- [x] `email` i `password` zostają na `varchar(255)`: tych nie zawężamy.
+- [x] Aplikacja startuje, a `SELECT COUNT(*) FROM patients;` nadal zwraca 3.
+- [x] W notatce z zadania D2 jest napisane, czy zawężenie zadziałało na istniejącej
   tabeli, czy trzeba było skasować wolumen. Sprawdź to u siebie, nie zgaduj.
+Nie trzeba było usuwać wolumenu. 
 
 ## Zadanie D2. Notatka o schemacie z klas
 
