@@ -38,7 +38,7 @@ public class PatientService {
         // Walidacja biznesowa: sprawdzamy, czy email nie jest już zajęty.
         // Wymaga dostępu do innych pacjentów, dlatego znajduje się w serwisie.
         // Walidację formalną danych wejściowych wykonuje już @Valid.
-        if (patientRepository.findByEmail(command.email()).isPresent()) {
+        if (patientRepository.existsByEmail(command.email())) {
             throw new PatientAlreadyExistsException(
                     "Patient with email " + command.email() + " already exists",
                     HttpStatus.CONFLICT
@@ -53,7 +53,7 @@ public class PatientService {
         Patient patient = patientRepository.findById(id)
                         .orElseThrow(() -> new PatientNotFound(id));
         updatePatienData(patient, command);
-        return patientRepository.save(patient);
+        return patient;
     }
 
     public void chanePassword(Long id, EditPasswordCommand command) {

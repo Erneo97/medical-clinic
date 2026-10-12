@@ -102,11 +102,11 @@ Serwis sprawdza duplikat e-maila, pobierając cały wiersz i budując z niego ob
 po to tylko, żeby stwierdzić, czy ten e-mail jest już zajęty. Zamień to na metodę, która pyta wprost.
 
 Kryteria akceptacji:
-- [ ] `PatientRepository` ma metodę `existsByEmail` zwracającą `boolean`.
-- [ ] Serwis używa jej przy zakładaniu pacjenta, a `findByEmail` zostaje tam, gdzie
+- [x] `PatientRepository` ma metodę `existsByEmail` zwracającą `boolean`.
+- [x] Serwis używa jej przy zakładaniu pacjenta, a `findByEmail` zostaje tam, gdzie
   naprawdę potrzebny jest cały pacjent.
-- [ ] `POST` z zajętym e-mailem nadal zwraca 409 z tym samym komunikatem.
-- [ ] W logu przy tym żądaniu widać zapytanie po jednym wierszu, a nie pobranie
+- [x] `POST` z zajętym e-mailem nadal zwraca 409 z tym samym komunikatem.
+- [x] W logu przy tym żądaniu widać zapytanie po jednym wierszu, a nie pobranie
   wszystkich kolumn pacjenta.
 
 ## Zadanie D2. Zapytanie, którego nie da się nazwać
