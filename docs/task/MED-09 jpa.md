@@ -131,12 +131,12 @@ wolumen (`docker compose down -v`), podnieś bazę i przejdź całą kolekcję o
 na świeżych danych startowych.
 
 Kryteria akceptacji:
-- [ ] W kolekcji jest żądanie `GET /patients?fragment=...` z sensowną nazwą po polsku.
-- [ ] Na świeżej bazie cała kolekcja przechodzi: 200, 201, 409, 400 i 404 tam, gdzie
+- [x] W kolekcji jest żądanie `GET /patients?fragment=...` z sensowną nazwą po polsku.
+- [x] Na świeżej bazie cała kolekcja przechodzi: 200, 201, 409, 400 i 404 tam, gdzie
   było tak w lekcji 14.
-- [ ] Żądanie „Utwórz pacjenta" ma dane, których nie ma w `data.sql` (inny e-mail
+- [x] Żądanie „Utwórz pacjenta" ma dane, których nie ma w `data.sql` (inny e-mail
   i inny numer dowodu), więc za pierwszym razem daje 201.
-- [ ] `mvn test` przechodzi przy zatrzymanym kontenerze bazy.
+- [x] `mvn test` przechodzi przy zatrzymanym kontenerze bazy.
 
 ## Jak sprawdzisz, że skończyłeś
 
