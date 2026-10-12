@@ -66,6 +66,10 @@ public class PatientService {
         patientRepository.deleteById(id);
     }
 
+    public List<Patient> searchBytName(String fragment) {
+        return patientRepository.searchByName(fragment);
+    }
+
     private void findUserByIdOrThrowException(Long id) {
         this.findById(id);
     }

@@ -117,12 +117,12 @@ zapytanie wprost w JPQL przez `@Query`. Wystaw je jako kolejny wariant ścieżki
 `GET /patients?fragment=...`.
 
 Kryteria akceptacji:
-- [ ] `GET /patients?fragment=kow` zwraca 200 i pacjentów, których imię albo nazwisko
+- [x] `GET /patients?fragment=kow` zwraca 200 i pacjentów, których imię albo nazwisko
   zawiera ten fragment.
-- [ ] Wielkość liter nie ma znaczenia: `KOW` i `kow` dają ten sam wynik.
-- [ ] Zapytanie w `@Query` operuje na encji `Patient` i nazwach pól, a nie na tabeli
+- [x] Wielkość liter nie ma znaczenia: `KOW` i `kow` dają ten sam wynik.
+- [x] Zapytanie w `@Query` operuje na encji `Patient` i nazwach pól, a nie na tabeli
   `patients` i nazwach kolumn.
-- [ ] Parametr jest nazwany (`:fragment`), a nie pozycyjny.
+- [x] Parametr jest nazwany (`:fragment`), a nie pozycyjny.
 
 ## Zadanie D3. Kolekcja Bruno rośnie o jedno żądanie
 

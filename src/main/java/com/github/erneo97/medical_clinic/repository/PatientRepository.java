@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PatientRepository extends JpaRepository<Patient, Long> {
@@ -17,6 +18,18 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     @Modifying(clearAutomatically = true)
     @Transactional
-    @Query("UPDATE Patient p SET p.password = :password WHERE p.id = :id")
+    @Query("""
+            UPDATE Patient p 
+            SET p.password = :password 
+            WHERE p.id = :id
+    """)
     void updatePassword(@Param("id") Long id, @Param("password") String password);
+
+    @Query("""
+        SELECT p
+        FROM Patient p
+        WHERE lower(p.lastName) like lower(concat('%', :fragment, '%'))
+            or lower(p.firstName) like lower(concat('%', :fragment, '%'))
+    """)
+    List<Patient> searchByName(@Param("fragment") String fragment);
 }
