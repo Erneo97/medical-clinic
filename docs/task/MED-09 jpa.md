@@ -70,10 +70,10 @@ powtarzać treści lekcji.
 5. Na koniec jedno zdanie o tym, czego `ddl-auto=update` nie zrobi.
 
 Kryteria akceptacji:
-- [ ] W notatce jest prawdziwy wydruk z twojego logu, nie przepisany z lekcji.
-- [ ] Tabelka pokrywa wszystkie pola klasy `Patient`.
-- [ ] Przy ograniczeniach unikalności jest napisane, skąd się wzięły ich dziwne nazwy.
-- [ ] Notatka mieści się na jednym ekranie.
+- [x] W notatce jest prawdziwy wydruk z twojego logu, nie przepisany z lekcji.
+- [x] Tabelka pokrywa wszystkie pola klasy `Patient`.
+- [x] Przy ograniczeniach unikalności jest napisane, skąd się wzięły ich dziwne nazwy.
+- [x] Notatka mieści się na jednym ekranie.
 
 ## Jak sprawdzisz, że skończyłeś
 
