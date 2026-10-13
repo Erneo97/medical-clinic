@@ -43,19 +43,22 @@ i zakładać oba wiersze jednym żądaniem.
 5. Skasuj wolumen, podnieś bazę, zbuduj i uruchom.
 
 Kryteria akceptacji:
-- [ ] `mvn clean package` kończy się na `BUILD SUCCESS`.
-- [ ] `GET /patients` zwraca trzech pacjentów z e-mailami, choć tabela `patients` nie ma
+- [x] `mvn clean package` kończy się na `BUILD SUCCESS`.
+- [x] `GET /patients` zwraca trzech pacjentów z e-mailami, choć tabela `patients` nie ma
   już kolumny `email`.
-- [ ] `GET /patients?email=jan.wisniewski@example.com` → 200 i Jan Wiśniewski.
-- [ ] `POST /patients` z nowym e-mailem → 201, a w logu widać dwa `INSERT`-y: najpierw
+- [x] `GET /patients?email=jan.wisniewski@example.com` → 200 i Jan Wiśniewski.
+- [x] `POST /patients` z nowym e-mailem → 201, a w logu widać dwa `INSERT`-y: najpierw
   `insert into users`, potem `insert into patients`.
-- [ ] `POST /patients` z tym samym e-mailem drugi raz → 409.
-- [ ] Po zatrzymaniu i ponownym uruchomieniu aplikacji (bez `down -v`) start przechodzi bez
+- [x] `POST /patients` z tym samym e-mailem drugi raz → 409.
+- [x] Po zatrzymaniu i ponownym uruchomieniu aplikacji (bez `down -v`) start przechodzi bez
   błędu, czyli `data.sql` wykonuje się drugi raz na tych samych danych.
 
 ### Zadanie 3 (6 min). Sprawdź w bazie, kto pilnuje relacji
 
 Zajrzyj do `psql` i zobacz, co naprawdę powstało z twoich adnotacji.
+
+Odp: Foreign-key constraints:
+"fkuwca24wcd1tg6pjex8lmc0y7" FOREIGN KEY (user_id) REFERENCES users(id)
 
 ```bash
 docker compose exec postgres psql -U clinic -d clinic -c "\d patients"
@@ -68,15 +71,17 @@ docker compose exec postgres psql -U clinic -d clinic -c "INSERT INTO patients (
 ```
 
 Na koniec zmień hasło pacjenta 1 (`PATCH /patients/1/password`) i sprawdź w logu, do której
-tabeli idzie `update`.
+tabeli idzie `update`. 
+
+Odp: idzie do patient;
 
 Kryteria akceptacji:
-- [ ] W `\d patients` widzisz kolumnę `user_id`, ograniczenie `UNIQUE CONSTRAINT` na niej
+- [x] W `\d patients` widzisz kolumnę `user_id`, ograniczenie `UNIQUE CONSTRAINT` na niej
   i klucz obcy `REFERENCES users(id)`.
-- [ ] `INSERT` drugiego pacjenta na konto 1 kończy się `duplicate key value violates unique
+- [x] `INSERT` drugiego pacjenta na konto 1 kończy się `duplicate key value violates unique
       constraint`.
-- [ ] `PATCH /patients/1/password` → 200, a w logu widać `update users set ...`.
-- [ ] Umiesz powiedzieć, która encja jest właścicielem relacji i po czym to poznajesz.
+- [x] `PATCH /patients/1/password` → 200, a w logu widać `update users set ...`.
+- [x] Umiesz powiedzieć, która encja jest właścicielem relacji i po czym to poznajesz.
 
 ## Jak sprawdzisz, że skończyłeś
 

@@ -5,9 +5,12 @@ import com.github.erneo97.medical_clinic.dto.EditPersonalDataCommand;
 import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.model.Patient;
+import com.github.erneo97.medical_clinic.model.Role;
+import com.github.erneo97.medical_clinic.model.User;
 import com.github.erneo97.medical_clinic.repository.PatientRepository;
 import com.github.erneo97.medical_clinic.exeption.PatientAlreadyExistsException;
 import com.github.erneo97.medical_clinic.exeption.PatientNotFound;
+import com.github.erneo97.medical_clinic.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PatientService {
     private final PatientRepository patientRepository;
+    private final UserRepository userRepository;
     private final PatientMapper patientMapper;
 
     public List<Patient> findAll() {
@@ -30,21 +34,27 @@ public class PatientService {
     }
 
     public Patient findByEmail(String email) {
-        return patientRepository.findByEmail(email)
+        return patientRepository.findByUserEmail(email)
                 .orElseThrow(() -> new PatientNotFound(email));
     }
 
+    @Transactional
     public Patient create(PatientCreateCommand command) {
         // Walidacja biznesowa: sprawdzamy, czy email nie jest już zajęty.
         // Wymaga dostępu do innych pacjentów, dlatego znajduje się w serwisie.
         // Walidację formalną danych wejściowych wykonuje już @Valid.
-        if (patientRepository.existsByEmail(command.email())) {
+        if (userRepository.existsByEmail(command.email())) {
             throw new PatientAlreadyExistsException(
                     "Patient with email " + command.email() + " already exists",
                     HttpStatus.CONFLICT
             );
         }
+        User newUser = patientMapper.toUser(command);
+        newUser.setRole(Role.PATIENT);
+        userRepository.save(newUser);
+
         Patient patient = patientMapper.toPatient(command);
+        patient.setUser(newUser);
         return patientRepository.save(patient);
     }
 

@@ -11,17 +11,16 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PatientRepository extends JpaRepository<Patient, Long> {
-    Optional<Patient> findByEmail(String email);
-    boolean existsByEmail(String email);
+    Optional<Patient> findByUserEmail(String email);
 
     void deleteById(Long id);
 
     @Modifying(clearAutomatically = true)
     @Transactional
     @Query("""
-            UPDATE Patient p
-            SET p.user.password = :password\s
-            WHERE p.id = :id
+        UPDATE User u
+        SET u.password = :password
+        WHERE u.id = (SELECT p.user.id FROM Patient p WHERE p.id = :id)
     """)
     void updatePassword(@Param("id") Long id, @Param("password") String password);
 
