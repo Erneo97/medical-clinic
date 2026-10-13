@@ -4,6 +4,7 @@ import com.github.erneo97.medical_clinic.dto.patient.EditPasswordCommand;
 import com.github.erneo97.medical_clinic.dto.patient.EditPersonalDataCommand;
 import com.github.erneo97.medical_clinic.dto.patient.PatientCreateCommand;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
+import com.github.erneo97.medical_clinic.mapper.UserMapper;
 import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.model.Role;
 import com.github.erneo97.medical_clinic.model.User;
@@ -24,6 +25,7 @@ public class PatientService {
     private final PatientRepository patientRepository;
     private final UserRepository userRepository;
     private final PatientMapper patientMapper;
+    private final UserMapper userMapper;
 
     public List<Patient> findAll() {
         return patientRepository.findAll();
@@ -49,7 +51,7 @@ public class PatientService {
                     HttpStatus.CONFLICT
             );
         }
-        User newUser = patientMapper.toUser(command);
+        User newUser = userMapper.toUser(command);
         newUser.setRole(Role.PATIENT);
         userRepository.save(newUser);
 
