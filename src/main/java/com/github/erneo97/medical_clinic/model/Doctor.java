@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Doctor {
-    private final static int MAX_LENGHT_NAME_DATA = 100;
+    private final static int MAX_LENGTH_NAME_DATA = 100;
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false, unique = true)
@@ -24,9 +24,9 @@ public class Doctor {
     @Column(nullable = false)
     Specialization specialization;
 
-    @Column(nullable = false, length = MAX_LENGHT_NAME_DATA)
+    @Column(nullable = false, length = MAX_LENGTH_NAME_DATA)
     private String firstName;
 
-    @Column(nullable = false, length = MAX_LENGHT_NAME_DATA)
+    @Column(nullable = false, length = MAX_LENGTH_NAME_DATA)
     private String lastName;
 }
