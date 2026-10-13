@@ -1,8 +1,8 @@
 package com.github.erneo97.medical_clinic.service;
 
-import com.github.erneo97.medical_clinic.dto.EditPasswordCommand;
-import com.github.erneo97.medical_clinic.dto.EditPersonalDataCommand;
-import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
+import com.github.erneo97.medical_clinic.dto.patient.EditPasswordCommand;
+import com.github.erneo97.medical_clinic.dto.patient.EditPersonalDataCommand;
+import com.github.erneo97.medical_clinic.dto.patient.PatientCreateCommand;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.model.Role;

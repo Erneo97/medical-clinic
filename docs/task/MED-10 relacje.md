@@ -106,10 +106,10 @@ się potem, więc konto musi dać się utworzyć samodzielnie, bez pacjenta. Wys
 zasób `/users` przez wszystkie warstwy: Command, DTO, maper, serwis, kontroler.
 
 Kryteria akceptacji:
-- [ ] `POST /users` z e-mailem, hasłem i rolą → 201, w odpowiedzi `id`, `email` i `role`.
-- [ ] Odpowiedź nigdy nie zawiera hasła: ani przy tworzeniu, ani na liście.
-- [ ] `POST /users` z e-mailem, który ma już jakiekolwiek konto → 409.
-- [ ] `POST /users` bez roli albo z hasłem krótszym niż 8 znaków → 400 z listą złamanych
+- [x] `POST /users` z e-mailem, hasłem i rolą → 201, w odpowiedzi `id`, `email` i `role`.
+- [x] Odpowiedź nigdy nie zawiera hasła: ani przy tworzeniu, ani na liście.
+- [x] `POST /users` z e-mailem, który ma już jakiekolwiek konto → 409.
+- [x] `POST /users` bez roli albo z hasłem krótszym niż 8 znaków → 400 z listą złamanych
   reguł (handler z lekcji 14).
 - [ ] `GET /users` → 200 i lista kont, `GET /users/{id}` → 200, `GET /users/999` → 404.
 

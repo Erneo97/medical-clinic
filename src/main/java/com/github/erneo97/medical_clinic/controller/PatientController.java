@@ -1,9 +1,9 @@
 package com.github.erneo97.medical_clinic.controller;
 
-import com.github.erneo97.medical_clinic.dto.EditPasswordCommand;
-import com.github.erneo97.medical_clinic.dto.EditPersonalDataCommand;
-import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
-import com.github.erneo97.medical_clinic.dto.PatientDto;
+import com.github.erneo97.medical_clinic.dto.patient.EditPasswordCommand;
+import com.github.erneo97.medical_clinic.dto.patient.EditPersonalDataCommand;
+import com.github.erneo97.medical_clinic.dto.patient.PatientCreateCommand;
+import com.github.erneo97.medical_clinic.dto.patient.PatientDto;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.service.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
