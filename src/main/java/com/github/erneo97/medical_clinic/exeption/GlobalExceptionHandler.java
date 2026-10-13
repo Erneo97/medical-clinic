@@ -44,12 +44,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoResourceFoundException.class)
     public ProblemDetail handleNoRoute(NoResourceFoundException exception) {
         log.warn("request route missing: {}", exception.getResourcePath());
+        log.warn("bad path: {}", exception.getResourcePath());
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, "no such endpoint");
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ProblemDetail handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException exception) {
-        log.warn("error type variable in route: {}", exception.getMessage());
+        log.warn("bad type of variable: {}", exception.getMessage());
         return ProblemDetail.forStatusAndDetail(
                 HttpStatus.BAD_REQUEST,  "path variable " + exception.getMessage() + " has a wronged type");
     }
