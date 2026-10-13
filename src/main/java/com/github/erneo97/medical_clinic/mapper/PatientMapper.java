@@ -39,6 +39,9 @@ public interface PatientMapper {
 
      UserDto toUserDto(User user);
 
+     List<UserDto> toUserDto(List<User> users);
+
+
      @Named("patientEmail")
      default String getEmailFromPatient(Patient patient) {
           return patient.getEmail();

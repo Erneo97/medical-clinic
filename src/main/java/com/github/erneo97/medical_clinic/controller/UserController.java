@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/users")
 @RequiredArgsConstructor
@@ -24,6 +26,11 @@ public class UserController {
 
     @GetMapping("/{id}")
     public UserDto findById(@PathVariable Long id) {
+        return  patientMapper.toUserDto(userService.findById(id));
+    }
 
+    @GetMapping
+    public List<UserDto> findAll() {
+        return patientMapper.toUserDto(userService.findAllUsers());
     }
 }

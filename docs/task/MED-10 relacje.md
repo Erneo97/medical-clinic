@@ -111,7 +111,7 @@ Kryteria akceptacji:
 - [x] `POST /users` z e-mailem, który ma już jakiekolwiek konto → 409.
 - [x] `POST /users` bez roli albo z hasłem krótszym niż 8 znaków → 400 z listą złamanych
   reguł (handler z lekcji 14).
-- [ ] `GET /users` → 200 i lista kont, `GET /users/{id}` → 200, `GET /users/999` → 404.
+- [z] `GET /users` → 200 i lista kont, `GET /users/{id}` → 200, `GET /users/999` → 404.
 
 ## Zadanie D2. Konta, którego ktoś używa, nie wolno skasować
 
