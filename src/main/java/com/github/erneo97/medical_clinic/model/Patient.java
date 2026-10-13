@@ -1,5 +1,10 @@
 package com.github.erneo97.medical_clinic.model;
 
+import com.github.erneo97.medical_clinic.dto.EditPersonalDataCommand;
+import jakarta.persistence.*;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import com.github.erneo97.medical_clinic.dto.patient.EditPersonalDataCommand;
 import jakarta.persistence.*;
@@ -11,6 +16,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
+@Entity
+@Table(name = "patients")
 public class Patient {
     private final static int MAX_LENGHT_NUMBER_DATA = 20;
     private final static int MAX_LENGHT_NAME_DATA = 100;
@@ -23,6 +30,12 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
 
     @Column(nullable = false, unique = true, length = MAX_LENGHT_NUMBER_DATA)
     private String idCardNo;
@@ -39,7 +52,6 @@ public class Patient {
     @Column(nullable = false)
     private LocalDate birthday;
 
-
     public Patient() {}
 
     public Patient(Long id, String email, String password, String idCardNo, String firstName, String lastName, String phoneNumber, LocalDate birthday) {
@@ -50,6 +62,7 @@ public class Patient {
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.birthday = birthday;
+    }
 
     public String getEmail() {
         return this.user.getEmail();
