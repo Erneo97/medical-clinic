@@ -33,4 +33,9 @@ public class UserController {
     public List<UserDto> findAll() {
         return userMapper.toUserDto(userService.findAllUsers());
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        userService.removeUser(id);
+    }
 }

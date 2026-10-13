@@ -111,7 +111,7 @@ Kryteria akceptacji:
 - [x] `POST /users` z e-mailem, który ma już jakiekolwiek konto → 409.
 - [x] `POST /users` bez roli albo z hasłem krótszym niż 8 znaków → 400 z listą złamanych
   reguł (handler z lekcji 14).
-- [z] `GET /users` → 200 i lista kont, `GET /users/{id}` → 200, `GET /users/999` → 404.
+- [x] `GET /users` → 200 i lista kont, `GET /users/{id}` → 200, `GET /users/999` → 404.
 
 ## Zadanie D2. Konta, którego ktoś używa, nie wolno skasować
 
@@ -120,9 +120,9 @@ Zanim napiszesz regułę, sprawdź, co się dzieje bez niej: baza i tak odmówi,
 `patients` wskazuje konto kluczem obcym. Pytanie brzmi, jaki status dostanie klient.
 
 Kryteria akceptacji:
-- [ ] `DELETE /users/{id}` konta bez pacjenta → 204, a potem `GET` tego konta → 404.
-- [ ] `DELETE /users/999` → 404.
-- [ ] `DELETE /users/1` (konto pacjenta) → 409 z czytelnym komunikatem, a nie 500.
+- [x] `DELETE /users/{id}` konta bez pacjenta → 204, a potem `GET` tego konta → 404.
+- [x] `DELETE /users/999` → 404.
+- [] `DELETE /users/1` (konto pacjenta) → 409 z czytelnym komunikatem, a nie 500.
 - [ ] Pytanie „czy jakiś pacjent wskazuje to konto" to jedna metoda w `PatientRepository`,
   zapytanie z nazwy metody, bez `@Query`.
 

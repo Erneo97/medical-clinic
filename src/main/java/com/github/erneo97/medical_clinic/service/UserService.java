@@ -1,7 +1,7 @@
 package com.github.erneo97.medical_clinic.service;
 
 import com.github.erneo97.medical_clinic.dto.doktor.UserCreateCommand;
-import com.github.erneo97.medical_clinic.exeption.PatientNotFound;
+import com.github.erneo97.medical_clinic.exeption.UserNotFound;
 import com.github.erneo97.medical_clinic.mapper.UserMapper;
 import com.github.erneo97.medical_clinic.model.User;
 import com.github.erneo97.medical_clinic.repository.UserRepository;
@@ -22,10 +22,19 @@ public class UserService {
 
     public User findById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new PatientNotFound(id));
+                .orElseThrow(() -> new UserNotFound(id));
     }
 
     public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    public void removeUser(Long id) {
+        findNotPatientOrThrow(id);
+        userRepository.deleteById(id);
+    }
+
+    private void findNotPatientOrThrow(Long id) {
+        this.findById(id);
     }
 }
