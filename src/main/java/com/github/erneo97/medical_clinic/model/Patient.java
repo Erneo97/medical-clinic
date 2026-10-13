@@ -1,6 +1,6 @@
 package com.github.erneo97.medical_clinic.model;
 
-import com.github.erneo97.medical_clinic.dto.EditPersonalDataCommand;
+import com.github.erneo97.medical_clinic.dto.patient.EditPersonalDataCommand;
 import jakarta.persistence.*;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
