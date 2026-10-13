@@ -177,9 +177,9 @@ Doktor to druga rola, która korzysta z konta z lekcji 21.
    Katarzynę Wróbel, kardiologa, na tym koncie.
 
 Kryteria akceptacji:
-- [ ] Kolumna `specialization` przechowuje nazwę (`CARDIOLOGIST`), a nie liczbę.
-- [ ] `doctors.user_id` ma `UNIQUE` i klucz obcy do `users`, tak jak `patients.user_id`.
-- [ ] Aplikacja startuje dwa razy z rzędu bez błędu `data.sql`.
+- [x] Kolumna `specialization` przechowuje nazwę (`CARDIOLOGIST`), a nie liczbę.
+- [x] `doctors.user_id` ma `UNIQUE` i klucz obcy do `users`, tak jak `patients.user_id`.
+- [x] Aplikacja startuje dwa razy z rzędu bez błędu `data.sql`.
 
 ### Zadanie 2 (10 min). Wizyta z dwiema relacjami
 
