@@ -122,8 +122,8 @@ Zanim napiszesz regułę, sprawdź, co się dzieje bez niej: baza i tak odmówi,
 Kryteria akceptacji:
 - [x] `DELETE /users/{id}` konta bez pacjenta → 204, a potem `GET` tego konta → 404.
 - [x] `DELETE /users/999` → 404.
-- [] `DELETE /users/1` (konto pacjenta) → 409 z czytelnym komunikatem, a nie 500.
-- [ ] Pytanie „czy jakiś pacjent wskazuje to konto" to jedna metoda w `PatientRepository`,
+- [x] `DELETE /users/1` (konto pacjenta) → 409 z czytelnym komunikatem, a nie 500.
+- [x] Pytanie „czy jakiś pacjent wskazuje to konto" to jedna metoda w `PatientRepository`,
   zapytanie z nazwy metody, bez `@Query`.
 
 ## Zadanie D3. Folder `konta` w kolekcji Bruno
@@ -133,10 +133,10 @@ od lekcji 3 i wysyła żądania do publicznego API testowego). Potem sprawdź w 
 konta nie mają pacjenta.
 
 Kryteria akceptacji:
-- [ ] Folder ma co najmniej sześć żądań: utworzenie konta, lista, konto po id, zajęty
+- [x] Folder ma co najmniej sześć żądań: utworzenie konta, lista, konto po id, zajęty
   e-mail (409), kasowanie konta pacjenta (409) i nieistniejące konto (404).
-- [ ] Na świeżej bazie cały folder przechodzi za pierwszym uruchomieniem.
-- [ ] Zapytaniem w `psql` (złączenie `users` z `patients` i warunek na brak pacjenta)
+- [x] Na świeżej bazie cały folder przechodzi za pierwszym uruchomieniem.
+- [x] Zapytaniem w `psql` (złączenie `users` z `patients` i warunek na brak pacjenta)
   pokazujesz konta, których nie wskazuje żaden pacjent.
 
 ## Jak sprawdzisz, że skończyłeś

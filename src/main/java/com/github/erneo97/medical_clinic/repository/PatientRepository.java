@@ -31,4 +31,6 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
             or lower(p.firstName) like lower(concat('%', :fragment, '%'))
     """)
     List<Patient> searchByName(@Param("fragment") String fragment);
+
+    boolean existsByUserId(Long userId);
 }

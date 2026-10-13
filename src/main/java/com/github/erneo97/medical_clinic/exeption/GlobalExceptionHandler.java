@@ -1,6 +1,7 @@
 package com.github.erneo97.medical_clinic.exeption;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -19,7 +20,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MedicalClinicException.class)
     public ProblemDetail handleMedicalClinic(MedicalClinicException exception) {
-        log.warn("błąd domeny {}",exception.getMessage());
+        log.warn("domain error {}",exception.getMessage());
         return ProblemDetail.forStatusAndDetail(exception.getStatus(), exception.getMessage());
     }
 
@@ -34,7 +35,7 @@ public class GlobalExceptionHandler {
                     return error;
                 })
                 .toList();
-        log.warn("odrzucone rządanie {} złamanych reguł", errors.size());
+        log.warn("request denied: count {} of brake rules", errors.size());
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
                 HttpStatus.BAD_REQUEST,  "request body failed validation");
         problemDetail.setProperty("errors", errors);
@@ -43,7 +44,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ProblemDetail handleUnreadable(HttpMessageNotReadableException exception) {
-        log.warn("nieczytelne body zadania {}", exception.getMostSpecificCause().getMessage());
+        log.warn("unread request body {}", exception.getMostSpecificCause().getMessage());
         return ProblemDetail.forStatusAndDetail(
                 HttpStatus.BAD_REQUEST, "request body is not valid JSON");
     }
@@ -61,10 +62,20 @@ public class GlobalExceptionHandler {
                 HttpStatus.BAD_REQUEST,  "path variable " + exception.getMessage() + " has a wronge type");
     }
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ProblemDetail handleDataIntegrity(DataIntegrityViolationException ex) {
+        log.warn("Integrate DB is in danger: {}", ex.getMostSpecificCause().getMessage());
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+                HttpStatus.CONFLICT,
+                "Operation break integrate of database");
+        problem.setTitle("Conflict");
+        return problem;
+    }
+
     // Siatka bezpieczeństwa
     @ExceptionHandler(Exception.class)
     public ProblemDetail handleUnknown(Exception exception) {
-        log.error("unhandled exception", exception);
+        log.error("unhandled exception {}", exception.getLocalizedMessage());
         return ProblemDetail.forStatusAndDetail(
                 HttpStatus.INTERNAL_SERVER_ERROR, "Unknown error");
     }
