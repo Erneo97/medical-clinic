@@ -52,7 +52,7 @@ public class PatientService {
     public Patient update(Long id, EditPersonalDataCommand command) {
         Patient patient = patientRepository.findById(id)
                         .orElseThrow(() -> new PatientNotFound(id));
-        updatePatienData(patient, command);
+        patient.updatePatient(command);
         return patient;
     }
 
@@ -72,13 +72,5 @@ public class PatientService {
 
     private void findUserByIdOrThrowException(Long id) {
         this.findById(id);
-    }
-
-    private void updatePatienData(Patient patientToUpdate, EditPersonalDataCommand newData) {
-        patientToUpdate.setEmail(newData.email());
-        patientToUpdate.setFirstName(newData.firstName());
-        patientToUpdate.setLastName(newData.lastName());
-        patientToUpdate.setPhoneNumber(newData.phoneNumber());
-        patientToUpdate.setBirthday(newData.birthday());
     }
 }

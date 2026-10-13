@@ -5,7 +5,6 @@ import com.github.erneo97.medical_clinic.dto.EditPersonalDataCommand;
 import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
 import com.github.erneo97.medical_clinic.dto.PatientDto;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
-import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.service.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

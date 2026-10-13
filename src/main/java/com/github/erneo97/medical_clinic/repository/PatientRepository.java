@@ -19,8 +19,8 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     @Modifying(clearAutomatically = true)
     @Transactional
     @Query("""
-            UPDATE Patient p 
-            SET p.password = :password 
+            UPDATE Patient p
+            SET p.user.password = :password\s
             WHERE p.id = :id
     """)
     void updatePassword(@Param("id") Long id, @Param("password") String password);
