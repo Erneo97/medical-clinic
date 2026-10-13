@@ -43,20 +43,20 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ProblemDetail handleUnreadable(HttpMessageNotReadableException exception) {
-        log.warn("nieczytelne body zadania");
+        log.warn("nieczytelne body zadania {}", exception.getMostSpecificCause().getMessage());
         return ProblemDetail.forStatusAndDetail(
                 HttpStatus.BAD_REQUEST, "request body is not valid JSON");
     }
 
     @ExceptionHandler(NoResourceFoundException.class)
     public ProblemDetail handleNoRoute(NoResourceFoundException exception) {
-        log.warn("brak trasy: {}", exception.getResourcePath());
+        log.warn("bad path: {}", exception.getResourcePath());
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, "no such endpoint");
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ProblemDetail handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException exception) {
-        log.warn("zły typ w ścieżce: {}", exception.getMessage());
+        log.warn("bad type of variable: {}", exception.getMessage());
         return ProblemDetail.forStatusAndDetail(
                 HttpStatus.BAD_REQUEST,  "path variable " + exception.getMessage() + " has a wronge type");
     }
@@ -64,7 +64,7 @@ public class GlobalExceptionHandler {
     // Siatka bezpieczeństwa
     @ExceptionHandler(Exception.class)
     public ProblemDetail handleUnknown(Exception exception) {
-        log.error("nieobsluzony wyjatek", exception);
+        log.error("unhandled exception", exception);
         return ProblemDetail.forStatusAndDetail(
                 HttpStatus.INTERNAL_SERVER_ERROR, "Unknown error");
     }
