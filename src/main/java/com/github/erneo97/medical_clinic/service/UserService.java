@@ -3,6 +3,7 @@ package com.github.erneo97.medical_clinic.service;
 import com.github.erneo97.medical_clinic.dto.doktor.UserCreateCommand;
 import com.github.erneo97.medical_clinic.exeption.UserNotFound;
 import com.github.erneo97.medical_clinic.mapper.UserMapper;
+import com.github.erneo97.medical_clinic.model.Role;
 import com.github.erneo97.medical_clinic.model.User;
 import com.github.erneo97.medical_clinic.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,5 +37,9 @@ public class UserService {
 
     private void findNotPatientOrThrow(Long id) {
         this.findById(id);
+    }
+
+    boolean existsDoctorById(Long id) {
+        return userRepository.existsByIdAndRole(id, Role.DOCTOR);
     }
 }

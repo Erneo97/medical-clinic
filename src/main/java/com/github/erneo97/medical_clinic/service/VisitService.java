@@ -1,0 +1,34 @@
+package com.github.erneo97.medical_clinic.service;
+
+import com.github.erneo97.medical_clinic.dto.visit.VisitCreateCommand;
+import com.github.erneo97.medical_clinic.exeption.DoctorNotFound;
+import com.github.erneo97.medical_clinic.mapper.VisitMapper;
+import com.github.erneo97.medical_clinic.model.Doctor;
+import com.github.erneo97.medical_clinic.model.Visit;
+import com.github.erneo97.medical_clinic.repository.VisitRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
+
+@Service
+@AllArgsConstructor
+public class VisitService {
+    private final VisitRepository visitRepository;
+    private final VisitMapper visitMapper;
+    private final UserService userService;
+
+    public List<Visit> findAll() {
+        return visitRepository.findAll();
+    }
+
+    public Visit create(@RequestBody VisitCreateCommand command) {
+        if(!userService.existsDoctorById(command.doctorId())) {
+            throw new DoctorNotFound("Doctor Not Found with ID: " + command.doctorId());
+        }
+
+        Visit visit = visitMapper.toVisit(command);
+        return visitRepository.save(visit);
+    }
+}

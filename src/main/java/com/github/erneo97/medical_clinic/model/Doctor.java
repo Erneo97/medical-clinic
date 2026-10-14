@@ -2,12 +2,14 @@ package com.github.erneo97.medical_clinic.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "doctors")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Doctor {
     private final static int MAX_LENGTH_NAME_DATA = 100;
     @Id
