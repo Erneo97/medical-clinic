@@ -36,7 +36,7 @@ public class InMemoryPatientRepository {
     }
 
     public void changePassword(long id, String newPassword) {
-        patients.get((int)id - OFFSET).setPassword(newPassword);
+        patients.get((int)id - OFFSET).updatePassword(newPassword);
     }
 
     public boolean deleteById(Long id) {
@@ -49,8 +49,6 @@ public class InMemoryPatientRepository {
         patients.get(innerId).setLastName(patient.getLastName());
         patients.get(innerId).setBirthday(patient.getBirthday());
         patients.get(innerId).setEmail(patient.getEmail());
-        patients.get(innerId).setPassword(patient.getPassword());
-        patients.get(innerId).setIdCardNo(patient.getIdCardNo());
         patients.get(innerId).setPhoneNumber(patient.getPhoneNumber());
         return patient;
     }

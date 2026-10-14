@@ -3,7 +3,6 @@ package com.github.erneo97.medical_clinic;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
 @SpringBootApplication
 public class MedicalClinicApplication {
 
