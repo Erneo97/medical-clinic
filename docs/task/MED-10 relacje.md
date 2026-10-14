@@ -203,10 +203,10 @@ wymagane), `VisitDto` (`id`, `doctorId`, `patientId`, `startsAt`, `endsAt`), `Vi
 pełny kwadrans, nakładanie) jeszcze nie ma: to lekcja 25.
 
 Kryteria akceptacji:
-- [ ] `POST /visits` z doktorem 1 i godzinami → 201, w odpowiedzi `"patientId": null`.
-- [ ] W tabeli `visits` jest wiersz z `doctor_id = 1` i pustym `patient_id`.
-- [ ] `POST /visits` z `doctorId` 999 → 404 z komunikatem o doktorze.
-- [ ] `POST /visits` bez `doctorId` → 400 z polem `doctorId` na liście błędów.
+- [x] `POST /visits` z doktorem 1 i godzinami → 201, w odpowiedzi `"patientId": null`.
+- [x] W tabeli `visits` jest wiersz z `doctor_id = 1` i pustym `patient_id`.
+- [x] `POST /visits` z `doctorId` 999 → 404 z komunikatem o doktorze.
+- [?] `POST /visits` bez `doctorId` → 400 z polem `doctorId` na liście błędów.
 
 ## Jak sprawdzisz, że skończyłeś
 
