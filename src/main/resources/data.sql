@@ -29,3 +29,13 @@ SELECT u.id, 'GHI345678', 'Ewa', 'Wiśniewska', '432904399', DATE '1978-07-23'
 FROM users u
 WHERE u.email = 'ewa.wisniewska@example.com'
     ON CONFLICT (id_card_no) DO NOTHING;
+
+INSERT INTO users (email, password, role)
+VALUES ('katarzyna.wrobel@example.com', 'haslo123', 'DOCTOR')
+ON CONFLICT DO NOTHING;
+
+INSERT INTO doctors (user_id, first_name, last_name, specialization)
+SELECT u.id, 'Katarzyna', 'Wróbel', 'CARDIOLOGIST'
+FROM users u
+WHERE u.email = 'katarzyna.wrobel@example.com'
+ON CONFLICT DO NOTHING;
