@@ -16,4 +16,14 @@ public record DoctorCreateCommand(
 
         @NotBlank(message = "field is required")
         Specialization specialization
-) { }
+) {
+        public static record DoctorDto(
+                Long id,
+                Long userId,
+                String email,
+                String firstName,
+                String lastName,
+                Specialization specialization
+        ) {
+        }
+}
