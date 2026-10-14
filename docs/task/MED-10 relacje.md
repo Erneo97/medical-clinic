@@ -191,9 +191,9 @@ Wizyta ma jednego doktora i najwyżej jednego pacjenta. Wizyta bez pacjenta to w
 3. Utwórz `VisitRepository`.
 
 Kryteria akceptacji:
-- [ ] W `\d visits` widzisz dwa klucze obce: `doctor_id` z `not null` i `patient_id` bez niego.
-- [ ] Na żadnym z nich nie ma `UNIQUE`.
-- [ ] W bazie są dokładnie cztery tabele: `users`, `patients`, `doctors`, `visits`.
+- [x] W `\d visits` widzisz dwa klucze obce: `doctor_id` z `not null` i `patient_id` bez niego.
+- [x] Na żadnym z nich nie ma `UNIQUE`.
+- [x] W bazie są dokładnie cztery tabele: `users`, `patients`, `doctors`, `visits`.
 
 ### Zadanie 3 (10 min). `POST /visits` zakłada wolny slot
 

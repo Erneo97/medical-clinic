@@ -10,23 +10,22 @@ import lombok.Setter;
 @Setter
 public class Doctor {
     private final static int MAX_LENGTH_NAME_DATA = 100;
-
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false, unique = true)
-    private User user;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    Specialization specialization;
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    private User user;
 
     @Column(nullable = false, length = MAX_LENGTH_NAME_DATA)
     private String firstName;
 
     @Column(nullable = false, length = MAX_LENGTH_NAME_DATA)
     private String lastName;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Specialization specialization;
 }
