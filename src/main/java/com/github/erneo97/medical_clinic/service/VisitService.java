@@ -37,4 +37,8 @@ public class VisitService {
         visit.setDoctor(doctor);
         return visitRepository.save(visit);
     }
+
+    public List<Visit> findByDoctorId(Long doctorId) {
+        return visitRepository.findByDoctorId(doctorId);
+    }
 }

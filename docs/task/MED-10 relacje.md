@@ -242,9 +242,9 @@ Dopisz `GET /visits?doctorId=...`, który zwraca wizyty jednego doktora. Zapytan
 metody w repozytorium wizyt. Potem dopisz w `Doctor` listę wizyt jako stronę „jeden" relacji.
 
 Kryteria akceptacji:
-- [ ] `GET /visits?doctorId=1` → 200 i wizyty doktora 1.
-- [ ] W logu zapytanie ma warunek `where v1_0.doctor_id=?`, bez złączenia z `doctors`.
-- [ ] Po dopisaniu listy wizyt w `Doctor` i `docker compose down -v` w bazie nadal są tylko
+- [x] `GET /visits?doctorId=1` → 200 i wizyty doktora 1.
+- [x] W logu zapytanie ma warunek `where v1_0.doctor_id=?`, bez złączenia z `doctors`.
+- [x] Po dopisaniu listy wizyt w `Doctor` i `docker compose down -v` w bazie nadal są tylko
   cztery tabele (żadnej `doctors_visits`).
 
 ## Zadanie D3. Foldery `doktorzy` i `wizyty` w kolekcji Bruno
@@ -252,7 +252,7 @@ Kryteria akceptacji:
 Scenariusz z kompendium: konto, doktor na tym koncie, doktor na zajęte konto (błąd).
 
 Kryteria akceptacji:
-- [ ] Folder `doktorzy`: utworzenie konta z rolą `DOCTOR`, doktor na tym koncie (201), drugi
+- [] Folder `doktorzy`: utworzenie konta z rolą `DOCTOR`, doktor na tym koncie (201), drugi
   doktor na to samo konto (409), doktor na nieistniejące konto (404), lista doktorów.
 - [ ] Folder `wizyty`: wolny slot (201), slot u nieistniejącego doktora (404), wizyty doktora
   (200), kasowanie doktora z wizytami (409).

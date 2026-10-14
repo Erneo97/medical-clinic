@@ -25,4 +25,9 @@ public class VisitController {
     public VisitDto create(@RequestBody VisitCreateCommand command) {
         return visitMapper.toVisit(visitService.create(command));
     }
+
+    @GetMapping(params = "doctorId")
+    public List<VisitDto> findByDoctorId(@RequestParam Long doctorId) {
+        return  visitMapper.toVisit(visitService.findByDoctorId(doctorId));
+    }
 }
