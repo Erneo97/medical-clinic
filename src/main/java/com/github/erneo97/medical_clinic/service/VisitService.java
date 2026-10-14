@@ -5,6 +5,7 @@ import com.github.erneo97.medical_clinic.exeption.DoctorNotFound;
 import com.github.erneo97.medical_clinic.mapper.VisitMapper;
 import com.github.erneo97.medical_clinic.model.Doctor;
 import com.github.erneo97.medical_clinic.model.Visit;
+import com.github.erneo97.medical_clinic.repository.DoctorRepository;
 import com.github.erneo97.medical_clinic.repository.VisitRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,18 +18,20 @@ import java.util.List;
 public class VisitService {
     private final VisitRepository visitRepository;
     private final VisitMapper visitMapper;
-    private final UserService userService;
+    private final DoctorRepository doctorRepository;
 
     public List<Visit> findAll() {
         return visitRepository.findAll();
     }
 
     public Visit create(@RequestBody VisitCreateCommand command) {
-        if(!userService.existsDoctorById(command.doctorId())) {
+        if(!doctorRepository.existsById(command.doctorId())) {
             throw new DoctorNotFound("Doctor Not Found with ID: " + command.doctorId());
         }
-
+        Doctor doctor = doctorRepository.findById(command.doctorId())
+                .orElseThrow(() -> new DoctorNotFound("Doctor Not Found with ID: " + command.doctorId()));
         Visit visit = visitMapper.toVisit(command);
+        visit.setDoctor(doctor);
         return visitRepository.save(visit);
     }
 }

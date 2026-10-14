@@ -38,8 +38,4 @@ public class UserService {
     private void findNotPatientOrThrow(Long id) {
         this.findById(id);
     }
-
-    boolean existsDoctorById(Long id) {
-        return userRepository.existsByIdAndRole(id, Role.DOCTOR);
-    }
 }
