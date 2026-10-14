@@ -8,8 +8,10 @@ import com.github.erneo97.medical_clinic.model.Visit;
 import com.github.erneo97.medical_clinic.repository.DoctorRepository;
 import com.github.erneo97.medical_clinic.repository.VisitRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class VisitService {
         return visitRepository.findAll();
     }
 
+    @ResponseStatus(value = HttpStatus.CREATED)
     public Visit create(@RequestBody VisitCreateCommand command) {
         if(!doctorRepository.existsById(command.doctorId())) {
             throw new DoctorNotFound("Doctor Not Found with ID: " + command.doctorId());
