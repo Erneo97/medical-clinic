@@ -17,6 +17,7 @@ public interface DoctorMapper {
 
     List<DoctorDto> toDto(List<Doctor> doctor);
 
-    @Mapping(target = "userId", ignore = true)
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "id", ignore = true)
     Doctor toDoctor(DoctorCreateCommand command);
 }

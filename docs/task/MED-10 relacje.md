@@ -227,11 +227,11 @@ To jest wariant B z lekcji 21. Dopisz `/doctors` przez wszystkie warstwy: `POST`
 `userId`, imię, nazwisko i specjalizację.
 
 Kryteria akceptacji:
-- [ ] `POST /doctors` z `userId` istniejącego konta → 201, w odpowiedzi `id`, `userId`,
+- [x] `POST /doctors` z `userId` istniejącego konta → 201, w odpowiedzi `id`, `userId`,
   `email` (z konta), imię, nazwisko i specjalizacja, bez hasła.
-- [ ] `POST /doctors` z `userId`, którego nie ma → 404.
-- [ ] `POST /doctors` z `userId` konta, które ma już doktora → 409.
-- [ ] `GET /doctors` → 200, `GET /doctors/{id}` → 200, nieistniejący → 404.
+- [x] `POST /doctors` z `userId`, którego nie ma → 404.
+- [x] `POST /doctors` z `userId` konta, które ma już doktora → 409.
+- [x] `GET /doctors` → 200, `GET /doctors/{id}` → 200, nieistniejący → 404.
 - [ ] `DELETE /doctors/{id}` doktora bez wizyt → 204, doktora z wizytami → 409 (wizyta bez
   doktora nie istnieje).
 - [ ] `DELETE /users/{id}` konta doktora → 409, tak jak konta pacjenta.
