@@ -32,4 +32,9 @@ public class DoctorController {
     public DoctorDto saveDoctor(@RequestBody DoctorCreateCommand command) {
         return doctorMapper.toDto(doctorService.create(command));
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteDoctor(@PathVariable Long id) {
+        doctorService.deleteDoctorById(id);
+    }
 }
