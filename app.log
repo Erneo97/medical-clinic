@@ -1,0 +1,46 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-16T21:05:52.919+02:00  INFO 2597 --- [medical-clinic] [           main] c.g.e.m.MedicalClinicApplication         : Starting MedicalClinicApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 2597 (/mnt/c/Users/Michal Kaniewski/Desktop/Kurs Java/medical-clinic/target/medical-clinic-0.0.1-SNAPSHOT.jar started by mk in /mnt/c/Users/Michal Kaniewski/Desktop/Kurs Java/medical-clinic)
+2026-10-16T21:05:52.929+02:00  INFO 2597 --- [medical-clinic] [           main] c.g.e.m.MedicalClinicApplication         : No active profile set, falling back to 1 default profile: "default"
+2026-10-16T21:05:56.123+02:00  INFO 2597 --- [medical-clinic] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-16T21:05:56.243+02:00  INFO 2597 --- [medical-clinic] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 96 ms. Found 5 JPA repository interfaces.
+2026-10-16T21:05:57.270+02:00  INFO 2597 --- [medical-clinic] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-10-16T21:05:57.312+02:00  INFO 2597 --- [medical-clinic] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-16T21:05:57.313+02:00  INFO 2597 --- [medical-clinic] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-16T21:05:57.373+02:00  INFO 2597 --- [medical-clinic] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 4228 ms
+2026-10-16T21:05:57.787+02:00  INFO 2597 --- [medical-clinic] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-16T21:05:57.978+02:00  INFO 2597 --- [medical-clinic] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-16T21:05:59.471+02:00  INFO 2597 --- [medical-clinic] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-16T21:05:59.581+02:00  INFO 2597 --- [medical-clinic] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-16T21:05:59.966+02:00  INFO 2597 --- [medical-clinic] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@24de63b
+2026-10-16T21:05:59.974+02:00  INFO 2597 --- [medical-clinic] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-16T21:06:00.207+02:00  INFO 2597 --- [medical-clinic] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5433/clinic]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.8
+	Default catalog/schema: clinic/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-16T21:06:02.765+02:00  INFO 2597 --- [medical-clinic] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-16T21:06:02.897+02:00  INFO 2597 --- [medical-clinic] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-16T21:06:03.041+02:00  INFO 2597 --- [medical-clinic] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-16T21:06:05.279+02:00  WARN 2597 --- [medical-clinic] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-16T21:06:06.388+02:00  INFO 2597 --- [medical-clinic] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-10-16T21:06:06.403+02:00  INFO 2597 --- [medical-clinic] [           main] c.g.e.m.MedicalClinicApplication         : Started MedicalClinicApplication in 14.777 seconds (process running for 16.0)
+2026-10-16T21:06:34.643+02:00  INFO 2597 --- [medical-clinic] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-16T21:06:34.644+02:00  INFO 2597 --- [medical-clinic] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-16T21:06:34.647+02:00  INFO 2597 --- [medical-clinic] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+Hibernate: select d1_0.id,f1_0.doctor_id,f1_1.id,f1_1.city,f1_1.name,f1_1.number,f1_1.street,f1_1.zip_code,d1_0.first_name,d1_0.last_name,d1_0.specialization,d1_0.user_id,u1_0.id,u1_0.email,u1_0.password,u1_0.role from doctors d1_0 left join doctor_facility f1_0 on d1_0.id=f1_0.doctor_id left join facilities f1_1 on f1_1.id=f1_0.facility_id join users u1_0 on u1_0.id=d1_0.user_id
