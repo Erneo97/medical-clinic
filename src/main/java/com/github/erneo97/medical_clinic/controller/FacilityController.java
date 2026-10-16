@@ -1,5 +1,7 @@
 package com.github.erneo97.medical_clinic.controller;
 
+import com.github.erneo97.medical_clinic.dto.FacilityDto;
+import com.github.erneo97.medical_clinic.mapper.FacilityMapper;
 import com.github.erneo97.medical_clinic.model.Facility;
 import com.github.erneo97.medical_clinic.service.FacilityService;
 import lombok.AllArgsConstructor;
@@ -15,14 +17,15 @@ import java.util.List;
 @AllArgsConstructor
 public class FacilityController {
     private  final FacilityService facilityService;
+    private final FacilityMapper facilityMapper;
 
     @GetMapping
-    public List<Facility> getFacilities() {
-        return facilityService.getAllFacilities();
+    public List<FacilityDto> getFacilities() {
+        return facilityMapper.mapToDto(facilityService.getAllFacilities());
     }
 
     @GetMapping("/{id}")
-    public Facility getFacilityById(@PathVariable Long id) {
-        return facilityService.getFacilityById(id);
+    public FacilityDto getFacilityById(@PathVariable Long id) {
+        return  facilityMapper.mapToDto(facilityService.getFacilityById(id));
     }
 }
