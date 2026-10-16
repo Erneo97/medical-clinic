@@ -30,7 +30,7 @@ public class Facility {
 
     private int number;
 
-    @ManyToMany(mappedBy = "facilities")
+    @ManyToMany(mappedBy = "facilities", fetch =  FetchType.LAZY)
     @Builder.Default
     private Set<Doctor> doctors = new HashSet<>();
 

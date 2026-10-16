@@ -325,7 +325,7 @@ Kryteria akceptacji:
   → 200, znika jeden wiersz, a w logu jest
   `delete from doctor_facility where doctor_id=? and facility_id=?`.
 - [x] `POST /doctors/1/facilities/999` → 404.
-- [ ] Nigdzie poza `Doctor` nie ma `getFacilities().add(...)`.
+- [x] Nigdzie poza `Doctor` nie ma `getFacilities().add(...)`.
 
 ### Zadanie 3 (8 min). Policz zapytania
 
@@ -339,9 +339,9 @@ grep -c 'Hibernate: select' app.log
 ```
 
 Kryteria akceptacji:
-- [ ] Zapisałeś liczbę zapytań i umiesz powiedzieć, skąd bierze się każde z nich: lista
+- [x] Zapisałeś liczbę zapytań i umiesz powiedzieć, skąd bierze się każde z nich: lista
   doktorów, konta, placówki.
-- [ ] Umiesz powiedzieć, które z nich wynikają z domyślnego `EAGER`, a które z sięgania po
+- [x] Umiesz powiedzieć, które z nich wynikają z domyślnego `EAGER`, a które z sięgania po
   kolekcję w pętli mapera.
 
 ## Jak sprawdzisz, że skończyłeś
@@ -363,9 +363,9 @@ Przejdź przez wszystkie encje i każdej relacji ustaw `fetch = FetchType.LAZY`:
 doktora, doktor i pacjent wizyty, wizyty doktora, placówki doktora i doktorzy placówki.
 
 Kryteria akceptacji:
-- [ ] Nie ma w projekcie ani jednego `@ManyToOne`, `@OneToOne`, `@OneToMany` ani
+- [x] Nie ma w projekcie ani jednego `@ManyToOne`, `@OneToOne`, `@OneToMany` ani
   `@ManyToMany` bez `fetch = FetchType.LAZY`.
-- [ ] Kolekcja Bruno z poprzednich lekcji przechodzi bez zmian (asercje tam, gdzie je dodałeś).
+- [x] Kolekcja Bruno z poprzednich lekcji przechodzi bez zmian (asercje tam, gdzie je dodałeś).
 
 ## Zadanie D2. N+1 na liście doktorów: zmierz i napraw
 

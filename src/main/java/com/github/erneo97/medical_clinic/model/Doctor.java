@@ -34,7 +34,7 @@ public class Doctor {
     @Column(nullable = false)
     private Specialization specialization;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "doctor_facility",
             joinColumns = @JoinColumn(name = "doctor_id"),

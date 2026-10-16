@@ -23,7 +23,7 @@ public class DoctorService {
     private final FacilityRepository facilityRepository;
 
     public List<Doctor> getAllDoctors() {
-        return doctorRepository.findAll();
+        return doctorRepository.findAllWithUserAndFacilities();
     }
 
     public Doctor getDoctorById(Long id) {
