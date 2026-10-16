@@ -1,6 +1,7 @@
 package com.github.erneo97.medical_clinic.controller;
 
 import com.github.erneo97.medical_clinic.dto.doctor.DoctorCreateCommand;
+import com.github.erneo97.medical_clinic.dto.doctor.DoctorDto;
 import com.github.erneo97.medical_clinic.mapper.DoctorMapper;
 import com.github.erneo97.medical_clinic.service.DoctorService;
 import lombok.AllArgsConstructor;
@@ -17,18 +18,18 @@ public class DoctorController {
     private final DoctorMapper doctorMapper;
 
     @GetMapping
-    public List<DoctorCreateCommand.DoctorDto> getAllDoctors() {
+    public List<DoctorDto> getAllDoctors() {
         return doctorMapper.toDto(doctorService.getAllDoctors());
     }
 
     @GetMapping("{id}")
-    public DoctorCreateCommand.DoctorDto findById(@PathVariable Long id) {
+    public DoctorDto findById(@PathVariable Long id) {
         return doctorMapper.toDto(doctorService.getDoctorById(id));
     }
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public DoctorCreateCommand.DoctorDto saveDoctor(@RequestBody DoctorCreateCommand command) {
+    public DoctorDto saveDoctor(@RequestBody DoctorCreateCommand command) {
         return doctorMapper.toDto(doctorService.create(command));
     }
 

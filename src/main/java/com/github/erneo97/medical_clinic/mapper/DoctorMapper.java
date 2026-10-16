@@ -1,6 +1,7 @@
 package com.github.erneo97.medical_clinic.mapper;
 
 import com.github.erneo97.medical_clinic.dto.doctor.DoctorCreateCommand;
+import com.github.erneo97.medical_clinic.dto.doctor.DoctorDto;
 import com.github.erneo97.medical_clinic.model.Doctor;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,11 +13,12 @@ import java.util.List;
 public interface DoctorMapper {
     @Mapping(target = "userId", source = "user.id")
     @Mapping(target = "email", source = "user.email")
-    DoctorCreateCommand.DoctorDto toDto(Doctor doctor);
+    DoctorDto toDto(Doctor doctor);
 
-    List<DoctorCreateCommand.DoctorDto> toDto(List<Doctor> doctor);
+    List<DoctorDto> toDto(List<Doctor> doctor);
 
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "facilities", ignore = true)
     Doctor toDoctor(DoctorCreateCommand command);
 }
