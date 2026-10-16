@@ -319,12 +319,12 @@ Kryteria akceptacji:
 4. Dodaj do `DoctorDto` posortowaną listę nazw placówek.
 
 Kryteria akceptacji:
-- [ ] `POST /doctors/1/facilities/1` → 200, w odpowiedzi `"facilities": ["Przychodnia Centrum"]`.
-- [ ] To samo żądanie drugi raz → 200, a w `doctor_facility` nadal jeden wiersz.
-- [ ] Po `POST /doctors/1/facilities/2` doktor ma dwie placówki; `DELETE /doctors/1/facilities/2`
+- [x] `POST /doctors/1/facilities/1` → 200, w odpowiedzi `"facilities": ["Przychodnia Centrum"]`.
+- [x] To samo żądanie drugi raz → 200, a w `doctor_facility` nadal jeden wiersz.
+- [x] Po `POST /doctors/1/facilities/2` doktor ma dwie placówki; `DELETE /doctors/1/facilities/2`
   → 200, znika jeden wiersz, a w logu jest
   `delete from doctor_facility where doctor_id=? and facility_id=?`.
-- [ ] `POST /doctors/1/facilities/999` → 404.
+- [x] `POST /doctors/1/facilities/999` → 404.
 - [ ] Nigdzie poza `Doctor` nie ma `getFacilities().add(...)`.
 
 ### Zadanie 3 (8 min). Policz zapytania

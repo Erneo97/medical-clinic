@@ -37,4 +37,14 @@ public class DoctorController {
     public void deleteDoctor(@PathVariable Long id) {
         doctorService.deleteDoctorById(id);
     }
+
+    @PostMapping("/{id}/facilities/{facilityId}")
+    public DoctorDto addFacility(@PathVariable Long id, @PathVariable Long facilityId) {
+        return doctorMapper.toDto(doctorService.addFacilityToDoctor(id, facilityId));
+    }
+
+    @DeleteMapping("/{id}/facilities/{facilityId}")
+    public void removeFacility(@PathVariable Long id, @PathVariable Long facilityId) {
+        doctorService.removeFacilityToDoctor(id, facilityId);
+    }
 }

@@ -1,13 +1,17 @@
 package com.github.erneo97.medical_clinic.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "facilities")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Facility {
     @Id
@@ -28,5 +32,6 @@ public class Facility {
 
     @ManyToMany(mappedBy = "facilities")
     @Builder.Default
-    private Set<Doctor> trainers = new HashSet<>();
+    private Set<Doctor> doctors = new HashSet<>();
+
 }

@@ -1,9 +1,8 @@
 package com.github.erneo97.medical_clinic.dto.doctor;
 
-import com.github.erneo97.medical_clinic.model.Facility;
 import com.github.erneo97.medical_clinic.model.Specialization;
 
-import java.util.Set;
+import java.util.List;
 
 public record DoctorDto(
         Long id,
@@ -12,6 +11,6 @@ public record DoctorDto(
         String firstName,
         String lastName,
         Specialization specialization,
-        Set<Facility> facilities
+        List<String> facilities
 ) {
 }

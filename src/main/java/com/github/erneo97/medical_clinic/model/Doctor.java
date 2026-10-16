@@ -44,9 +44,11 @@ public class Doctor {
 
     public void addFacility(Facility facility) {
         facilities.add(facility);
+        facility.getDoctors().add(this);
     }
 
     public void removeFacility(Facility facility) {
         facilities.remove(facility);
+        facility.getDoctors().remove(this);
     }
 }
