@@ -32,10 +32,19 @@ WHERE u.email = 'ewa.wisniewska@example.com'
 
 INSERT INTO users (email, password, role)
 VALUES ('katarzyna.wrobel@example.com', 'haslo123', 'DOCTOR')
-ON CONFLICT DO NOTHING;
+    ON CONFLICT DO NOTHING;
 
 INSERT INTO doctors (user_id, first_name, last_name, specialization)
 SELECT u.id, 'Katarzyna', 'Wróbel', 'CARDIOLOGIST'
 FROM users u
 WHERE u.email = 'katarzyna.wrobel@example.com'
-ON CONFLICT DO NOTHING;
+    ON CONFLICT DO NOTHING;
+
+
+INSERT INTO facilities (name, city, zip_code, street, number)
+VALUES ('Przychodnia Centrum', 'Łódź', '90-495', 'Piłsudskiego', 23)
+    ON CONFLICT DO NOTHING;
+
+INSERT INTO facilities (name, city, zip_code, street, number)
+VALUES ('Przychodnia Nowa Huta', 'Warszawa', '40-567', 'Główna', 13)
+    ON CONFLICT DO NOTHING;
