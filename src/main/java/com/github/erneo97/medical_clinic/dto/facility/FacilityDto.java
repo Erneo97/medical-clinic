@@ -1,4 +1,4 @@
-package com.github.erneo97.medical_clinic.dto;
+package com.github.erneo97.medical_clinic.dto.facility;
 
 import java.util.List;
 

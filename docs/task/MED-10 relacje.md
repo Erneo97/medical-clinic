@@ -392,14 +392,14 @@ zajętej nazwie). Potem załóż w kolekcji folder `placowki` ze scenariuszem z 
 przypisanie doktora, lista placówek doktora.
 
 Kryteria akceptacji:
-- [ ] Folder ma co najmniej: utworzenie placówki (201), zajętą nazwę (409), przypisanie doktora
+- [x] Folder ma co najmniej: utworzenie placówki (201), zajętą nazwę (409), przypisanie doktora
   numer 1 do nowej placówki (200), odczyt doktora z nową placówką na liście (200),
   przypisanie do nieistniejącej placówki (404).
-- [ ] Każde żądanie ma asercję statusu, a odczyt doktora dodatkowo sprawdza, że
+- [x] Każde żądanie ma asercję statusu, a odczyt doktora dodatkowo sprawdza, że
   `res.body.facilities` zawiera nazwę nowej placówki.
-- [ ] Numer nowej placówki nie jest wpisany na sztywno: zapisz go w skrypcie po żądaniu
+- [x] Numer nowej placówki nie jest wpisany na sztywno: zapisz go w skrypcie po żądaniu
   (`bru.setVar("placowkaId", res.body.id);`) i użyj w ścieżce jako `{{placowkaId}}`.
-- [ ] Po `docker compose down -v` folder przechodzi przy pierwszym przebiegu.
+- [x] Po `docker compose down -v` folder przechodzi przy pierwszym przebiegu.
 
 ## Jak sprawdzisz, że skończyłeś
 

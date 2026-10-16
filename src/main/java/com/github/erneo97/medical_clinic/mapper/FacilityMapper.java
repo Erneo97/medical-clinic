@@ -1,6 +1,7 @@
 package com.github.erneo97.medical_clinic.mapper;
 
-import com.github.erneo97.medical_clinic.dto.FacilityDto;
+import com.github.erneo97.medical_clinic.dto.facility.CreateFacilityCommand;
+import com.github.erneo97.medical_clinic.dto.facility.FacilityDto;
 import com.github.erneo97.medical_clinic.model.Doctor;
 import com.github.erneo97.medical_clinic.model.Facility;
 import org.mapstruct.*;
@@ -14,6 +15,10 @@ public interface FacilityMapper {
     FacilityDto mapToDto(Facility facility);
 
     List<FacilityDto> mapToDto(List<Facility> facility);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "doctors", ignore = true)
+    Facility mapToEntity(CreateFacilityCommand command);
 
     @Named("doctorNames")
     default List<String> doctorNames(Set<Doctor> doctors) {
