@@ -44,3 +44,10 @@
 2026-10-16T21:06:34.644+02:00  INFO 2597 --- [medical-clinic] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2026-10-16T21:06:34.647+02:00  INFO 2597 --- [medical-clinic] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
 Hibernate: select d1_0.id,f1_0.doctor_id,f1_1.id,f1_1.city,f1_1.name,f1_1.number,f1_1.street,f1_1.zip_code,d1_0.first_name,d1_0.last_name,d1_0.specialization,d1_0.user_id,u1_0.id,u1_0.email,u1_0.password,u1_0.role from doctors d1_0 left join doctor_facility f1_0 on d1_0.id=f1_0.doctor_id left join facilities f1_1 on f1_1.id=f1_0.facility_id join users u1_0 on u1_0.id=d1_0.user_id
+2026-10-16T21:28:11.928+02:00  WARN 2597 --- [medical-clinic] [nio-8080-exec-3] c.g.e.m.exeption.GlobalExceptionHandler  : bad path: facilities
+2026-10-16T21:28:16.820+02:00  WARN 2597 --- [medical-clinic] [nio-8080-exec-4] c.g.e.m.exeption.GlobalExceptionHandler  : bad path: facilities
+2026-10-16T21:28:44.791+02:00  INFO 2597 --- [medical-clinic] [ionShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-10-16T21:28:44.796+02:00  INFO 2597 --- [medical-clinic] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-10-16T21:28:44.807+02:00  INFO 2597 --- [medical-clinic] [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-16T21:28:44.813+02:00  INFO 2597 --- [medical-clinic] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-16T21:28:44.829+02:00  INFO 2597 --- [medical-clinic] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
