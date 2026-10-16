@@ -252,19 +252,19 @@ Kryteria akceptacji:
 Scenariusz z kompendium: konto, doktor na tym koncie, doktor na zajęte konto (błąd).
 
 Kryteria akceptacji:
-- [] Folder `doktorzy`: utworzenie konta z rolą `DOCTOR`, doktor na tym koncie (201), drugi
+- [x] Folder `doktorzy`: utworzenie konta z rolą `DOCTOR`, doktor na tym koncie (201), drugi
   doktor na to samo konto (409), doktor na nieistniejące konto (404), lista doktorów.
-- [ ] Folder `wizyty`: wolny slot (201), slot u nieistniejącego doktora (404), wizyty doktora
+- [x] Folder `wizyty`: wolny slot (201), slot u nieistniejącego doktora (404), wizyty doktora
   (200), kasowanie doktora z wizytami (409).
-- [ ] Każde żądanie ma asercję statusu (zakładka **Assert**: `res.status`, `eq`, oczekiwany
+- [x] Każde żądanie ma asercję statusu (zakładka **Assert**: `res.status`, `eq`, oczekiwany
   kod). Bez niej Bruno wypisuje `PASS` także wtedy, gdy zamiast 201 przyszło 409.
-- [ ] Żądania tworzące doktora nie wpisują numeru konta na sztywno. Każdy start aplikacji
+- [x] Żądania tworzące doktora nie wpisują numeru konta na sztywno. Każdy start aplikacji
   przesuwa numery kont, bo `INSERT ... ON CONFLICT DO NOTHING` w `data.sql` zużywa
   wartości sekwencji także wtedy, gdy wiersz już jest. W żądaniu „Utwórz konto doktora"
   otwórz zakładkę **Script**, pole **Post Response**, i wpisz
   `bru.setVar("kontoDoktoraId", res.body.id);`. W body dwóch kolejnych żądań wstaw
   `"userId": {{kontoDoktoraId}}`.
-- [ ] Po `docker compose down -v` oba foldery przechodzą przy pierwszym przebiegu, także wtedy, gdy po skasowaniu wolumenu uruchomisz aplikację kilka razy. Drugi przebieg folderu `doktorzy` na tej samej bazie ma paść na asercjach, bo konto i doktor już istnieją.
+- [x] Po `docker compose down -v` oba foldery przechodzą przy pierwszym przebiegu, także wtedy, gdy po skasowaniu wolumenu uruchomisz aplikację kilka razy. Drugi przebieg folderu `doktorzy` na tej samej bazie ma paść na asercjach, bo konto i doktor już istnieją.
 
 ## Jak sprawdzisz, że skończyłeś
 
@@ -302,11 +302,11 @@ Doktor przyjmuje w kilku placówkach, placówka gości wielu doktorów.
 4. Dopisz na końcu `data.sql` dwie placówki: „Przychodnia Centrum" i „Przychodnia Nowa Huta".
 
 Kryteria akceptacji:
-- [ ] `\d doctor_facility` pokazuje dwie kolumny kluczy obcych i `PRIMARY KEY (doctor_id,
+- [x] `\d doctor_facility` pokazuje dwie kolumny kluczy obcych i `PRIMARY KEY (doctor_id,
       facility_id)`.
-- [ ] W encjach są zbiory (`Set`), a nie listy. Jeśli pole było wcześniej listą, najpierw
+- [x] W encjach są zbiory (`Set`), a nie listy. Jeśli pole było wcześniej listą, najpierw
   `docker compose down -v`.
-- [ ] Aplikacja startuje dwa razy z rzędu bez błędu `data.sql`.
+- [x] Aplikacja startuje dwa razy z rzędu bez błędu `data.sql`.
 
 ### Zadanie 2 (12 min). Metody synchronizujące i endpointy
 

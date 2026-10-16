@@ -3,6 +3,9 @@ package com.github.erneo97.medical_clinic.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "doctors")
 @Builder
@@ -30,4 +33,12 @@ public class Doctor {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Specialization specialization;
+
+    @ManyToMany
+    @JoinTable(
+            name = "doctor_facility",
+            joinColumns = @JoinColumn(name = "doctor_id"),
+            inverseJoinColumns = @JoinColumn(name = "facility_id"))
+    @Builder.Default
+    private Set<Facility> facilities = new HashSet<>();
 }
