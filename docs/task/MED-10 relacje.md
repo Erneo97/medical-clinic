@@ -372,12 +372,17 @@ Kryteria akceptacji:
 Po D1 powtórz pomiar z zadania 3 z zajęć, a potem napraw listę doktorów tak, żeby
 `GET /doctors` wysyłał jedno zapytanie.
 
+Liczba doktorów w bazie
+Przed D1: 9
+Pod d1: 9
+Po d2: 1
+
 Kryteria akceptacji:
-- [ ] Masz zanotowane trzy liczby zapytań dla tych samych danych: przed D1, po D1 i po
+- [x] Masz zanotowane trzy liczby zapytań dla tych samych danych: przed D1, po D1 i po
   naprawie.
-- [ ] Naprawa to `@EntityGraph` na metodzie repozytorium (albo `JOIN FETCH` w `@Query`), a nie
+- [x] Naprawa to `@EntityGraph` na metodzie repozytorium (albo `JOIN FETCH` w `@Query`), a nie
   `EAGER` na relacji.
-- [ ] Po naprawie `GET /doctors` wysyła jedno zapytanie `select` i zwraca e-maile oraz placówki
+- [x] Po naprawie `GET /doctors` wysyła jedno zapytanie `select` i zwraca e-maile oraz placówki
   doktorów.
 
 ## Zadanie D3. Placówki przez API i folder `placowki` w Bruno
