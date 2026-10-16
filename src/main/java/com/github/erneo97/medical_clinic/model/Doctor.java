@@ -41,4 +41,12 @@ public class Doctor {
             inverseJoinColumns = @JoinColumn(name = "facility_id"))
     @Builder.Default
     private Set<Facility> facilities = new HashSet<>();
+
+    public void addFacility(Facility facility) {
+        facilities.add(facility);
+    }
+
+    public void removeFacility(Facility facility) {
+        facilities.remove(facility);
+    }
 }
