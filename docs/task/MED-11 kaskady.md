@@ -55,10 +55,12 @@ Kryteria akceptacji:
 3. Wróć przy `Doctor.user` do `PERSIST` i `MERGE`.
 
 Kryteria akceptacji:
-- [ ] Masz zanotowane, co zniknęło po `DELETE /doctors/1` z `ALL` po obu stronach: kolejne
+- [x] Masz zanotowane, co zniknęło po `DELETE /doctors/1` z `ALL` po obu stronach: kolejne
   `delete` z logu i liczby wierszy przed i po.
-- [ ] Umiesz pokazać w encjach, którędy przeszła lawina.
-- [ ] Po powrocie aplikacja się buduje, a `DELETE /doctors/1` znów zostawia konto i pacjentkę.
+
+- Odp: Z kaskadą ALL znikneło konto User jak i doctor
+- [x] Umiesz pokazać w encjach, którędy przeszła lawina.
+- [x] Po powrocie aplikacja się buduje, a `DELETE /doctors/1` znów zostawia konto i pacjentkę.
 
 ## Jak sprawdzisz, że skończyłeś
 
