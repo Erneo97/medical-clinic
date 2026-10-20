@@ -31,12 +31,6 @@ public class Patient {
     @Column(nullable = false)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String email;
-
-    @Column(nullable = false)
-    private String password;
-
     @Column(nullable = false, unique = true, length = MAX_LENGHT_NUMBER_DATA)
     private String idCardNo;
 

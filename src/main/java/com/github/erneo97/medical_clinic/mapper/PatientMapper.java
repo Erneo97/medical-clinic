@@ -1,10 +1,9 @@
 package com.github.erneo97.medical_clinic.mapper;
 
-import com.github.erneo97.medical_clinic.dto.EditPersonalDataCommand;
-import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
-import com.github.erneo97.medical_clinic.dto.PatientDto;
+import com.github.erneo97.medical_clinic.dto.patient.EditPersonalDataCommand;
+import com.github.erneo97.medical_clinic.dto.patient.PatientCreateCommand;
+import com.github.erneo97.medical_clinic.dto.patient.PatientDto;
 import com.github.erneo97.medical_clinic.model.Patient;
-import com.github.erneo97.medical_clinic.model.Role;
 import com.github.erneo97.medical_clinic.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
