@@ -1,9 +1,9 @@
 package com.github.erneo97.medical_clinic.controller;
 
-import com.github.erneo97.medical_clinic.dto.EditPasswordCommand;
-import com.github.erneo97.medical_clinic.dto.EditPersonalDataCommand;
-import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
-import com.github.erneo97.medical_clinic.dto.PatientDto;
+import com.github.erneo97.medical_clinic.dto.patient.EditPasswordCommand;
+import com.github.erneo97.medical_clinic.dto.patient.EditPersonalDataCommand;
+import com.github.erneo97.medical_clinic.dto.patient.PatientCreateCommand;
+import com.github.erneo97.medical_clinic.dto.patient.PatientDto;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.service.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -53,6 +53,12 @@ public class PatientController {
     })
     public PatientDto findByEmail(@RequestParam String email) {
         return patientMapper.toDto(patientService.findByEmail(email));
+    }
+
+    @GetMapping(params = "fragment")
+    @Operation(summary = "Find all user with first name or last name have searched fragment")
+    public List<PatientDto> findByFirstNameOrLastName(@RequestParam String fragment) {
+        return patientMapper.toDto(patientService.searchBytName(fragment));
     }
 
     @PostMapping
