@@ -167,9 +167,9 @@ Nagłówki notatki to cztery punkty, usunięcie doktora zwraca 204, usunięcie k
    `InvalidVisitException` z komunikatem, który mówi, co poprawić.
 
 Kryteria akceptacji:
-- [ ] `w-2020.json`, `w-1005-1035.json` i `w-1000-1020.json` dają 400, każdy z innym `detail`.
-- [ ] `w-1000-1030.json` daje 201.
-- [ ] Reguły stoją w serwisie przed `doctorRepository.findById`.
+- [x] `w-2020.json`, `w-1005-1035.json` i `w-1000-1020.json` dają 400, każdy z innym `detail`.
+- [x] `w-1000-1030.json` daje 201.
+- [x] Reguły stoją w serwisie przed `doctorRepository.findById`.
 
 ### Zadanie 2 (12 min). Nakładanie jednym zapytaniem
 
