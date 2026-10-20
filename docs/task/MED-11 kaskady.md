@@ -101,10 +101,10 @@ punktach poniżej. Przy każdym podaj: co znalazłeś, jak to sprawdziłeś, co 
 4. Kaskady w obie strony: tabela z każdą kaskadą w projekcie i jej testem cyklu życia.
 
 Kryteria akceptacji:
-- [ ] Plik ma cztery sekcje, po jednej na punkt, a każda podaje sposób sprawdzenia (polecenie,
+- [x] Plik ma cztery sekcje, po jednej na punkt, a każda podaje sposób sprawdzenia (polecenie,
   żądanie albo zapytanie).
-- [ ] `grep -rnE '^ *@(Data|ToString)' src/main/java` nic nie znajduje.
-- [ ] `grep -rn 'getFacilities().add' src/main/java` nic nie znajduje.
+- [x] `grep -rnE '^ *@(Data|ToString)' src/main/java` nic nie znajduje.
+- [x] `grep -rn 'getFacilities().add' src/main/java` nic nie znajduje.
 
 ## Zadanie D2. Co znika po każdym `DELETE`
 
@@ -115,10 +115,10 @@ Doktor ma mieć przypisaną placówkę, a na jego koncie ma stać pacjentka (sta
 z zajęć).
 
 Kryteria akceptacji:
-- [ ] W sekcji 4 notatki są liczby wierszy `users`, `patients`, `doctors` przed i po każdym
+- [x] W sekcji 4 notatki są liczby wierszy `users`, `patients`, `doctors` przed i po każdym
   z dwóch żądań oraz kolejne `delete` z logu.
-- [ ] `DELETE /doctors/1` → 204: znika doktor i jego wiersz w `doctor_facility`, konto zostaje.
-- [ ] `DELETE /users/{id}` na koncie, na które wskazuje pacjentka, → 409, nic nie znika.
+- [x] `DELETE /doctors/1` → 204: znika doktor i jego wiersz w `doctor_facility`, konto zostaje.
+- [x] `DELETE /users/{id}` na koncie, na które wskazuje pacjentka, → 409, nic nie znika.
 
 ## Zadanie D3. Strony odwrotne: usuń albo obroń
 
@@ -127,9 +127,9 @@ bez czytelnika usuń razem z jego `ignore` w maperze i z drugą linijką metody 
 Pole, które zostaje, obroń w notatce: podaj kod, który po nim nawiguje.
 
 Kryteria akceptacji:
-- [ ] W sekcji 3 notatki jest tabela: pole, kto je czyta, decyzja.
-- [ ] `grep -rn 'mappedBy' src/main/java` pokazuje tylko pola obronione w notatce.
-- [ ] Aplikacja się buduje, `POST /patients` dalej daje 201, a `POST /doctors/1/facilities/1`
+- [x] W sekcji 3 notatki jest tabela: pole, kto je czyta, decyzja.
+- [x] `grep -rn 'mappedBy' src/main/java` pokazuje tylko pola obronione w notatce.
+- [x] Aplikacja się buduje, `POST /patients` dalej daje 201, a `POST /doctors/1/facilities/1`
   dalej zwraca doktora z placówką.
 
 ## Jak sprawdzisz, że skończyłeś

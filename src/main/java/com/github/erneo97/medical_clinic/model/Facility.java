@@ -29,9 +29,4 @@ public class Facility {
     private String street;
 
     private int number;
-
-    @ManyToMany(mappedBy = "facilities", fetch =  FetchType.LAZY)
-    @Builder.Default
-    private Set<Doctor> doctors = new HashSet<>();
-
 }

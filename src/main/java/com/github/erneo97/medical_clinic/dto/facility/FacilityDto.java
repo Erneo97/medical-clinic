@@ -8,7 +8,6 @@ public record FacilityDto (
         String city,
         String zipCode,
         String street,
-        int number,
-        List<String> doctors
+        int number
 ) {
 }

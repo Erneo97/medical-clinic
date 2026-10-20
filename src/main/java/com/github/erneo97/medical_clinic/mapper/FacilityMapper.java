@@ -11,13 +11,11 @@ import java.util.Set;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface FacilityMapper {
-    @Mapping(target = "doctors", source = "facility.doctors", qualifiedByName = "doctorNames")
     FacilityDto mapToDto(Facility facility);
 
     List<FacilityDto> mapToDto(List<Facility> facility);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "doctors", ignore = true)
     Facility mapToEntity(CreateFacilityCommand command);
 
     @Named("doctorNames")
