@@ -183,10 +183,10 @@ Kryteria akceptacji:
    bo slot 10:00-10:30 z zadania 1 dalej w niej stoi, i uruchom aplikację.
 
 Kryteria akceptacji:
-- [ ] Po `w-1000-1030.json` żądanie `w-1015-1045.json` daje 409, a `w-1030-1100.json` 201.
-- [ ] W logu zapytanie ma ostre nierówności: `starts_at<?` i `ends_at>?` (z aliasem tabeli
+- [x] Po `w-1000-1030.json` żądanie `w-1015-1045.json` daje 409, a `w-1030-1100.json` 201.
+- [x] W logu zapytanie ma ostre nierówności: `starts_at<?` i `ends_at>?` (z aliasem tabeli
   przed kolumną, np. `v1_0.starts_at<?`).
-- [ ] Umiesz wskazać, który argument metody porównujesz z którą kolumną.
+- [x] Umiesz wskazać, który argument metody porównujesz z którą kolumną.
 
 ### Zadanie 3 (8 min). Zegar jako bean
 

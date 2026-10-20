@@ -3,6 +3,7 @@ package com.github.erneo97.medical_clinic.service;
 import com.github.erneo97.medical_clinic.dto.visit.VisitCreateCommand;
 import com.github.erneo97.medical_clinic.exeption.DoctorNotFound;
 import com.github.erneo97.medical_clinic.exeption.InvalidVisitException;
+import com.github.erneo97.medical_clinic.exeption.VisitOverlapsException;
 import com.github.erneo97.medical_clinic.mapper.VisitMapper;
 import com.github.erneo97.medical_clinic.model.Doctor;
 import com.github.erneo97.medical_clinic.model.Visit;
@@ -36,7 +37,9 @@ public class VisitService {
             throw new DoctorNotFound("Doctor Not Found with ID: " + command.doctorId());
         }
         validateSlot(command.startsAt(), command.endsAt());
-
+        if( visitRepository.existsByDoctorIdAndStartsAtLessThanAndEndsAtGreaterThan(command.doctorId(), command.endsAt(), command.startsAt())) {
+            throw new VisitOverlapsException(String.format("Visit already exists for Doctor on that time %s - %s", command.startsAt(), command.endsAt()));
+        }
         Doctor doctor = doctorRepository.findById(command.doctorId())
                 .orElseThrow(() -> new DoctorNotFound("Doctor Not Found with ID: " + command.doctorId()));
         Visit visit = visitMapper.toVisit(command);
@@ -52,7 +55,7 @@ public class VisitService {
         if( slotStart.isBefore(LocalDateTime.now()) || slotEnd.isBefore(LocalDateTime.now()) ) {
             throw new InvalidVisitException("Slot Start Date or Slot End Dates are in past");
         }
-        if( slotStart.getMinute() % QUARTER.toNanos() == 0 || slotStart.getSecond() != 0 || slotStart.getNano() != 0) {
+        if( slotStart.getMinute() % 15 != 0 || slotStart.getSecond() != 0 || slotStart.getNano() != 0) {
             throw new  InvalidVisitException("a session must start on a full quarter-hour");
         }
         Duration length = Duration.between(slotStart, slotEnd);
