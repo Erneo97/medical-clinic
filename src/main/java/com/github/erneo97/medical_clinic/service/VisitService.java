@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.time.Clock;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,10 +23,11 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class VisitService {
+    private static final Duration QUARTER = Duration.ofMinutes(15);
     private final VisitRepository visitRepository;
     private final VisitMapper visitMapper;
     private final DoctorRepository doctorRepository;
-    private static final Duration QUARTER = Duration.ofMinutes(15);
+    private final Clock clock;
 
     public List<Visit> findAll() {
         return visitRepository.findAll();
@@ -52,7 +54,7 @@ public class VisitService {
     }
 
     private void validateSlot(LocalDateTime slotStart, LocalDateTime slotEnd) {
-        if( slotStart.isBefore(LocalDateTime.now()) || slotEnd.isBefore(LocalDateTime.now()) ) {
+        if( slotStart.isBefore(LocalDateTime.now(clock)) || slotEnd.isBefore(LocalDateTime.now(clock)) ) {
             throw new InvalidVisitException("Slot Start Date or Slot End Dates are in past");
         }
         if( slotStart.getMinute() % 15 != 0 || slotStart.getSecond() != 0 || slotStart.getNano() != 0) {
