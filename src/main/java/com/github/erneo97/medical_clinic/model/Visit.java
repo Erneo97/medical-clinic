@@ -21,7 +21,7 @@ public class Visit {
     private LocalDateTime startsAt;
     private LocalDateTime endsAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 

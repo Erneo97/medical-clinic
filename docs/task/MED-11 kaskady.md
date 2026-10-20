@@ -17,10 +17,10 @@ Dziś `PatientService.create` zapisuje najpierw konto, potem pacjenta.
    Tylko ten jeden typ kaskady.
 
 Kryteria akceptacji:
-- [ ] Bez kaskady `POST /patients` daje 500, a w logu jest `TransientPropertyValueException`.
-- [ ] Z kaskadą to samo żądanie daje 201, a w logu są dwa wiersze w tej kolejności:
+- [x] Bez kaskady `POST /patients` daje 500, a w logu jest `TransientPropertyValueException`.
+- [x] Z kaskadą to samo żądanie daje 201, a w logu są dwa wiersze w tej kolejności:
   `Hibernate: insert into users` i `Hibernate: insert into patients`.
-- [ ] W `PatientService.create` nie ma już `userRepository.save`.
+- [x] W `PatientService.create` nie ma już `userRepository.save`.
 
 ### Zadanie 2 (10 min). Test cyklu życia konta doktora
 
@@ -33,12 +33,16 @@ Kryteria akceptacji:
 3. W `psql` policz wiersze `users`, `patients`, `doctors`, potem `DELETE /doctors/1` i policz
    jeszcze raz.
 
+Przed delete: Users 10, patients 5, doctors 4
+
+Po delete: Users 10, patients 5, doctors 3
+
 Kryteria akceptacji:
-- [ ] Przy `Doctor.user` jest `cascade = {CascadeType.PERSIST, CascadeType.MERGE}`, bez
+- [x] Przy `Doctor.user` jest `cascade = {CascadeType.PERSIST, CascadeType.MERGE}`, bez
   `REMOVE` i bez `ALL`, a komentarz podaje powód.
-- [ ] `DELETE /doctors/1` → 204; w logu `delete from doctor_facility` i `delete from doctors`,
+- [x] `DELETE /doctors/1` → 204; w logu `delete from doctor_facility` i `delete from doctors`,
   nic więcej.
-- [ ] Po usunięciu doktora konto `katarzyna.wrobel@example.com` i pacjentka `KLM222333` są
+- [x] Po usunięciu doktora konto `katarzyna.wrobel@example.com` i pacjentka `KLM222333` są
   w bazie.
 
 ### Zadanie 3 (12 min). Łańcuch domina na próbę

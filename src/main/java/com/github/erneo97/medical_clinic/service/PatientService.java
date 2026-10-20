@@ -51,9 +51,11 @@ public class PatientService {
                     HttpStatus.CONFLICT
             );
         }
-        User newUser = userMapper.toUser(command);
-        newUser.setRole(Role.PATIENT);
-        userRepository.save(newUser);
+        User newUser = User.builder()
+                .email(command.email())
+                .password(command.password())
+                .role(Role.PATIENT)
+                .build();
 
         Patient patient = patientMapper.toPatient(command);
         patient.setUser(newUser);

@@ -22,7 +22,7 @@ public class Patient {
     private final static int MAX_LENGHT_NUMBER_DATA = 20;
     private final static int MAX_LENGHT_NAME_DATA = 100;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 

@@ -20,7 +20,8 @@ public class Doctor {
     @Column(nullable = false)
     private Long id;
 
-    @OneToOne
+    // Konto doktora nie powinno istnieć bez doktora ale samo konto nie musi zostać usunięte gdy uuwamy doktora - może być też pacjentem naszej placówki
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
