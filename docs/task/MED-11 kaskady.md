@@ -198,9 +198,9 @@ Kryteria akceptacji:
    złamią regułę przeszłości, gdy miną, a 7 stycznia zajmują twoje sloty z zadań 1-2.
 
 Kryteria akceptacji:
-- [ ] `grep -rn 'now(' src/main/java` pokazuje w kodzie tylko `LocalDateTime.now(clock)`
+- [x] `grep -rn 'now(' src/main/java` pokazuje w kodzie tylko `LocalDateTime.now(clock)`
   (nie licząc komentarzy).
-- [ ] Folder `wizyty` w Bruno przechodzi (4 z 4) przy pierwszym przebiegu po
+- [x] Folder `wizyty` w Bruno przechodzi (4 z 4) przy pierwszym przebiegu po
   `docker compose down -v`.
 
 ## Jak sprawdzisz, że skończyłeś
