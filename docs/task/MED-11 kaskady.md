@@ -236,12 +236,12 @@ Dopisz `PATCH /visits/{id}/book/{patientId}`, który zapisuje pacjenta na wolny 
 wizytę.
 
 Kryteria akceptacji:
-- [ ] Wolny slot w przyszłości → 200, w odpowiedzi `patientId` pacjenta.
-- [ ] Wizyta albo pacjent, których nie ma → 404.
-- [ ] Slot, który ma już pacjenta → 409.
-- [ ] Slot z przeszłości → 400. Przeszłość sprawdzasz tym samym wstrzykniętym zegarem co przy
+- [x] Wolny slot w przyszłości → 200, w odpowiedzi `patientId` pacjenta.
+- [x] Wizyta albo pacjent, których nie ma → 404.
+- [x] Slot, który ma już pacjenta → 409.
+- [x] Slot z przeszłości → 400. Przeszłość sprawdzasz tym samym wstrzykniętym zegarem co przy
   zakładaniu slotu.
-- [ ] O tym, czy slot jest wolny, rozstrzyga metoda wizyty, a nie `== null` w serwisie.
+- [x] O tym, czy slot jest wolny, rozstrzyga metoda wizyty, a nie `== null` w serwisie.
 
 ## Zadanie D2. Wizyty pacjenta
 

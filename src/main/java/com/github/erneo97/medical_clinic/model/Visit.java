@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 
 @Entity
@@ -28,4 +29,12 @@ public class Visit {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id")
     private Patient patient;
+
+    public boolean isAvaliable() {
+        return patient == null;
+    }
+
+    public boolean isInPastAccordingClock(Clock clock) {
+        return startsAt.isBefore(LocalDateTime.now(clock));
+    }
 }

@@ -1,11 +1,10 @@
 package com.github.erneo97.medical_clinic.service;
 
 import com.github.erneo97.medical_clinic.dto.visit.VisitCreateCommand;
-import com.github.erneo97.medical_clinic.exeption.DoctorNotFound;
-import com.github.erneo97.medical_clinic.exeption.InvalidVisitException;
-import com.github.erneo97.medical_clinic.exeption.VisitOverlapsException;
+import com.github.erneo97.medical_clinic.exeption.*;
 import com.github.erneo97.medical_clinic.mapper.VisitMapper;
 import com.github.erneo97.medical_clinic.model.Doctor;
+import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.model.Visit;
 import com.github.erneo97.medical_clinic.repository.DoctorRepository;
 import com.github.erneo97.medical_clinic.repository.VisitRepository;
@@ -27,6 +26,7 @@ public class VisitService {
     private final VisitRepository visitRepository;
     private final VisitMapper visitMapper;
     private final DoctorRepository doctorRepository;
+    private final PatientService patientService;
     private final Clock clock;
 
     public List<Visit> findAll() {
@@ -66,4 +66,23 @@ public class VisitService {
                     "session length must be a positive multiple of 15 minutes");
         }
     }
+
+    public Visit bookVisit(Long id, Long patientId) {
+        Visit visit = this.findByIdOrExeption(id);
+        Patient patient = patientService.findById(patientId);
+
+        if( !visit.isAvaliable() ) {
+            throw new VisitAlreadyBookedException("This visit is booked");
+        }
+        if( visit.isInPastAccordingClock(clock)) {
+            throw new VisitInPastException("The visit has already taken place");
+        }
+        visit.setPatient(patient);
+        return visitRepository.save(visit);
+    }
+
+    public Visit findByIdOrExeption(Long id) {
+        return visitRepository.findById(id).orElseThrow(() -> new VisitNotFoundException(String.format("Visit with id %d not exist", id)));
+    }
+
 }

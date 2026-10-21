@@ -30,4 +30,9 @@ public class VisitController {
     public List<VisitDto> findByDoctorId(@RequestParam Long doctorId) {
         return  visitMapper.toVisit(visitService.findByDoctorId(doctorId));
     }
+
+    @PatchMapping("/{id}/book/{patientId}")
+    public VisitDto book(@PathVariable Long id, @PathVariable Long patientId) {
+        return visitMapper.toVisit(visitService.bookVisit(id, patientId));
+    }
 }
