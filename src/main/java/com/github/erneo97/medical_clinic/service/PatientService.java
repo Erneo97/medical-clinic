@@ -10,7 +10,7 @@ import com.github.erneo97.medical_clinic.model.Role;
 import com.github.erneo97.medical_clinic.model.User;
 import com.github.erneo97.medical_clinic.repository.PatientRepository;
 import com.github.erneo97.medical_clinic.exeption.PatientAlreadyExistsException;
-import com.github.erneo97.medical_clinic.exeption.PatientNotFound;
+import com.github.erneo97.medical_clinic.exeption.PatientNotFoundException;
 import com.github.erneo97.medical_clinic.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -32,12 +32,12 @@ public class PatientService {
     }
 
     public Patient findById(Long id) {
-        return patientRepository.findById(id).orElseThrow(() -> new PatientNotFound(id));
+        return patientRepository.findById(id).orElseThrow(() -> new PatientNotFoundException(id));
     }
 
     public Patient findByEmail(String email) {
         return patientRepository.findByUserEmail(email)
-                .orElseThrow(() -> new PatientNotFound(email));
+                .orElseThrow(() -> new PatientNotFoundException(email));
     }
 
     @Transactional
@@ -65,13 +65,13 @@ public class PatientService {
     @Transactional
     public Patient update(Long id, EditPersonalDataCommand command) {
         Patient patient = patientRepository.findById(id)
-                        .orElseThrow(() -> new PatientNotFound(id));
+                        .orElseThrow(() -> new PatientNotFoundException(id));
         patient.updatePatient(command);
         return patient;
     }
 
     public void chanePassword(Long id, EditPasswordCommand command) {
-        patientRepository.findById(id).orElseThrow( () -> new PatientNotFound(id) );
+        patientRepository.findById(id).orElseThrow( () -> new PatientNotFoundException(id) );
         patientRepository.updatePassword(id, command.password());
     }
 

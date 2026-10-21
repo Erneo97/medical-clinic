@@ -36,14 +36,14 @@ public class VisitService {
     @ResponseStatus(value = HttpStatus.CREATED)
     public Visit create(@RequestBody VisitCreateCommand command) {
         if(!doctorRepository.existsById(command.doctorId())) {
-            throw new DoctorNotFound("Doctor Not Found with ID: " + command.doctorId());
+            throw new DoctorNotFoundException("Doctor Not Found with ID: " + command.doctorId());
         }
         validateSlot(command.startsAt(), command.endsAt());
         if( visitRepository.existsByDoctorIdAndStartsAtLessThanAndEndsAtGreaterThan(command.doctorId(), command.endsAt(), command.startsAt())) {
             throw new VisitOverlapsException(String.format("Visit already exists for Doctor on that time %s - %s", command.startsAt(), command.endsAt()));
         }
         Doctor doctor = doctorRepository.findById(command.doctorId())
-                .orElseThrow(() -> new DoctorNotFound("Doctor Not Found with ID: " + command.doctorId()));
+                .orElseThrow(() -> new DoctorNotFoundException("Doctor Not Found with ID: " + command.doctorId()));
         Visit visit = visitMapper.toVisit(command);
         visit.setDoctor(doctor);
         return visitRepository.save(visit);

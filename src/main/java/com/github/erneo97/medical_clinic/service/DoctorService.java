@@ -1,7 +1,7 @@
 package com.github.erneo97.medical_clinic.service;
 
 import com.github.erneo97.medical_clinic.dto.doctor.DoctorCreateCommand;
-import com.github.erneo97.medical_clinic.exeption.FacilityNotFound;
+import com.github.erneo97.medical_clinic.exeption.FacilityNotFoundException;
 import com.github.erneo97.medical_clinic.mapper.DoctorMapper;
 import com.github.erneo97.medical_clinic.model.Doctor;
 import com.github.erneo97.medical_clinic.model.Facility;
@@ -64,7 +64,7 @@ public class DoctorService {
             throw new IllegalArgumentException();
         }
         if( !facilityRepository.existsById(facilityId)) {
-            throw new FacilityNotFound(facilityId);
+            throw new FacilityNotFoundException(facilityId);
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.github.erneo97.medical_clinic.service;
 
 import com.github.erneo97.medical_clinic.dto.facility.CreateFacilityCommand;
-import com.github.erneo97.medical_clinic.exeption.FacilityNotFound;
+import com.github.erneo97.medical_clinic.exeption.FacilityNotFoundException;
 import com.github.erneo97.medical_clinic.mapper.FacilityMapper;
 import com.github.erneo97.medical_clinic.model.Facility;
 import com.github.erneo97.medical_clinic.repository.FacilityRepository;
@@ -22,7 +22,7 @@ public class FacilityService {
 
     public Facility getFacilityById(Long id) {
         if( !facilityRepository.existsById(id) ) {
-            throw new FacilityNotFound(id);
+            throw new FacilityNotFoundException(id);
         }
         return facilityRepository.getReferenceById(id);
     }

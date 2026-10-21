@@ -1,9 +1,8 @@
 package com.github.erneo97.medical_clinic.service;
 
 import com.github.erneo97.medical_clinic.dto.doktor.UserCreateCommand;
-import com.github.erneo97.medical_clinic.exeption.UserNotFound;
+import com.github.erneo97.medical_clinic.exeption.UserNotFoundException;
 import com.github.erneo97.medical_clinic.mapper.UserMapper;
-import com.github.erneo97.medical_clinic.model.Role;
 import com.github.erneo97.medical_clinic.model.User;
 import com.github.erneo97.medical_clinic.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,7 @@ public class UserService {
 
     public User findById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFound(id));
+                .orElseThrow(() -> new UserNotFoundException(id));
     }
 
     public List<User> findAllUsers() {
