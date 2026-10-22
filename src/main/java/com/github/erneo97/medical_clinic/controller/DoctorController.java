@@ -2,8 +2,10 @@ package com.github.erneo97.medical_clinic.controller;
 
 import com.github.erneo97.medical_clinic.dto.doctor.DoctorCreateCommand;
 import com.github.erneo97.medical_clinic.dto.doctor.DoctorDto;
+import com.github.erneo97.medical_clinic.dto.doctor.SubstituteDoctorCommand;
 import com.github.erneo97.medical_clinic.mapper.DoctorMapper;
 import com.github.erneo97.medical_clinic.service.DoctorService;
+import com.github.erneo97.medical_clinic.service.VisitService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class DoctorController {
     private final DoctorService doctorService;
+    private final VisitService visitService;
     private final DoctorMapper doctorMapper;
 
     @GetMapping
@@ -42,6 +45,12 @@ public class DoctorController {
     public DoctorDto addFacility(@PathVariable Long id, @PathVariable Long facilityId) {
         return doctorMapper.toDto(doctorService.addFacilityToDoctor(id, facilityId));
     }
+
+    @PostMapping("/{id}/substitutions")
+    public void substituteDoctor(@PathVariable Long id, @RequestBody SubstituteDoctorCommand command) {
+        visitService.substitute(id, command.substituteId());
+    }
+
 
     @DeleteMapping("/{id}/facilities/{facilityId}")
     public void removeFacility(@PathVariable Long id, @PathVariable Long facilityId) {

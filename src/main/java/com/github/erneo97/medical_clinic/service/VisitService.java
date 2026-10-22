@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -26,7 +27,7 @@ public class VisitService {
     private static final Duration QUARTER = Duration.ofMinutes(15);
     private final VisitRepository visitRepository;
     private final VisitMapper visitMapper;
-    private final DoctorRepository doctorRepository;
+    private final DoctorService doctorService;
     private final PatientService patientService;
     private final Clock clock;
 
@@ -37,22 +38,20 @@ public class VisitService {
     @Transactional
     @ResponseStatus(value = HttpStatus.CREATED)
     public Visit create(@RequestBody VisitCreateCommand command) {
-        if (!doctorRepository.existsById(command.doctorId())) {
+        if (!doctorService.existsById(command.doctorId())) {
             throw new DoctorNotFoundException("Doctor Not Found with ID: " + command.doctorId());
         }
         validateSlot(command.startsAt(), command.endsAt());
-        if (visitRepository.existsByDoctorIdAndStartsAtLessThanAndEndsAtGreaterThan(command.doctorId(), command.endsAt(), command.startsAt())) {
-            throw new VisitOverlapsException(String.format("Visit already exists for Doctor on that time %s - %s", command.startsAt(), command.endsAt()));
-        }
-        Doctor doctor = doctorRepository.findById(command.doctorId())
-                .orElseThrow(() -> new DoctorNotFoundException("Doctor Not Found with ID: " + command.doctorId()));
+        checkOverlap(command.doctorId(), command.startsAt(), command.endsAt());
+
+        Doctor doctor = doctorService.findDoctorByIdOrThrowException(command.doctorId());
         Visit visit = visitMapper.toVisit(command);
         visit.setDoctor(doctor);
         return visitRepository.save(visit);
     }
 
     @Transactional(readOnly = true)
-    public List<Visit> findByDoctorId(Long doctorId) {
+    public List<Visit> findAllByDoctorId(Long doctorId) {
         return visitRepository.findByDoctorId(doctorId);
     }
 
@@ -81,6 +80,27 @@ public class VisitService {
         return visitRepository.findByPatientId(patientId);
     }
 
+    @Transactional
+    public List<Visit> substitute(Long doctorId, Long substituteId) {
+        doctorService.checkDoctorExistOrThrowException(doctorId);
+        Doctor doctorSubstitute = doctorService.findDoctorByIdOrThrowException(doctorId);
+
+        List<Visit> visits = visitRepository.findByDoctorId(doctorId)
+                .stream()
+                .sorted(Comparator.comparing(Visit::getStartsAt))
+                .toList();
+        substituteVisitsToDoctor(visits, doctorSubstitute);
+        return visits;
+    }
+
+    private void substituteVisitsToDoctor(List<Visit> visits, Doctor doctor) {
+        for(Visit visit : visits) {
+            checkOverlap(doctor.getId(), visit.getStartsAt(), visit.getEndsAt());
+            visit.setDoctor(doctor);
+            visitRepository.save(visit);
+        }
+    }
+
     private void validateSlot(LocalDateTime slotStart, LocalDateTime slotEnd) {
         if (slotStart.isBefore(LocalDateTime.now(clock)) || slotEnd.isBefore(LocalDateTime.now(clock))) {
             throw new InvalidVisitException("Slot Start Date or Slot End Dates are in past");
@@ -92,6 +112,13 @@ public class VisitService {
         if (!length.isPositive() || length.toNanos() % QUARTER.toNanos() != 0) {
             throw new InvalidVisitException(
                     "session length must be a positive multiple of 15 minutes");
+        }
+    }
+
+    private void checkOverlap(Long doctorId, LocalDateTime start, LocalDateTime end) {
+        if (visitRepository.existsByDoctorIdAndStartsAtLessThanAndEndsAtGreaterThan(
+                doctorId, end, start)) {
+            throw new VisitOverlapsException(String.format("Visit already exists for Doctor on that time %s - %s", start.toString(), end.toString()));
         }
     }
 }
