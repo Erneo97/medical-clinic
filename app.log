@@ -770,3 +770,212 @@ java.lang.IllegalArgumentException
 2026-10-22T13:31:39.676+02:00  INFO 45000 --- [medical-clinic] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-10-22T13:31:39.678+02:00  INFO 45000 --- [medical-clinic] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2026-10-22T13:31:39.681+02:00  INFO 45000 --- [medical-clinic] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-10-22T13:31:44.021+02:00  INFO 15068 --- [medical-clinic] [main] c.g.e.m.MedicalClinicApplication         : Starting MedicalClinicApplication using Java 21.0.10 with PID 15068 (C:\Users\Michal Kaniewski\Desktop\Kurs Java\medical-clinic\target\classes started by Michal Kaniewski in C:\Users\Michal Kaniewski\Desktop\Kurs Java\medical-clinic)
+2026-10-22T13:31:44.028+02:00  INFO 15068 --- [medical-clinic] [main] c.g.e.m.MedicalClinicApplication         : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T13:31:45.210+02:00  INFO 15068 --- [medical-clinic] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-22T13:31:45.317+02:00  INFO 15068 --- [medical-clinic] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 92 ms. Found 5 JPA repository interfaces.
+2026-10-22T13:31:46.437+02:00  INFO 15068 --- [medical-clinic] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-10-22T13:31:46.473+02:00  INFO 15068 --- [medical-clinic] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-22T13:31:46.473+02:00  INFO 15068 --- [medical-clinic] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-22T13:31:46.593+02:00  INFO 15068 --- [medical-clinic] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2506 ms
+2026-10-22T13:31:47.020+02:00  INFO 15068 --- [medical-clinic] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-22T13:31:47.174+02:00  INFO 15068 --- [medical-clinic] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-22T13:31:47.855+02:00  INFO 15068 --- [medical-clinic] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-22T13:31:47.890+02:00  INFO 15068 --- [medical-clinic] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-22T13:31:48.112+02:00  INFO 15068 --- [medical-clinic] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@37e491e2
+2026-10-22T13:31:48.115+02:00  INFO 15068 --- [medical-clinic] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-22T13:31:48.226+02:00  INFO 15068 --- [medical-clinic] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5433/clinic]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.8
+	Default catalog/schema: clinic/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-22T13:31:49.615+02:00  INFO 15068 --- [medical-clinic] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-22T13:31:49.711+02:00  INFO 15068 --- [medical-clinic] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T13:31:49.838+02:00  INFO 15068 --- [medical-clinic] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-22T13:31:51.631+02:00  WARN 15068 --- [medical-clinic] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-22T13:31:52.512+02:00  INFO 15068 --- [medical-clinic] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-10-22T13:31:52.521+02:00  INFO 15068 --- [medical-clinic] [main] c.g.e.m.MedicalClinicApplication         : Started MedicalClinicApplication in 9.169 seconds (process running for 9.759)
+2026-10-22T13:31:52.760+02:00  INFO 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-22T13:31:52.761+02:00  INFO 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-22T13:31:52.762+02:00  INFO 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-10-22T13:31:52.897+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(304360017<open>)] for JPA transaction
+2026-10-22T13:31:52.897+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.VisitService.substitute]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-22T13:31:52.902+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@795dbf3]
+2026-10-22T13:31:52.907+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(304360017<open>)] for JPA transaction
+2026-10-22T13:31:52.907+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:31:53.020+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(304360017<open>)] for JPA transaction
+2026-10-22T13:31:53.020+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:31:53.149+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(304360017<open>)] for JPA transaction
+2026-10-22T13:31:53.150+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:31:53.189+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(304360017<open>)] for JPA transaction
+2026-10-22T13:31:53.189+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:31:53.196+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(304360017<open>)] for JPA transaction
+2026-10-22T13:31:53.197+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:31:53.205+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(304360017<open>)] for JPA transaction
+2026-10-22T13:31:53.205+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:31:53.213+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(304360017<open>)] for JPA transaction
+2026-10-22T13:31:53.214+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:31:53.221+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(304360017<open>)] for JPA transaction
+2026-10-22T13:31:53.221+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:31:53.231+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(304360017<open>)] for JPA transaction
+2026-10-22T13:31:53.231+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:31:53.239+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(304360017<open>)] for JPA transaction
+2026-10-22T13:31:53.240+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:31:53.247+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(304360017<open>)] for JPA transaction
+2026-10-22T13:31:53.248+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:31:53.249+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T13:31:53.249+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(304360017<open>)]
+2026-10-22T13:31:53.263+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T13:31:57.050+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(404088767<open>)] for JPA transaction
+2026-10-22T13:31:57.051+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-10-22T13:31:57.053+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@36c0fdd1]
+2026-10-22T13:31:57.069+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T13:31:57.069+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(404088767<open>)]
+2026-10-22T13:31:57.071+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T13:32:04.684+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(633088737<open>)] for JPA transaction
+2026-10-22T13:32:04.684+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.VisitService.substitute]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-22T13:32:04.686+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@2b7bc026]
+2026-10-22T13:32:04.686+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(633088737<open>)] for JPA transaction
+2026-10-22T13:32:04.686+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:32:04.690+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(633088737<open>)] for JPA transaction
+2026-10-22T13:32:04.691+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:32:04.701+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(633088737<open>)] for JPA transaction
+2026-10-22T13:32:04.701+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:32:04.708+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(633088737<open>)] for JPA transaction
+2026-10-22T13:32:04.708+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:32:04.714+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(633088737<open>)] for JPA transaction
+2026-10-22T13:32:04.714+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:32:04.720+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(633088737<open>)] for JPA transaction
+2026-10-22T13:32:04.720+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:32:04.725+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(633088737<open>)] for JPA transaction
+2026-10-22T13:32:04.726+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:32:04.731+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(633088737<open>)] for JPA transaction
+2026-10-22T13:32:04.731+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:32:04.736+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(633088737<open>)] for JPA transaction
+2026-10-22T13:32:04.737+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:32:04.742+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(633088737<open>)] for JPA transaction
+2026-10-22T13:32:04.742+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:32:04.747+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(633088737<open>)] for JPA transaction
+2026-10-22T13:32:04.748+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:32:04.748+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T13:32:04.748+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(633088737<open>)]
+2026-10-22T13:32:04.755+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T13:36:47.358+02:00  WARN 15068 --- [medical-clinic] [http-nio-8080-exec-7] c.g.e.m.exeption.GlobalExceptionHandler  : nieczytelne body zadania Unexpected character (',' (code 44)): expected a value
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); byte offset: #108]
+2026-10-22T13:37:07.596+02:00  WARN 15068 --- [medical-clinic] [http-nio-8080-exec-8] c.g.e.m.exeption.GlobalExceptionHandler  : nieczytelne body zadania Unexpected character (',' (code 44)): expected a value
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); byte offset: #108]
+2026-10-22T13:37:10.992+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1899054946<open>)] for JPA transaction
+2026-10-22T13:37:10.992+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.VisitService.create]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-22T13:37:10.995+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@7ff6b734]
+2026-10-22T13:37:10.995+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1899054946<open>)] for JPA transaction
+2026-10-22T13:37:10.995+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:37:10.999+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-10-22T13:37:10.999+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(1899054946<open>)]
+2026-10-22T13:37:11.003+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T13:37:11.004+02:00  WARN 15068 --- [medical-clinic] [http-nio-8080-exec-9] c.g.e.m.exeption.GlobalExceptionHandler  : błąd domeny a session must start on a full quarter-hour
+2026-10-22T13:37:29.245+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1197506600<open>)] for JPA transaction
+2026-10-22T13:37:29.245+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.VisitService.create]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-22T13:37:29.248+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@49a776b4]
+2026-10-22T13:37:29.248+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1197506600<open>)] for JPA transaction
+2026-10-22T13:37:29.249+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:37:29.256+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1197506600<open>)] for JPA transaction
+2026-10-22T13:37:29.256+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:37:29.259+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1197506600<open>)] for JPA transaction
+2026-10-22T13:37:29.259+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:37:29.282+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T13:37:29.282+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1197506600<open>)]
+2026-10-22T13:37:29.286+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T13:37:41.145+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1398510125<open>)] for JPA transaction
+2026-10-22T13:37:41.145+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.VisitService.substitute]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-22T13:37:41.147+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@102d7477]
+2026-10-22T13:37:41.148+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1398510125<open>)] for JPA transaction
+2026-10-22T13:37:41.148+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:37:41.151+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1398510125<open>)] for JPA transaction
+2026-10-22T13:37:41.152+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:37:41.164+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1398510125<open>)] for JPA transaction
+2026-10-22T13:37:41.164+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:37:41.170+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1398510125<open>)] for JPA transaction
+2026-10-22T13:37:41.170+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:37:41.176+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1398510125<open>)] for JPA transaction
+2026-10-22T13:37:41.177+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:37:41.182+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1398510125<open>)] for JPA transaction
+2026-10-22T13:37:41.182+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:37:41.190+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1398510125<open>)] for JPA transaction
+2026-10-22T13:37:41.190+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:37:41.195+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1398510125<open>)] for JPA transaction
+2026-10-22T13:37:41.196+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:37:41.202+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1398510125<open>)] for JPA transaction
+2026-10-22T13:37:41.202+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:37:41.209+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1398510125<open>)] for JPA transaction
+2026-10-22T13:37:41.210+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:37:41.214+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1398510125<open>)] for JPA transaction
+2026-10-22T13:37:41.215+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:37:41.215+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T13:37:41.215+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1398510125<open>)]
+2026-10-22T13:37:41.220+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T13:37:48.733+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(269050837<open>)] for JPA transaction
+2026-10-22T13:37:48.733+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-10-22T13:37:48.736+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@f3ca266]
+2026-10-22T13:37:48.743+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T13:37:48.743+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(269050837<open>)]
+2026-10-22T13:37:48.744+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T13:38:28.057+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(173750559<open>)] for JPA transaction
+2026-10-22T13:38:28.057+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.VisitService.create]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-22T13:38:28.059+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@49cc624]
+2026-10-22T13:38:28.060+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(173750559<open>)] for JPA transaction
+2026-10-22T13:38:28.060+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:38:28.065+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(173750559<open>)] for JPA transaction
+2026-10-22T13:38:28.066+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:38:28.068+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(173750559<open>)] for JPA transaction
+2026-10-22T13:38:28.069+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:38:28.073+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T13:38:28.074+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(173750559<open>)]
+2026-10-22T13:38:28.078+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T13:38:33.918+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1124441150<open>)] for JPA transaction
+2026-10-22T13:38:33.918+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.VisitService.substitute]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-22T13:38:33.920+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@4dc26a2e]
+2026-10-22T13:38:33.920+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1124441150<open>)] for JPA transaction
+2026-10-22T13:38:33.920+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:38:33.924+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1124441150<open>)] for JPA transaction
+2026-10-22T13:38:33.924+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:38:33.933+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1124441150<open>)] for JPA transaction
+2026-10-22T13:38:33.933+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:38:33.939+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1124441150<open>)] for JPA transaction
+2026-10-22T13:38:33.939+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:38:33.943+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1124441150<open>)] for JPA transaction
+2026-10-22T13:38:33.944+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:38:33.948+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1124441150<open>)] for JPA transaction
+2026-10-22T13:38:33.948+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:38:33.954+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1124441150<open>)] for JPA transaction
+2026-10-22T13:38:33.954+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:38:33.960+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1124441150<open>)] for JPA transaction
+2026-10-22T13:38:33.960+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:38:33.966+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1124441150<open>)] for JPA transaction
+2026-10-22T13:38:33.966+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:38:33.972+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1124441150<open>)] for JPA transaction
+2026-10-22T13:38:33.973+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:38:33.979+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1124441150<open>)] for JPA transaction
+2026-10-22T13:38:33.979+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:38:33.984+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1124441150<open>)] for JPA transaction
+2026-10-22T13:38:33.985+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T13:38:33.985+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T13:38:33.985+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1124441150<open>)]
+2026-10-22T13:38:33.990+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T13:38:42.317+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(76126124<open>)] for JPA transaction
+2026-10-22T13:38:42.318+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-10-22T13:38:42.320+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@b613e5]
+2026-10-22T13:38:42.325+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T13:38:42.326+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(76126124<open>)]
+2026-10-22T13:38:42.328+02:00 DEBUG 15068 --- [medical-clinic] [http-nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T13:47:11.488+02:00  INFO 15068 --- [medical-clinic] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-10-22T13:47:11.506+02:00  INFO 15068 --- [medical-clinic] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-10-22T13:47:11.510+02:00  INFO 15068 --- [medical-clinic] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T13:47:11.513+02:00  INFO 15068 --- [medical-clinic] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-22T13:47:11.517+02:00  INFO 15068 --- [medical-clinic] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

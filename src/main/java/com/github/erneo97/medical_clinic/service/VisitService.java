@@ -98,7 +98,7 @@ public class VisitService {
 
     private void substituteVisitsToDoctor(List<Visit> visits, Doctor doctor) {
         for(Visit visit : visits) {
-            checkOverlap(doctor.getId(), visit.getEndsAt(), visit.getStartsAt());
+            checkOverlap(doctor.getId(), visit.getStartsAt(), visit.getEndsAt());
             visit.setDoctor(doctor);
             visitRepository.save(visit);
         }
