@@ -1,6 +1,7 @@
 package com.github.erneo97.medical_clinic.service;
 
 import com.github.erneo97.medical_clinic.dto.doctor.DoctorCreateCommand;
+import com.github.erneo97.medical_clinic.exeption.DoctorNotFoundException;
 import com.github.erneo97.medical_clinic.exeption.FacilityNotFoundException;
 import com.github.erneo97.medical_clinic.mapper.DoctorMapper;
 import com.github.erneo97.medical_clinic.model.Doctor;
@@ -32,7 +33,6 @@ public class DoctorService {
 
     public Doctor create(DoctorCreateCommand command) {
         User user = userRepository.getReferenceById(command.userId());
-
         Doctor newDoctor =  doctorMapper.toDoctor(command);
         newDoctor.setUser(user);
 
@@ -44,7 +44,7 @@ public class DoctorService {
     }
 
     public Doctor addFacilityToDoctor(Long id, Long facilityId) {
-        checDoctorOrFacilityExistOrThrowExeption(id, facilityId);
+        checDoctorOrFacilityExistOrThrowException(id, facilityId);
         Facility facility = facilityRepository.getReferenceById(facilityId);
         Doctor doctor = doctorRepository.getReferenceById(id);
         doctor.addFacility(facility);
@@ -52,17 +52,30 @@ public class DoctorService {
     }
 
     public void removeFacilityToDoctor(Long id, Long facilityId) {
-        checDoctorOrFacilityExistOrThrowExeption(id, facilityId);
+        checDoctorOrFacilityExistOrThrowException(id, facilityId);
         Facility facility = facilityRepository.getReferenceById(facilityId);
         Doctor doctor = doctorRepository.getReferenceById(id);
         doctor.removeFacility(facility);
         doctorRepository.save(doctor);
     }
 
-    private void checDoctorOrFacilityExistOrThrowExeption(Long doctorId, Long facilityId) {
+    public Doctor findDoctorByIdOrThrowException(Long doctorId) {
+        return doctorRepository.findById(doctorId)
+                .orElseThrow(() -> new DoctorNotFoundException(doctorId));
+    }
+
+    public void checkDoctorExistOrThrowException(Long doctorId) {
         if( !doctorRepository.existsById(doctorId)) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public boolean existsById(Long doctorId) {
+        return doctorRepository.existsById(doctorId);
+    }
+
+    private void checDoctorOrFacilityExistOrThrowException(Long doctorId, Long facilityId) {
+        checkDoctorExistOrThrowException(doctorId);
         if( !facilityRepository.existsById(facilityId)) {
             throw new FacilityNotFoundException(facilityId);
         }
