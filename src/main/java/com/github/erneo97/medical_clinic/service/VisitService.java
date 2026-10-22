@@ -11,6 +11,7 @@ import com.github.erneo97.medical_clinic.repository.VisitRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -33,13 +34,14 @@ public class VisitService {
         return visitRepository.findAll();
     }
 
+    @Transactional
     @ResponseStatus(value = HttpStatus.CREATED)
     public Visit create(@RequestBody VisitCreateCommand command) {
-        if(!doctorRepository.existsById(command.doctorId())) {
+        if (!doctorRepository.existsById(command.doctorId())) {
             throw new DoctorNotFoundException("Doctor Not Found with ID: " + command.doctorId());
         }
         validateSlot(command.startsAt(), command.endsAt());
-        if( visitRepository.existsByDoctorIdAndStartsAtLessThanAndEndsAtGreaterThan(command.doctorId(), command.endsAt(), command.startsAt())) {
+        if (visitRepository.existsByDoctorIdAndStartsAtLessThanAndEndsAtGreaterThan(command.doctorId(), command.endsAt(), command.startsAt())) {
             throw new VisitOverlapsException(String.format("Visit already exists for Doctor on that time %s - %s", command.startsAt(), command.endsAt()));
         }
         Doctor doctor = doctorRepository.findById(command.doctorId())
@@ -49,16 +51,42 @@ public class VisitService {
         return visitRepository.save(visit);
     }
 
+    @Transactional(readOnly = true)
     public List<Visit> findByDoctorId(Long doctorId) {
         return visitRepository.findByDoctorId(doctorId);
     }
 
+    @Transactional
+    public Visit bookVisit(Long id, Long patientId) {
+        Visit visit = this.findVisitByIdOrException(id);
+        Patient patient = patientService.findById(patientId);
+
+        if (!visit.isAvaliable()) {
+            throw new VisitAlreadyBookedException("This visit is booked");
+        }
+        if (visit.isInPastAccordingClock(clock)) {
+            throw new VisitInPastException("The visit has already taken place");
+        }
+        visit.setPatient(patient);
+        return visitRepository.save(visit);
+    }
+
+    @Transactional(readOnly = true)
+    public Visit findVisitByIdOrException(Long id) {
+        return visitRepository.findById(id).orElseThrow(() -> new VisitNotFoundException(String.format("Visit with id %d not exist", id)));
+    }
+
+    @Transactional(readOnly = true)
+    public List<Visit> getPatientVisit(Long patientId) {
+        return visitRepository.findByPatientId(patientId);
+    }
+
     private void validateSlot(LocalDateTime slotStart, LocalDateTime slotEnd) {
-        if( slotStart.isBefore(LocalDateTime.now(clock)) || slotEnd.isBefore(LocalDateTime.now(clock)) ) {
+        if (slotStart.isBefore(LocalDateTime.now(clock)) || slotEnd.isBefore(LocalDateTime.now(clock))) {
             throw new InvalidVisitException("Slot Start Date or Slot End Dates are in past");
         }
-        if( slotStart.getMinute() % 15 != 0 || slotStart.getSecond() != 0 || slotStart.getNano() != 0) {
-            throw new  InvalidVisitException("a session must start on a full quarter-hour");
+        if (slotStart.getMinute() % 15 != 0 || slotStart.getSecond() != 0 || slotStart.getNano() != 0) {
+            throw new InvalidVisitException("a session must start on a full quarter-hour");
         }
         Duration length = Duration.between(slotStart, slotEnd);
         if (!length.isPositive() || length.toNanos() % QUARTER.toNanos() != 0) {
@@ -66,27 +94,4 @@ public class VisitService {
                     "session length must be a positive multiple of 15 minutes");
         }
     }
-
-    public Visit bookVisit(Long id, Long patientId) {
-        Visit visit = this.findVisitByIdOrException(id);
-        Patient patient = patientService.findById(patientId);
-
-        if( !visit.isAvaliable() ) {
-            throw new VisitAlreadyBookedException("This visit is booked");
-        }
-        if( visit.isInPastAccordingClock(clock)) {
-            throw new VisitInPastException("The visit has already taken place");
-        }
-        visit.setPatient(patient);
-        return visitRepository.save(visit);
-    }
-
-    public Visit findVisitByIdOrException(Long id) {
-        return visitRepository.findById(id).orElseThrow(() -> new VisitNotFoundException(String.format("Visit with id %d not exist", id)));
-    }
-
-    public List<Visit> getPatientVisit(Long patientId) {
-        return visitRepository.findByPatientId(patientId);
-    }
-
 }

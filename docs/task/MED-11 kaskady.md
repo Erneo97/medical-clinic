@@ -299,10 +299,10 @@ założy. `./mvnw test` przechodzi przy zatrzymanym kontenerze.
 2. Adnotację importuj z pakietu `org.springframework.transaction.annotation`.
 
 Kryteria akceptacji:
-- [ ] W obu serwisach każda metoda publiczna ma jedną z dwóch adnotacji.
-- [ ] `create`, `update`, `changePassword`, `deleteById` i `book` mają `@Transactional`,
+- [x] W obu serwisach każda metoda publiczna ma jedną z dwóch adnotacji.
+- [x] `create`, `update`, `changePassword`, `deleteById` i `book` mają `@Transactional`,
   metody `find...` i `searchByName` mają `readOnly = true`.
-- [ ] `grep -rn "import .*Transactional;" src/main/java` pokazuje wyłącznie
+- [x] `grep -rn "import .*Transactional;" src/main/java` pokazuje wyłącznie
   `org.springframework.transaction.annotation.Transactional`.
 
 ### Zadanie 2 (12 min). Zapis bez save
