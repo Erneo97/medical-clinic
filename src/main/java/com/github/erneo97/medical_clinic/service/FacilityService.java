@@ -7,6 +7,7 @@ import com.github.erneo97.medical_clinic.model.Facility;
 import com.github.erneo97.medical_clinic.repository.FacilityRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,10 +17,12 @@ public class FacilityService {
     private final FacilityRepository facilityRepository;
     private final FacilityMapper facilityMapper;
 
+    @Transactional(readOnly = true)
     public List<Facility> getAllFacilities() {
         return facilityRepository.findAllWithDoctors();
     }
 
+    @Transactional(readOnly = true)
     public Facility getFacilityById(Long id) {
         if( !facilityRepository.existsById(id) ) {
             throw new FacilityNotFoundException(id);
@@ -27,6 +30,7 @@ public class FacilityService {
         return facilityRepository.getReferenceById(id);
     }
 
+    @Transactional
     public Facility create(CreateFacilityCommand command) {
         Facility facility = facilityMapper.mapToEntity(command);
         return facilityRepository.save(facility);
