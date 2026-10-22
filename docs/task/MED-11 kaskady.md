@@ -410,14 +410,14 @@ o statusach. Dopisz blok `assert` z oczekiwanym statusem do każdego żądania. 
 `zastepstwa` ze scenariuszem D1.
 
 Kryteria akceptacji:
-- [ ] Każde żądanie w trzech folderach ma `assert { res.status: eq ... }`.
-- [ ] Folder `pacjenci` tworzy własnego pacjenta spoza `data.sql`, zapamiętuje jego numer
+- [x] Każde żądanie w trzech folderach ma `assert { res.status: eq ... }`.
+- [x] Folder `pacjenci` tworzy własnego pacjenta spoza `data.sql`, zapamiętuje jego numer
   (`bru.setVar("patientId", res.body.id);`) i dalej używa `{{patientId}}` zamiast `1` (poza żądaniami, które kończą się 400 na
   walidacji, zanim serwis szuka pacjenta).
-- [ ] Folder `zastepstwa` zakłada konto i doktora zastępcę, trzy sloty (dwa u doktora 1
+- [x] Folder `zastepstwa` zakłada konto i doktora zastępcę, trzy sloty (dwa u doktora 1
   o 10:00 i 11:00, jeden u zastępcy o 11:00), wysyła zastępstwo (409) i sprawdza w bloku
   `tests`, że obie wizyty doktora 1 zostały przy nim.
-- [ ] Na świeżej bazie `pacjenci`, `konta` i `zastepstwa` przechodzą w całości, a `users`
+- [x] Na świeżej bazie `pacjenci`, `konta` i `zastepstwa` przechodzą w całości, a `users`
   przechodzi ze środowiskiem `test`.
 
 ## Jak sprawdzisz, że skończyłeś

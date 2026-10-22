@@ -1616,3 +1616,373 @@ Caused by: java.lang.IllegalArgumentException: Unable to locate Attribute with t
 2026-10-22T19:11:40.284+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
 2026-10-22T19:11:40.284+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(988679308<open>)]
 2026-10-22T19:11:40.285+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T19:12:48.920+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-5] c.g.e.m.exeption.GlobalExceptionHandler  : bad path: doctors/82acilities/1
+2026-10-22T19:12:54.968+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-6] c.g.e.m.exeption.GlobalExceptionHandler  : bad path: doctors/82/cilities/1
+2026-10-22T19:13:01.144+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(974837162<open>)] for JPA transaction
+2026-10-22T19:13:01.144+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.DoctorService.getAllDoctors]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-10-22T19:13:01.147+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@17d1bd2b]
+2026-10-22T19:13:01.197+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T19:13:01.199+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(974837162<open>)]
+2026-10-22T19:13:01.200+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T19:13:14.842+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-8] c.g.e.m.exeption.GlobalExceptionHandler  : bad path: doctors/82/cilities/1
+2026-10-22T19:13:19.112+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(2053615077<open>)] for JPA transaction
+2026-10-22T19:13:19.112+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.DoctorService.getAllDoctors]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-10-22T19:13:19.114+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@74a05cd9]
+2026-10-22T19:13:19.122+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T19:13:19.123+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(2053615077<open>)]
+2026-10-22T19:13:19.125+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T19:13:37.874+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1177435378<open>)] for JPA transaction
+2026-10-22T19:13:37.874+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.DoctorService.addFacilityToDoctor]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-22T19:13:37.875+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@48e9da47]
+2026-10-22T19:13:37.877+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1177435378<open>)] for JPA transaction
+2026-10-22T19:13:37.877+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:13:37.882+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1177435378<open>)] for JPA transaction
+2026-10-22T19:13:37.883+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:13:37.886+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1177435378<open>)] for JPA transaction
+2026-10-22T19:13:37.886+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:13:37.887+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1177435378<open>)] for JPA transaction
+2026-10-22T19:13:37.888+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:13:37.900+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T19:13:37.900+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1177435378<open>)]
+2026-10-22T19:13:37.938+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T19:13:44.108+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(878789495<open>)] for JPA transaction
+2026-10-22T19:13:44.108+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.DoctorService.addFacilityToDoctor]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-22T19:13:44.110+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@1e4c8263]
+2026-10-22T19:13:44.111+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(878789495<open>)] for JPA transaction
+2026-10-22T19:13:44.111+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:13:44.115+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(878789495<open>)] for JPA transaction
+2026-10-22T19:13:44.116+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:13:44.119+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(878789495<open>)] for JPA transaction
+2026-10-22T19:13:44.119+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:13:44.120+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(878789495<open>)] for JPA transaction
+2026-10-22T19:13:44.120+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:13:44.126+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T19:13:44.126+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(878789495<open>)]
+2026-10-22T19:13:44.132+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T19:15:49.307+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(916106649<open>)] for JPA transaction
+2026-10-22T19:15:49.307+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.PatientService.create]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-22T19:15:49.308+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@1b75d4e3]
+2026-10-22T19:15:49.346+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(916106649<open>)] for JPA transaction
+2026-10-22T19:15:49.346+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:15:49.386+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-9] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 0, SQLState: 23505
+2026-10-22T19:15:49.386+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-9] org.hibernate.orm.jdbc.error             : ERROR: duplicate key value violates unique constraint "uk3usu2gl5shfee2u3f4gfw4w3p"
+  Szczegóły: Key (id_card_no)=(MZZ344555) already exists.
+2026-10-22T19:15:49.392+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Participating transaction failed - marking existing transaction as rollback-only
+2026-10-22T19:15:49.393+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Setting JPA transaction on EntityManager [SessionImpl(916106649<open>)] rollback-only
+2026-10-22T19:15:49.397+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-10-22T19:15:49.398+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(916106649<open>)]
+2026-10-22T19:15:49.401+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T19:15:49.402+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-9] c.g.e.m.exeption.GlobalExceptionHandler  : Integrate DB is in danger: ERROR: duplicate key value violates unique constraint "uk3usu2gl5shfee2u3f4gfw4w3p"
+  Szczegóły: Key (id_card_no)=(MZZ344555) already exists.
+2026-10-22T19:16:06.056+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-10] c.g.e.m.exeption.GlobalExceptionHandler  : rejected request 1 break rules
+2026-10-22T19:16:27.673+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1781523693<open>)] for JPA transaction
+2026-10-22T19:16:27.673+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.PatientService.findByEmail]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-10-22T19:16:27.675+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@3bfb4874]
+2026-10-22T19:16:27.696+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T19:16:27.696+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1781523693<open>)]
+2026-10-22T19:16:27.698+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T19:16:47.972+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(544650927<open>)] for JPA transaction
+2026-10-22T19:16:47.972+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.PatientService.removeById]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-22T19:16:47.973+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@29bef746]
+2026-10-22T19:16:47.975+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(544650927<open>)] for JPA transaction
+2026-10-22T19:16:47.975+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:16:47.982+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(544650927<open>)] for JPA transaction
+2026-10-22T19:16:47.982+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:16:47.988+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T19:16:47.988+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(544650927<open>)]
+2026-10-22T19:16:47.998+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-2] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 0, SQLState: 23503
+2026-10-22T19:16:47.999+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-2] org.hibernate.orm.jdbc.error             : ERROR: update or delete on table "patients" violates foreign key constraint "fkra5p2e0tp6djolm46kdr42cyt" on table "visits"
+  Szczegóły: Key (id)=(1) is still referenced from table "visits".
+2026-10-22T19:16:48.001+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback after commit exception
+
+org.springframework.dao.DataIntegrityViolationException: could not execute statement [ERROR: update or delete on table "patients" violates foreign key constraint "fkra5p2e0tp6djolm46kdr42cyt" on table "visits"
+  Szczegóły: Key (id)=(1) is still referenced from table "visits".] [delete from patients where id=?]; SQL [delete from patients where id=?]; constraint [fkra5p2e0tp6djolm46kdr42cyt]
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.convertHibernateAccessException(HibernateExceptionTranslator.java:169) ~[spring-orm-7.0.9.jar:7.0.9]
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.convertHibernateAccessException(HibernateExceptionTranslator.java:131) ~[spring-orm-7.0.9.jar:7.0.9]
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.translateExceptionIfPossible(HibernateExceptionTranslator.java:105) ~[spring-orm-7.0.9.jar:7.0.9]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:223) ~[spring-orm-7.0.9.jar:7.0.9]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:556) ~[spring-orm-7.0.9.jar:7.0.9]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:794) ~[spring-tx-7.0.9.jar:7.0.9]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:757) ~[spring-tx-7.0.9.jar:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:687) ~[spring-tx-7.0.9.jar:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:408) ~[spring-tx-7.0.9.jar:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.9.jar:7.0.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.9.jar:7.0.9]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719) ~[spring-aop-7.0.9.jar:7.0.9]
+	at com.github.erneo97.medical_clinic.service.PatientService$$SpringCGLIB$$0.removeById(<generated>) ~[classes/:na]
+	at com.github.erneo97.medical_clinic.controller.PatientController.delete(PatientController.java:105) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.9.jar:7.0.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.9.jar:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at org.springframework.web.servlet.FrameworkServlet.doDelete(FrameworkServlet.java:925) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:651) ~[tomcat-embed-core-11.0.24.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.24.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:132) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:59) ~[tomcat-embed-websocket-11.0.24.jar:11.0.24]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.9.jar:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.9.jar:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.9.jar:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:347) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:406) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2036) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:949) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:483) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:74) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [ERROR: update or delete on table "patients" violates foreign key constraint "fkra5p2e0tp6djolm46kdr42cyt" on table "visits"
+  Szczegóły: Key (id)=(1) is still referenced from table "visits".] [delete from patients where id=?]
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:73) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:34) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:115) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:189) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.performNonBatchedMutation(AbstractMutationExecutor.java:145) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:53) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:65) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.persister.entity.mutation.AbstractDeleteCoordinator.doStaticDelete(AbstractDeleteCoordinator.java:274) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.persister.entity.mutation.AbstractDeleteCoordinator.delete(AbstractDeleteCoordinator.java:85) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.action.internal.EntityDeleteAction.execute(EntityDeleteAction.java:119) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:634) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:505) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:386) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:40) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:138) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.internal.SessionImpl.fireFlush(SessionImpl.java:1472) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:498) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:2100) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2021) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:426) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:167) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commitNoRollbackOnly(JdbcResourceLocalTransactionCoordinatorImpl.java:252) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:242) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:89) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:552) ~[spring-orm-7.0.9.jar:7.0.9]
+	... 52 common frames omitted
+Caused by: org.postgresql.util.PSQLException: ERROR: update or delete on table "patients" violates foreign key constraint "fkra5p2e0tp6djolm46kdr42cyt" on table "visits"
+  Szczegóły: Key (id)=(1) is still referenced from table "visits".
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2993) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2656) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:446) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:533) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:449) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:197) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:158) ~[postgresql-42.7.13.jar:42.7.13]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-7.0.2.jar:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:185) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	... 73 common frames omitted
+
+2026-10-22T19:16:48.011+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(544650927<open>)]
+2026-10-22T19:16:48.012+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T19:16:48.012+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-2] c.g.e.m.exeption.GlobalExceptionHandler  : Integrate DB is in danger: ERROR: update or delete on table "patients" violates foreign key constraint "fkra5p2e0tp6djolm46kdr42cyt" on table "visits"
+  Szczegóły: Key (id)=(1) is still referenced from table "visits".
+2026-10-22T19:17:32.307+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1658994708<open>)] for JPA transaction
+2026-10-22T19:17:32.307+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.PatientService.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-10-22T19:17:32.309+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@2e6d563c]
+2026-10-22T19:17:32.310+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1658994708<open>)] for JPA transaction
+2026-10-22T19:17:32.310+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:17:32.319+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T19:17:32.320+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1658994708<open>)]
+2026-10-22T19:17:32.321+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T19:17:55.557+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(239680324<open>)] for JPA transaction
+2026-10-22T19:17:55.557+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.PatientService.findById]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-10-22T19:17:55.559+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@3d3de841]
+2026-10-22T19:17:55.559+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(239680324<open>)] for JPA transaction
+2026-10-22T19:17:55.559+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:17:55.563+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-10-22T19:17:55.563+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(239680324<open>)]
+2026-10-22T19:17:55.565+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T19:17:55.566+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-7] c.g.e.m.exeption.GlobalExceptionHandler  : błąd domeny Patient not found with id 9999
+2026-10-22T19:18:03.658+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-8] c.g.e.m.exeption.GlobalExceptionHandler  : bad type of variable: Method parameter 'id': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "abc"
+2026-10-22T19:21:01.207+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1643962399<open>)] for JPA transaction
+2026-10-22T19:21:01.207+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.UserService.findById]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-10-22T19:21:01.210+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@7a66867e]
+2026-10-22T19:21:01.211+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1643962399<open>)] for JPA transaction
+2026-10-22T19:21:01.211+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:21:01.214+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-10-22T19:21:01.215+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(1643962399<open>)]
+2026-10-22T19:21:01.217+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T19:21:01.218+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-1] c.g.e.m.exeption.GlobalExceptionHandler  : błąd domeny User not found with id 53
+2026-10-22T19:21:15.445+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1379829487<open>)] for JPA transaction
+2026-10-22T19:21:15.445+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.UserService.createUser]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-22T19:21:15.447+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@6e83a23d]
+2026-10-22T19:21:15.448+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1379829487<open>)] for JPA transaction
+2026-10-22T19:21:15.448+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:21:15.452+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-2] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 0, SQLState: 23505
+2026-10-22T19:21:15.452+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-2] org.hibernate.orm.jdbc.error             : ERROR: duplicate key value violates unique constraint "uk6dotkott2kjsp8vw4d0m25fb7"
+  Szczegóły: Key (email)=(michal.nowak@doktor.com) already exists.
+2026-10-22T19:21:15.452+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Participating transaction failed - marking existing transaction as rollback-only
+2026-10-22T19:21:15.453+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Setting JPA transaction on EntityManager [SessionImpl(1379829487<open>)] rollback-only
+2026-10-22T19:21:15.454+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-10-22T19:21:15.454+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(1379829487<open>)]
+2026-10-22T19:21:15.455+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T19:21:15.456+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-2] c.g.e.m.exeption.GlobalExceptionHandler  : Integrate DB is in danger: ERROR: duplicate key value violates unique constraint "uk6dotkott2kjsp8vw4d0m25fb7"
+  Szczegóły: Key (email)=(michal.nowak@doktor.com) already exists.
+2026-10-22T19:21:27.612+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1869873616<open>)] for JPA transaction
+2026-10-22T19:21:27.612+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.UserService.removeUser]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-22T19:21:27.615+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@61b3e24e]
+2026-10-22T19:21:27.615+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1869873616<open>)] for JPA transaction
+2026-10-22T19:21:27.615+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:21:27.618+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1869873616<open>)] for JPA transaction
+2026-10-22T19:21:27.619+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:21:27.619+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-22T19:21:27.619+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1869873616<open>)]
+2026-10-22T19:21:27.622+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 0, SQLState: 23503
+2026-10-22T19:21:27.622+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.error             : ERROR: update or delete on table "users" violates foreign key constraint "fkuwca24wcd1tg6pjex8lmc0y7" on table "patients"
+  Szczegóły: Key (id)=(1) is still referenced from table "patients".
+2026-10-22T19:21:27.624+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback after commit exception
+
+org.springframework.dao.DataIntegrityViolationException: could not execute statement [ERROR: update or delete on table "users" violates foreign key constraint "fkuwca24wcd1tg6pjex8lmc0y7" on table "patients"
+  Szczegóły: Key (id)=(1) is still referenced from table "patients".] [delete from users where id=?]; SQL [delete from users where id=?]; constraint [fkuwca24wcd1tg6pjex8lmc0y7]
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.convertHibernateAccessException(HibernateExceptionTranslator.java:169) ~[spring-orm-7.0.9.jar:7.0.9]
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.convertHibernateAccessException(HibernateExceptionTranslator.java:131) ~[spring-orm-7.0.9.jar:7.0.9]
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.translateExceptionIfPossible(HibernateExceptionTranslator.java:105) ~[spring-orm-7.0.9.jar:7.0.9]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:223) ~[spring-orm-7.0.9.jar:7.0.9]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:556) ~[spring-orm-7.0.9.jar:7.0.9]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:794) ~[spring-tx-7.0.9.jar:7.0.9]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:757) ~[spring-tx-7.0.9.jar:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:687) ~[spring-tx-7.0.9.jar:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:408) ~[spring-tx-7.0.9.jar:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.9.jar:7.0.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.9.jar:7.0.9]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719) ~[spring-aop-7.0.9.jar:7.0.9]
+	at com.github.erneo97.medical_clinic.service.UserService$$SpringCGLIB$$0.removeUser(<generated>) ~[classes/:na]
+	at com.github.erneo97.medical_clinic.controller.UserController.delete(UserController.java:39) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.9.jar:7.0.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.9.jar:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at org.springframework.web.servlet.FrameworkServlet.doDelete(FrameworkServlet.java:925) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:651) ~[tomcat-embed-core-11.0.24.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.9.jar:7.0.9]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.24.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:132) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:59) ~[tomcat-embed-websocket-11.0.24.jar:11.0.24]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.9.jar:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.9.jar:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.9.jar:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:347) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:406) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2036) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:949) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:483) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:74) ~[tomcat-embed-core-11.0.24.jar:11.0.24]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [ERROR: update or delete on table "users" violates foreign key constraint "fkuwca24wcd1tg6pjex8lmc0y7" on table "patients"
+  Szczegóły: Key (id)=(1) is still referenced from table "patients".] [delete from users where id=?]
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:73) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:34) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:115) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:189) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.performNonBatchedMutation(AbstractMutationExecutor.java:145) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:53) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:65) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.persister.entity.mutation.AbstractDeleteCoordinator.doStaticDelete(AbstractDeleteCoordinator.java:274) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.persister.entity.mutation.AbstractDeleteCoordinator.delete(AbstractDeleteCoordinator.java:85) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.action.internal.EntityDeleteAction.execute(EntityDeleteAction.java:119) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:634) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:505) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:386) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:40) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:138) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.internal.SessionImpl.fireFlush(SessionImpl.java:1472) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:498) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:2100) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2021) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:426) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:167) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commitNoRollbackOnly(JdbcResourceLocalTransactionCoordinatorImpl.java:252) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:242) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:89) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:552) ~[spring-orm-7.0.9.jar:7.0.9]
+	... 52 common frames omitted
+Caused by: org.postgresql.util.PSQLException: ERROR: update or delete on table "users" violates foreign key constraint "fkuwca24wcd1tg6pjex8lmc0y7" on table "patients"
+  Szczegóły: Key (id)=(1) is still referenced from table "patients".
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2993) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2656) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:446) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:533) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:449) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:197) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:158) ~[postgresql-42.7.13.jar:42.7.13]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-7.0.2.jar:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:185) ~[hibernate-core-7.4.5.Final.jar:7.4.5.Final]
+	... 73 common frames omitted
+
+2026-10-22T19:21:27.628+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(1869873616<open>)]
+2026-10-22T19:21:27.628+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T19:21:27.629+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-3] c.g.e.m.exeption.GlobalExceptionHandler  : Integrate DB is in danger: ERROR: update or delete on table "users" violates foreign key constraint "fkuwca24wcd1tg6pjex8lmc0y7" on table "patients"
+  Szczegóły: Key (id)=(1) is still referenced from table "patients".
+2026-10-22T19:21:35.705+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(2117820616<open>)] for JPA transaction
+2026-10-22T19:21:35.706+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.UserService.removeUser]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-22T19:21:35.708+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@70fc817f]
+2026-10-22T19:21:35.708+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(2117820616<open>)] for JPA transaction
+2026-10-22T19:21:35.709+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:21:35.711+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-10-22T19:21:35.711+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(2117820616<open>)]
+2026-10-22T19:21:35.713+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T19:21:35.713+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-4] c.g.e.m.exeption.GlobalExceptionHandler  : błąd domeny User not found with id 1111
+2026-10-22T19:23:43.216+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1796902668<open>)] for JPA transaction
+2026-10-22T19:23:43.216+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.github.erneo97.medical_clinic.service.VisitService.create]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-22T19:23:43.218+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@14c8e586]
+2026-10-22T19:23:43.219+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1796902668<open>)] for JPA transaction
+2026-10-22T19:23:43.219+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:23:43.219+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1796902668<open>)] for JPA transaction
+2026-10-22T19:23:43.219+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-22T19:23:43.240+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-10-22T19:23:43.240+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(1796902668<open>)]
+2026-10-22T19:23:43.242+02:00 DEBUG 42884 --- [medical-clinic] [http-nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2026-10-22T19:23:43.243+02:00  WARN 42884 --- [medical-clinic] [http-nio-8080-exec-9] c.g.e.m.exeption.GlobalExceptionHandler  : błąd domeny Visit already exists for Doctor on that time 2026-11-01T18:45 - 2026-11-01T19:00
+2026-10-22T19:27:10.622+02:00  INFO 42884 --- [medical-clinic] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-10-22T19:27:10.641+02:00  INFO 42884 --- [medical-clinic] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-10-22T19:27:10.645+02:00  INFO 42884 --- [medical-clinic] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T19:27:10.648+02:00  INFO 42884 --- [medical-clinic] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-22T19:27:10.651+02:00  INFO 42884 --- [medical-clinic] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
