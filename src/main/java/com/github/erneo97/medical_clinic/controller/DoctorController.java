@@ -3,7 +3,9 @@ package com.github.erneo97.medical_clinic.controller;
 import com.github.erneo97.medical_clinic.dto.doctor.DoctorCreateCommand;
 import com.github.erneo97.medical_clinic.dto.doctor.DoctorDto;
 import com.github.erneo97.medical_clinic.dto.doctor.SubstituteDoctorCommand;
+import com.github.erneo97.medical_clinic.dto.visit.VisitDto;
 import com.github.erneo97.medical_clinic.mapper.DoctorMapper;
+import com.github.erneo97.medical_clinic.mapper.VisitMapper;
 import com.github.erneo97.medical_clinic.service.DoctorService;
 import com.github.erneo97.medical_clinic.service.VisitService;
 import lombok.AllArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.List;
 public class DoctorController {
     private final DoctorService doctorService;
     private final VisitService visitService;
+    private final VisitMapper visitMapper;
     private final DoctorMapper doctorMapper;
 
     @GetMapping
@@ -47,8 +50,8 @@ public class DoctorController {
     }
 
     @PostMapping("/{id}/substitutions")
-    public void substituteDoctor(@PathVariable Long id, @RequestBody SubstituteDoctorCommand command) {
-        visitService.substitute(id, command.substituteId());
+    public List<VisitDto> substituteDoctor(@PathVariable Long id, @RequestBody SubstituteDoctorCommand command) {
+        return visitMapper.toVisit(visitService.substitute(id, command.substituteId()));
     }
 
 

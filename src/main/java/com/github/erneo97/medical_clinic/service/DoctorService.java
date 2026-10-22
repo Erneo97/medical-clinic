@@ -66,7 +66,7 @@ public class DoctorService {
 
     public void checkDoctorExistOrThrowException(Long doctorId) {
         if( !doctorRepository.existsById(doctorId)) {
-            throw new IllegalArgumentException();
+            throw new DoctorNotFoundException(doctorId);
         }
     }
 

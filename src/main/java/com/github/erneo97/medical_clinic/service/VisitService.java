@@ -83,19 +83,22 @@ public class VisitService {
     @Transactional
     public List<Visit> substitute(Long doctorId, Long substituteId) {
         doctorService.checkDoctorExistOrThrowException(doctorId);
-        Doctor doctorSubstitute = doctorService.findDoctorByIdOrThrowException(doctorId);
-
-        List<Visit> visits = visitRepository.findByDoctorId(doctorId)
-                .stream()
-                .sorted(Comparator.comparing(Visit::getStartsAt))
-                .toList();
+        Doctor doctorSubstitute = doctorService.findDoctorByIdOrThrowException(substituteId);
+        List<Visit> visits = getSortedVisitsByDoctorId(doctorId);
         substituteVisitsToDoctor(visits, doctorSubstitute);
         return visits;
     }
 
+    private List<Visit> getSortedVisitsByDoctorId(Long doctorId) {
+        return visitRepository.findByDoctorId(doctorId)
+                .stream()
+                .sorted(Comparator.comparing(Visit::getStartsAt))
+                .toList();
+    }
+
     private void substituteVisitsToDoctor(List<Visit> visits, Doctor doctor) {
         for(Visit visit : visits) {
-            checkOverlap(doctor.getId(), visit.getStartsAt(), visit.getEndsAt());
+            checkOverlap(doctor.getId(), visit.getEndsAt(), visit.getStartsAt());
             visit.setDoctor(doctor);
             visitRepository.save(visit);
         }
@@ -116,7 +119,7 @@ public class VisitService {
     }
 
     private void checkOverlap(Long doctorId, LocalDateTime start, LocalDateTime end) {
-        if (visitRepository.existsByDoctorIdAndStartsAtLessThanAndEndsAtGreaterThan(
+        if (visitRepository.existsByDoctorIdAndStartsAtBeforeAndEndsAtAfter(
                 doctorId, end, start)) {
             throw new VisitOverlapsException(String.format("Visit already exists for Doctor on that time %s - %s", start.toString(), end.toString()));
         }

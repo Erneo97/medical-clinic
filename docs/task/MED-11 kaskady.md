@@ -330,9 +330,9 @@ Kryteria akceptacji:
    zatwierdza.
 
 Kryteria akceptacji:
-- [ ] `grep 'Creating new transaction' app.log` pokazuje transakcję o nazwie
+- [x] `grep 'Creating new transaction' app.log` pokazuje transakcję o nazwie
   `...PatientService.create`.
-- [ ] Umiesz wskazać w logu, że zapytanie o zajęty e-mail i zapis pacjenta leżą między
+- [x] Umiesz wskazać w logu, że zapytanie o zajęty e-mail i zapis pacjenta leżą między
   `Creating new transaction ... PatientService.create` a `Initiating transaction commit`.
   `Participating in existing transaction` stoi przed `save`; zapytanie z nazwy metody nie
   zostawia własnego wiersza.
@@ -370,10 +370,10 @@ doktora `{id}` przechodzą do zastępcy, od najwcześniejszej. Zastępca nie mo�
 własnej wizyty: konflikt z taką wizytą daje 409 i przerywa całą operację.
 
 Kryteria akceptacji:
-- [ ] Brak doktora albo zastępcy → 404, brak `substituteId` w treści → 400.
-- [ ] Zastępstwo bez konfliktu → 200 z listą przeniesionych wizyt jako `VisitDto`.
-- [ ] Konflikt przy drugiej wizycie → 409, a pierwsza wizyta zostaje przy starym doktorze.
-- [ ] Metoda serwisu ma `@Transactional` i nie woła `save`.
+- [x] Brak doktora albo zastępcy → 404, brak `substituteId` w treści → 400.
+- [x] Zastępstwo bez konfliktu → 200 z listą przeniesionych wizyt jako `VisitDto`.
+- [x] Konflikt przy drugiej wizycie → 409, a pierwsza wizyta zostaje przy starym doktorze.
+- [x] Metoda serwisu ma `@Transactional` i nie woła `save`.
 
 ## Zadanie D2. Udokumentowany rollback
 
