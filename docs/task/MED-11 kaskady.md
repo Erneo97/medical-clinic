@@ -313,13 +313,13 @@ Kryteria akceptacji:
 3. Zbuduj, uruchom i sprawdź każdą zmianę w bazie, a nie tylko w odpowiedzi.
 
 Kryteria akceptacji:
-- [ ] `PUT /patients/1` z nowym nazwiskiem daje 200, a
+- [x] `PUT /patients/1` z nowym nazwiskiem daje 200, a
   `SELECT id, last_name FROM patients WHERE id = 1;` pokazuje nowe nazwisko.
-- [ ] `PATCH /patients/1/password` daje 200, a `SELECT id, password FROM users WHERE id = 1;`
+- [x] `PATCH /patients/1/password` daje 200, a `SELECT id, password FROM users WHERE id = 1;`
   pokazuje nowe hasło.
-- [ ] Rezerwacja wolnego slotu daje 200, a `SELECT id, doctor_id, patient_id FROM visits;`
+- [x] Rezerwacja wolnego slotu daje 200, a `SELECT id, doctor_id, patient_id FROM visits;`
   pokazuje pacjenta przy wizycie.
-- [ ] Umiesz powiedzieć, czemu `create` nadal potrzebuje `save`.
+- [x] Umiesz powiedzieć, czemu `create` nadal potrzebuje `save`.
 
 ### Zadanie 3 (8 min). Transakcja w logu
 

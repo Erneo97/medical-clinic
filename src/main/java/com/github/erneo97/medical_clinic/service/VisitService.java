@@ -68,7 +68,7 @@ public class VisitService {
             throw new VisitInPastException("The visit has already taken place");
         }
         visit.setPatient(patient);
-        return visitRepository.save(visit);
+        return visit;
     }
 
     @Transactional(readOnly = true)
