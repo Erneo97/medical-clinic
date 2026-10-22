@@ -11,6 +11,7 @@ import java.util.Set;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface FacilityMapper {
+
     FacilityDto mapToDto(Facility facility);
 
     List<FacilityDto> mapToDto(List<Facility> facility);

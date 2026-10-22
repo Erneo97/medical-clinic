@@ -19,7 +19,7 @@ public class FacilityService {
 
     @Transactional(readOnly = true)
     public List<Facility> getAllFacilities() {
-        return facilityRepository.findAllWithDoctors();
+        return facilityRepository.findAll();
     }
 
     @Transactional(readOnly = true)

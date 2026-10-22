@@ -399,7 +399,7 @@ Oznacz metody `DoctorService`, `UserService` i `FacilityService` według konwenc
 Usuń `save` tam, gdzie encja jest zarządzana (przypisanie i odpięcie placówki).
 
 Kryteria akceptacji:
-- [ ] Każda metoda publiczna w tych trzech serwisach ma `@Transactional` albo `@Transactional(readOnly = true)`.
+- [x] Każda metoda publiczna w tych trzech serwisach ma `@Transactional` albo `@Transactional(readOnly = true)`.
 - [ ] `POST /doctors/1/facilities/2` daje 200, a `SELECT * FROM doctor_facility;` pokazuje wiersz
   `1 | 2`.
 
