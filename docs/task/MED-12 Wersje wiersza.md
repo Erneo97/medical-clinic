@@ -8,8 +8,8 @@
 
 Kryteria akceptacji:
 - [ ] `./mvnw -q -DskipTests package` przechodzi.
-- [ ] `"\d visits"` w `psql` pokazuje kolumnę `version` typu `bigint` z `not null`.
-- [ ] Po założeniu slotu wizyta ma `version` równe 0, a po rezerwacji 1 (`VisitDto` nie pokazuje
+- [x] `"\d visits"` w `psql` pokazuje kolumnę `version` typu `bigint` z `not null`.
+- [x] Po założeniu slotu wizyta ma `version` równe 0, a po rezerwacji 1 (`VisitDto` nie pokazuje
   wersji, więc sprawdź w `psql`:
   `SELECT id, patient_id, version FROM visits WHERE id = <id z odpowiedzi POST>;`).
 

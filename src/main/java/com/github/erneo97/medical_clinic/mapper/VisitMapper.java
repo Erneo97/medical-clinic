@@ -20,6 +20,7 @@ public interface VisitMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "doctor", ignore = true)
     @Mapping(target = "patient", ignore = true)
+    @Mapping(target = "version", ignore = true)
     Visit toVisit(VisitCreateCommand command);
 
 }

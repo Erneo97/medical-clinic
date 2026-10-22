@@ -19,6 +19,10 @@ public class Visit {
     @Column(nullable = false)
     private Long id;
 
+    @Version
+    @Column(nullable = false)
+    private Long version;
+
     private LocalDateTime startsAt;
     private LocalDateTime endsAt;
 
