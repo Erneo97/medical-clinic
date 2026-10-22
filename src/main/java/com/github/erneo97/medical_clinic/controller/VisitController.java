@@ -23,7 +23,7 @@ public class VisitController {
 
     @GetMapping(params = "doctorId")
     public List<VisitDto> findByDoctorId(@RequestParam Long doctorId) {
-        return  visitMapper.toVisit(visitService.findByDoctorId(doctorId));
+        return  visitMapper.toVisit(visitService.findAllByDoctorId(doctorId));
     }
 
     @GetMapping("/patient/{patientId}")
