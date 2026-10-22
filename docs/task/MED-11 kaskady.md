@@ -400,7 +400,7 @@ Usuń `save` tam, gdzie encja jest zarządzana (przypisanie i odpięcie placówk
 
 Kryteria akceptacji:
 - [x] Każda metoda publiczna w tych trzech serwisach ma `@Transactional` albo `@Transactional(readOnly = true)`.
-- [ ] `POST /doctors/1/facilities/2` daje 200, a `SELECT * FROM doctor_facility;` pokazuje wiersz
+- [x] `POST /doctors/1/facilities/2` daje 200, a `SELECT * FROM doctor_facility;` pokazuje wiersz
   `1 | 2`.
 
 ## Zadanie D4. Asercje w starszych folderach Bruno
