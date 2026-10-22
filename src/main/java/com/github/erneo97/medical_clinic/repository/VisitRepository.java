@@ -9,6 +9,8 @@ import java.util.List;
 public interface VisitRepository extends JpaRepository<Visit, Long> {
     List<Visit> findByDoctorId(Long doctorId);
 
+    List<Visit> findByPatientId(Long patientId);
+
     boolean existsByDoctorIdAndStartsAtLessThanAndEndsAtGreaterThan(
             Long doctorId,
             LocalDateTime newEnd,

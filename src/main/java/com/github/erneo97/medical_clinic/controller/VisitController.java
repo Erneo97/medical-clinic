@@ -21,14 +21,19 @@ public class VisitController {
         return visitMapper.toVisit(visitService.findAll());
     }
 
-    @PostMapping
-    public VisitDto create(@RequestBody VisitCreateCommand command) {
-        return visitMapper.toVisit(visitService.create(command));
-    }
-
     @GetMapping(params = "doctorId")
     public List<VisitDto> findByDoctorId(@RequestParam Long doctorId) {
         return  visitMapper.toVisit(visitService.findByDoctorId(doctorId));
+    }
+
+    @GetMapping("/patient/{patientId}")
+    public List<VisitDto> getPatientVisits(@PathVariable Long patientId) {
+        return visitMapper.toVisit(visitService.getPatientVisit(patientId));
+    }
+
+    @PostMapping
+    public VisitDto create(@RequestBody VisitCreateCommand command) {
+        return visitMapper.toVisit(visitService.create(command));
     }
 
     @PatchMapping("/{id}/book/{patientId}")

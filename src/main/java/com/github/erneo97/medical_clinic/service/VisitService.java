@@ -68,7 +68,7 @@ public class VisitService {
     }
 
     public Visit bookVisit(Long id, Long patientId) {
-        Visit visit = this.findByIdOrExeption(id);
+        Visit visit = this.findVisitByIdOrException(id);
         Patient patient = patientService.findById(patientId);
 
         if( !visit.isAvaliable() ) {
@@ -81,8 +81,12 @@ public class VisitService {
         return visitRepository.save(visit);
     }
 
-    public Visit findByIdOrExeption(Long id) {
+    public Visit findVisitByIdOrException(Long id) {
         return visitRepository.findById(id).orElseThrow(() -> new VisitNotFoundException(String.format("Visit with id %d not exist", id)));
+    }
+
+    public List<Visit> getPatientVisit(Long patientId) {
+        return visitRepository.findByPatientId(patientId);
     }
 
 }

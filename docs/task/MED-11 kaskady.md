@@ -235,6 +235,9 @@ Termin: przed następnymi zajęciami. Pracujesz w medical-clinic, na stanie z dz
 Dopisz `PATCH /visits/{id}/book/{patientId}`, który zapisuje pacjenta na wolny slot i zwraca
 wizytę.
 
+# Spr od tego miejsca
+
+
 Kryteria akceptacji:
 - [x] Wolny slot w przyszłości → 200, w odpowiedzi `patientId` pacjenta.
 - [x] Wizyta albo pacjent, których nie ma → 404.
@@ -248,8 +251,8 @@ Kryteria akceptacji:
 Dopisz `GET /visits/patient/{patientId}`, który zwraca wizyty pacjenta jako `VisitDto`.
 
 Kryteria akceptacji:
-- [ ] Po rezerwacji z D1 lista pacjenta ma tę wizytę, z `doctorId` i `patientId`.
-- [ ] Pacjent bez wizyt dostaje pustą listę.
+- [x] Po rezerwacji z D1 lista pacjenta ma tę wizytę, z `doctorId` i `patientId`.
+- [x] Pacjent bez wizyt dostaje pustą listę.
 
 ## Zadanie D3. Folder `sloty` w Bruno
 
@@ -257,12 +260,12 @@ Załóż folder `sloty` ze scenariuszem z kompendium: slot, rezerwacja, konflikt
 konflikt podwójnej rezerwacji.
 
 Kryteria akceptacji:
-- [ ] Cztery żądania w tej kolejności: nowy slot (201), rezerwacja dla pacjenta 1 (200), slot
+- [x] Cztery żądania w tej kolejności: nowy slot (201), rezerwacja dla pacjenta 1 (200), slot
   nachodzący na zarezerwowany (409), rezerwacja tego samego slotu dla pacjenta 2 (409).
-- [ ] Każde żądanie ma asercję statusu, a rezerwacja sprawdza też `res.body.patientId`.
-- [ ] Numer slotu nie jest wpisany na sztywno: `bru.setVar("slotId", res.body.id);`
+- [x] Każde żądanie ma asercję statusu, a rezerwacja sprawdza też `res.body.patientId`.
+- [x] Numer slotu nie jest wpisany na sztywno: `bru.setVar("slotId", res.body.id);`
   w skrypcie po pierwszym żądaniu i `{{slotId}}` w ścieżkach.
-- [ ] Po `docker compose down -v` folder przechodzi przy pierwszym przebiegu.
+- [x] Po `docker compose down -v` folder przechodzi przy pierwszym przebiegu.
 
 ## Jak sprawdzisz, że skończyłeś
 
