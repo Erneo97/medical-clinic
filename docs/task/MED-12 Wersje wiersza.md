@@ -21,6 +21,7 @@ Kryteria akceptacji:
    i spróbować ponownie.
 3. W logu zostaw ostrzeżenie z nazwą klasy encji.
 
+
 Kryteria akceptacji:
 - [ ] Handler zwraca `ProblemDetail` ze statusem 409.
 - [ ] Wyjątek łapie osobna metoda, a nie siatka bezpieczeństwa `Exception.class`.
