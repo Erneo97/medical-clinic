@@ -47,7 +47,7 @@ nie jest testem jednostkowym.
 - Sprawdź: `./mvnw test` daje `Tests run: 4`, a `-Dtest=PatientServiceTest` kończy się po około
   sekundzie bez startu Springa.
 
-**L30 Z1. Pierwszy test z atrapami**
+**~~L30 Z1. Pierwszy test z atrapami~~**
 - `@ExtendWith(MockitoExtension.class)`, `@Mock` na dwa repozytoria i maper, `@InjectMocks PatientService`.
 - `findById_patientExists_returnsPatient`: pacjent z buildera, `when(...)` na repozytorium,
   `assertEquals` na imieniu.

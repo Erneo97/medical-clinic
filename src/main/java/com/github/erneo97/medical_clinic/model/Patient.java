@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import com.github.erneo97.medical_clinic.dto.patient.EditPersonalDataCommand;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "patients")
 public class Patient {
     private final static int MAX_LENGHT_NUMBER_DATA = 20;
