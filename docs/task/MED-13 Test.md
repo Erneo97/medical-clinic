@@ -53,12 +53,15 @@ nie jest testem jednostkowym.
   `assertEquals` na imieniu.
 - Celowo zepsuj oczekiwane imię, zobacz `expected: <...> but was: <...>`, przywróć.
 
-**L30 Z2. Pozostałe metody czytające**
+**L~~30 Z2. Pozostałe metody czytające~~**
 - `findAll` (dwóch pacjentów: liczba i jedno imię), `findByEmail` (id), `searchByName` (fragment
   nazwiska, jedno trafienie).
 - Pusty szkielet usuń albo wypełnij.
 
-**L30 Z3.** `./mvnw test` bez filtra: porównaj czas `contextLoads` z czasem testów jednostkowych.
+**~~L30 Z3.~~** `./mvnw test` bez filtra: porównaj czas `contextLoads` z czasem testów jednostkowych.
+
+Czas z filtrem:   4.724 s
+Czas bez filtra:  12.427 s
 
 **L30 D1. Rejestracja:** `create_newEmail_savesPatientWithAccount`
 - Atrapy: e-mail wolny, maper zwraca pacjenta, `save` zwraca tego samego pacjenta.

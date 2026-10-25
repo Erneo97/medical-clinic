@@ -58,7 +58,7 @@ public class PatientController {
     @GetMapping(params = "fragment")
     @Operation(summary = "Find all user with first name or last name have searched fragment")
     public List<PatientDto> findByFirstNameOrLastName(@RequestParam String fragment) {
-        return patientMapper.toDto(patientService.searchBytName(fragment));
+        return patientMapper.toDto(patientService.searchByName(fragment));
     }
 
     @PostMapping

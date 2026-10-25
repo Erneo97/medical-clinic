@@ -86,7 +86,7 @@ public class PatientService {
     }
 
     @Transactional(readOnly = true)
-    public List<Patient> searchBytName(String fragment) {
+    public List<Patient> searchByName(String fragment) {
         return patientRepository.searchByName(fragment);
     }
 

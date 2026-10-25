@@ -39,7 +39,6 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    @Transactional(readOnly = true)
     private void findNotPatientOrThrow(Long id) {
         this.findById(id);
     }
