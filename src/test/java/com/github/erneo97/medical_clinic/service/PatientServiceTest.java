@@ -1,5 +1,8 @@
 package com.github.erneo97.medical_clinic.service;
 
+import com.github.erneo97.medical_clinic.dto.patient.EditPasswordCommand;
+import com.github.erneo97.medical_clinic.dto.patient.PatientCreateCommand;
+import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.model.User;
 import com.github.erneo97.medical_clinic.repository.PatientRepository;
@@ -14,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -24,6 +28,9 @@ class PatientServiceTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private PatientMapper patientMapper;
 
     @InjectMocks
     private PatientService patientService;
@@ -50,7 +57,7 @@ class PatientServiceTest {
     public void findByEmail_patientExists_returnsPatient() {
         // given
         String searchEmail = "jan.testowy@testowy.pl";
-        Patient patient  = this.getPatientWithEmail(searchEmail);
+        Patient patient = this.getPatientWithEmail(searchEmail);
         when(patientRepository.findByUserEmail(searchEmail))
                 .thenReturn(Optional.ofNullable(patient));
 
@@ -93,13 +100,55 @@ class PatientServiceTest {
         assertEquals(2, result.size());
     }
 
-    private Patient getPatientWithEmail(String email) {
-        User  user = User.builder()
+    @Test
+    void create_newEmail_savesPatientWithAccount() {
+        // given
+        String email = "test@test.test";
+        PatientCreateCommand command = PatientCreateCommand.builder().email(email).build();
+        Patient mapped = getPatientWithEmail(email);
+
+        when(userRepository.existsByEmail(email)).thenReturn(false);
+        when(patientMapper.toPatient(command)).thenReturn(mapped);
+        when(patientRepository.save(mapped)).thenReturn(mapped);
+
+        // when
+        Patient result = patientService.create(command);
+
+        // then
+        assertEquals(email, result.getEmail());
+        verify(patientRepository).save(mapped);
+    }
+
+    @Test
+    public void changePassword_patientExists_setsNewPassword() {
+        // given
+        final String oldPassword = "oldPassword123!",
+                newPassword = "newPassword123!";
+        Patient patient = getPatientWithPassword(oldPassword);
+        EditPasswordCommand editPasswordCommand = new EditPasswordCommand(newPassword);
+        when(patientRepository.findById(1L)).thenReturn(Optional.of(getPatientWithPassword(newPassword)));
+
+
+        // when
+        patientService.chanePassword(1L, editPasswordCommand);
+        Patient result = patientService.findById(1L);
+
+        // then
+        verify(patientRepository).updatePassword(1L, newPassword);
+    }
+
+    private Patient getPatientWithPassword(final String password) {
+        User account = User.builder().password(password).build();
+        return Patient.builder().id(1L).user(account).build();
+    }
+
+    private Patient getPatientWithEmail(final String email) {
+        User account = User.builder()
                 .email(email)
                 .build();
 
         return Patient.builder()
-                .user(user)
+                .user(account)
                 .id(1L)
                 .build();
     }

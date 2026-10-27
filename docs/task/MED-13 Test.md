@@ -63,13 +63,13 @@ nie jest testem jednostkowym.
 Czas z filtrem:   4.724 s
 Czas bez filtra:  12.427 s
 
-**L30 D1. Rejestracja:** `create_newEmail_savesPatientWithAccount`
+**~~L30 D1. Rejestracja:~~** `create_newEmail_savesPatientWithAccount`
 - Atrapy: e-mail wolny, maper zwraca pacjenta, `save` zwraca tego samego pacjenta.
 - Asercje na tym, co dołożył serwis: e-mail, hasło i rola `PATIENT` konta.
 - Umiesz wyjaśnić, czemu test ze stubem `existsByEmail` pada po usunięciu sprawdzenia e-maila
   z serwisu, a test bez tego stubu zostaje zielony.
 
-**L30 D2. Zmiana hasła:** `changePassword_patientExists_setsNewPassword`
+**L~~30 D2. Zmiana hasła:~~** `changePassword_patientExists_setsNewPassword`
 - Pacjent w given ma konto ze starym hasłem, asercja na nowym haśle.
 
 Gotowe, gdy: `PatientServiceTest` ma 6 zielonych testów, `./mvnw test` → `BUILD SUCCESS`.
