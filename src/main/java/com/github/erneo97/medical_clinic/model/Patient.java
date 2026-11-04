@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @AllArgsConstructor
 @Getter
@@ -50,6 +51,10 @@ public class Patient {
 
     public Patient() {}
 
+    public Patient(String firstName) {
+        this.firstName = firstName;
+    }
+
     public Patient(Long id, String email, String password, String idCardNo, String firstName, String lastName, String phoneNumber, LocalDate birthday) {
         this.id = id;
         this.user = new User(id,  email, password, Role.PATIENT);
@@ -70,5 +75,21 @@ public class Patient {
         this.phoneNumber = command.phoneNumber();
         this.birthday = command.birthday();
         this.user.setEmail(command.email());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Patient other)) {
+            return false;
+        }
+        return id != null && id.equals(other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

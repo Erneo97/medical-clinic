@@ -188,17 +188,17 @@ Strategia: dwa obiekty są równe tylko z tym samym, nadanym id; `hashCode` sta�
 `equals` przez `instanceof` (nie `getClass()`) i getter (`other.getId()`, nie pole).
 Na encjach żadnego `@EqualsAndHashCode` ani `@Data`.
 
-**L33 Z1. Obstaw i sprawdź** (`src/test/java/.../model/PatientTest.java`, na obecnej klasie `Patient`)
+**~~L33 Z1. Obstaw i sprawdź~~** (`src/test/java/.../model/PatientTest.java`, na obecnej klasie `Patient`)
 - Pacjent dodany do `HashSet` przed `setId(42L)` jest w nim po nadaniu id.
 - Dwa obiekty `Patient` z tym samym id są równe.
 - Przed uruchomieniem zapisz w komentarzu, który test padnie; potem wyjaśnij, czemu.
 
-**L33 Z2.** `equals` i `hashCode` w `Patient` według strategii. Oba testy z Z1 zielone.
+**~~L33 Z2.~~** `equals` i `hashCode` w `Patient` według strategii. Oba testy z Z1 zielone.
 
-**L33 Z3.** Trzeci test: dwaj niezapisani pacjenci (bez id) z tym samym imieniem nie są równi.
+**~~L33 Z3.~~** Trzeci test: dwaj niezapisani pacjenci (bez id) z tym samym imieniem nie są równi.
 Umiesz powiedzieć, co się stanie z testem z setem po zamianie `hashCode` na `Objects.hashCode(id)`.
 
-**L33 D1. Wszystkie encje:** ta sama strategia w `User`, `Doctor`, `Facility` i `Visit`.
+**~~L33 D1. Wszystkie encje:~~** ta sama strategia w `User`, `Doctor`, `Facility` i `Visit`.
 Testy z lekcji 30-32 nadal zielone.
 
 **L33 D2. Test strażnik relacji:** `DoctorTest`

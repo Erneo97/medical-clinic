@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "visits")
@@ -40,5 +41,21 @@ public class Visit {
 
     public boolean isInPastAccordingClock(Clock clock) {
         return startsAt.isBefore(LocalDateTime.now(clock));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Visit other)) {
+            return false;
+        }
+        return id != null && id.equals(other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
