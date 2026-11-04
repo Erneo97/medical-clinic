@@ -101,7 +101,7 @@ Brak skutku = `verify(..., never())`.
   `InvalidVisitException` z komunikatem.
 - Sprawdź: `./mvnw test -Dtest='PatientServiceTest,VisitServiceTest'` → `Tests run: 12`, zero porażek.
 
-**L31 D1. Komplet PatientService** (każda metoda publiczna: test pozytywny + test każdej odmowy)
+**~~L31 D1. Komplet PatientService~~** (każda metoda publiczna: test pozytywny + test każdej odmowy)
 - Brakujące: `findByEmail` bez pacjenta, 
 - `update` (istnieje / nie istnieje), `changePassword`
   bez pacjenta.
