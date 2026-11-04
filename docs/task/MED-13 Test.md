@@ -109,7 +109,7 @@ Brak skutku = `verify(..., never())`.
 - `update` bez pacjenta: wyjątek, maper niewywołany.
 - `create` z `ArgumentCaptor` na `save`: imię pacjenta, e-mail i rola konta.
 
-**L31 D2. Reguły VisitService**
+**~~31 D2. Reguły VisitService~~**
 - `create`, odmowy: start nie w pełnym kwadransie, długość niebędąca wielokrotnością 15 min,
   brak doktora, nakładanie się na inną wizytę; przy każdej odmowie nic nie idzie do `save`.
 - `create`, przejście: start dokładnie „teraz", `ArgumentCaptor` na `save` (czasy i doktor).
@@ -127,17 +127,17 @@ Klasa: `src/test/java/.../controller/PatientControllerTest.java` z
 `@WebMvcTest(PatientController.class)` i `@Import(PatientMapperImpl.class)`, pole `@Autowired MockMvc`,
 dubler `@MockitoBean PatientService`. Bez `@SpringBootTest` i bez `@Mock`.
 
-**L32 Z1. `GET /patients/{id}`, pacjent istnieje**
+**~~L32 Z1. `GET /patients/{id}`, pacjent istnieje~~**
 - Status 200, `jsonPath` na id, e-mail i `fullName`.
 - `jsonPath("$.idCardNo").doesNotExist()`: numer dowodu nie wychodzi z API.
 
-**L32 Z2. Lista i rejestracja**
+**~~L32 Z2. Lista i rejestracja~~**
 - `GET /patients` z dwoma pacjentami: `$.length()` i imię drugiego.
 - `POST /patients` z poprawnym body → 201 (body spełnia wszystkie reguły `PatientCreateCommand`:
   dowód, telefon, hasło, data w przeszłości).
 - Sprawdź: `-Dtest=PatientControllerTest` → `Tests run: 3`.
 
-**L32 Z3. Jeden test na pełnym kontekście:** `PatientApiIntegrationTest`
+**~~L32 Z3. Jeden test na pełnym kontekście:~~** `PatientApiIntegrationTest`
 - `@SpringBootTest` + `@AutoConfigureMockMvc`, zero dublerów (serwis, repozytoria i H2 prawdziwe).
 - `POST /patients`, potem `GET /patients?email=...` znajduje nowego pacjenta.
 - Umiesz wyjaśnić, czemu ten test puszczony osobno startuje dłużej niż w całym buildzie.
@@ -151,13 +151,13 @@ Gotowe, gdy: `-Dtest='PatientControllerTest,PatientApiIntegrationTest'` → 4 te
 Ciąg dalszy `PatientControllerTest` (L32, praca domowa). Nazwy `endpoint_warunek_rezultat`,
 komentarze given/when/then.
 
-**L32 D1. Odmowy i kasowanie**
+**~~L32 D1. Odmowy i kasowanie~~**
 - `GET`, pacjenta nie ma (dubler rzuca `PatientNotFoundException`) → 404 i `$.detail` z komunikatem.
 - `POST`, puste imię → 400 z błędem pola `firstName`, serwis niewywołany (`verify(..., never())`).
 - `POST`, zajęty e-mail (dubler rzuca `PatientAlreadyExistsException`) → 409 z komunikatem.
 - `DELETE`, pacjent istnieje → 204 i `verify` na `deleteById`; nie istnieje → 404.
 
-**L32 D2. Przyjazne błędy**
+**~~L32 D2. Przyjazne błędy~~**
 - Nieczytelny JSON w `POST` → 400, `detail` „request body is not valid JSON", serwis niewywołany.
 - `GET /patients/abc` → 400 z komunikatem o złym typie.
 - Dubler rzuca nieoczekiwany wyjątek (np. `IllegalStateException`) → 500, `detail` „Unknown error",

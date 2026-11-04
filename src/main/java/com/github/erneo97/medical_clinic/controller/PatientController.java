@@ -97,6 +97,7 @@ public class PatientController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "delete the patient")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "patient deleted"),
             @ApiResponse(responseCode = "404", description = "patient not found", content = @Content(schema = @Schema(implementation = ProblemDetail.class)))
