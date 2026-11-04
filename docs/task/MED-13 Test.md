@@ -102,7 +102,8 @@ Brak skutku = `verify(..., never())`.
 - Sprawdź: `./mvnw test -Dtest='PatientServiceTest,VisitServiceTest'` → `Tests run: 12`, zero porażek.
 
 **L31 D1. Komplet PatientService** (każda metoda publiczna: test pozytywny + test każdej odmowy)
-- Brakujące: `findByEmail` bez pacjenta, `update` (istnieje / nie istnieje), `changePassword`
+- Brakujące: `findByEmail` bez pacjenta, 
+- `update` (istnieje / nie istnieje), `changePassword`
   bez pacjenta.
 - `update` z pacjentem: `verify` na `update` mapera z tym samym pacjentem i Commandem.
 - `update` bez pacjenta: wyjątek, maper niewywołany.

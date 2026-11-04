@@ -72,6 +72,21 @@ class PatientServiceTest {
     }
 
     @Test
+    void findByEmail_patientNotExists_throwsPatientNotFoundException() {
+        // given
+        String email = "unknown@test.pl";
+        when(patientRepository.findByUserEmail(email))
+                .thenReturn(Optional.empty());
+
+        // when
+        assertThatThrownBy(() -> patientService.findByEmail(email))
+                .isInstanceOf(PatientNotFoundException.class);
+
+        // then
+        verify(patientRepository).findByUserEmail(email);
+    }
+
+    @Test
     public void findAll_twoPatientsExists_returnsBoth() {
         // given
         Patient p1 = Patient.builder().id(1L).firstName("Jan").build();
@@ -139,7 +154,7 @@ class PatientServiceTest {
     }
 
     @Test
-    void deleteById_removePatient_PatientNotExistsEnymore() {
+    void deleteById_removePatient_PatientNotExistsAnymore() {
         // given
         Long patientId  = 1L;
         Patient patient = new Patient();
