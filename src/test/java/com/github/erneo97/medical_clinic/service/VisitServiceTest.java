@@ -250,7 +250,24 @@ class VisitServiceTest {
         assertNull(visit.getPatient());
     }
 
+    @Test
+    void bookVisit_visitAvailable_assignsPatient() {
+        // given
+        Long visitId = 1L;
+        Long patientId = 2L;
+        Patient patient = new Patient();
+        Visit visit = createFutureVisit();
 
+        when(visitRepository.findById(visitId)).thenReturn(Optional.of(visit));
+        when(patientService.findById(patientId)).thenReturn(patient);
+
+        // when
+        Visit result = visitService.bookVisit(visitId, patientId);
+
+        // then
+        assertSame(patient, result.getPatient());
+        assertSame(visit, result);
+    }
 
     private Visit createFutureVisit() {
         Visit visit = new Visit();
