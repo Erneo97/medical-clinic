@@ -2,6 +2,8 @@ package com.github.erneo97.medical_clinic.service;
 
 import com.github.erneo97.medical_clinic.dto.patient.EditPasswordCommand;
 import com.github.erneo97.medical_clinic.dto.patient.PatientCreateCommand;
+import com.github.erneo97.medical_clinic.exeption.PatientAlreadyExistsException;
+import com.github.erneo97.medical_clinic.exeption.PatientNotFoundException;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.model.User;
@@ -13,12 +15,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class PatientServiceTest {
@@ -120,6 +123,36 @@ class PatientServiceTest {
     }
 
     @Test
+    void create_emailTaken_throwsPatientAlreadyExists() {
+        // given
+        PatientCreateCommand command = new PatientCreateCommand("jan.nowak@test.test", "Password1234!", "ABC123456", "Jan", "Nowak", "1234567890", LocalDate.of(1997, 9, 7));
+        when(userRepository.existsByEmail("jan.nowak@test.test")).thenReturn(true);
+
+        // when
+        PatientAlreadyExistsException exception =
+                assertThrows(PatientAlreadyExistsException.class, () -> patientService.create(command));
+
+        //then
+        assertEquals( "Patient with email jan.nowak@test.test already exists",
+                exception.getMessage());
+        verify(userRepository, never()).save(any());
+    }
+
+    @Test
+    void deleteById_removePatient_PatientNotExistsEnymore() {
+        // given
+        Long patientId  = 1L;
+        Patient patient = new Patient();
+        when(patientRepository.findById(patientId)).thenReturn(Optional.of(patient));
+
+        // when
+         patientService.removeById(patientId);
+
+        // then
+        verify(patientRepository).deleteById(patientId);
+    }
+
+    @Test
     public void changePassword_patientExists_setsNewPassword() {
         // given
         final String oldPassword = "oldPassword123!",
@@ -131,7 +164,6 @@ class PatientServiceTest {
 
         // when
         patientService.chanePassword(1L, editPasswordCommand);
-        Patient result = patientService.findById(1L);
 
         // then
         verify(patientRepository).updatePassword(1L, newPassword);

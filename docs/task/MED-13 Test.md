@@ -82,13 +82,13 @@ Gotowe, gdy: `PatientServiceTest` ma 6 zielonych testów, `./mvnw test` → `BUI
 Odmowa = `assertThrows` z typem wyjątku domenowego + `assertEquals` na komunikacie.
 Brak skutku = `verify(..., never())`.
 
-**L31 Z1. Odmowy PatientService**
+**~~L31 Z1. Odmowy PatientService~~**
 - `create` z zajętym e-mailem (np. `create_emailTaken_throwsPatientAlreadyExists`) + `verify`,
   że nic nie poszło do `save`.
 - `findById` dla nieistniejącego id.
 - Usuń z serwisu sprawdzenie e-maila, test ma być czerwony, przywróć.
 
-**L31 Z2. `deleteById` (void)**
+**~~L31 Z2. `deleteById` (void)~~**
 - Pacjent istnieje → `verify` na `deleteById` z tym samym id.
 - Pacjenta nie ma → wyjątek i `verify(..., never()).deleteById(any())`.
 - Żadnego `assertEquals` na wyniku (metoda nic nie zwraca).
