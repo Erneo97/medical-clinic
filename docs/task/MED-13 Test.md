@@ -201,12 +201,12 @@ Umiesz powiedzieć, co się stanie z testem z setem po zamianie `hashCode` na `O
 **~~L33 D1. Wszystkie encje:~~** ta sama strategia w `User`, `Doctor`, `Facility` i `Visit`.
 Testy z lekcji 30-32 nadal zielone.
 
-**L33 D2. Test strażnik relacji:** `DoctorTest`
+**~~L33 D2. Test strażnik relacji:~~** `DoctorTest`
 - Placówka dodana przez `addFacility` przed nadaniem id daje się usunąć przez `removeFacility`
   po nadaniu id (bez `getFacilities().add(...)`).
 - Na końcu set placówek doktora jest pusty.
 
-**L33 D3. Notatka** `docs/encje/equals-hashcode.md`, pięć punktów:
+**~~L33 D3. Notatka~~** `docs/encje/equals-hashcode.md`, pięć punktów:
 1. Jak `HashSet` używa `hashCode` i `equals` (wiadra) i jaki cichy warunek kontraktu łamią encje.
 2. Trzy złe wersje (domyślna, po wszystkich polach, hash z id), każda ze scenariuszem porażki.
 3. Nasza strategia: kod i test strażnik (ścieżki plików w repo).
