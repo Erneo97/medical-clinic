@@ -1,11 +1,10 @@
 package com.github.erneo97.medical_clinic.service;
 
 import com.github.erneo97.medical_clinic.dto.visit.VisitCreateCommand;
-import com.github.erneo97.medical_clinic.exeption.DoctorNotFoundException;
-import com.github.erneo97.medical_clinic.exeption.InvalidVisitException;
-import com.github.erneo97.medical_clinic.exeption.VisitOverlapsException;
+import com.github.erneo97.medical_clinic.exeption.*;
 import com.github.erneo97.medical_clinic.mapper.VisitMapper;
 import com.github.erneo97.medical_clinic.model.Doctor;
+import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.model.Visit;
 import com.github.erneo97.medical_clinic.repository.VisitRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -162,5 +162,102 @@ class VisitServiceTest {
         assertSame(doctor, savedVisit.getDoctor());
 
         assertSame(savedVisit, result);
+    }
+
+    @Test
+    void bookVisit_visitNotExists_throwsVisitNotFoundException() {
+        // given
+        Long visitId = 1L;
+        Long patientId = 2L;
+        when(visitRepository.findById(visitId)).thenReturn(Optional.empty());
+
+        // when
+        VisitNotFoundException exception = assertThrows(VisitNotFoundException.class, () -> visitService.bookVisit(visitId, patientId));
+
+        // then
+        assertEquals(
+                "Visit with id 1 not exist",
+                exception.getMessage()
+        );
+        verify(patientService, never()).findById(any());
+    }
+
+    @Test
+    void bookVisit_patientNotExists_throwsPatientNotFoundException() {
+        // given
+        Long visitId = 1L;
+        Long patientId = 2L;
+        Visit visit = createFutureVisit();
+
+        when(visitRepository.findById(visitId)).thenReturn(Optional.of(visit));
+        when(patientService.findById(patientId)).thenThrow(new PatientNotFoundException(patientId));
+
+        // when
+        assertThrows(
+                PatientNotFoundException.class,
+                () -> visitService.bookVisit(visitId, patientId)
+        );
+
+        // then
+        assertNull(visit.getPatient());
+    }
+
+    @Test
+    void bookVisit_visitAlreadyBooked_throwsVisitAlreadyBookedException() {
+        // given
+        Long visitId = 1L;
+        Long patientId = 2L;
+        Patient existingPatient = new Patient();
+        Patient newPatient = new Patient();
+
+        Visit visit = createFutureVisit();
+        visit.setPatient(existingPatient);
+
+        when(visitRepository.findById(visitId)).thenReturn(Optional.of(visit));
+
+        when(patientService.findById(patientId)).thenReturn(newPatient);
+
+        // when
+        VisitAlreadyBookedException exception = assertThrows(VisitAlreadyBookedException.class, () -> visitService.bookVisit(visitId, patientId)
+        );
+
+        // then
+        assertEquals("This visit is booked", exception.getMessage());
+        assertSame(existingPatient, visit.getPatient());
+    }
+
+    @Test
+    void bookVisit_visitInPast_throwsVisitInPastException() {
+        // given
+        Long visitId = 1L;
+        Long patientId = 2L;
+        Patient patient = new Patient();
+        Visit visit = new Visit();
+        visit.setStartsAt(NOW.minusHours(1));
+        visit.setEndsAt(NOW.minusMinutes(15));
+
+        when(visitRepository.findById(visitId)).thenReturn(Optional.of(visit));
+        when(patientService.findById(patientId)).thenReturn(patient);
+
+        // when
+        VisitInPastException exception = assertThrows(
+                VisitInPastException.class,
+                () -> visitService.bookVisit(visitId, patientId)
+        );
+
+        // then
+        assertEquals("The visit has already taken place", exception.getMessage());
+        assertNull(visit.getPatient());
+    }
+
+
+
+    private Visit createFutureVisit() {
+        Visit visit = new Visit();
+
+        visit.setStartsAt(NOW.plusHours(1));
+        visit.setEndsAt(NOW.plusHours(1).plusMinutes(45));
+
+        return visit;
     }
 }
