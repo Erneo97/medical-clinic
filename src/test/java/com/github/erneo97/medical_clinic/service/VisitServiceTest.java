@@ -1,9 +1,10 @@
 package com.github.erneo97.medical_clinic.service;
 
 import com.github.erneo97.medical_clinic.dto.visit.VisitCreateCommand;
+import com.github.erneo97.medical_clinic.exeption.DoctorNotFoundException;
 import com.github.erneo97.medical_clinic.exeption.InvalidVisitException;
+import com.github.erneo97.medical_clinic.exeption.VisitOverlapsException;
 import com.github.erneo97.medical_clinic.mapper.VisitMapper;
-import com.github.erneo97.medical_clinic.model.Doctor;
 import com.github.erneo97.medical_clinic.repository.VisitRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,7 +36,7 @@ class VisitServiceTest {
 
     @BeforeEach
     void setUp() {
-        Clock clock = Clock.fixed(NOW.toInstant(ZoneOffset.UTC), ZoneId.systemDefault());
+        Clock clock = Clock.fixed(NOW.toInstant(ZoneOffset.UTC), ZoneOffset.UTC);
         VisitMapper visitMapper = Mappers.getMapper(VisitMapper.class);
         visitService = new VisitService(visitRepository, visitMapper, doctorService, patientService, clock);
     }
@@ -53,5 +53,78 @@ class VisitServiceTest {
         // then
         assertEquals("Slot Start Date or Slot End Dates are in past", exception.getMessage());
         verify(visitRepository, never()).save(any());
+    }
+
+    @Test
+    void create_startNotOnFullQuarterHour_throwsInvalidVisitException() {
+        // given
+        VisitCreateCommand command = new VisitCreateCommand(1L, NOW.plusMinutes(20), NOW.plusMinutes(30));
+        when(doctorService.existsById(1L)).thenReturn(true);
+
+        // when
+        InvalidVisitException exception = assertThrows(InvalidVisitException.class, () -> visitService.create(command));
+
+        // then
+        assertEquals("a session must start on a full quarter-hour", exception.getMessage());
+        verify(visitRepository, never()).save(any());
+    }
+
+    @Test
+    void create_durationNotMultipleOf15Minutes_throwsInvalidVisitException() {
+        // given
+        VisitCreateCommand command = new VisitCreateCommand(1L, NOW.plusMinutes(15), NOW.plusMinutes(40));
+
+        when(doctorService.existsById(1L)).thenReturn(true);
+
+        // when
+        InvalidVisitException exception = assertThrows(
+                InvalidVisitException.class,
+                () -> visitService.create(command)
+        );
+
+        // then
+        assertEquals("session length must be a positive multiple of 15 minutes", exception.getMessage());
+        verify(visitRepository, never()).save(any());
+    }
+
+    @Test
+    void create_doctorNotExists_throwsDoctorNotFoundException() {
+        // given
+        VisitCreateCommand command = new VisitCreateCommand(1L, NOW.plusMinutes(15), NOW.plusMinutes(45));
+
+        when(doctorService.existsById(1L)).thenReturn(false);
+
+        // when
+        DoctorNotFoundException exception = assertThrows(
+                DoctorNotFoundException.class,
+                () -> visitService.create(command)
+        );
+
+        // then
+        assertEquals("Doctor Not Found with ID: 1", exception.getMessage());
+
+        verify(visitRepository, never()).save(any());
+    }
+
+    @Test
+    void create_visitOverlaps_throwsVisitOverlapsException() {
+        // given
+        VisitCreateCommand command = new VisitCreateCommand(1L, NOW.plusMinutes(15), NOW.plusMinutes(45));
+
+        when(doctorService.existsById(1L)).thenReturn(true);
+
+        when(visitRepository.existsByDoctorIdAndStartsAtBeforeAndEndsAtAfter(1L, command.endsAt(), command.startsAt())).thenReturn(true);
+
+        // when
+        VisitOverlapsException exception = assertThrows(
+                VisitOverlapsException.class,
+                () -> visitService.create(command)
+        );
+
+        // then
+        assertTrue(exception.getMessage().contains("Visit already exists"));
+
+        verify(visitRepository, never()).save(any());
+        verify(doctorService, never()).findDoctorByIdOrThrowException(any());
     }
 }
