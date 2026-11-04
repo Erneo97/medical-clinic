@@ -5,11 +5,14 @@ import com.github.erneo97.medical_clinic.exeption.DoctorNotFoundException;
 import com.github.erneo97.medical_clinic.exeption.InvalidVisitException;
 import com.github.erneo97.medical_clinic.exeption.VisitOverlapsException;
 import com.github.erneo97.medical_clinic.mapper.VisitMapper;
+import com.github.erneo97.medical_clinic.model.Doctor;
+import com.github.erneo97.medical_clinic.model.Visit;
 import com.github.erneo97.medical_clinic.repository.VisitRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -126,5 +129,38 @@ class VisitServiceTest {
 
         verify(visitRepository, never()).save(any());
         verify(doctorService, never()).findDoctorByIdOrThrowException(any());
+    }
+
+    @Test
+    void create_startExactlyNow_savesVisitWithCorrectData() {
+        // given
+        Long doctorId = 1L;
+
+        Doctor doctor = new Doctor();
+        doctor.setId(doctorId);
+        VisitCreateCommand command = new VisitCreateCommand(doctorId, NOW, NOW.plusMinutes(45));
+
+        when(doctorService.existsById(doctorId)).thenReturn(true);
+        when(visitRepository.existsByDoctorIdAndStartsAtBeforeAndEndsAtAfter(doctorId, command.endsAt(), command.startsAt())).thenReturn(false);
+        when(doctorService.findDoctorByIdOrThrowException(doctorId)).thenReturn(doctor);
+        when(visitRepository.save(any(Visit.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+
+        // when
+        Visit result = visitService.create(command);
+
+        // then
+        ArgumentCaptor<Visit> captor =
+                ArgumentCaptor.forClass(Visit.class);
+
+        verify(visitRepository).save(captor.capture());
+
+        Visit savedVisit = captor.getValue();
+
+        assertEquals(NOW, savedVisit.getStartsAt());
+        assertEquals(NOW.plusMinutes(45), savedVisit.getEndsAt());
+        assertSame(doctor, savedVisit.getDoctor());
+
+        assertSame(savedVisit, result);
     }
 }
