@@ -1,6 +1,7 @@
 package com.github.erneo97.medical_clinic.service;
 
 import com.github.erneo97.medical_clinic.dto.patient.EditPasswordCommand;
+import com.github.erneo97.medical_clinic.dto.patient.EditPersonalDataCommand;
 import com.github.erneo97.medical_clinic.dto.patient.PatientCreateCommand;
 import com.github.erneo97.medical_clinic.exeption.PatientAlreadyExistsException;
 import com.github.erneo97.medical_clinic.exeption.PatientNotFoundException;
@@ -198,5 +199,47 @@ class PatientServiceTest {
                 .user(account)
                 .id(1L)
                 .build();
+    }
+
+    @Test
+    void update_patientExists_updatesPatient() {
+        // given
+        Long patientId = 1L;
+        Patient patient = getPatientWithEmail("jan@test.pl");
+        EditPersonalDataCommand command = new EditPersonalDataCommand("jan@test.pl", "Adam", "Kowalski", "123456789", LocalDate.of(1997, 9, 7));
+        when(patientRepository.findById(patientId))
+                .thenReturn(Optional.of(patient));
+
+        // when
+        Patient result = patientService.update(patientId, command);
+
+        // then
+        assertEquals("Adam", result.getFirstName());
+        assertEquals("Kowalski", result.getLastName());
+        assertEquals("123456789", result.getPhoneNumber());
+        assertEquals(LocalDate.of(1997, 9, 7), result.getBirthday());
+
+        assertSame(patient, result);
+    }
+
+    @Test
+    void update_patientNotExists_throwsPatientNotFoundException() {
+        // given
+        Long patientId = 1L;
+
+        EditPersonalDataCommand command = new EditPersonalDataCommand(
+                "jan@test.pl",
+                "Adam",
+                "Kowalski",
+                "123456789",
+                LocalDate.of(1997, 9, 7)
+        );
+
+        when(patientRepository.findById(patientId))
+                .thenReturn(Optional.empty());
+
+        // when & then
+        assertThatThrownBy(() -> patientService.update(patientId, command))
+                .isInstanceOf(PatientNotFoundException.class);
     }
 }
