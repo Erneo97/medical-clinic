@@ -93,7 +93,7 @@ Brak skutku = `verify(..., never())`.
 - Pacjenta nie ma → wyjątek i `verify(..., never()).deleteById(any())`.
 - Żadnego `assertEquals` na wyniku (metoda nic nie zwraca).
 
-**L31 Z3. Pierwszy `VisitServiceTest` z zegarem**
+**~~L31 Z3. Pierwszy `VisitServiceTest` z zegarem~~**
 - `@Mock` tylko na trzy repozytoria, maper prawdziwy (`Mappers.getMapper(VisitMapper.class)`),
   `Clock.fixed` na 15.01.2030 8:00, serwis składany konstruktorem w `@BeforeEach`.
 - Bez `@InjectMocks` i bez `@Mock Clock`.
