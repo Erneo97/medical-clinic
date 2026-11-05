@@ -31,12 +31,12 @@ Odp: błędy się zdarzają, klient ma prawo do nich, błąd 500 jest informacj�
 - Komunikat nazywa odrzucone pole i wymienia dozwolone: `cannot sort by 'abrakadabra', allowed: startsAt, endsAt`.
 - Bez nowego handlera w advice: wyjątek domenowy obsługuje piętro pierwsze.
 
-**L35.3. Sprawdź**
+**~~L35.3. Sprawdź~~**
 - `sort=abrakadabra` i `sort=patient.user.password` → 400 z listą dozwolonych pól.
 - `sort=startsAt,desc` → 200, wizyty od najpóźniejszej.
 - Przy odrzuconym sortowaniu w logu nie ma `select ... from visits`.
 
-**L35.4. Testy serwisu** (`VisitServiceTest`, dwa testy `findAll`)
+**~~L35.4. Testy serwisu~~** (`VisitServiceTest`, dwa testy `findAll`)
 - Pole z listy: serwis oddaje tę samą instancję `Page` co repozytorium (`assertSame`).
 - Pole spoza listy: `assertThrows` z typem i pełnym komunikatem +
   `verify(visitRepository, never()).findAll(any(PageRequest.class))`.

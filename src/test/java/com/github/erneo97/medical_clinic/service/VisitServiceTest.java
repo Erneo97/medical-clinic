@@ -14,10 +14,15 @@ import org.mapstruct.factory.Mappers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -276,5 +281,33 @@ class VisitServiceTest {
         visit.setEndsAt(NOW.plusHours(1).plusMinutes(45));
 
         return visit;
+    }
+
+    @Test
+    void findAll_allowedSort_returnsRepositoryPage() {
+        // given
+        PageRequest pageable = PageRequest.of(1, 5, Sort.by("startsAt").descending());
+        Page<Visit> page =
+                new PageImpl<>(List.of(new Visit()), pageable, 12);
+        when(visitRepository.findAll(pageable)).thenReturn(page);
+
+        // when
+        Page<Visit> result = visitService.findAll(pageable);
+
+        // then
+        assertSame(page, result);
+    }
+
+    @Test
+    void findAll_unknownSortProperty_throwsInvalidSortProperty() {
+        // given
+        PageRequest pageable = PageRequest.of(0, 20, Sort.by("abrakadabra"));
+
+        // when + then
+        InvalidSortPropertyException exception = assertThrows(
+                InvalidSortPropertyException.class, () -> visitService.findAll(pageable));
+        assertEquals("cannot sort by 'abrakadabra', allowed: startsAt, endsAt",
+                exception.getMessage());
+        verify(visitRepository, never()).findAll(any(PageRequest.class));
     }
 }

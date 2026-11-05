@@ -1,5 +1,6 @@
 package com.github.erneo97.medical_clinic.controller;
 
+import com.github.erneo97.medical_clinic.exeption.InvalidSortPropertyException;
 import com.github.erneo97.medical_clinic.mapper.VisitMapperImpl;
 import com.github.erneo97.medical_clinic.model.Doctor;
 import com.github.erneo97.medical_clinic.model.Visit;
@@ -93,5 +94,18 @@ class VisitControllerTest {
         ArgumentCaptor<Pageable> captor = ArgumentCaptor.forClass(Pageable.class);
         verify(visitService).findAll(captor.capture());
         assertEquals(100, captor.getValue().getPageSize());
+    }
+
+    @Test
+    void getSessions_sortNotAllowed_returns400WithAllowedFields() throws Exception {
+        // given
+        when(visitService.findAll(any())).thenThrow(new InvalidSortPropertyException(
+                "abrakadabra", List.of("startsAt", "endsAt")));
+
+        // when + then
+        mockMvc.perform(get("/visits").param("sort", "abrakadabra"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.detail")
+                        .value("cannot sort by 'abrakadabra', allowed: startsAt, endsAt"));
     }
 }
