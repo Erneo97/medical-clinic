@@ -3,7 +3,7 @@
 
 Przed startem: baza na czysto (`docker compose down -v`, `docker compose up -d --wait`) i aplikacja.
 
-**L34 Z1. Plan** `docs/paginacja/plan-get-visits.md`, sześć odpowiedzi (pokaż prowadzącemu przed
+**~~L34 Z1. Plan~~** `docs/paginacja/plan-get-visits.md`, sześć odpowiedzi (pokaż prowadzącemu przed
 kodowaniem):
 1. Które endpointy stronicujesz, które zostają listami, i dlaczego.
 2. Domyślny rozmiar i domyślne sortowanie.
