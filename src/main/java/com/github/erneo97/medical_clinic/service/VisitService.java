@@ -6,14 +6,16 @@ import com.github.erneo97.medical_clinic.mapper.VisitMapper;
 import com.github.erneo97.medical_clinic.model.Doctor;
 import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.model.Visit;
-import com.github.erneo97.medical_clinic.repository.DoctorRepository;
 import com.github.erneo97.medical_clinic.repository.VisitRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
 
 import java.time.Clock;
 import java.time.Duration;
@@ -31,8 +33,9 @@ public class VisitService {
     private final PatientService patientService;
     private final Clock clock;
 
-    public List<Visit> findAll() {
-        return visitRepository.findAll();
+    @Transactional(readOnly = true)
+    public Page<Visit> findAll(Pageable pageable) {
+        return visitRepository.findAll(pageable);
     }
 
     @Transactional

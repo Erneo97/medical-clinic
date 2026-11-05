@@ -12,23 +12,26 @@ kodowaniem):
 5. Kształt odpowiedzi (pola widoczne dla klienta).
 6. Jakie testy napiszesz w L35.
 
-**L34 Z2. `GET /visits` z `Pageable`**
+**~~L34 Z2. `GET /visits` z `Pageable`~~**
 - `VisitService.findAll(Pageable)` z `@Transactional(readOnly = true)`, woła `visitRepository.findAll(pageable)`.
 - Endpoint w `VisitController`: `@PageableDefault` według planu, zwraca `Page<VisitDto>`
   przez `Page.map(visitMapper::toDto)`.
 - `GET /visits?doctorId=1` i `GET /visits/patient/{id}` działają jak wcześniej.
 
-**L34 Z3. Sprawdź w logu:** dodaj kilkanaście wizyt doktora 1, wyślij `GET /visits?page=1&size=5`.
-- Odpowiedź: 5 wizyt, pola `totalElements`, `totalPages`, `number`.
+**~~L34 Z3. Sprawdź w logu:~~** dodaj kilkanaście wizyt doktora 1, wyślij `GET /visits?page=1&size=5`.
+- Odpowiedź: 5 wizyt, pola `totalElements` 15, `totalPages` 3, `number` 1.
 - W logu dwa zapytania: strona (`offset ... fetch first`) i `count`.
-- Ostrzeżenie „Serializing PageImpl instances as-is is not supported": umiesz powiedzieć, skąd jest.
+- Ostrzeżenie „Serializing PageImpl instances Ostrzeżenie „Serializing PageImpl instances as-is is not supported": umiesz powiedzieć, skąd jest.": umiesz powiedzieć, skąd jest.
+Odp: Spring data ostrzega że serializacja Page do JSON nie daje gwarancji stablinego formatu odpowiedzi
 
-**L34 D1. Limit rozmiaru strony**
+**~~L34 D1. Limit rozmiaru strony~~**
 - `spring.data.web.pageable.max-page-size=100` w `src/main/resources/application.properties`
   i w `src/test/resources/application.properties`, obok komentarz, po co limit.
 - `GET /visits?size=5000` oddaje stronę o rozmiarze 100.
+ODP: Chce świadomie zabezpieczyć aplikację przed przetwarzaniem, wysyłąniem ogromnej ilości danych. 
 
-**L34 D2. `PageResponse` zamiast surowego `Page`**
+
+**~~L34 D2. `PageResponse` zamiast surowego `Page`~~**
 - Rekord `PageResponse<T>` w pakiecie `dto`: pola `content`, `page`, `size`, `totalElements`,
   `totalPages` i statyczne `from(Page<T>)`.
 - `GET /visits` oddaje dokładnie te pięć pól, `content` z `VisitDto` (encje nie wychodzą).
