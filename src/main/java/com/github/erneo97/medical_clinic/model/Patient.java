@@ -8,21 +8,24 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import com.github.erneo97.medical_clinic.dto.patient.EditPersonalDataCommand;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "patients")
 public class Patient {
     private final static int MAX_LENGHT_NUMBER_DATA = 20;
     private final static int MAX_LENGHT_NAME_DATA = 100;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
@@ -48,6 +51,10 @@ public class Patient {
 
     public Patient() {}
 
+    public Patient(String firstName) {
+        this.firstName = firstName;
+    }
+
     public Patient(Long id, String email, String password, String idCardNo, String firstName, String lastName, String phoneNumber, LocalDate birthday) {
         this.id = id;
         this.user = new User(id,  email, password, Role.PATIENT);
@@ -68,5 +75,21 @@ public class Patient {
         this.phoneNumber = command.phoneNumber();
         this.birthday = command.birthday();
         this.user.setEmail(command.email());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Patient other)) {
+            return false;
+        }
+        return id != null && id.equals(other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

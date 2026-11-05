@@ -58,7 +58,7 @@ public class PatientController {
     @GetMapping(params = "fragment")
     @Operation(summary = "Find all user with first name or last name have searched fragment")
     public List<PatientDto> findByFirstNameOrLastName(@RequestParam String fragment) {
-        return patientMapper.toDto(patientService.searchBytName(fragment));
+        return patientMapper.toDto(patientService.searchByName(fragment));
     }
 
     @PostMapping
@@ -97,6 +97,7 @@ public class PatientController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "delete the patient")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "patient deleted"),
             @ApiResponse(responseCode = "404", description = "patient not found", content = @Content(schema = @Schema(implementation = ProblemDetail.class)))

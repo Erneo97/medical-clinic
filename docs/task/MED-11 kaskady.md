@@ -17,10 +17,10 @@ Dziś `PatientService.create` zapisuje najpierw konto, potem pacjenta.
    Tylko ten jeden typ kaskady.
 
 Kryteria akceptacji:
-- [ ] Bez kaskady `POST /patients` daje 500, a w logu jest `TransientPropertyValueException`.
-- [ ] Z kaskadą to samo żądanie daje 201, a w logu są dwa wiersze w tej kolejności:
+- [x] Bez kaskady `POST /patients` daje 500, a w logu jest `TransientPropertyValueException`.
+- [x] Z kaskadą to samo żądanie daje 201, a w logu są dwa wiersze w tej kolejności:
   `Hibernate: insert into users` i `Hibernate: insert into patients`.
-- [ ] W `PatientService.create` nie ma już `userRepository.save`.
+- [x] W `PatientService.create` nie ma już `userRepository.save`.
 
 ### Zadanie 2 (10 min). Test cyklu życia konta doktora
 
@@ -33,12 +33,16 @@ Kryteria akceptacji:
 3. W `psql` policz wiersze `users`, `patients`, `doctors`, potem `DELETE /doctors/1` i policz
    jeszcze raz.
 
+Przed delete: Users 10, patients 5, doctors 4
+
+Po delete: Users 10, patients 5, doctors 3
+
 Kryteria akceptacji:
-- [ ] Przy `Doctor.user` jest `cascade = {CascadeType.PERSIST, CascadeType.MERGE}`, bez
+- [x] Przy `Doctor.user` jest `cascade = {CascadeType.PERSIST, CascadeType.MERGE}`, bez
   `REMOVE` i bez `ALL`, a komentarz podaje powód.
-- [ ] `DELETE /doctors/1` → 204; w logu `delete from doctor_facility` i `delete from doctors`,
+- [x] `DELETE /doctors/1` → 204; w logu `delete from doctor_facility` i `delete from doctors`,
   nic więcej.
-- [ ] Po usunięciu doktora konto `katarzyna.wrobel@example.com` i pacjentka `KLM222333` są
+- [x] Po usunięciu doktora konto `katarzyna.wrobel@example.com` i pacjentka `KLM222333` są
   w bazie.
 
 ### Zadanie 3 (12 min). Łańcuch domina na próbę
@@ -51,10 +55,12 @@ Kryteria akceptacji:
 3. Wróć przy `Doctor.user` do `PERSIST` i `MERGE`.
 
 Kryteria akceptacji:
-- [ ] Masz zanotowane, co zniknęło po `DELETE /doctors/1` z `ALL` po obu stronach: kolejne
+- [x] Masz zanotowane, co zniknęło po `DELETE /doctors/1` z `ALL` po obu stronach: kolejne
   `delete` z logu i liczby wierszy przed i po.
-- [ ] Umiesz pokazać w encjach, którędy przeszła lawina.
-- [ ] Po powrocie aplikacja się buduje, a `DELETE /doctors/1` znów zostawia konto i pacjentkę.
+
+- Odp: Z kaskadą ALL znikneło konto User jak i doctor
+- [x] Umiesz pokazać w encjach, którędy przeszła lawina.
+- [x] Po powrocie aplikacja się buduje, a `DELETE /doctors/1` znów zostawia konto i pacjentkę.
 
 ## Jak sprawdzisz, że skończyłeś
 
@@ -95,10 +101,10 @@ punktach poniżej. Przy każdym podaj: co znalazłeś, jak to sprawdziłeś, co 
 4. Kaskady w obie strony: tabela z każdą kaskadą w projekcie i jej testem cyklu życia.
 
 Kryteria akceptacji:
-- [ ] Plik ma cztery sekcje, po jednej na punkt, a każda podaje sposób sprawdzenia (polecenie,
+- [x] Plik ma cztery sekcje, po jednej na punkt, a każda podaje sposób sprawdzenia (polecenie,
   żądanie albo zapytanie).
-- [ ] `grep -rnE '^ *@(Data|ToString)' src/main/java` nic nie znajduje.
-- [ ] `grep -rn 'getFacilities().add' src/main/java` nic nie znajduje.
+- [x] `grep -rnE '^ *@(Data|ToString)' src/main/java` nic nie znajduje.
+- [x] `grep -rn 'getFacilities().add' src/main/java` nic nie znajduje.
 
 ## Zadanie D2. Co znika po każdym `DELETE`
 
@@ -109,10 +115,10 @@ Doktor ma mieć przypisaną placówkę, a na jego koncie ma stać pacjentka (sta
 z zajęć).
 
 Kryteria akceptacji:
-- [ ] W sekcji 4 notatki są liczby wierszy `users`, `patients`, `doctors` przed i po każdym
+- [x] W sekcji 4 notatki są liczby wierszy `users`, `patients`, `doctors` przed i po każdym
   z dwóch żądań oraz kolejne `delete` z logu.
-- [ ] `DELETE /doctors/1` → 204: znika doktor i jego wiersz w `doctor_facility`, konto zostaje.
-- [ ] `DELETE /users/{id}` na koncie, na które wskazuje pacjentka, → 409, nic nie znika.
+- [x] `DELETE /doctors/1` → 204: znika doktor i jego wiersz w `doctor_facility`, konto zostaje.
+- [x] `DELETE /users/{id}` na koncie, na które wskazuje pacjentka, → 409, nic nie znika.
 
 ## Zadanie D3. Strony odwrotne: usuń albo obroń
 
@@ -121,9 +127,9 @@ bez czytelnika usuń razem z jego `ignore` w maperze i z drugą linijką metody 
 Pole, które zostaje, obroń w notatce: podaj kod, który po nim nawiguje.
 
 Kryteria akceptacji:
-- [ ] W sekcji 3 notatki jest tabela: pole, kto je czyta, decyzja.
-- [ ] `grep -rn 'mappedBy' src/main/java` pokazuje tylko pola obronione w notatce.
-- [ ] Aplikacja się buduje, `POST /patients` dalej daje 201, a `POST /doctors/1/facilities/1`
+- [x] W sekcji 3 notatki jest tabela: pole, kto je czyta, decyzja.
+- [x] `grep -rn 'mappedBy' src/main/java` pokazuje tylko pola obronione w notatce.
+- [x] Aplikacja się buduje, `POST /patients` dalej daje 201, a `POST /doctors/1/facilities/1`
   dalej zwraca doktora z placówką.
 
 ## Jak sprawdzisz, że skończyłeś
@@ -161,9 +167,9 @@ Nagłówki notatki to cztery punkty, usunięcie doktora zwraca 204, usunięcie k
    `InvalidVisitException` z komunikatem, który mówi, co poprawić.
 
 Kryteria akceptacji:
-- [ ] `w-2020.json`, `w-1005-1035.json` i `w-1000-1020.json` dają 400, każdy z innym `detail`.
-- [ ] `w-1000-1030.json` daje 201.
-- [ ] Reguły stoją w serwisie przed `doctorRepository.findById`.
+- [x] `w-2020.json`, `w-1005-1035.json` i `w-1000-1020.json` dają 400, każdy z innym `detail`.
+- [x] `w-1000-1030.json` daje 201.
+- [x] Reguły stoją w serwisie przed `doctorRepository.findById`.
 
 ### Zadanie 2 (12 min). Nakładanie jednym zapytaniem
 
@@ -177,10 +183,10 @@ Kryteria akceptacji:
    bo slot 10:00-10:30 z zadania 1 dalej w niej stoi, i uruchom aplikację.
 
 Kryteria akceptacji:
-- [ ] Po `w-1000-1030.json` żądanie `w-1015-1045.json` daje 409, a `w-1030-1100.json` 201.
-- [ ] W logu zapytanie ma ostre nierówności: `starts_at<?` i `ends_at>?` (z aliasem tabeli
+- [x] Po `w-1000-1030.json` żądanie `w-1015-1045.json` daje 409, a `w-1030-1100.json` 201.
+- [x] W logu zapytanie ma ostre nierówności: `starts_at<?` i `ends_at>?` (z aliasem tabeli
   przed kolumną, np. `v1_0.starts_at<?`).
-- [ ] Umiesz wskazać, który argument metody porównujesz z którą kolumną.
+- [x] Umiesz wskazać, który argument metody porównujesz z którą kolumną.
 
 ### Zadanie 3 (8 min). Zegar jako bean
 
@@ -192,9 +198,9 @@ Kryteria akceptacji:
    złamią regułę przeszłości, gdy miną, a 7 stycznia zajmują twoje sloty z zadań 1-2.
 
 Kryteria akceptacji:
-- [ ] `grep -rn 'now(' src/main/java` pokazuje w kodzie tylko `LocalDateTime.now(clock)`
+- [x] `grep -rn 'now(' src/main/java` pokazuje w kodzie tylko `LocalDateTime.now(clock)`
   (nie licząc komentarzy).
-- [ ] Folder `wizyty` w Bruno przechodzi (4 z 4) przy pierwszym przebiegu po
+- [x] Folder `wizyty` w Bruno przechodzi (4 z 4) przy pierwszym przebiegu po
   `docker compose down -v`.
 
 ## Jak sprawdzisz, że skończyłeś
@@ -229,21 +235,24 @@ Termin: przed następnymi zajęciami. Pracujesz w medical-clinic, na stanie z dz
 Dopisz `PATCH /visits/{id}/book/{patientId}`, który zapisuje pacjenta na wolny slot i zwraca
 wizytę.
 
+# Spr od tego miejsca
+
+
 Kryteria akceptacji:
-- [ ] Wolny slot w przyszłości → 200, w odpowiedzi `patientId` pacjenta.
-- [ ] Wizyta albo pacjent, których nie ma → 404.
-- [ ] Slot, który ma już pacjenta → 409.
-- [ ] Slot z przeszłości → 400. Przeszłość sprawdzasz tym samym wstrzykniętym zegarem co przy
+- [x] Wolny slot w przyszłości → 200, w odpowiedzi `patientId` pacjenta.
+- [x] Wizyta albo pacjent, których nie ma → 404.
+- [x] Slot, który ma już pacjenta → 409.
+- [x] Slot z przeszłości → 400. Przeszłość sprawdzasz tym samym wstrzykniętym zegarem co przy
   zakładaniu slotu.
-- [ ] O tym, czy slot jest wolny, rozstrzyga metoda wizyty, a nie `== null` w serwisie.
+- [x] O tym, czy slot jest wolny, rozstrzyga metoda wizyty, a nie `== null` w serwisie.
 
 ## Zadanie D2. Wizyty pacjenta
 
 Dopisz `GET /visits/patient/{patientId}`, który zwraca wizyty pacjenta jako `VisitDto`.
 
 Kryteria akceptacji:
-- [ ] Po rezerwacji z D1 lista pacjenta ma tę wizytę, z `doctorId` i `patientId`.
-- [ ] Pacjent bez wizyt dostaje pustą listę.
+- [x] Po rezerwacji z D1 lista pacjenta ma tę wizytę, z `doctorId` i `patientId`.
+- [x] Pacjent bez wizyt dostaje pustą listę.
 
 ## Zadanie D3. Folder `sloty` w Bruno
 
@@ -251,12 +260,12 @@ Załóż folder `sloty` ze scenariuszem z kompendium: slot, rezerwacja, konflikt
 konflikt podwójnej rezerwacji.
 
 Kryteria akceptacji:
-- [ ] Cztery żądania w tej kolejności: nowy slot (201), rezerwacja dla pacjenta 1 (200), slot
+- [x] Cztery żądania w tej kolejności: nowy slot (201), rezerwacja dla pacjenta 1 (200), slot
   nachodzący na zarezerwowany (409), rezerwacja tego samego slotu dla pacjenta 2 (409).
-- [ ] Każde żądanie ma asercję statusu, a rezerwacja sprawdza też `res.body.patientId`.
-- [ ] Numer slotu nie jest wpisany na sztywno: `bru.setVar("slotId", res.body.id);`
+- [x] Każde żądanie ma asercję statusu, a rezerwacja sprawdza też `res.body.patientId`.
+- [x] Numer slotu nie jest wpisany na sztywno: `bru.setVar("slotId", res.body.id);`
   w skrypcie po pierwszym żądaniu i `{{slotId}}` w ścieżkach.
-- [ ] Po `docker compose down -v` folder przechodzi przy pierwszym przebiegu.
+- [x] Po `docker compose down -v` folder przechodzi przy pierwszym przebiegu.
 
 ## Jak sprawdzisz, że skończyłeś
 
@@ -290,10 +299,10 @@ założy. `./mvnw test` przechodzi przy zatrzymanym kontenerze.
 2. Adnotację importuj z pakietu `org.springframework.transaction.annotation`.
 
 Kryteria akceptacji:
-- [ ] W obu serwisach każda metoda publiczna ma jedną z dwóch adnotacji.
-- [ ] `create`, `update`, `changePassword`, `deleteById` i `book` mają `@Transactional`,
+- [x] W obu serwisach każda metoda publiczna ma jedną z dwóch adnotacji.
+- [x] `create`, `update`, `changePassword`, `deleteById` i `book` mają `@Transactional`,
   metody `find...` i `searchByName` mają `readOnly = true`.
-- [ ] `grep -rn "import .*Transactional;" src/main/java` pokazuje wyłącznie
+- [x] `grep -rn "import .*Transactional;" src/main/java` pokazuje wyłącznie
   `org.springframework.transaction.annotation.Transactional`.
 
 ### Zadanie 2 (12 min). Zapis bez save
@@ -304,13 +313,13 @@ Kryteria akceptacji:
 3. Zbuduj, uruchom i sprawdź każdą zmianę w bazie, a nie tylko w odpowiedzi.
 
 Kryteria akceptacji:
-- [ ] `PUT /patients/1` z nowym nazwiskiem daje 200, a
+- [x] `PUT /patients/1` z nowym nazwiskiem daje 200, a
   `SELECT id, last_name FROM patients WHERE id = 1;` pokazuje nowe nazwisko.
-- [ ] `PATCH /patients/1/password` daje 200, a `SELECT id, password FROM users WHERE id = 1;`
+- [x] `PATCH /patients/1/password` daje 200, a `SELECT id, password FROM users WHERE id = 1;`
   pokazuje nowe hasło.
-- [ ] Rezerwacja wolnego slotu daje 200, a `SELECT id, doctor_id, patient_id FROM visits;`
+- [x] Rezerwacja wolnego slotu daje 200, a `SELECT id, doctor_id, patient_id FROM visits;`
   pokazuje pacjenta przy wizycie.
-- [ ] Umiesz powiedzieć, czemu `create` nadal potrzebuje `save`.
+- [x] Umiesz powiedzieć, czemu `create` nadal potrzebuje `save`.
 
 ### Zadanie 3 (8 min). Transakcja w logu
 
@@ -321,9 +330,9 @@ Kryteria akceptacji:
    zatwierdza.
 
 Kryteria akceptacji:
-- [ ] `grep 'Creating new transaction' app.log` pokazuje transakcję o nazwie
+- [x] `grep 'Creating new transaction' app.log` pokazuje transakcję o nazwie
   `...PatientService.create`.
-- [ ] Umiesz wskazać w logu, że zapytanie o zajęty e-mail i zapis pacjenta leżą między
+- [x] Umiesz wskazać w logu, że zapytanie o zajęty e-mail i zapis pacjenta leżą między
   `Creating new transaction ... PatientService.create` a `Initiating transaction commit`.
   `Participating in existing transaction` stoi przed `save`; zapytanie z nazwy metody nie
   zostawia własnego wiersza.
@@ -361,10 +370,10 @@ doktora `{id}` przechodzą do zastępcy, od najwcześniejszej. Zastępca nie mo�
 własnej wizyty: konflikt z taką wizytą daje 409 i przerywa całą operację.
 
 Kryteria akceptacji:
-- [ ] Brak doktora albo zastępcy → 404, brak `substituteId` w treści → 400.
-- [ ] Zastępstwo bez konfliktu → 200 z listą przeniesionych wizyt jako `VisitDto`.
-- [ ] Konflikt przy drugiej wizycie → 409, a pierwsza wizyta zostaje przy starym doktorze.
-- [ ] Metoda serwisu ma `@Transactional` i nie woła `save`.
+- [x] Brak doktora albo zastępcy → 404, brak `substituteId` w treści → 400.
+- [x] Zastępstwo bez konfliktu → 200 z listą przeniesionych wizyt jako `VisitDto`.
+- [x] Konflikt przy drugiej wizycie → 409, a pierwsza wizyta zostaje przy starym doktorze.
+- [x] Metoda serwisu ma `@Transactional` i nie woła `save`.
 
 ## Zadanie D2. Udokumentowany rollback
 
@@ -390,8 +399,8 @@ Oznacz metody `DoctorService`, `UserService` i `FacilityService` według konwenc
 Usuń `save` tam, gdzie encja jest zarządzana (przypisanie i odpięcie placówki).
 
 Kryteria akceptacji:
-- [ ] Każda metoda publiczna w tych trzech serwisach ma `@Transactional` albo `@Transactional(readOnly = true)`.
-- [ ] `POST /doctors/1/facilities/2` daje 200, a `SELECT * FROM doctor_facility;` pokazuje wiersz
+- [x] Każda metoda publiczna w tych trzech serwisach ma `@Transactional` albo `@Transactional(readOnly = true)`.
+- [x] `POST /doctors/1/facilities/2` daje 200, a `SELECT * FROM doctor_facility;` pokazuje wiersz
   `1 | 2`.
 
 ## Zadanie D4. Asercje w starszych folderach Bruno
@@ -401,14 +410,14 @@ o statusach. Dopisz blok `assert` z oczekiwanym statusem do każdego żądania. 
 `zastepstwa` ze scenariuszem D1.
 
 Kryteria akceptacji:
-- [ ] Każde żądanie w trzech folderach ma `assert { res.status: eq ... }`.
-- [ ] Folder `pacjenci` tworzy własnego pacjenta spoza `data.sql`, zapamiętuje jego numer
+- [x] Każde żądanie w trzech folderach ma `assert { res.status: eq ... }`.
+- [x] Folder `pacjenci` tworzy własnego pacjenta spoza `data.sql`, zapamiętuje jego numer
   (`bru.setVar("patientId", res.body.id);`) i dalej używa `{{patientId}}` zamiast `1` (poza żądaniami, które kończą się 400 na
   walidacji, zanim serwis szuka pacjenta).
-- [ ] Folder `zastepstwa` zakłada konto i doktora zastępcę, trzy sloty (dwa u doktora 1
+- [x] Folder `zastepstwa` zakłada konto i doktora zastępcę, trzy sloty (dwa u doktora 1
   o 10:00 i 11:00, jeden u zastępcy o 11:00), wysyła zastępstwo (409) i sprawdza w bloku
   `tests`, że obie wizyty doktora 1 zostały przy nim.
-- [ ] Na świeżej bazie `pacjenci`, `konta` i `zastepstwa` przechodzą w całości, a `users`
+- [x] Na świeżej bazie `pacjenci`, `konta` i `zastepstwa` przechodzą w całości, a `users`
   przechodzi ze środowiskiem `test`.
 
 ## Jak sprawdzisz, że skończyłeś

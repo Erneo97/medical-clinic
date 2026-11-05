@@ -1,7 +1,6 @@
 package com.github.erneo97.medical_clinic.repository;
 
 import com.github.erneo97.medical_clinic.model.Patient;
-import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,7 +15,6 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     void deleteById(Long id);
 
     @Modifying(clearAutomatically = true)
-    @Transactional
     @Query("""
         UPDATE User u
         SET u.password = :password

@@ -8,8 +8,5 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface FacilityRepository extends JpaRepository<Facility, Long> {
-    @EntityGraph(attributePaths = {"doctors"})
-    @Query("SELECT f FROM Facility f")
-    List<Facility> findAllWithDoctors();
 
 }

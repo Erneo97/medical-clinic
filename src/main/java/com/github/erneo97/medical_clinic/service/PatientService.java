@@ -10,9 +10,9 @@ import com.github.erneo97.medical_clinic.model.Role;
 import com.github.erneo97.medical_clinic.model.User;
 import com.github.erneo97.medical_clinic.repository.PatientRepository;
 import com.github.erneo97.medical_clinic.exeption.PatientAlreadyExistsException;
-import com.github.erneo97.medical_clinic.exeption.PatientNotFound;
+import com.github.erneo97.medical_clinic.exeption.PatientNotFoundException;
 import com.github.erneo97.medical_clinic.repository.UserRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -27,17 +27,20 @@ public class PatientService {
     private final PatientMapper patientMapper;
     private final UserMapper userMapper;
 
+    @Transactional(readOnly = true)
     public List<Patient> findAll() {
         return patientRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Patient findById(Long id) {
-        return patientRepository.findById(id).orElseThrow(() -> new PatientNotFound(id));
+        return patientRepository.findById(id).orElseThrow(() -> new PatientNotFoundException(id));
     }
 
+    @Transactional(readOnly = true)
     public Patient findByEmail(String email) {
         return patientRepository.findByUserEmail(email)
-                .orElseThrow(() -> new PatientNotFound(email));
+                .orElseThrow(() -> new PatientNotFoundException(email));
     }
 
     @Transactional
@@ -51,9 +54,11 @@ public class PatientService {
                     HttpStatus.CONFLICT
             );
         }
-        User newUser = userMapper.toUser(command);
-        newUser.setRole(Role.PATIENT);
-        userRepository.save(newUser);
+        User newUser = User.builder()
+                .email(command.email())
+                .password(command.password())
+                .role(Role.PATIENT)
+                .build();
 
         Patient patient = patientMapper.toPatient(command);
         patient.setUser(newUser);
@@ -63,22 +68,25 @@ public class PatientService {
     @Transactional
     public Patient update(Long id, EditPersonalDataCommand command) {
         Patient patient = patientRepository.findById(id)
-                        .orElseThrow(() -> new PatientNotFound(id));
+                        .orElseThrow(() -> new PatientNotFoundException(id));
         patient.updatePatient(command);
         return patient;
     }
 
+    @Transactional
     public void chanePassword(Long id, EditPasswordCommand command) {
-        patientRepository.findById(id).orElseThrow( () -> new PatientNotFound(id) );
+        patientRepository.findById(id).orElseThrow( () -> new PatientNotFoundException(id) );
         patientRepository.updatePassword(id, command.password());
     }
 
+    @Transactional
     public void removeById(Long id) {
         findUserByIdOrThrowException(id);
         patientRepository.deleteById(id);
     }
 
-    public List<Patient> searchBytName(String fragment) {
+    @Transactional(readOnly = true)
+    public List<Patient> searchByName(String fragment) {
         return patientRepository.searchByName(fragment);
     }
 

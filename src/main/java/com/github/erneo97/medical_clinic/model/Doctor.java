@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -20,7 +21,8 @@ public class Doctor {
     @Column(nullable = false)
     private Long id;
 
-    @OneToOne
+    // Konto doktora nie powinno istnieć bez doktora ale samo konto nie musi zostać usunięte gdy uuwamy doktora - może być też pacjentem naszej placówki
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
@@ -44,11 +46,26 @@ public class Doctor {
 
     public void addFacility(Facility facility) {
         facilities.add(facility);
-        facility.getDoctors().add(this);
     }
 
     public void removeFacility(Facility facility) {
         facilities.remove(facility);
-        facility.getDoctors().remove(this);
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Doctor other)) {
+            return false;
+        }
+        return id != null && id.equals(other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
