@@ -70,7 +70,7 @@ Przed startem: baza od zera (`docker compose down -v`, `docker compose up -d --w
   dzień = od `day.atStartOfDay()` włącznie do `day.plusDays(1).atStartOfDay()` wyłącznie.
 - Sprawdź: `./mvnw -q compile`.
 
-**L36.2. `VisitBookingFacade`** (pakiet `facade`, `@Service`)
+**~~L36.2. `VisitBookingFacade`~~** (pakiet `facade`, `@Service`)
 - `BookingSummaryDto book(Long visitId, Long patientId)`: `VisitService.book`, odczyt pacjenta
   i doktora przez ich serwisy, wolne sloty doktora w dniu wizyty, podsumowanie przez istniejące mapery.
 - `@Transactional` na metodzie fasady; wolne sloty liczysz po rezerwacji.
