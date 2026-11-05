@@ -1,10 +1,11 @@
-package com.github.erneo97.medical_clinic.dto;
+package com.github.erneo97.medical_clinic.dto.patient;
 
 import com.github.erneo97.medical_clinic.validate.ValidFieldRulers;
 import jakarta.validation.constraints.*;
+import lombok.Builder;
 
 import java.time.LocalDate;
-
+@Builder
 public record PatientCreateCommand (
         @NotBlank(message = ValidFieldRulers.NOT_BLANK_MESSAGE)
         @Email(message = ValidFieldRulers.FIELD_IS_NOT_EMAIL)

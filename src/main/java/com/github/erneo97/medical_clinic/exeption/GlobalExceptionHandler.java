@@ -1,10 +1,12 @@
 package com.github.erneo97.medical_clinic.exeption;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -19,7 +21,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MedicalClinicException.class)
     public ProblemDetail handleMedicalClinic(MedicalClinicException exception) {
-        log.warn("Error domain {}",exception.getMessage());
+        log.warn("błąd domeny {}",exception.getMessage());
         return ProblemDetail.forStatusAndDetail(exception.getStatus(), exception.getMessage());
     }
 
@@ -33,24 +35,44 @@ public class GlobalExceptionHandler {
         return problemDetail;
     }
 
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ProblemDetail handleUnreadable(HttpMessageNotReadableException exception) {
-        log.warn("body is unread");
+        log.warn("nieczytelne body zadania {}", exception.getMostSpecificCause().getMessage());
         return ProblemDetail.forStatusAndDetail(
                 HttpStatus.BAD_REQUEST, "request body is not valid JSON");
     }
 
     @ExceptionHandler(NoResourceFoundException.class)
     public ProblemDetail handleNoRoute(NoResourceFoundException exception) {
-        log.warn("request route missing: {}", exception.getResourcePath());
+        log.warn("bad path: {}", exception.getResourcePath());
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, "no such endpoint");
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ProblemDetail handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException exception) {
-        log.warn("error type variable in route: {}", exception.getMessage());
+        log.warn("bad type of variable: {}", exception.getMessage());
         return ProblemDetail.forStatusAndDetail(
                 HttpStatus.BAD_REQUEST,  "path variable " + exception.getMessage() + " has a wronged type");
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ProblemDetail handleDataIntegrity(DataIntegrityViolationException ex) {
+        log.warn("Integrate DB is in danger: {}", ex.getMostSpecificCause().getMessage());
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+                HttpStatus.CONFLICT,
+                "Operation break integrate of database");
+        problem.setTitle("Conflict");
+        return problem;
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ProblemDetail handleMethodNotSupported(
+            HttpRequestMethodNotSupportedException exception) {
+
+        ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.METHOD_NOT_ALLOWED);
+        problem.setDetail("method " + exception.getMethod() + " is not supported here");
+        return problem;
     }
 
     // Siatka bezpieczeństwa
