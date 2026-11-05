@@ -10,6 +10,7 @@ import com.github.erneo97.medical_clinic.repository.VisitRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,7 @@ import java.util.List;
 @AllArgsConstructor
 public class VisitService {
     private static final Duration QUARTER = Duration.ofMinutes(15);
+    private static final List<String> SORTABLE = List.of("startsAt", "endsAt");
     private final VisitRepository visitRepository;
     private final VisitMapper visitMapper;
     private final DoctorService doctorService;
@@ -35,6 +37,7 @@ public class VisitService {
 
     @Transactional(readOnly = true)
     public Page<Visit> findAll(Pageable pageable) {
+        validateSort(pageable.getSort());
         return visitRepository.findAll(pageable);
     }
 
@@ -90,6 +93,17 @@ public class VisitService {
         List<Visit> visits = getSortedVisitsByDoctorId(doctorId);
         substituteVisitsToDoctor(visits, doctorSubstitute);
         return visits;
+    }
+
+    private void validateSort(Sort sort) {
+        sort.stream().iterator().forEachRemaining(order -> {
+            if (!SORTABLE.contains(order.getProperty())) {
+                throw new InvalidSortPropertyException(
+                        order.getProperty(),
+                        SORTABLE
+                );
+            }
+        });
     }
 
     private List<Visit> getSortedVisitsByDoctorId(Long doctorId) {

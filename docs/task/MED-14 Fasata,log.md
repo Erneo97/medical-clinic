@@ -17,12 +17,14 @@ Przed startem: baza i aplikacja jak w L34, kilkanaście wizyt doktora 1 (pętla 
 do sortowania pochodzi z `docs/paginacja/plan-get-visits.md`.
 
 **L35.1. Co dziś przechodzi** (przed jakąkolwiek zmianą)
-- Wyślij `GET /visits?sort=abrakadabra`, `sort=patient.user.password`, `sort=patient.user.pesel`
+- Wyślij `GET /visits?sort=abrakadabra`(500), `sort=patient.user.password` (200), `sort=patient.user.pesel` (500)
   i zapisz statusy w komentarzu w planie.
 - Umiesz powiedzieć, czemu pole z hasłem przechodzi, a pole, którego nie ma, daje 500, i czemu
   500 za literówkę to wina serwera, a nie klienta.
 
-**L35.2. Biała lista w serwisie**
+Odp: błędy się zdarzają, klient ma prawo do nich, błąd 500 jest informacją że serwer nie działa a nie inforemacją o popełnionym będzie co jest winną serwera że nie zostało to zaimplementowane.
+
+**~~L35.2. Biała lista w serwisie~~**
 - Wyjątek `InvalidSortPropertyException` (dziedziczy po `MedicalClinicException`, status 400).
 - `VisitService.findAll` sprawdza każde pole z `pageable.getSort()`, zanim zawoła repozytorium.
 - Dozwolone pola jako `List.of(...)`, nie `Set.of(...)`.
