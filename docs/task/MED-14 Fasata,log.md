@@ -63,7 +63,7 @@ Przed startem: baza od zera (`docker compose down -v`, `docker compose up -d --w
 (`./mvnw -q -DskipTests package`) i aplikacja z logiem w pliku:
 `java -jar target/medical-clinic-0.0.1-SNAPSHOT.jar > app.log 2>&1`.
 
-**L36.1. Podsumowanie i wolne sloty**
+**~~L36.1. Podsumowanie i wolne sloty~~**
 - Rekord `dto/BookingSummaryDto(VisitDto visit, PatientDto patient, DoctorDto doctor, long freeSlotsThatDay)`.
 - W `VisitRepository` zapytanie `@Query`: liczba wizyt doktora bez pacjenta w przedziale czasu.
 - `VisitService.countFreeSlots(Long doctorId, LocalDate day)` z `@Transactional(readOnly = true)`;

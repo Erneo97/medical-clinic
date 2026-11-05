@@ -2,6 +2,8 @@ package com.github.erneo97.medical_clinic.service;
 
 import com.github.erneo97.medical_clinic.dto.visit.VisitCreateCommand;
 import com.github.erneo97.medical_clinic.exeption.*;
+import com.github.erneo97.medical_clinic.facade.UserFacade;
+import com.github.erneo97.medical_clinic.facade.VisitBookingFacade;
 import com.github.erneo97.medical_clinic.mapper.VisitMapper;
 import com.github.erneo97.medical_clinic.model.Doctor;
 import com.github.erneo97.medical_clinic.model.Patient;
@@ -40,13 +42,14 @@ class VisitServiceTest {
     @Mock
     private PatientService patientService;
 
+    private UserFacade userFacade;
     private VisitService visitService;
 
     @BeforeEach
     void setUp() {
         Clock clock = Clock.fixed(NOW.toInstant(ZoneOffset.UTC), ZoneOffset.UTC);
         VisitMapper visitMapper = Mappers.getMapper(VisitMapper.class);
-        visitService = new VisitService(visitRepository, visitMapper, doctorService, patientService, clock);
+        visitService = new VisitService(visitRepository, visitMapper, userFacade, clock);
     }
 
     @Test

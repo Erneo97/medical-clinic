@@ -2,6 +2,7 @@ package com.github.erneo97.medical_clinic.service;
 
 import com.github.erneo97.medical_clinic.dto.visit.VisitCreateCommand;
 import com.github.erneo97.medical_clinic.exeption.*;
+import com.github.erneo97.medical_clinic.facade.UserFacade;
 import com.github.erneo97.medical_clinic.mapper.VisitMapper;
 import com.github.erneo97.medical_clinic.model.Doctor;
 import com.github.erneo97.medical_clinic.model.Patient;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.Clock;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
@@ -31,8 +33,8 @@ public class VisitService {
     private static final List<String> SORTABLE = List.of("startsAt", "endsAt");
     private final VisitRepository visitRepository;
     private final VisitMapper visitMapper;
-    private final DoctorService doctorService;
-    private final PatientService patientService;
+    private final UserFacade userFacade;
+
     private final Clock clock;
 
     @Transactional(readOnly = true)
@@ -44,13 +46,13 @@ public class VisitService {
     @Transactional
     @ResponseStatus(value = HttpStatus.CREATED)
     public Visit create(@RequestBody VisitCreateCommand command) {
-        if (!doctorService.existsById(command.doctorId())) {
+        if (!userFacade.doctorExistsById(command.doctorId())) {
             throw new DoctorNotFoundException("Doctor Not Found with ID: " + command.doctorId());
         }
         validateSlot(command.startsAt(), command.endsAt());
         checkOverlap(command.doctorId(), command.startsAt(), command.endsAt());
 
-        Doctor doctor = doctorService.findDoctorByIdOrThrowException(command.doctorId());
+        Doctor doctor = userFacade.findDoctorById(command.doctorId());
         Visit visit = visitMapper.toVisit(command);
         visit.setDoctor(doctor);
         return visitRepository.save(visit);
@@ -64,7 +66,7 @@ public class VisitService {
     @Transactional
     public Visit bookVisit(Long id, Long patientId) {
         Visit visit = this.findVisitByIdOrException(id);
-        Patient patient = patientService.findById(patientId);
+        Patient patient = userFacade.findPatientById(patientId);
 
         if (!visit.isAvaliable()) {
             throw new VisitAlreadyBookedException("This visit is booked");
@@ -82,14 +84,21 @@ public class VisitService {
     }
 
     @Transactional(readOnly = true)
+    public long countFreeSlots(Long doctorId, LocalDate day) {
+        LocalDateTime start = day.atStartOfDay();
+        LocalDateTime end = day.plusDays(1).atStartOfDay();
+        return visitRepository.countFreeSlots(doctorId, start, end);
+    }
+
+    @Transactional(readOnly = true)
     public List<Visit> getPatientVisit(Long patientId) {
         return visitRepository.findByPatientId(patientId);
     }
 
     @Transactional
     public List<Visit> substitute(Long doctorId, Long substituteId) {
-        doctorService.checkDoctorExistOrThrowException(doctorId);
-        Doctor doctorSubstitute = doctorService.findDoctorByIdOrThrowException(substituteId);
+        userFacade.checkDoctorExistOrThrowException(doctorId);
+        Doctor doctorSubstitute = userFacade.findDoctorById(substituteId);
         List<Visit> visits = getSortedVisitsByDoctorId(doctorId);
         substituteVisitsToDoctor(visits, doctorSubstitute);
         return visits;
