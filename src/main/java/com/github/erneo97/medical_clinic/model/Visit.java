@@ -1,9 +1,7 @@
 package com.github.erneo97.medical_clinic.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -12,7 +10,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "visits")
 @Getter
+@Builder
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class Visit {
     @Id

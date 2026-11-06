@@ -17,24 +17,26 @@ Przed startem: baza i aplikacja jak w L34, kilkanaście wizyt doktora 1 (pętla 
 do sortowania pochodzi z `docs/paginacja/plan-get-visits.md`.
 
 **L35.1. Co dziś przechodzi** (przed jakąkolwiek zmianą)
-- Wyślij `GET /visits?sort=abrakadabra`, `sort=patient.user.password`, `sort=patient.user.pesel`
+- Wyślij `GET /visits?sort=abrakadabra`(500), `sort=patient.user.password` (200), `sort=patient.user.pesel` (500)
   i zapisz statusy w komentarzu w planie.
 - Umiesz powiedzieć, czemu pole z hasłem przechodzi, a pole, którego nie ma, daje 500, i czemu
   500 za literówkę to wina serwera, a nie klienta.
 
-**L35.2. Biała lista w serwisie**
+Odp: błędy się zdarzają, klient ma prawo do nich, błąd 500 jest informacją że serwer nie działa a nie inforemacją o popełnionym będzie co jest winną serwera że nie zostało to zaimplementowane.
+
+**~~L35.2. Biała lista w serwisie~~**
 - Wyjątek `InvalidSortPropertyException` (dziedziczy po `MedicalClinicException`, status 400).
 - `VisitService.findAll` sprawdza każde pole z `pageable.getSort()`, zanim zawoła repozytorium.
 - Dozwolone pola jako `List.of(...)`, nie `Set.of(...)`.
 - Komunikat nazywa odrzucone pole i wymienia dozwolone: `cannot sort by 'abrakadabra', allowed: startsAt, endsAt`.
 - Bez nowego handlera w advice: wyjątek domenowy obsługuje piętro pierwsze.
 
-**L35.3. Sprawdź**
+**~~L35.3. Sprawdź~~**
 - `sort=abrakadabra` i `sort=patient.user.password` → 400 z listą dozwolonych pól.
 - `sort=startsAt,desc` → 200, wizyty od najpóźniejszej.
 - Przy odrzuconym sortowaniu w logu nie ma `select ... from visits`.
 
-**L35.4. Testy serwisu** (`VisitServiceTest`, dwa testy `findAll`)
+**~~L35.4. Testy serwisu~~** (`VisitServiceTest`, dwa testy `findAll`)
 - Pole z listy: serwis oddaje tę samą instancję `Page` co repozytorium (`assertSame`).
 - Pole spoza listy: `assertThrows` z typem i pełnym komunikatem +
   `verify(visitRepository, never()).findAll(any(PageRequest.class))`.
@@ -61,14 +63,14 @@ Przed startem: baza od zera (`docker compose down -v`, `docker compose up -d --w
 (`./mvnw -q -DskipTests package`) i aplikacja z logiem w pliku:
 `java -jar target/medical-clinic-0.0.1-SNAPSHOT.jar > app.log 2>&1`.
 
-**L36.1. Podsumowanie i wolne sloty**
+**~~L36.1. Podsumowanie i wolne sloty~~**
 - Rekord `dto/BookingSummaryDto(VisitDto visit, PatientDto patient, DoctorDto doctor, long freeSlotsThatDay)`.
 - W `VisitRepository` zapytanie `@Query`: liczba wizyt doktora bez pacjenta w przedziale czasu.
 - `VisitService.countFreeSlots(Long doctorId, LocalDate day)` z `@Transactional(readOnly = true)`;
   dzień = od `day.atStartOfDay()` włącznie do `day.plusDays(1).atStartOfDay()` wyłącznie.
 - Sprawdź: `./mvnw -q compile`.
 
-**L36.2. `VisitBookingFacade`** (pakiet `facade`, `@Service`)
+**~~L36.2. `VisitBookingFacade`~~** (pakiet `facade`, `@Service`)
 - `BookingSummaryDto book(Long visitId, Long patientId)`: `VisitService.book`, odczyt pacjenta
   i doktora przez ich serwisy, wolne sloty doktora w dniu wizyty, podsumowanie przez istniejące mapery.
 - `@Transactional` na metodzie fasady; wolne sloty liczysz po rezerwacji.
