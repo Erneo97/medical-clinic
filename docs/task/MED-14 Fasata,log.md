@@ -17,24 +17,26 @@ Przed startem: baza i aplikacja jak w L34, kilkanaście wizyt doktora 1 (pętla 
 do sortowania pochodzi z `docs/paginacja/plan-get-visits.md`.
 
 **L35.1. Co dziś przechodzi** (przed jakąkolwiek zmianą)
-- Wyślij `GET /visits?sort=abrakadabra`, `sort=patient.user.password`, `sort=patient.user.pesel`
+- Wyślij `GET /visits?sort=abrakadabra`(500), `sort=patient.user.password` (200), `sort=patient.user.pesel` (500)
   i zapisz statusy w komentarzu w planie.
 - Umiesz powiedzieć, czemu pole z hasłem przechodzi, a pole, którego nie ma, daje 500, i czemu
   500 za literówkę to wina serwera, a nie klienta.
 
-**L35.2. Biała lista w serwisie**
+Odp: błędy się zdarzają, klient ma prawo do nich, błąd 500 jest informacją że serwer nie działa a nie inforemacją o popełnionym będzie co jest winną serwera że nie zostało to zaimplementowane.
+
+**~~L35.2. Biała lista w serwisie~~**
 - Wyjątek `InvalidSortPropertyException` (dziedziczy po `MedicalClinicException`, status 400).
 - `VisitService.findAll` sprawdza każde pole z `pageable.getSort()`, zanim zawoła repozytorium.
 - Dozwolone pola jako `List.of(...)`, nie `Set.of(...)`.
 - Komunikat nazywa odrzucone pole i wymienia dozwolone: `cannot sort by 'abrakadabra', allowed: startsAt, endsAt`.
 - Bez nowego handlera w advice: wyjątek domenowy obsługuje piętro pierwsze.
 
-**L35.3. Sprawdź**
+**~~L35.3. Sprawdź~~**
 - `sort=abrakadabra` i `sort=patient.user.password` → 400 z listą dozwolonych pól.
 - `sort=startsAt,desc` → 200, wizyty od najpóźniejszej.
 - Przy odrzuconym sortowaniu w logu nie ma `select ... from visits`.
 
-**L35.4. Testy serwisu** (`VisitServiceTest`, dwa testy `findAll`)
+**~~L35.4. Testy serwisu~~** (`VisitServiceTest`, dwa testy `findAll`)
 - Pole z listy: serwis oddaje tę samą instancję `Page` co repozytorium (`assertSame`).
 - Pole spoza listy: `assertThrows` z typem i pełnym komunikatem +
   `verify(visitRepository, never()).findAll(any(PageRequest.class))`.
@@ -61,41 +63,41 @@ Przed startem: baza od zera (`docker compose down -v`, `docker compose up -d --w
 (`./mvnw -q -DskipTests package`) i aplikacja z logiem w pliku:
 `java -jar target/medical-clinic-0.0.1-SNAPSHOT.jar > app.log 2>&1`.
 
-**L36.1. Podsumowanie i wolne sloty**
+**~~L36.1. Podsumowanie i wolne sloty~~**
 - Rekord `dto/BookingSummaryDto(VisitDto visit, PatientDto patient, DoctorDto doctor, long freeSlotsThatDay)`.
 - W `VisitRepository` zapytanie `@Query`: liczba wizyt doktora bez pacjenta w przedziale czasu.
 - `VisitService.countFreeSlots(Long doctorId, LocalDate day)` z `@Transactional(readOnly = true)`;
   dzień = od `day.atStartOfDay()` włącznie do `day.plusDays(1).atStartOfDay()` wyłącznie.
 - Sprawdź: `./mvnw -q compile`.
 
-**L36.2. `VisitBookingFacade`** (pakiet `facade`, `@Service`)
+**~~L36.2. `VisitBookingFacade`~~** (pakiet `facade`, `@Service`)
 - `BookingSummaryDto book(Long visitId, Long patientId)`: `VisitService.book`, odczyt pacjenta
   i doktora przez ich serwisy, wolne sloty doktora w dniu wizyty, podsumowanie przez istniejące mapery.
 - `@Transactional` na metodzie fasady; wolne sloty liczysz po rezerwacji.
 - `PATCH /visits/{id}/book/{patientId}` woła wyłącznie fasadę, pozostałe endpointy wizyt zostają przy serwisie.
 - Żaden serwis nie wstrzykuje innego serwisu.
 
-**L36.3. Sprawdź** (przebuduj i zrestartuj aplikację)
+**~~L36.3. Sprawdź~~** (przebuduj i zrestartuj aplikację)
 - Doktor 1: dwa wolne sloty 4.03.2030, 10:00-10:30 i 11:00-11:30 (`POST /visits`).
 - `PATCH /visits/1/book/2` → 200 z `visit`, `patient`, `doctor`, `freeSlotsThatDay` = 1.
 - W `app.log` jedna linia `Creating new transaction` z metodą fasady, potem `Initiating transaction commit`.
 - Druga rezerwacja tego samego slotu → 409, pacjent, którego nie ma → 404.
 - Folder Bruno `sloty` oblewa teraz jedną asercję (`res.body.patientId`); poprawka w L36.6.
 
-**L36.4. `VisitBookingFacadeTest`** (`src/test/java/.../facade`)
+**~~L36.4. `VisitBookingFacadeTest`~~** (`src/test/java/.../facade`)
 - Serwisy jako `@Mock`, mapery prawdziwe (`Mappers.getMapper`), fasada składana w `@BeforeEach`.
 - Poprawna rezerwacja: `InOrder` przypina tylko `visitService.book` przed `countFreeSlots`,
   asercje na czterech polach podsumowania. Odczyty pacjenta i doktora w dowolnej kolejności.
 - Odmowa: `book` rzuca `VisitAlreadyBookedException`, fasada go przepuszcza, serwisy pacjenta
   i doktora niewywołane (`verifyNoInteractions`).
 
-**L36.5. `VisitControllerTest`** z `@WebMvcTest(VisitController.class)`
+**~~L36.5. `VisitControllerTest`~~** z `@WebMvcTest(VisitController.class)`
 - `@MockitoBean` na fasadę i na serwis wizyt (inne endpointy), `@Import(VisitMapperImpl.class)`.
 - Rezerwacja: 200 i `$.visit.patientId`, `$.patient.fullName`, `$.doctor.lastName`,
   `$.freeSlotsThatDay`; `verifyNoInteractions` na serwisie wizyt.
 - Błędy: 409 z `detail` dla zajętego slotu, 404 dla pacjenta, którego nie ma.
 
-**L36.6. Bruno** `bruno/sloty/zarezerwuj-slot.bru` (reszty folderu nie ruszasz)
+**~~L36.6. Bruno~~** `bruno/sloty/zarezerwuj-slot.bru` (reszty folderu nie ruszasz)
 - Asercje: 200, `res.body.visit.id: eq {{slotId}}`, pacjent, doktor, `freeSlotsThatDay` jest liczbą.
 
 Gotowe, gdy:
