@@ -91,13 +91,13 @@ Przed startem: baza od zera (`docker compose down -v`, `docker compose up -d --w
 - Odmowa: `book` rzuca `VisitAlreadyBookedException`, fasada go przepuszcza, serwisy pacjenta
   i doktora niewywołane (`verifyNoInteractions`).
 
-**L36.5. `VisitControllerTest`** z `@WebMvcTest(VisitController.class)`
+**~~L36.5. `VisitControllerTest`~~** z `@WebMvcTest(VisitController.class)`
 - `@MockitoBean` na fasadę i na serwis wizyt (inne endpointy), `@Import(VisitMapperImpl.class)`.
 - Rezerwacja: 200 i `$.visit.patientId`, `$.patient.fullName`, `$.doctor.lastName`,
   `$.freeSlotsThatDay`; `verifyNoInteractions` na serwisie wizyt.
 - Błędy: 409 z `detail` dla zajętego slotu, 404 dla pacjenta, którego nie ma.
 
-**L36.6. Bruno** `bruno/sloty/zarezerwuj-slot.bru` (reszty folderu nie ruszasz)
+**~~L36.6. Bruno~~** `bruno/sloty/zarezerwuj-slot.bru` (reszty folderu nie ruszasz)
 - Asercje: 200, `res.body.visit.id: eq {{slotId}}`, pacjent, doktor, `freeSlotsThatDay` jest liczbą.
 
 Gotowe, gdy:
