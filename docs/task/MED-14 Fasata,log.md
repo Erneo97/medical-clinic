@@ -77,14 +77,14 @@ Przed startem: baza od zera (`docker compose down -v`, `docker compose up -d --w
 - `PATCH /visits/{id}/book/{patientId}` woła wyłącznie fasadę, pozostałe endpointy wizyt zostają przy serwisie.
 - Żaden serwis nie wstrzykuje innego serwisu.
 
-**L36.3. Sprawdź** (przebuduj i zrestartuj aplikację)
+**~~L36.3. Sprawdź~~** (przebuduj i zrestartuj aplikację)
 - Doktor 1: dwa wolne sloty 4.03.2030, 10:00-10:30 i 11:00-11:30 (`POST /visits`).
 - `PATCH /visits/1/book/2` → 200 z `visit`, `patient`, `doctor`, `freeSlotsThatDay` = 1.
 - W `app.log` jedna linia `Creating new transaction` z metodą fasady, potem `Initiating transaction commit`.
 - Druga rezerwacja tego samego slotu → 409, pacjent, którego nie ma → 404.
 - Folder Bruno `sloty` oblewa teraz jedną asercję (`res.body.patientId`); poprawka w L36.6.
 
-**L36.4. `VisitBookingFacadeTest`** (`src/test/java/.../facade`)
+**~~L36.4. `VisitBookingFacadeTest`~~** (`src/test/java/.../facade`)
 - Serwisy jako `@Mock`, mapery prawdziwe (`Mappers.getMapper`), fasada składana w `@BeforeEach`.
 - Poprawna rezerwacja: `InOrder` przypina tylko `visitService.book` przed `countFreeSlots`,
   asercje na czterech polach podsumowania. Odczyty pacjenta i doktora w dowolnej kolejności.

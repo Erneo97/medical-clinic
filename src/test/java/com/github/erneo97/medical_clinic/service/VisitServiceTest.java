@@ -20,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -42,7 +43,9 @@ class VisitServiceTest {
     @Mock
     private PatientService patientService;
 
+    @MockitoBean
     private UserFacade userFacade;
+
     private VisitService visitService;
 
     @BeforeEach
