@@ -9,6 +9,7 @@ import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.model.Visit;
 import com.github.erneo97.medical_clinic.repository.VisitRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -27,6 +28,7 @@ import java.util.Comparator;
 import java.util.List;
 
 @Service
+@Slf4j
 @AllArgsConstructor
 public class VisitService {
     private static final Duration QUARTER = Duration.ofMinutes(15);
@@ -55,7 +57,9 @@ public class VisitService {
         Doctor doctor = userFacade.findDoctorById(command.doctorId());
         Visit visit = visitMapper.toVisit(command);
         visit.setDoctor(doctor);
-        return visitRepository.save(visit);
+        Visit savedVisit = visitRepository.save(visit);
+        log.info("stworzono nowa wizyte {} dla doktora {}; start: {} koniec: {}", savedVisit.getId(), savedVisit.getDoctor(), savedVisit.getStartsAt(), savedVisit.getEndsAt());
+        return savedVisit;
     }
 
     @Transactional(readOnly = true)
@@ -75,6 +79,7 @@ public class VisitService {
             throw new VisitInPastException("The visit has already taken place");
         }
         visit.setPatient(patient);
+        log.info("zarezerwowano wizyte {} przez {}", visit.getId(), visit.getPatient().getId());
         return visit;
     }
 
@@ -87,7 +92,9 @@ public class VisitService {
     public long countFreeSlots(Long doctorId, LocalDate day) {
         LocalDateTime start = day.atStartOfDay();
         LocalDateTime end = day.plusDays(1).atStartOfDay();
-        return visitRepository.countFreeSlots(doctorId, start, end);
+        long freeSlots = visitRepository.countFreeSlots(doctorId, start, end);
+        log.debug("liczba wolnych dni {},  dla doktora {}, dnia {}", freeSlots, doctorId, day);
+        return freeSlots;
     }
 
     @Transactional(readOnly = true)
@@ -128,6 +135,7 @@ public class VisitService {
             visit.setDoctor(doctor);
             visitRepository.save(visit);
         }
+        log.info("zastepstwo: {} wizyt doktroa {} przejmuje {}",  visits.size(), visits.getFirst().getDoctor().getId(), doctor.getId());
     }
 
     private void validateSlot(LocalDateTime slotStart, LocalDateTime slotEnd) {
@@ -145,6 +153,7 @@ public class VisitService {
     }
 
     private void checkOverlap(Long doctorId, LocalDateTime start, LocalDateTime end) {
+        log.debug("Sprawdzam nakladanie wizyt dla doktora {}: {} - {}", doctorId, start, end);
         if (visitRepository.existsByDoctorIdAndStartsAtBeforeAndEndsAtAfter(
                 doctorId, end, start)) {
             throw new VisitOverlapsException(String.format("Visit already exists for Doctor on that time %s - %s", start.toString(), end.toString()));

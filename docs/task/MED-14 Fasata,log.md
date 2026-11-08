@@ -116,7 +116,7 @@ Przed startem: baza od zera. Aplikację uruchamiasz dopiero w L37.3.
 Zasady dla każdego wpisu: placeholdery `{}` (bez sklejania plusem), same identyfikatory (żaden
 obiekt ani Command w `{}`), komunikaty po polsku bez diakrytyków (`zarezerwowano wizyte …`).
 
-**L37.1. `VisitService`** (`@Slf4j`)
+**~~L37.1. `VisitService`~~** (`@Slf4j`)
 - INFO: założenie wizyty (wizyta, doktor, początek, koniec), rezerwacja (wizyta, pacjent),
   zastępstwo (liczba wizyt, obaj doktorzy).
 - DEBUG: sprawdzanie nakładania przed zapisem, wynik liczenia wolnych slotów.
