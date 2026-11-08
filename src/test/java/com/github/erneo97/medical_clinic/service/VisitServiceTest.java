@@ -3,7 +3,6 @@ package com.github.erneo97.medical_clinic.service;
 import com.github.erneo97.medical_clinic.dto.visit.VisitCreateCommand;
 import com.github.erneo97.medical_clinic.exeption.*;
 import com.github.erneo97.medical_clinic.facade.UserFacade;
-import com.github.erneo97.medical_clinic.facade.VisitBookingFacade;
 import com.github.erneo97.medical_clinic.mapper.VisitMapper;
 import com.github.erneo97.medical_clinic.model.Doctor;
 import com.github.erneo97.medical_clinic.model.Patient;
@@ -20,7 +19,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -42,10 +40,8 @@ class VisitServiceTest {
     private DoctorService doctorService;
     @Mock
     private PatientService patientService;
-
-    @MockitoBean
+    @Mock
     private UserFacade userFacade;
-
     private VisitService visitService;
 
     @BeforeEach
@@ -59,7 +55,7 @@ class VisitServiceTest {
     void create_startInPast_throwsInvalidVisitException() {
         // given
         VisitCreateCommand command = new VisitCreateCommand(1L, NOW.minusMinutes(15), NOW.plusMinutes(45));
-        when(doctorService.existsById(1L)).thenReturn(true);
+        when(userFacade.doctorExistsById(1L)).thenReturn(true);
 
         // when
         InvalidVisitException exception = assertThrows(InvalidVisitException.class, () -> visitService.create(command));
@@ -73,7 +69,7 @@ class VisitServiceTest {
     void create_startNotOnFullQuarterHour_throwsInvalidVisitException() {
         // given
         VisitCreateCommand command = new VisitCreateCommand(1L, NOW.plusMinutes(20), NOW.plusMinutes(30));
-        when(doctorService.existsById(1L)).thenReturn(true);
+        when(userFacade.doctorExistsById(1L)).thenReturn(true);
 
         // when
         InvalidVisitException exception = assertThrows(InvalidVisitException.class, () -> visitService.create(command));
@@ -88,7 +84,7 @@ class VisitServiceTest {
         // given
         VisitCreateCommand command = new VisitCreateCommand(1L, NOW.plusMinutes(15), NOW.plusMinutes(40));
 
-        when(doctorService.existsById(1L)).thenReturn(true);
+        when(userFacade.doctorExistsById(1L)).thenReturn(true);
 
         // when
         InvalidVisitException exception = assertThrows(
@@ -106,7 +102,7 @@ class VisitServiceTest {
         // given
         VisitCreateCommand command = new VisitCreateCommand(1L, NOW.plusMinutes(15), NOW.plusMinutes(45));
 
-        when(doctorService.existsById(1L)).thenReturn(false);
+        when(userFacade.doctorExistsById(1L)).thenReturn(false);
 
         // when
         DoctorNotFoundException exception = assertThrows(
@@ -125,8 +121,7 @@ class VisitServiceTest {
         // given
         VisitCreateCommand command = new VisitCreateCommand(1L, NOW.plusMinutes(15), NOW.plusMinutes(45));
 
-        when(doctorService.existsById(1L)).thenReturn(true);
-
+        when(userFacade.doctorExistsById(1L)).thenReturn(true);
         when(visitRepository.existsByDoctorIdAndStartsAtBeforeAndEndsAtAfter(1L, command.endsAt(), command.startsAt())).thenReturn(true);
 
         // when
@@ -151,11 +146,10 @@ class VisitServiceTest {
         doctor.setId(doctorId);
         VisitCreateCommand command = new VisitCreateCommand(doctorId, NOW, NOW.plusMinutes(45));
 
-        when(doctorService.existsById(doctorId)).thenReturn(true);
+        when(userFacade.doctorExistsById(doctorId)).thenReturn(true);
         when(visitRepository.existsByDoctorIdAndStartsAtBeforeAndEndsAtAfter(doctorId, command.endsAt(), command.startsAt())).thenReturn(false);
-        when(doctorService.findDoctorByIdOrThrowException(doctorId)).thenReturn(doctor);
-        when(visitRepository.save(any(Visit.class)))
-                .thenAnswer(invocation -> invocation.getArgument(0));
+        when(userFacade.findDoctorById(doctorId)).thenReturn(doctor);
+        when(visitRepository.save(any(Visit.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         // when
         Visit result = visitService.create(command);
@@ -201,7 +195,7 @@ class VisitServiceTest {
         Visit visit = createFutureVisit();
 
         when(visitRepository.findById(visitId)).thenReturn(Optional.of(visit));
-        when(patientService.findById(patientId)).thenThrow(new PatientNotFoundException(patientId));
+        when(userFacade.findPatientById(patientId)).thenThrow(new PatientNotFoundException(patientId));
 
         // when
         assertThrows(
@@ -226,7 +220,7 @@ class VisitServiceTest {
 
         when(visitRepository.findById(visitId)).thenReturn(Optional.of(visit));
 
-        when(patientService.findById(patientId)).thenReturn(newPatient);
+        when(userFacade.findPatientById(patientId)).thenReturn(newPatient);
 
         // when
         VisitAlreadyBookedException exception = assertThrows(VisitAlreadyBookedException.class, () -> visitService.bookVisit(visitId, patientId)
@@ -248,7 +242,7 @@ class VisitServiceTest {
         visit.setEndsAt(NOW.minusMinutes(15));
 
         when(visitRepository.findById(visitId)).thenReturn(Optional.of(visit));
-        when(patientService.findById(patientId)).thenReturn(patient);
+        when(userFacade.findPatientById(patientId)).thenReturn(patient);
 
         // when
         VisitInPastException exception = assertThrows(
@@ -270,7 +264,7 @@ class VisitServiceTest {
         Visit visit = createFutureVisit();
 
         when(visitRepository.findById(visitId)).thenReturn(Optional.of(visit));
-        when(patientService.findById(patientId)).thenReturn(patient);
+        when(userFacade.findPatientById(patientId)).thenReturn(patient);
 
         // when
         Visit result = visitService.bookVisit(visitId, patientId);

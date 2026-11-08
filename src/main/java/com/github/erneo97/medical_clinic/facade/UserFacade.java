@@ -4,7 +4,6 @@ import com.github.erneo97.medical_clinic.model.Doctor;
 import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.service.DoctorService;
 import com.github.erneo97.medical_clinic.service.PatientService;
-import com.github.erneo97.medical_clinic.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
