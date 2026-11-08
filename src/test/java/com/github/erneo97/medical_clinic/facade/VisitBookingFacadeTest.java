@@ -65,7 +65,7 @@ class VisitBookingFacadeTest {
                 .user(User.builder().email("ewa.nowak@exp.net").build())
                 .build();
 
-        LocalDateTime visitStartsAt =NOW.plusDays(1);
+        LocalDateTime visitStartsAt = NOW.plusDays(1);
 
         Visit visit = Visit.builder()
                 .id(visitId).
@@ -74,7 +74,7 @@ class VisitBookingFacadeTest {
                 .endsAt(visitStartsAt.plusMinutes(45L))
                 .build();
 
-        when(visitService.bookVisit(visitId,patientId )).thenReturn(visit);
+        when(visitService.bookVisit(visitId, patientId)).thenReturn(visit);
         when(patientService.findById(patientId)).thenReturn(patient);
         when(doctorService.getDoctorById(doctorId)).thenReturn(doctor);
         when(visitService.countFreeSlots(doctorId, visitStartsAt.toLocalDate())).thenReturn(4L);
@@ -84,7 +84,7 @@ class VisitBookingFacadeTest {
 
         // then
         InOrder inOrder = Mockito.inOrder(visitService);
-        inOrder.verify(visitService).bookVisit(visitId,patientId);
+        inOrder.verify(visitService).bookVisit(visitId, patientId);
         inOrder.verify(visitService).countFreeSlots(doctorId, visitStartsAt.toLocalDate());
 
         assertEquals("Ewa Nowak", String.format("%s %s", summaryDto.patient().firstName(), summaryDto.patient().lastName()));
