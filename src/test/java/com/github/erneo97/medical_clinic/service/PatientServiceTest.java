@@ -126,9 +126,9 @@ class PatientServiceTest {
         PatientCreateCommand command = PatientCreateCommand.builder().email(email).build();
         Patient mapped = getPatientWithEmail(email);
 
+        when(patientRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
         when(userRepository.existsByEmail(email)).thenReturn(false);
         when(patientMapper.toPatient(command)).thenReturn(mapped);
-        when(patientRepository.save(mapped)).thenReturn(mapped);
 
         // when
         Patient result = patientService.create(command);
