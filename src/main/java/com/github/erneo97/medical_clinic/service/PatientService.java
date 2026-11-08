@@ -12,6 +12,7 @@ import com.github.erneo97.medical_clinic.repository.PatientRepository;
 import com.github.erneo97.medical_clinic.exeption.PatientAlreadyExistsException;
 import com.github.erneo97.medical_clinic.exeption.PatientNotFoundException;
 import com.github.erneo97.medical_clinic.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PatientService {
     private final PatientRepository patientRepository;
     private final UserRepository userRepository;
@@ -62,7 +64,9 @@ public class PatientService {
 
         Patient patient = patientMapper.toPatient(command);
         patient.setUser(newUser);
-        return patientRepository.save(patient);
+        Patient savedPatient = patientRepository.save(patient);
+        log.info("stworzono {} pacjenta", patient.getId());
+        return  savedPatient;
     }
 
     @Transactional
@@ -70,6 +74,7 @@ public class PatientService {
         Patient patient = patientRepository.findById(id)
                         .orElseThrow(() -> new PatientNotFoundException(id));
         patient.updatePatient(command);
+        log.info("pacjent {} zmienil dane", patient.getId());
         return patient;
     }
 
@@ -77,12 +82,14 @@ public class PatientService {
     public void chanePassword(Long id, EditPasswordCommand command) {
         patientRepository.findById(id).orElseThrow( () -> new PatientNotFoundException(id) );
         patientRepository.updatePassword(id, command.password());
+        log.info("pacjent {} zmienil haslo", id);
     }
 
     @Transactional
     public void removeById(Long id) {
         findUserByIdOrThrowException(id);
         patientRepository.deleteById(id);
+        log.info("pacjent {} zostal usuniety", id);
     }
 
     @Transactional(readOnly = true)

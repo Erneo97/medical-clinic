@@ -122,14 +122,14 @@ obiekt ani Command w `{}`), komunikaty po polsku bez diakrytyków (`zarezerwowan
 - DEBUG: sprawdzanie nakładania przed zapisem, wynik liczenia wolnych slotów.
 - Odmów (409, 400) serwis nie loguje, robi to advice.
 
-**L37.2. `PatientService`** (`@Slf4j`)
+**~~L37.2. `PatientService`~~** (`@Slf4j`)
 - INFO: rejestracja (numer zapisanego pacjenta, bez `command`), zmiana danych, zmiana hasła
   (bez hasła), usunięcie.
 - `./mvnw test` zielony. Test tworzenia pada z `"saved" is null`? Dopisz
   `when(patientRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));`
   (to samo dla `visitRepository` w teście tworzenia wizyty).
 
-**L37.3. Próg i sprawdzenie**
+**~~L37.3. Próg i sprawdzenie~~**
 - `logging.level.com.github.kurs.medicalclinic=DEBUG` w `application.properties`, build,
   aplikacja z `> app.log 2>&1`.
 - Rejestracja pacjenta, dwa sloty doktora 1 (4.03.2030, 10:00 i 11:00), rezerwacja pierwszego
