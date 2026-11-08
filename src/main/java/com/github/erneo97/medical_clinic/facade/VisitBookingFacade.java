@@ -10,6 +10,7 @@ import com.github.erneo97.medical_clinic.model.Visit;
 import com.github.erneo97.medical_clinic.service.DoctorService;
 import com.github.erneo97.medical_clinic.service.PatientService;
 import com.github.erneo97.medical_clinic.service.VisitService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 @Service
+@Slf4j
 @AllArgsConstructor
 public class VisitBookingFacade {
     private final PatientService patientService;
@@ -33,11 +35,14 @@ public class VisitBookingFacade {
         Patient patient = patientService.findById(patientId);
         Doctor doctor = doctorService.getDoctorById(visit.getDoctor().getId());
         LocalDate dateVisit = visit.getStartsAt().toLocalDate();
-        return BookingSummaryDto.builder()
+        BookingSummaryDto summaryDto = BookingSummaryDto.builder()
                 .visit(visitMapper.toVisit(visit))
                 .doctor(doctorMapper.toDto(doctor))
                 .patient(patientMapper.toDto(patient))
                 .freeSlotsThatDay(visitService.countFreeSlots(doctor.getId(), dateVisit))
                 .build();
+
+        log.debug("zlozenie podsumowania wizyta {} u doktora {}, {} liczba wolnych miejsc dnia {}", visit.getId(), doctor.getId(), summaryDto.freeSlotsThatDay(), visit.getStartsAt().toLocalDate());
+        return summaryDto;
     }
 }

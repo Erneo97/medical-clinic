@@ -153,7 +153,7 @@ Gotowe, gdy:
 
 Ciąg dalszy MED-30 (L37), te same zasady wpisów co w cz. 1.
 
-**L37.4. Pozostałe serwisy i fasada**
+**~~L37.4. Pozostałe serwisy i fasada~~**
 - INFO w `DoctorService` (utworzenie, usunięcie, przypisanie i odpięcie placówki),
   `UserService` (utworzenie i usunięcie konta), `FacilityService` (utworzenie placówki).
 - `VisitBookingFacade`: jeden DEBUG o złożeniu podsumowania (wizyta, doktor). Rezerwacji

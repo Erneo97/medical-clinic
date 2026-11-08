@@ -51,6 +51,7 @@ public class PatientService {
         // Wymaga dostępu do innych pacjentów, dlatego znajduje się w serwisie.
         // Walidację formalną danych wejściowych wykonuje już @Valid.
         if (userRepository.existsByEmail(command.email())) {
+
             throw new PatientAlreadyExistsException(
                     "Patient with email " + command.email() + " already exists",
                     HttpStatus.CONFLICT
