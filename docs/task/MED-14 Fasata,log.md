@@ -160,14 +160,14 @@ Ciąg dalszy MED-30 (L37), te same zasady wpisów co w cz. 1.
   i wolnych slotów nie powtarzasz, zapisuje je `VisitService`.
 - `./mvnw test` zielony.
 
-**L37.5. `RequestIdFilter`** (pakiet `config`, `@Component`, dziedziczy po `OncePerRequestFilter`)
+**~~L37.5. `RequestIdFilter`~~** (pakiet `config`, `@Component`, dziedziczy po `OncePerRequestFilter`)
 - Krótki identyfikator żądania (np. 8 znaków UUID) w MDC pod kluczem `requestId` i w nagłówku
   odpowiedzi `X-Request-Id`; `MDC.remove("requestId")` w `finally`.
-- `logging.pattern.correlation=[%X{requestId}] ` (spacja na końcu, ginie przy kopiowaniu z PDF-u).
+- `logging.pattern.correlation=[%X{requestId}]` (spacja na końcu, ginie przy kopiowaniu z PDF-u).
 - `logging.file.name=logs/medical-clinic.log`, katalog `logs/` w `.gitignore`.
 - Każda linia logu z żądania ma identyfikator w nawiasie; puste `[]` tylko przy wpisach ze startu.
 
-**L37.6. Audyt pliku logu**
+**~~L37.6. Audyt pliku logu~~**
 - Zarejestruj pacjenta, zmień mu hasło (`PATCH /patients/{id}/password`), załóż placówkę i konto (`POST /users`).
 - `grep -riE 'password=|idCardNo|id_card_no' logs/` nic nie zwraca; nie ma też wysłanych haseł
   ani numeru dowodu (szukaj ich wartości).
