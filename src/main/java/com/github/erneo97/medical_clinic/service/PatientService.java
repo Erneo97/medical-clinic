@@ -83,7 +83,7 @@ public class PatientService {
     @Transactional
     public void chanePassword(Long id, EditPasswordCommand command) {
         patientRepository.findById(id).orElseThrow( () -> new PatientNotFoundException(id) );
-        patientRepository.updatePassword(id, command.password());
+        patientRepository.updatePassword(id, passwordEncoder.encode(command.password()));
         log.info("pacjent {} zmienil haslo", id);
     }
 
