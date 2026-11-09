@@ -117,7 +117,7 @@ Przed startem: baza od zera. Do L39.3 budujesz z `-DskipTests`: po włączeniu S
 - Bean `PasswordEncoder`: `new BCryptPasswordEncoder()`.
 - `curl -s -i http://localhost:8080/patients` → 401 z `WWW-Authenticate: Basic realm="Realm"`, bez `Set-Cookie`.
 
-**L39.2. Konta z tabeli**
+**~~L39.2. Konta z tabeli~~**
 - `UserRepository`: `Optional<User> findByEmail(String email)`.
 - `service/AccountUserDetailsService` (`@Service`, `implements UserDetailsService`): konto po e-mailu
   z nagłówka, `UserDetails` z hasłem i rolą; konta brak → `UsernameNotFoundException`. Nazwę `User`
@@ -129,7 +129,7 @@ Przed startem: baza od zera. Do L39.3 budujesz z `-DskipTests`: po włączeniu S
   Anny → 401 (w bazie czysty tekst, poprawka w L39.4); rejestracja z nagłówkiem Oli → 403.
 - Nowe konto dostaje 401? Rejestracja zapisała czysty tekst. Po poprawce baza od zera i rejestracja jeszcze raz.
 
-**L39.3. Testy z zabezpieczeniami** (`./mvnw test`: 16 porażek i 2 błędy)
+**~~L39.3. Testy z zabezpieczeniami~~** (`./mvnw test`: 16 porażek i 2 błędy)
 - `PatientControllerTest` i `VisitControllerTest`: `SecurityConfig.class` w `@Import` (wycinek
   `@WebMvcTest` sam go nie ładuje), `@WithMockUser` przy testach zalogowanego; testy rejestracji bez adnotacji.
 - `PatientApiIntegrationTest`: po rejestracji loguje się nowym kontem przez `Authorization: Basic`

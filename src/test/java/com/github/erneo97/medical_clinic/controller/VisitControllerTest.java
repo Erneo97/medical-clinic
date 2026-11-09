@@ -1,5 +1,6 @@
 package com.github.erneo97.medical_clinic.controller;
 
+import com.github.erneo97.medical_clinic.config.SecurityConfig;
 import com.github.erneo97.medical_clinic.dto.BookingSummaryDto;
 import com.github.erneo97.medical_clinic.dto.doctor.DoctorDto;
 import com.github.erneo97.medical_clinic.dto.patient.PatientDto;
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import org.springframework.data.domain.PageImpl;
@@ -45,7 +47,8 @@ import java.util.List;
 import java.util.Optional;
 
 @WebMvcTest(VisitController.class)
-@Import(VisitMapperImpl.class)
+@Import({VisitMapperImpl.class, SecurityConfig.class})
+@WithMockUser
 class VisitControllerTest {
     @Autowired
     private MockMvc mockMvc;

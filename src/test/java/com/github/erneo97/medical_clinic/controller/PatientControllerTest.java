@@ -1,5 +1,6 @@
 package com.github.erneo97.medical_clinic.controller;
 
+import com.github.erneo97.medical_clinic.config.SecurityConfig;
 import com.github.erneo97.medical_clinic.dto.patient.PatientCreateCommand;
 import com.github.erneo97.medical_clinic.exeption.PatientAlreadyExistsException;
 import com.github.erneo97.medical_clinic.exeption.PatientNotFoundException;
@@ -14,6 +15,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -26,7 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(PatientController.class)
-@Import(PatientMapperImpl.class)
+@Import({PatientMapperImpl.class, SecurityConfig.class})
 class PatientControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -38,6 +40,7 @@ class PatientControllerTest {
     private PatientService patientService;
 
     @Test
+    @WithMockUser
     void findAll_returnsPatients() throws Exception {
         // given
         when(patientService.findAll()).thenReturn(List.of(getPatient()));
@@ -55,6 +58,7 @@ class PatientControllerTest {
     }
 
     @Test
+    @WithMockUser
     void findById_patientExists_returnsPatientWithoutIdCardNo() throws Exception {
         // given
         Patient patient = getPatient(
@@ -72,6 +76,7 @@ class PatientControllerTest {
     }
 
     @Test
+    @WithMockUser
     void findById_patientDoesNotExist_returns404() throws Exception {
         // given
         PatientNotFoundException exception = new PatientNotFoundException(1L);
@@ -88,6 +93,7 @@ class PatientControllerTest {
     }
 
     @Test
+    @WithMockUser
     void findAll_returnsTwoPatients() throws Exception {
         // given
         Patient first = getPatient(1L, "anna@example.com", "Anna", "Nowak");
@@ -157,6 +163,7 @@ class PatientControllerTest {
     }
 
     @Test
+    @WithMockUser
     void delete_patientExists_returns204() throws Exception {
         mockMvc.perform(delete("/patients/{id}", 1L))
                 .andExpect(status().isNoContent());
@@ -165,6 +172,7 @@ class PatientControllerTest {
     }
 
     @Test
+    @WithMockUser
     void delete_patientDoesNotExist_returns404() throws Exception {
         doThrow(new PatientNotFoundException(1L))
                 .when(patientService).removeById(1L);
@@ -188,6 +196,7 @@ class PatientControllerTest {
     }
 
     @Test
+    @WithMockUser
     void findById_invalidIdType_returns400() throws Exception {
         mockMvc.perform(get("/patients/abc"))
                 .andExpect(status().isBadRequest())
@@ -197,6 +206,7 @@ class PatientControllerTest {
     }
 
     @Test
+    @WithMockUser
     void findById_unexpectedException_returns500() throws Exception {
         when(patientService.findById(1L))
                 .thenThrow(new IllegalStateException("Database connection failed"));
@@ -214,6 +224,7 @@ class PatientControllerTest {
     }
 
     @Test
+    @WithMockUser
     void delete_withoutId_returns405() throws Exception {
         mockMvc.perform(delete("/patients"))
                 .andExpect(status().isMethodNotAllowed())
