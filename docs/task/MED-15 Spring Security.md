@@ -109,7 +109,7 @@ nie ma sekcji `rollback`.
 
 Przed startem: baza od zera. Do L39.3 budujesz z `-DskipTests`: po włączeniu Spring Security testy padają.
 
-**L39.1. Zależności i łańcuch filtrów**
+**~~L39.1. Zależności i łańcuch filtrów~~**
 - `spring-boot-starter-security` pod starterem Liquibase'a i `spring-boot-starter-security-test`
   ze `<scope>test</scope>` pod starterem testów web.
 - `config/SecurityConfig`, bean `SecurityFilterChain`: bez CSRF, bez sesji (`SessionCreationPolicy.STATELESS`),

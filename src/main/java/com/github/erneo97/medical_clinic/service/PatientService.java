@@ -13,6 +13,7 @@ import com.github.erneo97.medical_clinic.exeption.PatientAlreadyExistsException;
 import com.github.erneo97.medical_clinic.exeption.PatientNotFoundException;
 import com.github.erneo97.medical_clinic.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class PatientService {
     private final PatientRepository patientRepository;
     private final UserRepository userRepository;
     private final PatientMapper patientMapper;
-    private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
     public List<Patient> findAll() {
@@ -59,7 +60,7 @@ public class PatientService {
         }
         User newUser = User.builder()
                 .email(command.email())
-                .password(command.password())
+                .password(passwordEncoder.encode(command.password()))
                 .role(Role.PATIENT)
                 .build();
 
