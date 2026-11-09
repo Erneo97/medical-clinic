@@ -14,7 +14,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -36,8 +39,12 @@ class PatientServiceTest {
     @Mock
     private PatientMapper patientMapper;
 
+    @Spy
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @InjectMocks
     private PatientService patientService;
+
 
     @Test
     public void findById_patientExists_returnsPatient() {
