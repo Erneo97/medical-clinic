@@ -76,6 +76,18 @@ class PatientControllerTest {
     }
 
     @Test
+    void findById_patientExistsNoAuthorization_returns401NoAuthorization() throws Exception {
+        // given
+        Patient patient = getPatient(
+                1L, "anna@example.com", "Anna", "Nowak"
+        );
+        when(patientService.findById(1L)).thenReturn(patient);
+
+        mockMvc.perform(get("/patients/{id}", 1L))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
     @WithMockUser
     void findById_patientDoesNotExist_returns404() throws Exception {
         // given

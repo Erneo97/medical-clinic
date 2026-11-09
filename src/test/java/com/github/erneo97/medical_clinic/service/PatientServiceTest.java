@@ -12,6 +12,7 @@ import com.github.erneo97.medical_clinic.repository.PatientRepository;
 import com.github.erneo97.medical_clinic.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
@@ -179,17 +180,21 @@ class PatientServiceTest {
     public void changePassword_patientExists_setsNewPassword() {
         // given
         final String oldPassword = "oldPassword123!",
-                newPassword = "newPassword123!";
-        Patient patient = getPatientWithPassword(oldPassword);
+                newPassword = passwordEncoder.encode("newPassword123!");
+        getPatientWithPassword(oldPassword);
         EditPasswordCommand editPasswordCommand = new EditPasswordCommand(newPassword);
         when(patientRepository.findById(1L)).thenReturn(Optional.of(getPatientWithPassword(newPassword)));
-
 
         // when
         patientService.chanePassword(1L, editPasswordCommand);
 
         // then
-        verify(patientRepository).updatePassword(1L, newPassword);
+        ArgumentCaptor<String> passwordCaptor = ArgumentCaptor.forClass(String.class);
+        verify(patientRepository).updatePassword( 1L, passwordCaptor.capture());
+        String encodedPassword = passwordCaptor.getValue();
+
+        assertNotEquals(newPassword, encodedPassword);
+        assertTrue(passwordEncoder.matches(newPassword, encodedPassword));
     }
 
     private Patient getPatientWithPassword(final String password) {

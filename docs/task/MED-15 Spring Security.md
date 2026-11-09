@@ -138,14 +138,14 @@ Przed startem: baza od zera. Do L39.3 budujesz z `-DskipTests`: po włączeniu S
   `encode`; w koncie ląduje to, co oddał `PasswordEncoder`.
 - Żaden test nie wyłącza zabezpieczeń (bez `excludeAutoConfiguration` i bez konfiguracji „przepuść wszystko").
 
-**L39.4. Hasło kodowane wszędzie**
+**~~L39.4. Hasło kodowane wszędzie~~**
 - `PatientService.changePassword` koduje hasło; w `changePassword_patientExists_setsNewPassword` stub `encode` i asercja na hash.
 - `UserService.create` (`POST /users`): maper przepisuje hasło z komendy, po mapowaniu podmień je na hash.
 - `data.sql`: hashe BCrypt zamiast haseł, hasła pokazowe w komentarzu nad wpisami. Hash zrobisz
   aplikacją: zarejestruj pacjenta z hasłem z `data.sql` i skopiuj `password` jego konta z bazy.
 - Na starej bazie `ON CONFLICT DO NOTHING` zostawi czyste hasła: baza od zera.
 
-**L39.5. `X-Request-Id` także przy 401**
+**~~L39.5. `X-Request-Id` także przy 401~~**
 - `RequestIdFilter` z L37 stoi za filtrem Spring Security (kolejność -100), więc 401 wychodzi bez
   nagłówka. Przestaw filtr na początek łańcucha.
 
