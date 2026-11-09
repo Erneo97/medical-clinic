@@ -192,7 +192,7 @@ jshell --class-path $JAR/spring-security-crypto-7.1.1.jar /tmp/hash.jsh
 - Na końcu `anyRequest().denyAll()`.
 - W `hasRole` podajesz samą nazwę roli, przedrostek `ROLE_` Spring Security dokleja sam.
 
-**L40.3. Sprawdź** (przy każdym przypadku wiesz, która reguła zadecydowała)
+**~~L40.3. Sprawdź~~** (przy każdym przypadku wiesz, która reguła zadecydowała)
 - `GET /patients`: Anna 403, admin 200. `GET /patients/1`: Anna 200, admin 403.
 - `GET /users`: Anna 403, admin 200.
 - `GET /doctors` kontem doktor Katarzyny: 403. `GET /nie-ma-takiej` jako Anna: 403.
@@ -200,7 +200,7 @@ jshell --class-path $JAR/spring-security-crypto-7.1.1.jar /tmp/hash.jsh
 - `POST /visits` z `{"doctorId": 1, "startsAt": "2030-03-04T10:00:00", "endsAt": "2030-03-04T10:30:00"}`: Anna 403, admin 201.
 - Anna dostaje listę pacjentów? Reguła `/patients/**` stoi nad `GET /patients`: wygrywa pierwsza pasująca.
 
-**L40.4. Testy pod role** (`./mvnw test`: 12 porażek, wszystkie z 403)
+**~~L40.4. Testy pod role~~** (`./mvnw test`: 12 porażek, wszystkie z 403)
 - `PatientControllerTest`: testy listy (`GET /patients`) z `@WithMockUser(roles = "ADMIN")`, pozostałe
   z `@WithMockUser` dostają `roles = "PATIENT"`, testy rejestracji bez adnotacji.
 - `VisitControllerTest`: `@WithMockUser(roles = "PATIENT")` nad klasą.

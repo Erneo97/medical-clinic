@@ -11,14 +11,12 @@ import com.github.erneo97.medical_clinic.exeption.VisitAlreadyBookedException;
 import com.github.erneo97.medical_clinic.facade.VisitBookingFacade;
 import com.github.erneo97.medical_clinic.mapper.VisitMapperImpl;
 import com.github.erneo97.medical_clinic.model.Doctor;
-import com.github.erneo97.medical_clinic.model.Role;
 import com.github.erneo97.medical_clinic.model.Specialization;
 import com.github.erneo97.medical_clinic.model.Visit;
 import com.github.erneo97.medical_clinic.service.DoctorService;
 import com.github.erneo97.medical_clinic.service.PatientService;
 import com.github.erneo97.medical_clinic.service.VisitService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Import;
@@ -44,11 +42,10 @@ import org.springframework.data.domain.Pageable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @WebMvcTest(VisitController.class)
 @Import({VisitMapperImpl.class, SecurityConfig.class})
-@WithMockUser
+@WithMockUser(roles = "PATIENT")
 class VisitControllerTest {
     @Autowired
     private MockMvc mockMvc;

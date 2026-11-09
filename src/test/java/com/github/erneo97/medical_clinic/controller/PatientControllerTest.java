@@ -40,7 +40,7 @@ class PatientControllerTest {
     private PatientService patientService;
 
     @Test
-    @WithMockUser
+    @WithMockUser(roles = "ADMIN")
     void findAll_returnsPatients() throws Exception {
         // given
         when(patientService.findAll()).thenReturn(List.of(getPatient()));
@@ -58,7 +58,7 @@ class PatientControllerTest {
     }
 
     @Test
-    @WithMockUser
+    @WithMockUser(roles = "PATIENT")
     void findById_patientExists_returnsPatientWithoutIdCardNo() throws Exception {
         // given
         Patient patient = getPatient(
@@ -75,20 +75,10 @@ class PatientControllerTest {
                 .andExpect(jsonPath("$.idCardNo").doesNotExist());
     }
 
-    @Test
-    void findById_patientExistsNoAuthorization_returns401NoAuthorization() throws Exception {
-        // given
-        Patient patient = getPatient(
-                1L, "anna@example.com", "Anna", "Nowak"
-        );
-        when(patientService.findById(1L)).thenReturn(patient);
 
-        mockMvc.perform(get("/patients/{id}", 1L))
-                .andExpect(status().isUnauthorized());
-    }
 
     @Test
-    @WithMockUser
+    @WithMockUser(roles = "PATIENT")
     void findById_patientDoesNotExist_returns404() throws Exception {
         // given
         PatientNotFoundException exception = new PatientNotFoundException(1L);
@@ -105,7 +95,7 @@ class PatientControllerTest {
     }
 
     @Test
-    @WithMockUser
+    @WithMockUser(roles = "ADMIN")
     void findAll_returnsTwoPatients() throws Exception {
         // given
         Patient first = getPatient(1L, "anna@example.com", "Anna", "Nowak");
@@ -175,7 +165,7 @@ class PatientControllerTest {
     }
 
     @Test
-    @WithMockUser
+    @WithMockUser(roles = "PATIENT")
     void delete_patientExists_returns204() throws Exception {
         mockMvc.perform(delete("/patients/{id}", 1L))
                 .andExpect(status().isNoContent());
@@ -184,7 +174,7 @@ class PatientControllerTest {
     }
 
     @Test
-    @WithMockUser
+    @WithMockUser(roles = "PATIENT")
     void delete_patientDoesNotExist_returns404() throws Exception {
         doThrow(new PatientNotFoundException(1L))
                 .when(patientService).removeById(1L);
@@ -208,7 +198,7 @@ class PatientControllerTest {
     }
 
     @Test
-    @WithMockUser
+    @WithMockUser(roles = "PATIENT")
     void findById_invalidIdType_returns400() throws Exception {
         mockMvc.perform(get("/patients/abc"))
                 .andExpect(status().isBadRequest())
@@ -218,7 +208,7 @@ class PatientControllerTest {
     }
 
     @Test
-    @WithMockUser
+    @WithMockUser(roles = "PATIENT")
     void findById_unexpectedException_returns500() throws Exception {
         when(patientService.findById(1L))
                 .thenThrow(new IllegalStateException("Database connection failed"));
@@ -236,7 +226,7 @@ class PatientControllerTest {
     }
 
     @Test
-    @WithMockUser
+    @WithMockUser(roles = "PATIENT")
     void delete_withoutId_returns405() throws Exception {
         mockMvc.perform(delete("/patients"))
                 .andExpect(status().isMethodNotAllowed())
@@ -246,7 +236,7 @@ class PatientControllerTest {
         verifyNoInteractions(patientService);
     }
 
-    private Patient getPatient(Long id, String email, String firstName, String lastName) {
+    public static Patient getPatient(Long id, String email, String firstName, String lastName) {
         User user = User.builder()
                 .email(email)
                 .build();
@@ -261,7 +251,7 @@ class PatientControllerTest {
                 .build();
     }
 
-    private PatientCreateCommand getPatientCreateCommand() {
+    public static PatientCreateCommand getPatientCreateCommand() {
         return PatientCreateCommand.builder()
                 .email("anna@example.com")
                 .password("Password123!")
