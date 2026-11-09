@@ -1,5 +1,6 @@
 package com.github.erneo97.medical_clinic.config;
 
+import com.github.erneo97.medical_clinic.model.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -19,7 +20,12 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/patients").anonymous()
-                        .anyRequest().authenticated())
+                        .requestMatchers(HttpMethod.GET, "/patients").hasRole(Role.ADMIN.getValue())
+                        .requestMatchers( "/users/**").hasRole(Role.ADMIN.getValue())
+                        .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").hasRole(Role.ADMIN.getValue())
+                        .requestMatchers(HttpMethod.POST, "/visits").hasRole(Role.ADMIN.getValue())
+                        .requestMatchers("/patients/**","/doctors/**","/facilities/**", "/visits/**").hasRole(Role.PATIENT.getValue())
+                        .anyRequest().denyAll())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
     }

@@ -183,7 +183,7 @@ JAR=~/.m2/repository/org/springframework/security/spring-security-crypto/7.1.1
 jshell --class-path $JAR/spring-security-crypto-7.1.1.jar /tmp/hash.jsh
 ```
 
-**L40.2. Reguły** (w `SecurityConfig` zamiast `.anyRequest().authenticated()`, w tej kolejności, rejestracja zostaje na górze)
+**~~L40.2. Reguły~~** (w `SecurityConfig` zamiast `.anyRequest().authenticated()`, w tej kolejności, rejestracja zostaje na górze)
 - `GET /patients` (lista i wyszukiwanie) tylko dla ADMIN.
 - `/users/**` (konta) tylko dla ADMIN.
 - Swagger UI (`/swagger-ui.html`, `/swagger-ui/**`, `/v3/api-docs/**`) tylko dla ADMIN.

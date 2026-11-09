@@ -8,6 +8,7 @@ import lombok.ToString;
 public enum Role {
     PATIENT("PATIENT"),
     DOCTOR("DOCTOR"),
+    ADMIN("ADMIN"),
     NOTHING("NOTHING");
 
     private final String name;

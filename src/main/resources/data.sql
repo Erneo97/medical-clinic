@@ -1,6 +1,6 @@
--- 1. Konta password default: JavaJ3stSuper1
+-- 1. Konta password default: JavaJ3stSuper!
 INSERT INTO users (email, password, role)
-VALUES ('anna.nowak@example.com', '$2a$10$kSU/3mk2auJYm5Q.BQU7bOYAfiz.RuqTUh6ojMCQr50Sf0W5vVtv.', 'PATIENT')
+VALUES ('anna.nowak@example.com', '$2a$10$kSU/3mk2auJYm5Q.BQU7bOYAfiz.RuqTUh6ojMCQr50Sf0W5vVtv.', 'ADMIN')
     ON CONFLICT (email) DO NOTHING;
 
 INSERT INTO users (email, password, role)
