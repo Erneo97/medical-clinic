@@ -21,10 +21,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/patients").anonymous()
                         .requestMatchers(HttpMethod.GET, "/patients").hasRole(Role.ADMIN.getValue())
+                        .requestMatchers(HttpMethod.POST, "/doctors").hasRole(Role.ADMIN.getValue())
+                        .requestMatchers(HttpMethod.GET, "/doctors").hasRole(Role.ADMIN.getValue())
+                        .requestMatchers(HttpMethod.POST, "/facilities").hasRole(Role.ADMIN.getValue())
                         .requestMatchers( "/users/**").hasRole(Role.ADMIN.getValue())
+                        .requestMatchers("/doctors/*/facilities/*").hasRole(Role.DOCTOR.getValue())
                         .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").hasRole(Role.ADMIN.getValue())
                         .requestMatchers(HttpMethod.POST, "/visits").hasRole(Role.ADMIN.getValue())
-                        .requestMatchers("/patients/**","/doctors/**","/facilities/**", "/visits/**").hasRole(Role.PATIENT.getValue())
+                        .requestMatchers("/patients/**","/doctors/**", "/visits/**").hasRole(Role.PATIENT.getValue())
+                        .requestMatchers(HttpMethod.GET, "/facilities/**").authenticated()
                         .anyRequest().denyAll())
                 .httpBasic(Customizer.withDefaults());
         return http.build();

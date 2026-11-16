@@ -28,7 +28,7 @@ Przed startem: aplikacja zatrzymana, baza od zera.
 - Build i start na świeżej bazie (tabele zakłada jeszcze Hibernate); gdy `grep 'Started' app.log`
   coś pokaże, zatrzymaj aplikację.
 - Sprawdź, jakie ograniczenia check (listy dozwolonych wartości) Hibernate założył na kolumnach z enumem:
-  `docker exec clinic-db psql -U clinic -d clinic -c "SELECT conrelid::regclass AS tabela, conname FROM pg_constraint WHERE contype = 'c' AND conrelid <> 0 ORDER BY conname"`.
+  `docker exec -it medicalClinic psql -U clinicUsr -d clinic -c "SELECT conrelid::regclass AS tabela, conname FROM pg_constraint WHERE contype = 'c' AND conrelid <> 0 ORDER BY conname"`.
 - Generator Liquibase'a zapisuje schemat jako pierwszy krok historii (polecenie niżej).
 - `grep -c 'changeSet:' $PLIK` → 18, każdy krok ma `author: kursant`.
 - Porównaj ograniczenia check w bazie i w pliku (`grep -ci 'check' $PLIK`) i zapisz, których brakuje: wrócą w L38.5.
@@ -36,8 +36,8 @@ Przed startem: aplikacja zatrzymana, baza od zera.
 ```bash
 PLIK=src/main/resources/liquibase-changelog/versions/001-initial.yaml
 ./mvnw -q org.liquibase:liquibase-maven-plugin:5.0.3:generateChangeLog \
-  -Dliquibase.url=jdbc:postgresql://localhost:5432/clinic \
-  -Dliquibase.username=clinic -Dliquibase.password=clinic \
+  -Dliquibase.url=jdbc:postgresql://localhost:5433/clinic \
+  -Dliquibase.username=clinicUsr -Dliquibase.password=clinic123 \
   -Dliquibase.changeSetAuthor=kursant \
   -Dliquibase.outputChangeLogFile=$PLIK
 ```
