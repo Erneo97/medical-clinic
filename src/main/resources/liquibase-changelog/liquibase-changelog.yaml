@@ -5,3 +5,6 @@ databaseChangeLog:
   - include:
       file: versions/002-enum-checks.yaml
       relativeToChangelogFile: true
+  - include:
+      file: versions/003-visits-doctor-starts-at-index.yaml
+      relativeToChangelogFile: true

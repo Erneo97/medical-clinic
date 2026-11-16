@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: create=idx-visits-doctor-starts-at
+      author: erne97
+      changes:
+        - createIndex:
+            tableName: visits
+            indexName: idx_visits_doctor_starts_at
+            columns:
+              - column:
+                  name: doctor_id
+              - column:
+                  name: starts_at
+      rollback:
+        - dropIndex:
+            tableName: visits
+            indexName: idx_visits_doctor_starts_at

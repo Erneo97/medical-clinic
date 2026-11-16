@@ -65,7 +65,7 @@ PLIK=src/main/resources/liquibase-changelog/versions/001-initial.yaml
   Nazwy tabel i ograniczeń przepisz z kroku, który cofasz.
 - Identyfikatorów z generatora jeszcze nie ruszasz: porządkujesz je w MED-18.
 
-**L38.5. Code review historii**
+**~~L38.5. Code review historii~~**
 - Każda poprawka to nowy krok w osobnym pliku w `versions/`, z wpisem na końcu spisu i z sekcją `rollback`.
 - `002-enum-checks.yaml`, krok `19`: ograniczenia check, które zgubił generator. Zmiana `sql`
   (`ALTER TABLE ... ADD CONSTRAINT ... CHECK (... IN (...))`, wartości z enumów w kodzie); jej
