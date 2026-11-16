@@ -33,6 +33,7 @@ public class SecurityConfig {
 
                         .requestMatchers("/patients/**","/doctors/**", "/visits/**").hasRole(Role.PATIENT.getValue())
                         .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").hasRole(Role.ADMIN.getValue())
+                        .requestMatchers("/postman/**").hasRole(Role.ADMIN.getValue())
                         .anyRequest().denyAll())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
