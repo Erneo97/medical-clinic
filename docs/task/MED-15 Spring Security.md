@@ -264,7 +264,7 @@ Przed startem: stan po MED-20, aplikacja zatrzymana.
   bo Liquibase rusza przed `data.sql`, więc żądanie usuwało admina. Anna ma konto 2: `/users/1` → `/users/2`.
 - Folder `users` to zewnętrzne API z L3 (środowisko `test`), dlatego polecenie wymienia foldery aplikacji po kolei.
 
-**L40.8. Eksport do Postmana**
+**~~L40.8. Eksport do Postmana~~**
 - W skryptach `res.body` → `res.getBody()`: Bruno rozumie oba, a konwerter poprawnie tłumaczy tylko drugi zapis.
 - Z plików z blokiem `params:query` usuń ten blok, parametr zostaw w adresie.
 - Bruno → Open Collection z katalogu `bruno` projektu → menu kolekcji → Share → Postman, prosto do
