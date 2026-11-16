@@ -1,6 +1,6 @@
 databaseChangeLog:
     - changeSet:
-          id: 1794830789146-1
+          id: 1
           author: erneo97
           changes:
               - createTable:
@@ -38,7 +38,7 @@ databaseChangeLog:
               - dropTable:
                     tableName: doctors
     - changeSet:
-          id: 1794830789146-2
+          id: 2
           author: erneo97
           changes:
               - createTable:
@@ -71,7 +71,7 @@ databaseChangeLog:
               - dropTable:
                     tableName: users
     - changeSet:
-          id: 1794830789146-3
+          id: 3
           author: erneo97
           changes:
               - createTable:
@@ -117,7 +117,7 @@ databaseChangeLog:
               - dropTable:
                     tableName: patients
     - changeSet:
-          id: 1794830789146-4
+          id: 4
           author: erneo97
           changes:
               - createTable:
@@ -156,7 +156,7 @@ databaseChangeLog:
               - dropTable:
                     tableName: facilities
     - changeSet:
-          id: 1794830789146-5
+          id: 5
           author: erneo97
           changes:
               - addUniqueConstraint:
@@ -168,7 +168,7 @@ databaseChangeLog:
                     tableName: doctors
                     constraintName: ukt1f6cueqyjwx5ghew9ar1exe3
     - changeSet:
-          id: 1794830789146-6
+          id: 6
           author: erneo97
           changes:
               - addUniqueConstraint:
@@ -180,7 +180,7 @@ databaseChangeLog:
                     tableName: users
                     constraintName: uk6dotkott2kjsp8vw4d0m25fb7
     - changeSet:
-          id: 1794830789146-7
+          id: 7
           author: erneo97
           changes:
               - addUniqueConstraint:
@@ -192,7 +192,7 @@ databaseChangeLog:
                     tableName: patients
                     constraintName: uk3usu2gl5shfee2u3f4gfw4w3p
     - changeSet:
-          id: 1794830789146-8
+          id: 8
           author: erneo97
           changes:
               - addUniqueConstraint:
@@ -204,7 +204,7 @@ databaseChangeLog:
                     tableName: patients
                     constraintName: uk9tbsl3fmey0eofbm2xj69v4qs
     - changeSet:
-          id: 1794830789146-9
+          id: 9
           author: erneo97
           changes:
               - addUniqueConstraint:
@@ -216,7 +216,7 @@ databaseChangeLog:
                     tableName: facilities
                     constraintName: uk6tm0w2xajnx3l566muxq8apmq
     - changeSet:
-          id: 1794830789146-10
+          id: 10
           author: erneo97
           changes:
               - createTable:
@@ -240,7 +240,7 @@ databaseChangeLog:
               - dropTable:
                     tableName: doctor_facility
     - changeSet:
-          id: 1794830789146-11
+          id: 11
           author: erneo97
           changes:
               - createTable:
@@ -277,7 +277,7 @@ databaseChangeLog:
               - dropTable:
                     tableName: visits
     - changeSet:
-          id: 1794830789146-12
+          id: 12
           author: erneo97
           changes:
               - addForeignKeyConstraint:
@@ -296,7 +296,7 @@ databaseChangeLog:
                     baseTableName: doctor_facility
                     constraintName: fk6rvws93w4vd9s5tggl1diftg0
     - changeSet:
-          id: 1794830789146-13
+          id: 13
           author: erneo97
           changes:
               - addForeignKeyConstraint:
@@ -315,7 +315,7 @@ databaseChangeLog:
                     baseTableName: doctors
                     constraintName: fke9pf5qtxxkdyrwibaevo9frtk
     - changeSet:
-          id: 1794830789146-14
+          id: 14
           author: erneo97
           changes:
               - addForeignKeyConstraint:
@@ -334,7 +334,7 @@ databaseChangeLog:
                     baseTableName: doctor_facility
                     constraintName: fkj2psotpoak4d7vydo85rjtxb1
     - changeSet:
-          id: 1794830789146-15
+          id: 15
           author: erneo97
           changes:
               - addForeignKeyConstraint:
@@ -353,7 +353,7 @@ databaseChangeLog:
                     baseTableName: visits
                     constraintName: fkra5p2e0tp6djolm46kdr42cyt
     - changeSet:
-          id: 1794830789146-16
+          id: 16
           author: erneo97
           changes:
               - addForeignKeyConstraint:
@@ -372,7 +372,7 @@ databaseChangeLog:
                     baseTableName: visits
                     constraintName: fkth95fndjk3y3nepjfu3f66r63
     - changeSet:
-          id: 1794830789146-17
+          id: 17
           author: erneo97
           changes:
               - addForeignKeyConstraint:

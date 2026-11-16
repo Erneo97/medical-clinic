@@ -4,7 +4,11 @@ VALUES ('anna.nowak@example.com', '$2a$10$kSU/3mk2auJYm5Q.BQU7bOYAfiz.RuqTUh6ojM
     ON CONFLICT (email) DO NOTHING;
 
 INSERT INTO users (email, password, role)
-VALUES ('jan.kowalski@example.com', '$2a$10$kSU/3mk2auJYm5Q.BQU7bOYAfiz.RuqTUh6ojMCQr50Sf0W5vVtv.', 'ADMIN')
+VALUES ('jan.kowalski@example.com', '$2a$10$kSU/3mk2auJYm5Q.BQU7bOYAfiz.RuqTUh6ojMCQr50Sf0W5vVtv.', 'DOCTOR')
+    ON CONFLICT (email) DO NOTHING;
+
+INSERT INTO users (email, password, role)
+VALUES ('mateusz.nowak@admin.com', '$2a$10$kSU/3mk2auJYm5Q.BQU7bOYAfiz.RuqTUh6ojMCQr50Sf0W5vVtv.', 'ADMIN')
     ON CONFLICT (email) DO NOTHING;
 
 INSERT INTO users (email, password, role)

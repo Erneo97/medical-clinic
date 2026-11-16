@@ -165,7 +165,7 @@ Przed startem: baza od zera. Do L40.4 budujesz z `-DskipTests`: po regułach z r
 Kolumna `role` jest w `users` od L21, więc skrypt z polem `role` z MED-16 nie jest potrzebny. Konsoli
 H2 w aplikacji nie ma, więc „konsolę bazy" z MED-17 zastępuje Swagger UI.
 
-**L40.1. Rola ADMIN i admin z historii schematu**
+**~~L40.1. Rola ADMIN i admin z historii schematu~~**
 - `Role`: wartość `ADMIN` na końcu.
 - `versions/004-admin.yaml` na końcu spisu, dwa kroki z `author: kursant` i z `rollback`.
 - Krok `21`: usuń `users_role_check` i załóż go od nowa z `PATIENT`, `DOCTOR` i `ADMIN` (dwie zmiany `sql`, jak w kroku 19).
@@ -219,7 +219,7 @@ Gotowe, gdy (aplikacja zatrzymana, baza od zera, build, start):
 
 Przed startem: stan po MED-16 i MED-17. Z MED-20 zostały same wymagania ról.
 
-**L40.5. Reguły** (w `SecurityConfig` pod regułą `POST /visits`, nad regułą dla PATIENT, w tej kolejności)
+**~~L40.5. Reguły~~** (w `SecurityConfig` pod regułą `POST /visits`, nad regułą dla PATIENT, w tej kolejności)
 - `POST /doctors` i `POST /facilities` (nowi doktorzy i placówki) tylko dla ADMIN.
 - `GET /doctors` (lista doktorów) tylko dla ADMIN.
 - `GET /facilities/**` dla każdego zalogowanego (`authenticated()`).
@@ -239,7 +239,7 @@ Gotowe, gdy (baza od zera, build, start):
 
 Przed startem: stan po MED-20, aplikacja zatrzymana.
 
-**L40.6. Identyfikatory od 1**
+**~~L40.6. Identyfikatory od 1~~**
 - Kroki w `001-initial.yaml` dostają identyfikatory `1` do `18` w kolejności z pliku (tak je wykonuje
   Liquibase); kroki `19`-`22` już je mają. Na stanie z tagu `po-L38-pd` lub późniejszym kroki są już
   ponumerowane, więc tylko sprawdzasz.
@@ -247,7 +247,7 @@ Przed startem: stan po MED-20, aplikacja zatrzymana.
   pada z `relation "doctors" already exists`, więc baza od zera. Zmieniać identyfikatory wolno ci
   tylko dlatego, że historia nie wyszła poza twój komputer; na wspólnym środowisku wykonanych kroków się nie rusza.
 
-**L40.7. Kolekcja Bruno na trzech kontach** (od MED-15 żądania kolekcji poza rejestracją dostają 401)
+**~~L40.7. Kolekcja Bruno na trzech kontach~~** (od MED-15 żądania kolekcji poza rejestracją dostają 401)
 - `bruno/collection.bru`: basic auth ze zmiennych `{{email}}` i `{{haslo}}`.
 - `bruno/environments/local.bru`: `email` i `haslo` Anny, `adminEmail` i `adminHaslo` admina,
   `doktorEmail` i `doktorHaslo` doktor Katarzyny.

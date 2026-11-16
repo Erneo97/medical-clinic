@@ -19,17 +19,20 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.POST, "/doctor").hasRole(Role.ADMIN.getValue())
+                        .requestMatchers(HttpMethod.POST, "/facilities").hasRole(Role.ADMIN.getValue())
+                        .requestMatchers(HttpMethod.GET, "/doctors").hasRole(Role.ADMIN.getValue())
+                        .requestMatchers(HttpMethod.GET, "/facilities/**").authenticated()
+                        .requestMatchers("/doctors/*/facilities/*").hasRole(Role.DOCTOR.getValue())
+                        .requestMatchers(HttpMethod.POST, "/visits").hasRole(Role.ADMIN.getValue())
+                        .requestMatchers("/doctors/**").hasRole(Role.DOCTOR.getValue())
+
                         .requestMatchers(HttpMethod.POST, "/patients").anonymous()
                         .requestMatchers(HttpMethod.GET, "/patients").hasRole(Role.ADMIN.getValue())
-                        .requestMatchers(HttpMethod.POST, "/doctors").hasRole(Role.ADMIN.getValue())
-                        .requestMatchers(HttpMethod.GET, "/doctors").hasRole(Role.ADMIN.getValue())
-                        .requestMatchers(HttpMethod.POST, "/facilities").hasRole(Role.ADMIN.getValue())
                         .requestMatchers( "/users/**").hasRole(Role.ADMIN.getValue())
-                        .requestMatchers("/doctors/*/facilities/*").hasRole(Role.DOCTOR.getValue())
-                        .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").hasRole(Role.ADMIN.getValue())
-                        .requestMatchers(HttpMethod.POST, "/visits").hasRole(Role.ADMIN.getValue())
+
                         .requestMatchers("/patients/**","/doctors/**", "/visits/**").hasRole(Role.PATIENT.getValue())
-                        .requestMatchers(HttpMethod.GET, "/facilities/**").authenticated()
+                        .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").hasRole(Role.ADMIN.getValue())
                         .anyRequest().denyAll())
                 .httpBasic(Customizer.withDefaults());
         return http.build();

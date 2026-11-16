@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: restore-enum-checks-role
+      id: 19
       author: erneo97
       changes:
         - sql:
@@ -11,7 +11,7 @@ databaseChangeLog:
         - sql:
             sql: ALTER TABLE users DROP CONSTRAINT users_role_check
   - changeSet:
-      id: restore-enum-checks-specialization
+      id: 20
       author: erneo97
       changes:
         - sql:

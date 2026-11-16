@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: admin-role-check
+      id: 22
       author: erneo97
       changes:
         - sql:
