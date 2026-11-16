@@ -6,7 +6,7 @@ databaseChangeLog:
         - sql:
             sql: >-
               ALTER TABLE users ADD CONSTRAINT users_role_check
-              CHECK (role IN ('PATIENT', 'DOCTOR', 'ADMIN', 'NOTHING'))
+              CHECK (role IN ('PATIENT', 'DOCTOR', 'NOTHING'))
       rollback:
         - sql:
             sql: ALTER TABLE users DROP CONSTRAINT users_role_check

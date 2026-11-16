@@ -8,3 +8,6 @@ databaseChangeLog:
   - include:
       file: versions/003-visits-doctor-starts-at-index.yaml
       relativeToChangelogFile: true
+  - include:
+      file: versions/004-admin.yaml
+      relativeToChangelogFile: true
