@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: versions/001-initial.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: versions/002-enum-checks.yaml
+      relativeToChangelogFile: true

@@ -19,6 +19,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import static org.mockito.ArgumentMatchers.eq;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -190,7 +191,7 @@ class PatientServiceTest {
 
         // then
         ArgumentCaptor<String> passwordCaptor = ArgumentCaptor.forClass(String.class);
-        verify(patientRepository).updatePassword( 1L, passwordCaptor.capture());
+        verify(patientRepository).updatePassword(eq(1L), passwordCaptor.capture());
         String encodedPassword = passwordCaptor.getValue();
 
         assertNotEquals(newPassword, encodedPassword);

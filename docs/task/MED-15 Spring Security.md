@@ -24,7 +24,7 @@ dochodzi w MED-17.
 
 Przed startem: aplikacja zatrzymana, baza od zera.
 
-**L38.1. Schemat z bazy**
+**~~L38.1. Schemat z bazy~~**
 - Build i start na świeżej bazie (tabele zakłada jeszcze Hibernate); gdy `grep 'Started' app.log`
   coś pokaże, zatrzymaj aplikację.
 - Sprawdź, jakie ograniczenia check (listy dozwolonych wartości) Hibernate założył na kolumnach z enumem:
@@ -42,7 +42,7 @@ PLIK=src/main/resources/liquibase-changelog/versions/001-initial.yaml
   -Dliquibase.outputChangeLogFile=$PLIK
 ```
 
-**L38.2. Liquibase rządzi, Hibernate pilnuje**
+**~~L38.2. Liquibase rządzi, Hibernate pilnuje~~**
 - `spring-boot-starter-liquibase` w `pom.xml` pod sterownikiem PostgreSQL, bez wersji.
 - Spis `liquibase-changelog/liquibase-changelog.yaml` z jawnym `include` pliku `versions/001-initial.yaml`
   (`relativeToChangelogFile: true`).
@@ -54,12 +54,12 @@ PLIK=src/main/resources/liquibase-changelog/versions/001-initial.yaml
 - Licznik kroków w logu: `grep -E 'liquibase.util +: (Run|Previously run|Total change sets):' app.log | sed 's/.* : //'`.
 - Na świeżej bazie `Schema validation: missing table [...]`? W pliku została flaga `defer-datasource-initialization`.
 
-**L38.3. Testy jadą historią**
+**~~L38.3. Testy jadą historią~~**
 - `./mvnw test` → `Errors: 2` i `no changelog could be found at 'classpath:/db/changelog/db.changelog-master.yaml'`.
 - Na końcu `src/test/resources/application.properties` ten sam wpis spisu i `spring.jpa.hibernate.ddl-auto=validate`
   (plik testów zastępuje główny, a nie uzupełnia go) → `Tests run: 51`, `BUILD SUCCESS`.
 
-**L38.4. Przepisy na cofnięcie**
+**~~L38.4. Przepisy na cofnięcie~~**
 - Każdy krok w `001-initial.yaml` dostaje sekcję `rollback`: `dropTable` do `createTable`,
   `dropUniqueConstraint` do `addUniqueConstraint`, `dropForeignKeyConstraint` do `addForeignKeyConstraint`.
   Nazwy tabel i ograniczeń przepisz z kroku, który cofasz.

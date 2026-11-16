@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: restore-enum-checks-role
+      author: erneo97
+      changes:
+        - sql:
+            sql: >-
+              ALTER TABLE users ADD CONSTRAINT users_role_check
+              CHECK (role IN ('PATIENT', 'DOCTOR', 'ADMIN', 'NOTHING'))
+      rollback:
+        - sql:
+            sql: ALTER TABLE users DROP CONSTRAINT users_role_check
+  - changeSet:
+      id: restore-enum-checks-specialization
+      author: erneo97
+      changes:
+        - sql:
+            sql: >-
+              ALTER TABLE doctors ADD CONSTRAINT doctors_specialization_check
+              CHECK (specialization IN ('DERMATOLOGIST', 'CARDIOLOGIST', 'PEDIATRICIAN', 'UNKNOWN'))
+      rollback:
+        - sql:
+            sql: ALTER TABLE doctors DROP CONSTRAINT doctors_specialization_check
