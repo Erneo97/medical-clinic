@@ -3,20 +3,22 @@ package com.github.erneo97.medical_clinic.config;
 import com.github.erneo97.medical_clinic.model.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.*;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
 
 @Configuration
+@Import(JwtConfig.class)
 public class SecurityConfig {
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationConverter converter) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -38,7 +40,9 @@ public class SecurityConfig {
                         .requestMatchers("/postman/**").hasRole(Role.ADMIN.getValue())
                         .requestMatchers(HttpMethod.POST, "/auth/token").permitAll()
                         .anyRequest().denyAll())
-                .httpBasic(Customizer.withDefaults());
+                .oauth2ResourceServer(
+                        oauth2 ->
+                                oauth2.jwt( jwt -> jwt.jwtAuthenticationConverter(converter)));
         return http.build();
     }
 

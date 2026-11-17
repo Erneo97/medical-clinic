@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
-import javax.naming.AuthenticationException;
+import org.springframework.security.core.AuthenticationException;
 import java.util.*;
 
 @Slf4j
@@ -68,6 +68,12 @@ public class GlobalExceptionHandler {
         return problem;
     }
 
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<Map<String, String>> handleAuthentication(AuthenticationException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of("error", "wrong e-mail or password"));
+    }
+
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ProblemDetail handleMethodNotSupported(
             HttpRequestMethodNotSupportedException exception) {
@@ -93,12 +99,6 @@ public class GlobalExceptionHandler {
                 .sorted(Comparator.comparing(FieldError::getField))
                 .map(this::getFieldErrorInReturnFormat)
                 .toList();
-    }
-
-    @ExceptionHandler(AuthenticationException.class)
-    ResponseEntity<Map<String, String>> handleWrongAuthentication(AuthenticationException ex) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(Map.of("error", "wrong e-mail or password"));
     }
 
     private Map<String, String> getFieldErrorInReturnFormat(FieldError fieldError) {

@@ -353,14 +353,14 @@ TOKEN=$(curl -s -X POST http://localhost:8080/auth/token \
 
 `ADMIN_TOKEN` zapisujesz tak samo, z danymi `admin`/`admin`.
 
-**L41.3. Token zamiast basic auth**
+**~~L41.3. Token zamiast basic auth~~**
 - `SecurityConfig`: bez `httpBasic`, z `oauth2ResourceServer` i JWT (dekoder z `JwtConfig`); reguła logowania zostaje.
 - `@Import(JwtConfig.class)` nad `SecurityConfig`: wycinki `@WebMvcTest` importują `SecurityConfig`,
   ale innych klas konfiguracji nie ładują, a łańcuch z resource serverem bez dekodera nie wstaje.
 - `application.properties`: role w claimie `roles`, przedrostek `ROLE_` (dwa wpisy). `issuer-uri` nie
   jest potrzebne, dekoder budujesz sam.
 
-**L41.4. Testy**
+**~~L41.4. Testy~~**
 - `PatientApiIntegrationTest` loguje się jak klient: pod `POST /auth/token`, potem wysyła token
   (`JsonPath.read(body, "$.token")` z odpowiedzi logowania).
 - `AuthApiIntegrationTest` (pełny kontekst, MockMvc), cztery testy: admin dostaje token na godzinę,
