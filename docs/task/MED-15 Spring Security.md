@@ -368,7 +368,7 @@ TOKEN=$(curl -s -X POST http://localhost:8080/auth/token \
 - Dwa wpisy mapowania ról powtórz w `src/test/resources/application.properties`; bez nich token
   w teście ma tylko uprawnienie `FACTOR_BEARER` i dostaje 403.
 
-**L41.5. Bruno i Postman na tokenach**
+**~~L41.5. Bruno i Postman na tokenach~~**
 - Folder `logowanie`, cztery żądania bez uwierzytelnienia (`auth { mode: none }` w `folder.bru`,
   `auth: none` w każdym żądaniu). Trzy logują Annę, admina i doktor Katarzynę i zapisują token
   w zmiennej (`bru.setVar("token", res.getBody().token)`, dalej `adminToken`, `doktorToken`); czwarte
