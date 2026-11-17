@@ -3,6 +3,7 @@ target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+app.log
 
 ### STS ###
 .apt_generated
@@ -38,3 +39,4 @@ build/
 /s-1015-1045.json
 /s-1030-1100.json
 /s-2020.json
+/logs

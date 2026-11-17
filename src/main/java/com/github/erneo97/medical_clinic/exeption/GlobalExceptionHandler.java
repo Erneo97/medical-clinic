@@ -79,6 +79,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ProblemDetail handleUnknown(Exception exception) {
         log.error("unhandled exception", exception);
+        log.error("zlapano nie obslurzony wyjatek", exception);
         return ProblemDetail.forStatusAndDetail(
                 HttpStatus.INTERNAL_SERVER_ERROR, "Unknown error");
     }

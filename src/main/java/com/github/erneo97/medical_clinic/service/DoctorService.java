@@ -11,12 +11,14 @@ import com.github.erneo97.medical_clinic.repository.DoctorRepository;
 import com.github.erneo97.medical_clinic.repository.FacilityRepository;
 import com.github.erneo97.medical_clinic.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class DoctorService {
     private final DoctorMapper doctorMapper;
@@ -39,12 +41,15 @@ public class DoctorService {
         User user = userRepository.getReferenceById(command.userId());
         Doctor newDoctor =  doctorMapper.toDoctor(command);
         newDoctor.setUser(user);
-        return doctorRepository.save(newDoctor);
+        Doctor doctor = doctorMapper.toDoctor(command);
+        log.info("utworzono doktora {}", doctor.getId());
+        return doctor;
     }
 
     @Transactional
     public void deleteDoctorById(Long id) {
         doctorRepository.deleteById(id);
+        log.info("usunieto doktora {}", id);
     }
 
     @Transactional
@@ -53,6 +58,7 @@ public class DoctorService {
         Facility facility = facilityRepository.getReferenceById(facilityId);
         Doctor doctor = doctorRepository.getReferenceById(id);
         doctor.addFacility(facility);
+        log. info("Dodano placowke {} do doktora {}", facility.getId(), doctor.getId());
         return doctor;
     }
 
@@ -62,6 +68,7 @@ public class DoctorService {
         Facility facility = facilityRepository.getReferenceById(facilityId);
         Doctor doctor = doctorRepository.getReferenceById(id);
         doctor.removeFacility(facility);
+        log. info("Usunieto placowke {} z doktora {}", facility.getId(), doctor.getId());
     }
 
     @Transactional(readOnly = true)
