@@ -16,6 +16,8 @@ public interface UserMapper {
     @Mapping(target = "id", ignore = true)
     User toUser(UserCreateCommand command);
 
+    @Mapping(target = "firstName", ignore = true)
+    @Mapping(target = "lastName", ignore = true)
     UserDto toUserDto(User user);
 
     List<UserDto> toUserDto(List<User> users);

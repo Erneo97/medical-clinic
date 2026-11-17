@@ -6,6 +6,7 @@ import com.github.erneo97.medical_clinic.exeption.FacilityNotFoundException;
 import com.github.erneo97.medical_clinic.mapper.DoctorMapper;
 import com.github.erneo97.medical_clinic.model.Doctor;
 import com.github.erneo97.medical_clinic.model.Facility;
+import com.github.erneo97.medical_clinic.model.Role;
 import com.github.erneo97.medical_clinic.model.User;
 import com.github.erneo97.medical_clinic.repository.DoctorRepository;
 import com.github.erneo97.medical_clinic.repository.FacilityRepository;
@@ -39,6 +40,7 @@ public class DoctorService {
     @Transactional
     public Doctor create(DoctorCreateCommand command) {
         User user = userRepository.getReferenceById(command.userId());
+        user.setRole(Role.DOCTOR);
         Doctor newDoctor =  doctorMapper.toDoctor(command);
         newDoctor.setUser(user);
         Doctor doctor = doctorMapper.toDoctor(command);

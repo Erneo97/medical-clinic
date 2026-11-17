@@ -24,11 +24,11 @@ dochodzi w MED-17.
 
 Przed startem: aplikacja zatrzymana, baza od zera.
 
-**L38.1. Schemat z bazy**
+**~~L38.1. Schemat z bazy~~**
 - Build i start na świeżej bazie (tabele zakłada jeszcze Hibernate); gdy `grep 'Started' app.log`
   coś pokaże, zatrzymaj aplikację.
 - Sprawdź, jakie ograniczenia check (listy dozwolonych wartości) Hibernate założył na kolumnach z enumem:
-  `docker exec clinic-db psql -U clinic -d clinic -c "SELECT conrelid::regclass AS tabela, conname FROM pg_constraint WHERE contype = 'c' AND conrelid <> 0 ORDER BY conname"`.
+  `docker exec -it medicalClinic psql -U clinicUsr -d clinic -c "SELECT conrelid::regclass AS tabela, conname FROM pg_constraint WHERE contype = 'c' AND conrelid <> 0 ORDER BY conname"`.
 - Generator Liquibase'a zapisuje schemat jako pierwszy krok historii (polecenie niżej).
 - `grep -c 'changeSet:' $PLIK` → 18, każdy krok ma `author: kursant`.
 - Porównaj ograniczenia check w bazie i w pliku (`grep -ci 'check' $PLIK`) i zapisz, których brakuje: wrócą w L38.5.
@@ -36,13 +36,13 @@ Przed startem: aplikacja zatrzymana, baza od zera.
 ```bash
 PLIK=src/main/resources/liquibase-changelog/versions/001-initial.yaml
 ./mvnw -q org.liquibase:liquibase-maven-plugin:5.0.3:generateChangeLog \
-  -Dliquibase.url=jdbc:postgresql://localhost:5432/clinic \
-  -Dliquibase.username=clinic -Dliquibase.password=clinic \
+  -Dliquibase.url=jdbc:postgresql://localhost:5433/clinic \
+  -Dliquibase.username=clinicUsr -Dliquibase.password=clinic123 \
   -Dliquibase.changeSetAuthor=kursant \
   -Dliquibase.outputChangeLogFile=$PLIK
 ```
 
-**L38.2. Liquibase rządzi, Hibernate pilnuje**
+**~~L38.2. Liquibase rządzi, Hibernate pilnuje~~**
 - `spring-boot-starter-liquibase` w `pom.xml` pod sterownikiem PostgreSQL, bez wersji.
 - Spis `liquibase-changelog/liquibase-changelog.yaml` z jawnym `include` pliku `versions/001-initial.yaml`
   (`relativeToChangelogFile: true`).
@@ -54,18 +54,18 @@ PLIK=src/main/resources/liquibase-changelog/versions/001-initial.yaml
 - Licznik kroków w logu: `grep -E 'liquibase.util +: (Run|Previously run|Total change sets):' app.log | sed 's/.* : //'`.
 - Na świeżej bazie `Schema validation: missing table [...]`? W pliku została flaga `defer-datasource-initialization`.
 
-**L38.3. Testy jadą historią**
+**~~L38.3. Testy jadą historią~~**
 - `./mvnw test` → `Errors: 2` i `no changelog could be found at 'classpath:/db/changelog/db.changelog-master.yaml'`.
 - Na końcu `src/test/resources/application.properties` ten sam wpis spisu i `spring.jpa.hibernate.ddl-auto=validate`
   (plik testów zastępuje główny, a nie uzupełnia go) → `Tests run: 51`, `BUILD SUCCESS`.
 
-**L38.4. Przepisy na cofnięcie**
+**~~L38.4. Przepisy na cofnięcie~~**
 - Każdy krok w `001-initial.yaml` dostaje sekcję `rollback`: `dropTable` do `createTable`,
   `dropUniqueConstraint` do `addUniqueConstraint`, `dropForeignKeyConstraint` do `addForeignKeyConstraint`.
   Nazwy tabel i ograniczeń przepisz z kroku, który cofasz.
 - Identyfikatorów z generatora jeszcze nie ruszasz: porządkujesz je w MED-18.
 
-**L38.5. Code review historii**
+**~~L38.5. Code review historii~~**
 - Każda poprawka to nowy krok w osobnym pliku w `versions/`, z wpisem na końcu spisu i z sekcją `rollback`.
 - `002-enum-checks.yaml`, krok `19`: ograniczenia check, które zgubił generator. Zmiana `sql`
   (`ALTER TABLE ... ADD CONSTRAINT ... CHECK (... IN (...))`, wartości z enumów w kodzie); jej
@@ -109,7 +109,7 @@ nie ma sekcji `rollback`.
 
 Przed startem: baza od zera. Do L39.3 budujesz z `-DskipTests`: po włączeniu Spring Security testy padają.
 
-**L39.1. Zależności i łańcuch filtrów**
+**~~L39.1. Zależności i łańcuch filtrów~~**
 - `spring-boot-starter-security` pod starterem Liquibase'a i `spring-boot-starter-security-test`
   ze `<scope>test</scope>` pod starterem testów web.
 - `config/SecurityConfig`, bean `SecurityFilterChain`: bez CSRF, bez sesji (`SessionCreationPolicy.STATELESS`),
@@ -117,7 +117,7 @@ Przed startem: baza od zera. Do L39.3 budujesz z `-DskipTests`: po włączeniu S
 - Bean `PasswordEncoder`: `new BCryptPasswordEncoder()`.
 - `curl -s -i http://localhost:8080/patients` → 401 z `WWW-Authenticate: Basic realm="Realm"`, bez `Set-Cookie`.
 
-**L39.2. Konta z tabeli**
+**~~L39.2. Konta z tabeli~~**
 - `UserRepository`: `Optional<User> findByEmail(String email)`.
 - `service/AccountUserDetailsService` (`@Service`, `implements UserDetailsService`): konto po e-mailu
   z nagłówka, `UserDetails` z hasłem i rolą; konta brak → `UsernameNotFoundException`. Nazwę `User`
@@ -129,7 +129,7 @@ Przed startem: baza od zera. Do L39.3 budujesz z `-DskipTests`: po włączeniu S
   Anny → 401 (w bazie czysty tekst, poprawka w L39.4); rejestracja z nagłówkiem Oli → 403.
 - Nowe konto dostaje 401? Rejestracja zapisała czysty tekst. Po poprawce baza od zera i rejestracja jeszcze raz.
 
-**L39.3. Testy z zabezpieczeniami** (`./mvnw test`: 16 porażek i 2 błędy)
+**~~L39.3. Testy z zabezpieczeniami~~** (`./mvnw test`: 16 porażek i 2 błędy)
 - `PatientControllerTest` i `VisitControllerTest`: `SecurityConfig.class` w `@Import` (wycinek
   `@WebMvcTest` sam go nie ładuje), `@WithMockUser` przy testach zalogowanego; testy rejestracji bez adnotacji.
 - `PatientApiIntegrationTest`: po rejestracji loguje się nowym kontem przez `Authorization: Basic`
@@ -138,14 +138,14 @@ Przed startem: baza od zera. Do L39.3 budujesz z `-DskipTests`: po włączeniu S
   `encode`; w koncie ląduje to, co oddał `PasswordEncoder`.
 - Żaden test nie wyłącza zabezpieczeń (bez `excludeAutoConfiguration` i bez konfiguracji „przepuść wszystko").
 
-**L39.4. Hasło kodowane wszędzie**
+**~~L39.4. Hasło kodowane wszędzie~~**
 - `PatientService.changePassword` koduje hasło; w `changePassword_patientExists_setsNewPassword` stub `encode` i asercja na hash.
 - `UserService.create` (`POST /users`): maper przepisuje hasło z komendy, po mapowaniu podmień je na hash.
 - `data.sql`: hashe BCrypt zamiast haseł, hasła pokazowe w komentarzu nad wpisami. Hash zrobisz
   aplikacją: zarejestruj pacjenta z hasłem z `data.sql` i skopiuj `password` jego konta z bazy.
 - Na starej bazie `ON CONFLICT DO NOTHING` zostawi czyste hasła: baza od zera.
 
-**L39.5. `X-Request-Id` także przy 401**
+**~~L39.5. `X-Request-Id` także przy 401~~**
 - `RequestIdFilter` z L37 stoi za filtrem Spring Security (kolejność -100), więc 401 wychodzi bez
   nagłówka. Przestaw filtr na początek łańcucha.
 
@@ -165,7 +165,7 @@ Przed startem: baza od zera. Do L40.4 budujesz z `-DskipTests`: po regułach z r
 Kolumna `role` jest w `users` od L21, więc skrypt z polem `role` z MED-16 nie jest potrzebny. Konsoli
 H2 w aplikacji nie ma, więc „konsolę bazy" z MED-17 zastępuje Swagger UI.
 
-**L40.1. Rola ADMIN i admin z historii schematu**
+**~~L40.1. Rola ADMIN i admin z historii schematu~~**
 - `Role`: wartość `ADMIN` na końcu.
 - `versions/004-admin.yaml` na końcu spisu, dwa kroki z `author: kursant` i z `rollback`.
 - Krok `21`: usuń `users_role_check` i załóż go od nowa z `PATIENT`, `DOCTOR` i `ADMIN` (dwie zmiany `sql`, jak w kroku 19).
@@ -183,7 +183,7 @@ JAR=~/.m2/repository/org/springframework/security/spring-security-crypto/7.1.1
 jshell --class-path $JAR/spring-security-crypto-7.1.1.jar /tmp/hash.jsh
 ```
 
-**L40.2. Reguły** (w `SecurityConfig` zamiast `.anyRequest().authenticated()`, w tej kolejności, rejestracja zostaje na górze)
+**~~L40.2. Reguły~~** (w `SecurityConfig` zamiast `.anyRequest().authenticated()`, w tej kolejności, rejestracja zostaje na górze)
 - `GET /patients` (lista i wyszukiwanie) tylko dla ADMIN.
 - `/users/**` (konta) tylko dla ADMIN.
 - Swagger UI (`/swagger-ui.html`, `/swagger-ui/**`, `/v3/api-docs/**`) tylko dla ADMIN.
@@ -192,7 +192,7 @@ jshell --class-path $JAR/spring-security-crypto-7.1.1.jar /tmp/hash.jsh
 - Na końcu `anyRequest().denyAll()`.
 - W `hasRole` podajesz samą nazwę roli, przedrostek `ROLE_` Spring Security dokleja sam.
 
-**L40.3. Sprawdź** (przy każdym przypadku wiesz, która reguła zadecydowała)
+**~~L40.3. Sprawdź~~** (przy każdym przypadku wiesz, która reguła zadecydowała)
 - `GET /patients`: Anna 403, admin 200. `GET /patients/1`: Anna 200, admin 403.
 - `GET /users`: Anna 403, admin 200.
 - `GET /doctors` kontem doktor Katarzyny: 403. `GET /nie-ma-takiej` jako Anna: 403.
@@ -200,7 +200,7 @@ jshell --class-path $JAR/spring-security-crypto-7.1.1.jar /tmp/hash.jsh
 - `POST /visits` z `{"doctorId": 1, "startsAt": "2030-03-04T10:00:00", "endsAt": "2030-03-04T10:30:00"}`: Anna 403, admin 201.
 - Anna dostaje listę pacjentów? Reguła `/patients/**` stoi nad `GET /patients`: wygrywa pierwsza pasująca.
 
-**L40.4. Testy pod role** (`./mvnw test`: 12 porażek, wszystkie z 403)
+**~~L40.4. Testy pod role~~** (`./mvnw test`: 12 porażek, wszystkie z 403)
 - `PatientControllerTest`: testy listy (`GET /patients`) z `@WithMockUser(roles = "ADMIN")`, pozostałe
   z `@WithMockUser` dostają `roles = "PATIENT"`, testy rejestracji bez adnotacji.
 - `VisitControllerTest`: `@WithMockUser(roles = "PATIENT")` nad klasą.
@@ -219,7 +219,7 @@ Gotowe, gdy (aplikacja zatrzymana, baza od zera, build, start):
 
 Przed startem: stan po MED-16 i MED-17. Z MED-20 zostały same wymagania ról.
 
-**L40.5. Reguły** (w `SecurityConfig` pod regułą `POST /visits`, nad regułą dla PATIENT, w tej kolejności)
+**~~L40.5. Reguły~~** (w `SecurityConfig` pod regułą `POST /visits`, nad regułą dla PATIENT, w tej kolejności)
 - `POST /doctors` i `POST /facilities` (nowi doktorzy i placówki) tylko dla ADMIN.
 - `GET /doctors` (lista doktorów) tylko dla ADMIN.
 - `GET /facilities/**` dla każdego zalogowanego (`authenticated()`).
@@ -239,7 +239,7 @@ Gotowe, gdy (baza od zera, build, start):
 
 Przed startem: stan po MED-20, aplikacja zatrzymana.
 
-**L40.6. Identyfikatory od 1**
+**~~L40.6. Identyfikatory od 1~~**
 - Kroki w `001-initial.yaml` dostają identyfikatory `1` do `18` w kolejności z pliku (tak je wykonuje
   Liquibase); kroki `19`-`22` już je mają. Na stanie z tagu `po-L38-pd` lub późniejszym kroki są już
   ponumerowane, więc tylko sprawdzasz.
@@ -247,7 +247,7 @@ Przed startem: stan po MED-20, aplikacja zatrzymana.
   pada z `relation "doctors" already exists`, więc baza od zera. Zmieniać identyfikatory wolno ci
   tylko dlatego, że historia nie wyszła poza twój komputer; na wspólnym środowisku wykonanych kroków się nie rusza.
 
-**L40.7. Kolekcja Bruno na trzech kontach** (od MED-15 żądania kolekcji poza rejestracją dostają 401)
+**~~L40.7. Kolekcja Bruno na trzech kontach~~** (od MED-15 żądania kolekcji poza rejestracją dostają 401)
 - `bruno/collection.bru`: basic auth ze zmiennych `{{email}}` i `{{haslo}}`.
 - `bruno/environments/local.bru`: `email` i `haslo` Anny, `adminEmail` i `adminHaslo` admina,
   `doktorEmail` i `doktorHaslo` doktor Katarzyny.
@@ -264,14 +264,14 @@ Przed startem: stan po MED-20, aplikacja zatrzymana.
   bo Liquibase rusza przed `data.sql`, więc żądanie usuwało admina. Anna ma konto 2: `/users/1` → `/users/2`.
 - Folder `users` to zewnętrzne API z L3 (środowisko `test`), dlatego polecenie wymienia foldery aplikacji po kolei.
 
-**L40.8. Eksport do Postmana**
+**~~L40.8. Eksport do Postmana~~**
 - W skryptach `res.body` → `res.getBody()`: Bruno rozumie oba, a konwerter poprawnie tłumaczy tylko drugi zapis.
 - Z plików z blokiem `params:query` usuń ten blok, parametr zostaw w adresie.
 - Bruno → Open Collection z katalogu `bruno` projektu → menu kolekcji → Share → Postman, prosto do
   `src/main/resources`, nazwa `medical-clinic.postman_collection` (Bruno dopisze `.json`). Zmienne
   trafiają do pliku bez wartości.
 
-**L40.9. `GET /postman/patients`**
+**~~L40.9. `GET /postman/patients`~~**
 - `PostmanController` oddaje plik jako `String` czytany przez `InputStream` z `ClassPathResource`.
 - `GET /postman/**` tylko dla ADMIN, nad `denyAll`.
 - Brak pliku to `FileNotFoundException`. Nie łapiesz go: advice z L14 zamienia nieznany wyjątek na 500.
@@ -317,7 +317,7 @@ Jak ma działać po zmianie:
 - Swagger UI widzi tylko admin, bez okna logowania w przeglądarce. JSON dokumentacji:
   `curl -H "Authorization: Bearer $ADMIN_TOKEN" http://localhost:8080/v3/api-docs`.
 
-**L41.1. Klucze, koder i dekoder**
+**~~L41.1. Klucze, koder i dekoder~~**
 - `spring-boot-starter-security-oauth2-resource-server` pod starterem Spring Security.
 - `JwtConfig`: para kluczy RSA generowana przy starcie (`KeyPairGenerator.getInstance("RSA")`,
   `initialize(2048)`), bean `JwtEncoder` (`NimbusJwtEncoder.withKeyPair(...)`) i bean `JwtDecoder`
@@ -325,7 +325,7 @@ Jak ma działać po zmianie:
 - Wystawca w publicznej stałej `JwtConfig.ISSUER`; korzystają z niej dekoder i serwis tokenów.
 - Klucze żyją w pamięci, więc po restarcie stare tokeny przestają działać. Na produkcji para kluczy przychodzi z pliku albo z sejfu.
 
-**L41.2. Logowanie pod `POST /auth/token`**
+**~~L41.2. Logowanie pod `POST /auth/token`~~**
 - Rekordy `LoginCommand` (`email`, `password`, oba wymagane) i `TokenDto` (`token`, `tokenType`, `expiresIn`).
 - `TokenService`: e-mail i hasło sprawdza `AuthenticationManager`
   (`authenticate(UsernamePasswordAuthenticationToken.unauthenticated(email, password))`), czas
@@ -353,14 +353,14 @@ TOKEN=$(curl -s -X POST http://localhost:8080/auth/token \
 
 `ADMIN_TOKEN` zapisujesz tak samo, z danymi `admin`/`admin`.
 
-**L41.3. Token zamiast basic auth**
+**~~L41.3. Token zamiast basic auth~~**
 - `SecurityConfig`: bez `httpBasic`, z `oauth2ResourceServer` i JWT (dekoder z `JwtConfig`); reguła logowania zostaje.
 - `@Import(JwtConfig.class)` nad `SecurityConfig`: wycinki `@WebMvcTest` importują `SecurityConfig`,
   ale innych klas konfiguracji nie ładują, a łańcuch z resource serverem bez dekodera nie wstaje.
 - `application.properties`: role w claimie `roles`, przedrostek `ROLE_` (dwa wpisy). `issuer-uri` nie
   jest potrzebne, dekoder budujesz sam.
 
-**L41.4. Testy**
+**~~L41.4. Testy~~**
 - `PatientApiIntegrationTest` loguje się jak klient: pod `POST /auth/token`, potem wysyła token
   (`JsonPath.read(body, "$.token")` z odpowiedzi logowania).
 - `AuthApiIntegrationTest` (pełny kontekst, MockMvc), cztery testy: admin dostaje token na godzinę,
@@ -368,7 +368,7 @@ TOKEN=$(curl -s -X POST http://localhost:8080/auth/token \
 - Dwa wpisy mapowania ról powtórz w `src/test/resources/application.properties`; bez nich token
   w teście ma tylko uprawnienie `FACTOR_BEARER` i dostaje 403.
 
-**L41.5. Bruno i Postman na tokenach**
+**~~L41.5. Bruno i Postman na tokenach~~**
 - Folder `logowanie`, cztery żądania bez uwierzytelnienia (`auth { mode: none }` w `folder.bru`,
   `auth: none` w każdym żądaniu). Trzy logują Annę, admina i doktor Katarzynę i zapisują token
   w zmiennej (`bru.setVar("token", res.getBody().token)`, dalej `adminToken`, `doktorToken`); czwarte

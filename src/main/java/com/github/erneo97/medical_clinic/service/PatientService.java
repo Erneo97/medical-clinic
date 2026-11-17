@@ -4,7 +4,6 @@ import com.github.erneo97.medical_clinic.dto.patient.EditPasswordCommand;
 import com.github.erneo97.medical_clinic.dto.patient.EditPersonalDataCommand;
 import com.github.erneo97.medical_clinic.dto.patient.PatientCreateCommand;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
-import com.github.erneo97.medical_clinic.mapper.UserMapper;
 import com.github.erneo97.medical_clinic.model.Patient;
 import com.github.erneo97.medical_clinic.model.Role;
 import com.github.erneo97.medical_clinic.model.User;
@@ -13,6 +12,7 @@ import com.github.erneo97.medical_clinic.exeption.PatientAlreadyExistsException;
 import com.github.erneo97.medical_clinic.exeption.PatientNotFoundException;
 import com.github.erneo97.medical_clinic.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,7 +27,7 @@ public class PatientService {
     private final PatientRepository patientRepository;
     private final UserRepository userRepository;
     private final PatientMapper patientMapper;
-    private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
     public List<Patient> findAll() {
@@ -59,7 +59,7 @@ public class PatientService {
         }
         User newUser = User.builder()
                 .email(command.email())
-                .password(command.password())
+                .password(passwordEncoder.encode(command.password()))
                 .role(Role.PATIENT)
                 .build();
 
@@ -82,7 +82,7 @@ public class PatientService {
     @Transactional
     public void chanePassword(Long id, EditPasswordCommand command) {
         patientRepository.findById(id).orElseThrow( () -> new PatientNotFoundException(id) );
-        patientRepository.updatePassword(id, command.password());
+        patientRepository.updatePassword(id, passwordEncoder.encode(command.password()));
         log.info("pacjent {} zmienil haslo", id);
     }
 

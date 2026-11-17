@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: 22
+      author: erneo97
+      changes:
+        - sql:
+            sql: ALTER TABLE users DROP CONSTRAINT users_role_check
+        - sql:
+            sql: >-
+              ALTER TABLE users ADD CONSTRAINT users_role_check
+              CHECK (role IN ('PATIENT', 'DOCTOR', 'ADMIN', 'NOTHING'))
+            rollback:
+              - sql:
+                  sql: ALTER TABLE users DROP CONSTRAINT users_role_check
+              - sql:
+                  sql: >-
+                    ALTER TABLE users ADD CONSTRAINT users_role_check
+                    CHECK (role IN ('PATIENT', 'DOCTOR', 'ADMIN', 'NOTHING'))

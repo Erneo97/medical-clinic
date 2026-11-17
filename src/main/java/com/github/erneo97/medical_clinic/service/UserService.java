@@ -6,6 +6,7 @@ import com.github.erneo97.medical_clinic.mapper.UserMapper;
 import com.github.erneo97.medical_clinic.model.User;
 import com.github.erneo97.medical_clinic.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,10 +17,13 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public User createUser(UserCreateCommand command) {
-        return userRepository.save(userMapper.toUser(command));
+        User newUser = userMapper.toUser(command);
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        return userRepository.save(newUser);
     }
 
     @Transactional(readOnly = true)
