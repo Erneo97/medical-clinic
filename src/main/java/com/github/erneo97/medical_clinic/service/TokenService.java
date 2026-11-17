@@ -1,6 +1,6 @@
 package com.github.erneo97.medical_clinic.service;
 
-import com.github.erneo97.medical_clinic.config.SecurityConfig;
+import com.github.erneo97.medical_clinic.config.JwtConfig;
 import com.github.erneo97.medical_clinic.dto.auth.LoginCommand;
 import com.github.erneo97.medical_clinic.dto.auth.TokenDto;
 import lombok.AllArgsConstructor;
@@ -39,7 +39,7 @@ public class TokenService {
                 .toList();
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
-                .issuer(SecurityConfig.ISSUER)
+                .issuer(JwtConfig.ISSUER)
                 .subject(auth.getName())
                 .issuedAt(now)
                 .expiresAt(now.plusSeconds(timeout))
