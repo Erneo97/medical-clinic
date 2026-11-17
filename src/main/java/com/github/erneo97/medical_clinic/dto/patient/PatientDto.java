@@ -1,4 +1,4 @@
-package com.github.erneo97.medical_clinic.dto;
+package com.github.erneo97.medical_clinic.dto.patient;
 
 import java.time.LocalDate;
 

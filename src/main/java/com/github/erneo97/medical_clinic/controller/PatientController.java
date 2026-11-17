@@ -1,9 +1,9 @@
 package com.github.erneo97.medical_clinic.controller;
 
-import com.github.erneo97.medical_clinic.dto.EditPasswordCommand;
-import com.github.erneo97.medical_clinic.dto.EditPersonalDataCommand;
-import com.github.erneo97.medical_clinic.dto.PatientCreateCommand;
-import com.github.erneo97.medical_clinic.dto.PatientDto;
+import com.github.erneo97.medical_clinic.dto.patient.EditPasswordCommand;
+import com.github.erneo97.medical_clinic.dto.patient.EditPersonalDataCommand;
+import com.github.erneo97.medical_clinic.dto.patient.PatientCreateCommand;
+import com.github.erneo97.medical_clinic.dto.patient.PatientDto;
 import com.github.erneo97.medical_clinic.mapper.PatientMapper;
 import com.github.erneo97.medical_clinic.service.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -55,6 +55,12 @@ public class PatientController {
         return patientMapper.toDto(patientService.findByEmail(email));
     }
 
+    @GetMapping(params = "fragment")
+    @Operation(summary = "Find all user with first name or last name have searched fragment")
+    public List<PatientDto> findByFirstNameOrLastName(@RequestParam String fragment) {
+        return patientMapper.toDto(patientService.searchByName(fragment));
+    }
+
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     @Operation(summary = "create a patient")
@@ -91,6 +97,7 @@ public class PatientController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "delete the patient")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "patient deleted"),
             @ApiResponse(responseCode = "404", description = "patient not found", content = @Content(schema = @Schema(implementation = ProblemDetail.class)))

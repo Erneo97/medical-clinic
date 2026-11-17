@@ -1,0 +1,100 @@
+package com.github.erneo97.medical_clinic.service;
+
+import com.github.erneo97.medical_clinic.dto.doctor.DoctorCreateCommand;
+import com.github.erneo97.medical_clinic.exeption.DoctorNotFoundException;
+import com.github.erneo97.medical_clinic.exeption.FacilityNotFoundException;
+import com.github.erneo97.medical_clinic.mapper.DoctorMapper;
+import com.github.erneo97.medical_clinic.model.Doctor;
+import com.github.erneo97.medical_clinic.model.Facility;
+import com.github.erneo97.medical_clinic.model.Role;
+import com.github.erneo97.medical_clinic.model.User;
+import com.github.erneo97.medical_clinic.repository.DoctorRepository;
+import com.github.erneo97.medical_clinic.repository.FacilityRepository;
+import com.github.erneo97.medical_clinic.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class DoctorService {
+    private final DoctorMapper doctorMapper;
+    private final DoctorRepository doctorRepository;
+    private final UserRepository userRepository;
+    private final FacilityRepository facilityRepository;
+
+    @Transactional(readOnly = true)
+    public List<Doctor> getAllDoctors() {
+        return doctorRepository.findAllWithUserAndFacilities();
+    }
+
+    @Transactional(readOnly = true)
+    public Doctor getDoctorById(Long id) {
+        return doctorRepository.getReferenceById(id);
+    }
+
+    @Transactional
+    public Doctor create(DoctorCreateCommand command) {
+        User user = userRepository.getReferenceById(command.userId());
+        user.setRole(Role.DOCTOR);
+        Doctor newDoctor =  doctorMapper.toDoctor(command);
+        newDoctor.setUser(user);
+        Doctor doctor = doctorMapper.toDoctor(command);
+        log.info("utworzono doktora {}", doctor.getId());
+        return doctor;
+    }
+
+    @Transactional
+    public void deleteDoctorById(Long id) {
+        doctorRepository.deleteById(id);
+        log.info("usunieto doktora {}", id);
+    }
+
+    @Transactional
+    public Doctor addFacilityToDoctor(Long id, Long facilityId) {
+        checDoctorOrFacilityExistOrThrowException(id, facilityId);
+        Facility facility = facilityRepository.getReferenceById(facilityId);
+        Doctor doctor = doctorRepository.getReferenceById(id);
+        doctor.addFacility(facility);
+        log. info("Dodano placowke {} do doktora {}", facility.getId(), doctor.getId());
+        return doctor;
+    }
+
+    @Transactional
+    public void removeFacilityToDoctor(Long id, Long facilityId) {
+        checDoctorOrFacilityExistOrThrowException(id, facilityId);
+        Facility facility = facilityRepository.getReferenceById(facilityId);
+        Doctor doctor = doctorRepository.getReferenceById(id);
+        doctor.removeFacility(facility);
+        log. info("Usunieto placowke {} z doktora {}", facility.getId(), doctor.getId());
+    }
+
+    @Transactional(readOnly = true)
+    public Doctor findDoctorByIdOrThrowException(Long doctorId) {
+        return doctorRepository.findById(doctorId)
+                .orElseThrow(() -> new DoctorNotFoundException(doctorId));
+    }
+
+    @Transactional(readOnly = true)
+    public void checkDoctorExistOrThrowException(Long doctorId) {
+        if( !doctorRepository.existsById(doctorId)) {
+            throw new DoctorNotFoundException(doctorId);
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public boolean existsById(Long doctorId) {
+        return doctorRepository.existsById(doctorId);
+    }
+
+    private void checDoctorOrFacilityExistOrThrowException(Long doctorId, Long facilityId) {
+        checkDoctorExistOrThrowException(doctorId);
+        if( !facilityRepository.existsById(facilityId)) {
+            throw new FacilityNotFoundException(facilityId);
+        }
+    }
+}

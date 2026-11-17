@@ -1,0 +1,162 @@
+package com.github.erneo97.medical_clinic.service;
+
+import com.github.erneo97.medical_clinic.dto.visit.VisitCreateCommand;
+import com.github.erneo97.medical_clinic.exeption.*;
+import com.github.erneo97.medical_clinic.facade.UserFacade;
+import com.github.erneo97.medical_clinic.mapper.VisitMapper;
+import com.github.erneo97.medical_clinic.model.Doctor;
+import com.github.erneo97.medical_clinic.model.Patient;
+import com.github.erneo97.medical_clinic.model.Visit;
+import com.github.erneo97.medical_clinic.repository.VisitRepository;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+
+import java.time.Clock;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.List;
+
+@Service
+@Slf4j
+@AllArgsConstructor
+public class VisitService {
+    private static final Duration QUARTER = Duration.ofMinutes(15);
+    private static final List<String> SORTABLE = List.of("startsAt", "endsAt");
+    private final VisitRepository visitRepository;
+    private final VisitMapper visitMapper;
+    private final UserFacade userFacade;
+
+    private final Clock clock;
+
+    @Transactional(readOnly = true)
+    public Page<Visit> findAll(Pageable pageable) {
+        validateSort(pageable.getSort());
+        return visitRepository.findAll(pageable);
+    }
+
+    @Transactional
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public Visit create(@RequestBody VisitCreateCommand command) {
+        if (!userFacade.doctorExistsById(command.doctorId())) {
+            throw new DoctorNotFoundException("Doctor Not Found with ID: " + command.doctorId());
+        }
+        validateSlot(command.startsAt(), command.endsAt());
+        checkOverlap(command.doctorId(), command.startsAt(), command.endsAt());
+
+        Doctor doctor = userFacade.findDoctorById(command.doctorId());
+        Visit visit = visitMapper.toVisit(command);
+        visit.setDoctor(doctor);
+        Visit savedVisit = visitRepository.save(visit);
+        log.info("stworzono nowa wizyte {} dla doktora {}; start: {} koniec: {}", savedVisit.getId(), savedVisit.getDoctor(), savedVisit.getStartsAt(), savedVisit.getEndsAt());
+        return savedVisit;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Visit> findAllByDoctorId(Long doctorId) {
+        return visitRepository.findByDoctorId(doctorId);
+    }
+
+    @Transactional
+    public Visit bookVisit(Long id, Long patientId) {
+        Visit visit = this.findVisitByIdOrException(id);
+        Patient patient = userFacade.findPatientById(patientId);
+
+        if (!visit.isAvaliable()) {
+            throw new VisitAlreadyBookedException("This visit is booked");
+        }
+        if (visit.isInPastAccordingClock(clock)) {
+            throw new VisitInPastException("The visit has already taken place");
+        }
+        visit.setPatient(patient);
+        log.info("zarezerwowano wizyte {} przez {}", visit.getId(), visit.getPatient().getId());
+        return visit;
+    }
+
+    @Transactional(readOnly = true)
+    public Visit findVisitByIdOrException(Long id) {
+        return visitRepository.findById(id).orElseThrow(() -> new VisitNotFoundException(String.format("Visit with id %d not exist", id)));
+    }
+
+    @Transactional(readOnly = true)
+    public long countFreeSlots(Long doctorId, LocalDate day) {
+        LocalDateTime start = day.atStartOfDay();
+        LocalDateTime end = day.plusDays(1).atStartOfDay();
+        long freeSlots = visitRepository.countFreeSlots(doctorId, start, end);
+        log.debug("liczba wolnych dni {},  dla doktora {}, dnia {}", freeSlots, doctorId, day);
+        return freeSlots;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Visit> getPatientVisit(Long patientId) {
+        return visitRepository.findByPatientId(patientId);
+    }
+
+    @Transactional
+    public List<Visit> substitute(Long doctorId, Long substituteId) {
+        userFacade.checkDoctorExistOrThrowException(doctorId);
+        Doctor doctorSubstitute = userFacade.findDoctorById(substituteId);
+        List<Visit> visits = getSortedVisitsByDoctorId(doctorId);
+        substituteVisitsToDoctor(visits, doctorSubstitute);
+        return visits;
+    }
+
+    private void validateSort(Sort sort) {
+        sort.stream().iterator().forEachRemaining(order -> {
+            if (!SORTABLE.contains(order.getProperty())) {
+                throw new InvalidSortPropertyException(
+                        order.getProperty(),
+                        SORTABLE
+                );
+            }
+        });
+    }
+
+    private List<Visit> getSortedVisitsByDoctorId(Long doctorId) {
+        return visitRepository.findByDoctorId(doctorId)
+                .stream()
+                .sorted(Comparator.comparing(Visit::getStartsAt))
+                .toList();
+    }
+
+    private void substituteVisitsToDoctor(List<Visit> visits, Doctor doctor) {
+        for (Visit visit : visits) {
+            checkOverlap(doctor.getId(), visit.getStartsAt(), visit.getEndsAt());
+            visit.setDoctor(doctor);
+            visitRepository.save(visit);
+        }
+        log.info("zastepstwo: {} wizyt doktroa {} przejmuje {}",  visits.size(), visits.getFirst().getDoctor().getId(), doctor.getId());
+    }
+
+    private void validateSlot(LocalDateTime slotStart, LocalDateTime slotEnd) {
+        if (slotStart.isBefore(LocalDateTime.now(clock)) || slotEnd.isBefore(LocalDateTime.now(clock))) {
+            throw new InvalidVisitException("Slot Start Date or Slot End Dates are in past");
+        }
+        if (slotStart.getMinute() % 15 != 0 || slotStart.getSecond() != 0 || slotStart.getNano() != 0) {
+            throw new InvalidVisitException("a session must start on a full quarter-hour");
+        }
+        Duration length = Duration.between(slotStart, slotEnd);
+        if (!length.isPositive() || length.toNanos() % QUARTER.toNanos() != 0) {
+            throw new InvalidVisitException(
+                    "session length must be a positive multiple of 15 minutes");
+        }
+    }
+
+    private void checkOverlap(Long doctorId, LocalDateTime start, LocalDateTime end) {
+        log.debug("Sprawdzam nakladanie wizyt dla doktora {}: {} - {}", doctorId, start, end);
+        if (visitRepository.existsByDoctorIdAndStartsAtBeforeAndEndsAtAfter(
+                doctorId, end, start)) {
+            throw new VisitOverlapsException(String.format("Visit already exists for Doctor on that time %s - %s", start.toString(), end.toString()));
+        }
+    }
+}
