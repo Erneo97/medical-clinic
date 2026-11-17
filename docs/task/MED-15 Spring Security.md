@@ -271,7 +271,7 @@ Przed startem: stan po MED-20, aplikacja zatrzymana.
   `src/main/resources`, nazwa `medical-clinic.postman_collection` (Bruno dopisze `.json`). Zmienne
   trafiają do pliku bez wartości.
 
-**L40.9. `GET /postman/patients`**
+**~~L40.9. `GET /postman/patients`~~**
 - `PostmanController` oddaje plik jako `String` czytany przez `InputStream` z `ClassPathResource`.
 - `GET /postman/**` tylko dla ADMIN, nad `denyAll`.
 - Brak pliku to `FileNotFoundException`. Nie łapiesz go: advice z L14 zamienia nieznany wyjątek na 500.
@@ -317,7 +317,7 @@ Jak ma działać po zmianie:
 - Swagger UI widzi tylko admin, bez okna logowania w przeglądarce. JSON dokumentacji:
   `curl -H "Authorization: Bearer $ADMIN_TOKEN" http://localhost:8080/v3/api-docs`.
 
-**L41.1. Klucze, koder i dekoder**
+**~~L41.1. Klucze, koder i dekoder~~**
 - `spring-boot-starter-security-oauth2-resource-server` pod starterem Spring Security.
 - `JwtConfig`: para kluczy RSA generowana przy starcie (`KeyPairGenerator.getInstance("RSA")`,
   `initialize(2048)`), bean `JwtEncoder` (`NimbusJwtEncoder.withKeyPair(...)`) i bean `JwtDecoder`
