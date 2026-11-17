@@ -325,7 +325,7 @@ Jak ma działać po zmianie:
 - Wystawca w publicznej stałej `JwtConfig.ISSUER`; korzystają z niej dekoder i serwis tokenów.
 - Klucze żyją w pamięci, więc po restarcie stare tokeny przestają działać. Na produkcji para kluczy przychodzi z pliku albo z sejfu.
 
-**L41.2. Logowanie pod `POST /auth/token`**
+**~~L41.2. Logowanie pod `POST /auth/token`~~**
 - Rekordy `LoginCommand` (`email`, `password`, oba wymagane) i `TokenDto` (`token`, `tokenType`, `expiresIn`).
 - `TokenService`: e-mail i hasło sprawdza `AuthenticationManager`
   (`authenticate(UsernamePasswordAuthenticationToken.unauthenticated(email, password))`), czas
